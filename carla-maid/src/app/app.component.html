@@ -1,5 +1,4 @@
 
-<button (click)="setLang('en')">ُEN</button>
-<button (click)="setLang('ar')">AR</button>
+<button (click)="toggleLang()">{{lang}}</button>
 
-<h1 dir="{{textDir}}">{{"shared.hello"| translate}}</h1>
+<h1 >{{"shared.hello"| translate}}</h1>
