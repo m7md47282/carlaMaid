@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Languages } from './shared/interfaces/languages';
 import { ConfigService } from './shared/config/config.service';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import { ConfigService } from './shared/config/config.service';
   imports: [
     RouterOutlet,
     TranslateModule,
-    
+    HeaderComponent,
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
