@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+// 
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Signika+Negative:wght@300..700&display=swap')
+@import "variables"
+*
+    font-family: "Poppins", serif
+
+.flex-center 
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+.gap-10
+    gap: 10px
+
+.margin-top20
+    margin-top: 20px
+.btn-primary
+    width: 135px
+    height: 48px
+    border-radius: 5px
+    padding: 16px
+    color: #ffffff
+    font-weight: 700
+    background-image: $primary
+    border: 0
+
+    &:hover
+        background-color: $background-image
+        transition: 0.25s ease-in-out
+.btn-secondary
+    // width: 135px
+    width: 300px
+    height: 48px
+    border-radius: 5px $primary
+    font-weight: 700
+    background-color: #ffffff
+    background-clip: text
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-image: $primary
+    
+button,a,.clickable
+    cursor: pointer
+
+.carla-service
+    font-size: 20px
+    margin: 0
+    color: #91D6AA
+
+.cleaner
+    position: relative
+    left: 290px
+    top: 10px
+
+.primary-text-color
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-image: $primary
