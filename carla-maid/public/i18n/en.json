@@ -1,5 +1,22 @@
 {
     "shared":{
-        "hello":"hello"
+        "hello":"hello",
+        "home":"Home",
+        "services":"services",
+        "aboutUs":"About Us",
+        "blogs":"Blogs",
+        "contactUs":"Contact Us",
+        "bookNow":"Book Now",
+        "CarlaMaidCleaningServices":"Carla Maid Cleaning Services",
+        "bookCleanService": "Book Your Cleaning Service Today!",
+        "ProfessionalCleaningServices": "Professional Cleaning Services in Qatar",
+        "LetUsHandleTheMess":"Let Us Handle the Mess!"
+        
+
+
+    },
+    
+    "paragraph":{
+        "trustMaidService":"Your trusted maid service and cleaning company in Qatar. Carla Maid provides tailored cleaning services for homes and businesses, including eco-friendly options and deep cleaning for a spotless, stress-free environment in Doha and beyond."
     }
 }

@@ -1,8 +1,22 @@
-<p>header works!</p>
+<header>
+  <img class="logo" src="../../assets/images/Logo-En.png" alt="no-no">
+  <nav>
+    <li>{{'shared.home'| translate}}</li>
+    <li>{{'shared.services' | translate}}</li>
+    <li>{{'shared.aboutUs' | translate}}</li>
+    <li>{{'shared.blogs' | translate}}</li>
+  </nav>
 
-<h1 >{{'shared.hello' | translate}}</h1>
+  <section class="flex-center gap-10">
+    <p>{{'shared.contactUs'|translate}}<p>
+    <button class="btn-primary">
+      {{'shared.bookNow'| translate}}
+    </button>
+  </section>
 
-<button (click)="switchLanguage()">
+  <button class="translation-button" (click)="switchLanguage()">
+    <mat-icon>language</mat-icon>
     {{ currentLang === 'en' ? 'العربية' : 'English' }}
   </button>
-  <hr>
+</header>
+  

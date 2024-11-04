@@ -33,8 +33,9 @@ export class ConfigService {
       document.documentElement.lang = lang;
       environment.lang = lang;
       this.translate.use(environment.lang);
-
+      
       environment.direction = lang == 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.dir = environment.direction;
       localStorage.setItem('direction', environment.direction);
     }
   }
