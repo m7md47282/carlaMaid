@@ -6,6 +6,7 @@ import { ConfigService } from './shared/config/config.service';
 import { HeaderComponent } from './header/header.component';
 import { environment } from '../environments/environment';
 import { LandingComponent } from './landing/landing.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { LandingComponent } from './landing/landing.component';
     RouterOutlet,
     TranslateModule,
     HeaderComponent,
-    LandingComponent
+    LandingComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'

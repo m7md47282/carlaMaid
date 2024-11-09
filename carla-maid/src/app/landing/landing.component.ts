@@ -11,5 +11,10 @@ import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-transla
   styleUrl: './landing.component.sass'
 })
 export class LandingComponent {
+ slideLeft(){
 
+ }
+ slideRight(){
+  
+ }
 }
