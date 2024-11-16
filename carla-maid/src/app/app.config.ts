@@ -22,7 +22,11 @@ export const provideTranslation = () => ({
 });
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync(),    
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideAnimationsAsync(),
+
     importProvidersFrom([
       HttpClientModule, 
       TranslateModule.forRoot(provideTranslation())
