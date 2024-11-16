@@ -1,0 +1,24 @@
+<header>
+  <img class="logo" src="../../assets/images/Logo-En.png" alt="no-no">
+  <nav>
+    <li>{{'shared.home'| translate}}</li>
+      <li >
+      <a routerLink="our-services">{{'shared.services' | translate}}</a> 
+      </li>
+    <li (click)="navigateToServices()">{{'shared.aboutUs' | translate}}</li>
+    <li>{{'shared.blogs' | translate}}</li>
+  </nav>
+
+  <section class="flex-center gap-10">
+    <p>{{'shared.contactUs'|translate}}<p>
+    <button class="btn-primary">
+      {{'shared.bookNow'| translate}}
+    </button>
+  </section>
+
+  <button class="translation-button" (click)="switchLanguage()">
+    <mat-icon>language</mat-icon>
+    {{ currentLang === 'en' ? 'العربية' : 'English' }}
+  </button>
+</header>
+  
