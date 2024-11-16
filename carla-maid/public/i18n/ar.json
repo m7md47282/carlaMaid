@@ -1,5 +1,22 @@
 {
     "shared":{
-        "hello":"السلام عليكم يا اخوانن"
+        "home":"الصفحة الرئيسية",
+        "services":"الخدمات",
+        "aboutUs": "من نحن",
+        "blogs":"المدونات",
+        "contactUs": "تواصل معنا",
+        "bookNow": "احجز الآن",
+        "CarlaMaidCleaningServices":"خدمات تنظيف كارلا ميد",
+        "ProfessionalCleaningServices": "خدمات تنظيف احترافية في قطر",
+        "bookCleanService":"احجز خدمة التنظيف الخاصة بك اليوم!",
+        "LetUsHandleTheMess":"دعنا نتولى امر الفوضى",
+        "ourServices":"خدماتنا",
+        "theBestInCleaning": "افضل مساعدة في التنظيف",
+        "carlaMaidServices":" خدمات كارلا ميد",
+        "TailoredSolution": "حلول مخصصة لكل مساحة"
+    },
+
+    "paragraph":{
+        "trustMaidService":"خدمة تنظيف موثوقة وشركة تنظيف في قطر. تقدم كارلا ميد خدمات تنظيف مخصصة للمنازل والشركات، بما في ذلك خيارات صديقة للبيئة والتنظيف العميق للحصول على بيئة نظيفة وخالية من التوتر في الدوحة وما بعدها."
     }
 }
