@@ -9,6 +9,9 @@
     display: flex
     align-items: center
     justify-content: space-between
+.align-center
+    display: flex
+    align-items: center
 
 // gaps
 .gap-0
@@ -65,24 +68,40 @@
     color: #ffffff
     font-weight: 700
     background-image: $primary
-    border: 0
-
+    border: 2px solid #0346FF
+    display: flex
+    align-items: center
+    justify-content: center
     &:hover
-        background-color: $background-image
+        background-image: $white-color
         transition: 0.25s ease-in-out
+        .span
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            background-image: $primary
+            
     span
         color:#ffffff
         font-weight: 700
+        display: flex
+        align-items: center
+        justify-content: center
 .btn-secondary
     width: 135px
     height: 48px
-    border: 1px 
-    border-color: #0188FF
     border-radius: 5px
     background-color: #ffffff
     padding: 16px
-    
-        
+    display: flex
+    justify-content: center
+    align-items: center
+    border: 2px solid #0346FF
+    &:hover
+        background-image: $primary
+        transition: 0.25s ease-in-out
+        color: #ffffff
+    span
+        color: white
 button,a,.clickable
     cursor: pointer
 
@@ -96,7 +115,9 @@ button,a,.clickable
     .cleaner
         display: flex
         justify-content: flex-end
-        width: 89%
+    svg
+        margin-left: 17vw
+
 
 
 .primary-text-color
@@ -116,7 +137,9 @@ button,a,.clickable
 .flex-around
     display: flex
     justify-content: space-around
-
+.flex-end
+    display: flex
+    justify-content: flex-end
 .flex-wrap
     display: flex
     flex-wrap: wrap
@@ -153,8 +176,8 @@ button,a,.clickable
 .primary-card
     background-image: $primary
     border-radius: 5px
-    width:16rem
-    height: 19rem
+    width:20rem
+    height: 25rem
     padding: 30px
     h3
         color: #fff
@@ -165,8 +188,8 @@ button,a,.clickable
 .secondary-card
     background-color: #ffffff
     border-radius: 5px
-    width:16rem
-    height: 19rem
+    width:20rem
+    height: 25rem
     padding: 30px
     h3
         color: #4D4D4D
@@ -174,3 +197,5 @@ button,a,.clickable
     p
         color: #4D4D4D
         font-size: 14px
+.relative
+    position: relative

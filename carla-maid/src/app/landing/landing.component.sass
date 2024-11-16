@@ -3,41 +3,51 @@
     display: inline-block
     display: flex
     flex-direction: column
-    .heroImg
+    
+    .hero-button
+        position: relative
+        bottom: 7rem
+        left: 9rem
+        width: 19%
+        span
+            width: 90%
+            font-size: 0.8rem
+    .img-text
+        background-image: url('../../assets/images/MAIN-HERO.png')
+        background-size: cover
+        width: 100%
+        height: auto
+        margin: 0
         width: 100%
         height: auto
         position: relative
         z-index: 0
         display: block
-    .hero-button
-        position: relative
-        bottom: 11rem
-        left: 9rem
-        width: 19%
-    .img-text
-        position: absolute
-        top: 8px
-        left: 95px
-        
-        h1
-            color: #FFFFFF
-            font-size: 3.3vw
-            width: 680px
-            margin: 0
+        .img-info
+            margin: 75px 10px 150px 150px 
+            .top-title-service
+                .cleaner-margin
+                    margin-left: 17vw
+            
+            h1
+                color: #FFFFFF
+                font-size: 3.3vw
+                width: 680px
+                margin: 0
 
-        h3
-            font-size: 1.5vw
-            color: #ffffff
-            font-weight: 600
-            margin: 0
-        p
-            font-size: 1vw
-            color: #ffffff
-            font-weight: 400
-            width: 50%
-            margin: 10px 0
-        .p-width
-            width: 20px
+            h4
+                font-size: 1.5vw
+                color: #ffffff
+                font-weight: 600
+                margin: 0
+            p
+                font-size: 1vw
+                color: #ffffff
+                font-weight: 400
+                width: 50%
+                margin: 10px 0
+            .p-width
+                width: 20px
 
 // secyion 2
 
@@ -46,16 +56,21 @@
         h1
             font-size: 60px
             margin: 0
+        .why-us-text
+            font-size: 0.9rem
+            width: 90%
         p
-            width: 70%
+            font-size: 0.9rem
+            width: 100%
     .why-us-card
        .card-header
         width: 40% 
         svg
-            width: 35%
+            width: 25%
             height: auto
         h3
-            width: 100%   
+            width: 100%
+            font-size: 1rem
     .whyUs-imgs
         img
             width: 90%
@@ -79,23 +94,37 @@
         margin-right: 12px
 
         .feature-content
-        h3
-            font-size: 18px
-            font-weight: 600
-            margin: 0
-
-        p
-            margin: 4px 0 0 0
-            font-size: 14px
-            line-height: 1.5
-
-    
-.mid-img
+            h3
+                font-size: 18px
+                font-weight: 600
+                margin: 0
+            p
+                margin: 4px 0 0 0
+                font-size: 14px
+                line-height: 1.5
+//section-4
+.section-4
+    background-image: url('../../assets/images/section-4-img.png') 
+    background-size: cover
+    height: 85%
     margin-top: 50px
     img
         width: 100%
         height: auto
-
+        position: relative
+    .cleaning-position
+        position: relative
+        top: 12rem
+    h1
+        color: #ffffff
+        font-weight: 500
+        font-size: 2rem
+    p
+        color: #ffffff
+    svg
+        position: relative
+        left: 140px
+        margin: 0
 .section-5-container
 
     .p-title
@@ -107,12 +136,14 @@
         padding: 10px
 
 .section-6
+    margin-top: 50px
     background-color: #e1f7f7
     .slider-title
         display: flex
         align-items: center
         justify-content: space-around
         gap: 21%
+
         h1
             margin: 0
     .cards-container
@@ -124,11 +155,36 @@
             width: 98%
         .width-container
             width: 30%
-       
 .section-7
+    margin-bottom: 10rem
+    position: relative
     .img-width
         width: 25%
+        
         img
             width: 100%
         p
-            width: 98%
+            width: 35%
+            font-size: 0.9rem
+            font-weight: 500
+    
+    .text-border
+        
+        border-radius: 20px
+        padding: 20px
+
+        position: absolute
+        z-index: 999
+        
+        &:hover
+            padding: 90px 30px 10px 10px
+            // top: -50px
+            width: 18%
+            transition: 0.5s ease-in-out
+            background-color: #deddddc4
+            .more-txt
+                display: block
+                transition: 0.5s ease-in-out
+        
+        .more-txt
+            display: none
