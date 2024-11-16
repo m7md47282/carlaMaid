@@ -1,0 +1,147 @@
+.section-1
+    margin-top: 50px
+    img
+        width: 28vw
+    .header-text
+        margin-left: 5vw
+        .the-best-p
+            border: 2px solid #51585480
+            border-radius: 10px
+            padding: 15px
+            font-size: 1.4rem
+            font-weight: 500
+            margin: 0 0 0.5rem
+            width: 35vw
+        .our-services-list
+            border: 2px solid #51585480
+            padding: 20px
+            border-radius: 10px
+            p
+                margin: 5px
+        h1
+            margin-top: 0
+            font-size: 4rem
+.section-2
+    margin-top: 4rem
+    h1
+        font-size: 2.7rem  
+        margin: 0
+.section-3
+    display: flex
+    flex-wrap: wrap
+    gap: 0
+    padding: 1rem
+    .service-item
+        flex: 1 1 calc(25% - 1rem) // Flexbox: Adjusts width dynamically for responsiveness
+        max-width: calc(22% - 1rem)
+        position: relative
+        overflow: hidden
+        border-radius: 8px
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+        transition: transform 0.3s ease    
+        img
+            width: 24rem
+            height: auto
+            transition: transform 0.3s ease
+            object-fit: fill
+        &:hover img
+            transform: scale(1.1)
+        .service-content
+            position: absolute
+            bottom: 0
+            left: 0
+            right: 0
+            background: rgba(0, 0, 0, 0.6)
+            color: #ffffff
+            margin: 10px 0
+            border-radius: 15px
+            bottom: 0.3rem
+            width: 98%
+
+            // padding: 1rem
+            // text-align: center
+            h3
+                margin: 0 15px
+                font-size: 1rem
+
+            p
+                margin: 0 15px
+                font-size: 0.7rem
+
+// section 4
+
+.services
+  padding: 2rem
+  text-align: center
+
+  header
+    margin-bottom: 1.5rem
+
+    h2
+      font-size: 2rem
+      color: #333
+
+  .services-container
+    display: flex
+    flex-wrap: wrap
+    gap: 1rem
+    justify-content: center
+
+    .service-item
+      flex: 1 1 calc(20% - 1rem) // Dynamically size items (5 per row)
+      max-width: calc(20% - 1rem)
+      text-align: center
+      padding: 1rem
+      border-radius: 8px
+      background-color: #ffffff
+      transition: transform 0.3s ease, box-shadow 0.3s ease
+
+      &:hover
+        transform: translateY(-5px)
+        // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+
+      img
+        width: 60px
+        height: 60px
+        margin-bottom: 0.5rem
+
+      h3
+        font-size: 1rem
+        color: #333
+.section-5
+    margin-top: 15vh
+    background-color: #0188FF
+    position: relative
+    img
+        position: absolute
+        bottom: 0vh
+        width: 33vw
+        height: auto
+        left: 5vw
+    .section-5-content
+      margin: 6vw 45vw
+      p
+          width: 40vw
+          color: #ffffff
+      button
+          width: 20vw
+          span
+            width: 15vw
+            font-size: 0.8vw
+      h1
+        color: #ffffff
+        font-size: 2.5vw
+
+
+
+@media (max-width: 1024px)
+  .service-item
+    flex: 1 1 calc(33.33% - 1rem) // 3 items per row
+
+@media (max-width: 768px)
+  .service-item
+    flex: 1 1 calc(50% - 1rem) // 2 items per row
+
+@media (max-width: 480px)
+  .service-item
+    flex: 1 1 100% // Full width for small screens
