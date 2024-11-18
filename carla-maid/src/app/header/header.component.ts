@@ -50,7 +50,5 @@ export class HeaderComponent {
   servicesPage() {
     this.router.navigate(['our-services']);
   }
-  navigateToServices(){
-    this.router.navigate(['/our-services']);
-  }
+  
 }
