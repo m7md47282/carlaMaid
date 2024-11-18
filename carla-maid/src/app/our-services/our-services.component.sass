@@ -2,6 +2,7 @@
     margin-top: 50px
     img
         width: 28vw
+        min-width: 475px
     .header-text
         margin-left: 5vw
         .the-best-p
@@ -34,6 +35,7 @@
     .service-item
         flex: 1 1 calc(25% - 1rem) // Flexbox: Adjusts width dynamically for responsiveness
         max-width: calc(22% - 1rem)
+        min-width: 300px
         position: relative
         overflow: hidden
         border-radius: 8px
@@ -57,7 +59,7 @@
             border-radius: 15px
             bottom: 0.3rem
             width: 98%
-
+            max-width: 385px
             // padding: 1rem
             // text-align: center
             h3
@@ -90,6 +92,7 @@
     .service-item
       flex: 1 1 calc(20% - 1rem) // Dynamically size items (5 per row)
       max-width: calc(20% - 1rem)
+      min-width: 200px
       text-align: center
       padding: 1rem
       border-radius: 8px
@@ -112,12 +115,15 @@
     margin-top: 15vh
     background-color: #0188FF
     position: relative
-    img
-        position: absolute
-        bottom: 0vh
-        width: 33vw
-        height: auto
-        left: 5vw
+    .img-container
+      width: 33vw
+      img
+          position: absolute
+          bottom: 0vh
+          width: 33vw
+          max-width: 675px
+          height: auto
+          left: 5vw
     .section-5-content
       margin: 6vw 45vw
       p
