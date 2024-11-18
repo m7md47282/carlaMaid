@@ -1,19 +1,15 @@
 <header>
   <img class="logo" src="../../assets/images/Logo-En.png" alt="no-no">
   <nav>
-    <li>{{'shared.home'| translate}}</li>
-      <li >
-      <a routerLink="our-services">{{'shared.services' | translate}}</a> 
-      </li>
-    <li (click)="navigateToServices()">{{'shared.aboutUs' | translate}}</li>
-    <li>{{'shared.blogs' | translate}}</li>
+    <li routerLink="/">{{'shared.home'| translate}}</li>
+    <li routerLink="/our-services">{{'shared.services' | translate}} </li>
+    <li routerLink="/about-us">{{'shared.aboutUs' | translate}}</li>
+    <li routerLink="/blogs">{{'shared.blogs' | translate}}</li>
   </nav>
 
   <section class="flex-center gap-10">
-    <p>{{'shared.contactUs'|translate}}<p>
-    <button class="btn-primary">
-      {{'shared.bookNow'| translate}}
-    </button>
+    <p routerLink="/contact-us">{{'shared.contactUs'|translate}}</p>
+      <button class="btn-primary">{{'shared.bookNow'| translate}}</button>
   </section>
 
   <button class="translation-button" (click)="switchLanguage()">
@@ -21,4 +17,3 @@
     {{ currentLang === 'en' ? 'العربية' : 'English' }}
   </button>
 </header>
-  
