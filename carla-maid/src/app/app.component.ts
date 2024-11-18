@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { LandingComponent } from './landing/landing.component';
 import { FooterComponent } from './footer/footer.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
     TranslateModule,
     HeaderComponent,
     FooterComponent,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
