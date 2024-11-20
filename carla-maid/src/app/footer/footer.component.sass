@@ -13,9 +13,19 @@ h1
 hr
     width: 90%
 .our-info
+    display: flex
+    padding: 20px
     p
         font-size: 13px
 .Copyright
     p
         margin: 10px
         font-size: 12px
+
+@media (max-width: 780px)
+    .our-info
+        flex-direction: column
+    .logo
+        width: 40%
+        p
+            width: 100%

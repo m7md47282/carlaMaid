@@ -1,45 +1,56 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../shared/config/config.service';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterModule, Routes } from '@angular/router';
 import { OurServicesComponent } from '../our-services/our-services.component';
-
-const routes: Routes = [
-  // { path: '', component: HomeComponent },
-  { path: 'our-services', component: OurServicesComponent },
-];
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-})
-export class AppModule {}
+import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
+    MenubarModule,
     TranslateModule,
-    MatIconModule,
-    RouterModule,
-    RouterLink,
+    MatIcon
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'
 })
-export class HeaderComponent {
+
+export class HeaderComponent implements OnInit {
   environment ={lang: 'en'};
   textDir :string = 'ltr'
   currentLang: string = 'en'
+  items: any
 
-  constructor(private translate: TranslateService ,private configService: ConfigService,private router: Router) { 
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
+  constructor(private translate: TranslateService ,private configService: ConfigService,private router: Router) {}
+  ngOnInit(): void {
+    this.items = [
       {
-       
-        document.documentElement.lang = event.lang;
-        document.documentElement.dir = event.lang == 'ar'? 'rtl' : 'ltr';
-
-      });
+        label: 'Home',
+        icon: 'pi pi-home',
+        link: '/'
+      },
+      {
+        label: 'Our Services',
+        icon: 'pi pi-star',
+        link: "our-services"
+      },
+      {
+        label: 'About Us',
+        icon: 'pi pi-envelope',
+        link: '/about-us'
+      },
+      {
+        label: 'Blogs',
+        icon: 'pi pi-envelope',
+        link: '/blogs'
+      }
+    ];
   }
+
+
   switchLanguage(): void {
     this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
     localStorage.setItem('lang', this.currentLang);
