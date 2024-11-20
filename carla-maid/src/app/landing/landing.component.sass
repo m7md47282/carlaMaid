@@ -4,44 +4,34 @@
     display: flex
     flex-direction: column
     
-    .hero-button
-        position: relative
-        bottom: 7rem
-        left: 9rem
-        width: 19%
-        span
-            width: 90%
-            font-size: 0.8rem
     .img-text
         background-image: url('../../assets/images/MAIN-HERO.png')
         background-size: cover
-        width: 100%
-        height: auto
         margin: 0
         width: 100%
-        height: auto
+        height: 80vh
         position: relative
         z-index: 0
-        display: block
         .img-info
-            margin: 75px 10px 150px 150px 
-            .top-title-service
-                .cleaner-margin
-                    margin-left: 17vw
+            display: flex
+            flex-direction: column
+            height: 100%
+            justify-content: center
+            margin-inline-start: 10rem
             
             h1
                 color: #FFFFFF
-                font-size: 3.3vw
-                width: 680px
+                font-size: 3.3rem
+                width: 50%
                 margin: 0
 
             h4
-                font-size: 1.5vw
+                font-size: 1.5rem
                 color: #ffffff
                 font-weight: 600
                 margin: 0
             p
-                font-size: 1vw
+                font-size: 1rem
                 color: #ffffff
                 font-weight: 400
                 width: 50%
@@ -49,12 +39,12 @@
             .p-width
                 width: 20px
 
-// secyion 2
+// section 2
 
 .section-2-container
     .text-section
         h1
-            font-size: 60px
+            font-size: 3rem
             margin: 0
         .why-us-text
             font-size: 0.9rem
@@ -106,24 +96,25 @@
 .section-4
     background-image: url('../../assets/images/section-4-img.png') 
     background-size: cover
-    height: 85%
+    height: 50vh
     margin-top: 50px
     img
         width: 100%
         height: auto
         position: relative
     .cleaning-position
-        position: relative
-        top: 12rem
+        height: 100%
+        display: flex
+        flex-direction: column
     h1
         color: #ffffff
         font-weight: 500
-        font-size: 2rem
+        font-size: 2.5rem
     p
         color: #ffffff
+        font-size: 1.2rem
     svg
         position: relative
-        left: 140px
         margin: 0
 .section-5-container
 
@@ -141,9 +132,7 @@
     .slider-title
         display: flex
         align-items: center
-        justify-content: space-around
-        gap: 21%
-
+        padding: 0 12rem
         h1
             margin: 0
     .cards-container
@@ -155,36 +144,121 @@
             width: 98%
         .width-container
             width: 30%
+.service-card
+    padding: 0 20px
+
 .section-7
     margin-bottom: 10rem
     position: relative
+    .blog-card
+        height: 350px
+        position: relative
+        .title
+            font-size: 1rem
+        .more-info
+            display: none
+            transition: 0.5s all ease-in-out
+        &:hover
+            .title
+                animation: fadeOut 0.6s ease-out forwards
+            .more-info
+                display: inline-block
+                position: absolute
+                width: 20rem
+                background-color: #deddddc4
+                border-radius: 10px
+                bottom: -20px
+                right: 20px
+                padding: 20px
+                z-index: 999
+                animation: slideIn 0.6s ease-out forwards
+
+
     .img-width
         width: 25%
         
         img
             width: 100%
         p
-            width: 35%
             font-size: 0.9rem
             font-weight: 500
     
-    .text-border
-        
-        border-radius: 20px
-        padding: 20px
 
-        position: absolute
-        z-index: 999
+.services-slider
+    img    
+        width: 25rem
+        height: 15rem
+        object-fit: cover
+        border-radius: 20px
+        transition: 0.5s all ease-in-out
+
+::ng-deep
+    .services-slider
+        .p-carousel-container
+            height: 60vh
+        .p-carousel-item.p-carousel-item-active
+            img
+                height: 20rem
+
+
+@media (max-width: 780px)
+    .img-container
+        .img-text
+            .img-info
+                margin-inline-start: 2rem
+                align-items: center
+            .hero-content
+                h1,h4,p
+                    width: 100%
+                    text-align: center
+            .btn-epic
+                min-width: 250px
         
-        &:hover
-            padding: 90px 30px 10px 10px
-            // top: -50px
-            width: 18%
-            transition: 0.5s ease-in-out
-            background-color: #deddddc4
-            .more-txt
-                display: block
-                transition: 0.5s ease-in-out
-        
-        .more-txt
-            display: none
+    .section-2-container
+        flex-direction: column
+        .text-section.width-40, .why-choose-us-img 
+            width: 100%
+            padding: 20px
+    .why-us-card
+        gap: 20px
+        align-items: center
+    .experiences
+        flex-direction: column-reverse
+        .experience-text-container
+            width: 100%
+
+
+    .section-4
+        height: 60vh
+
+    .our-cards
+        flex-direction: column
+
+    .primary-card, .secondary-card
+        width: 28rem
+        height: auto
+    .new-blogs
+        flex-direction: column
+        .img-width
+            width: 50%
+            height: auto
+
+
+
+
+@keyframes slideIn 
+  from 
+    transform: translateX(-20%)
+    opacity: 0
+  
+  to 
+    transform: translateX(0)
+    opacity: 1
+
+@keyframes fadeOut 
+  from 
+    opacity: 1
+  
+  to 
+    opacity: 0
+  
