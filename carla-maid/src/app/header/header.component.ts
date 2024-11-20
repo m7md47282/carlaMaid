@@ -30,6 +30,7 @@ export class HeaderComponent {
   environment ={lang: 'en'};
   textDir :string = 'ltr'
   currentLang: string = 'en'
+  isSidebarOpen: boolean = false;
 
   constructor(private translate: TranslateService ,private configService: ConfigService,private router: Router) { 
     this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
@@ -47,8 +48,9 @@ export class HeaderComponent {
     this.environment.lang = this.currentLang;
     this.translate.use(this.environment.lang);
   }
-  servicesPage() {
-    this.router.navigate(['our-services']);
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
   
 }
