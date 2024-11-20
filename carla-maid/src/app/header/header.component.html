@@ -1,48 +1,26 @@
-<!-- <header>
-  <img class="logo" src="../../assets/images/Logo-En.png" alt="no-no">
-  <button class="menu-button" onclick="toggleSidebar()">☰</button>
-  <nav class="sidebar">
-    <li><a routerLink="home">{{'shared.home'| translate}}</a></li>
-    <li><a routerLink="our-services">{{'shared.services' | translate}}</a> </li>
-    <li><a routerLink="aboutUS">{{'shared.aboutUs' | translate}}</a> </li>
-    <li><a routerLink="Blogs">{{'shared.blogs' | translate}}</a></li>
-  </nav>
-  
-  <section class="flex-center gap-10">
-    <p>{{'shared.contactUs'|translate}}</p>
-      <button class="btn-primary">
-        {{'shared.bookNow'| translate}}
-      </button>
-  </section>
-
-
-  <button class="translation-button" (click)="switchLanguage()">
-    <mat-icon>language</mat-icon>
-    {{ currentLang === 'en' ? 'العربية' : 'English' }}
-  </button>
-</header> -->
-
-
-
 <header>
-  <img class="logo" src="../../assets/images/Logo-En.png" alt="no-no">
-  
-  <button class="menu-button" (click)="toggleSidebar()">☰</button>
-  
-  <div class="sidebar" [class.open]="isSidebarOpen">
-    <li><a routerLink="home">{{'shared.home' | translate}}</a></li>
-    <li><a routerLink="our-services">{{'shared.services' | translate}}</a></li>
-    <li><a routerLink="aboutUS">{{'shared.aboutUs' | translate}}</a></li>
-    <li><a routerLink="Blogs">{{'shared.blogs' | translate}}</a></li>
-  </div>
+  <nav class="nav">
+    <p-menubar [model]="items">
+      <ng-template pTemplate="start">
+        <div class="logo">
+          <img src="../../assets/images/Logo-En.png" alt="no-no">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="item" let-item let-root="root">
+        <a pRipple [routerLink]="item.link" class="flex align-items-center p-menuitem-link">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">{{ item.label }}</span>
+        </a>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <button class="translation-button" (click)="switchLanguage()">
+          <mat-icon>language</mat-icon>
+          {{ currentLang === 'en' ? 'العربية' : 'English' }}
+        </button>
+      </ng-template>
+    </p-menubar>
+  </nav>
 
-  <section class="flex-center gap-10">
-    <p>{{'shared.contactUs' | translate}}</p>
-    <button class="btn-primary">{{'shared.bookNow' | translate}}</button>
-  </section>
 
-  <button class="translation-button" (click)="switchLanguage()">
-    <mat-icon>language</mat-icon>
-    {{ currentLang === 'en' ? 'العربية' : 'English' }}
-  </button>
+
 </header>

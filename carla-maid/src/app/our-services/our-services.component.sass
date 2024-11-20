@@ -1,8 +1,8 @@
 .section-1
     margin-top: 50px
     img
-        width: 28vw
-        min-width: 403px
+        width: 100%
+        min-width: 310px
     .header-text
         margin-left: 5vw
         .the-best-p
@@ -12,7 +12,6 @@
             font-size: 1.4rem
             font-weight: 500
             margin: 0 0 0.5rem
-            width: 35vw
         .our-services-list
             border: 2px solid #51585480
             padding: 20px
@@ -33,13 +32,12 @@
     gap: 0
     padding: 1rem
     .service-item
-        flex: 1 1 calc(25% - 1rem) // Flexbox: Adjusts width dynamically for responsiveness
+        flex: 1 1 calc(25% - 1rem) 
         max-width: calc(22% - 1rem)
         min-width: 300px
         position: relative
         overflow: hidden
         border-radius: 8px
-        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
         transition: transform 0.3s ease    
         img
             width: 24rem
@@ -51,17 +49,13 @@
         .service-content
             position: absolute
             bottom: 0
-            left: 0
-            right: 0
             background: rgba(0, 0, 0, 0.6)
             color: #ffffff
             margin: 10px 0
             border-radius: 15px
             bottom: 0.3rem
             width: 98%
-            max-width: 385px
-            // padding: 1rem
-            // text-align: center
+            max-width: 24rem
             h3
                 margin: 0 15px
                 font-size: 1rem
@@ -116,38 +110,79 @@
     background-color: #0188FF
     position: relative
     .img-container
-      width: 33vw
+      width: 40%
       img
-          position: absolute
-          bottom: 0vh
-          width: 33vw
-          max-width: 675px
-          height: auto
-          left: 5vw
+        position: absolute
+        bottom: 2rem
+        max-width: 400px
+        height: auto
+        width: 30vw
     .section-5-content
-      margin: 6vw 45vw
+      width: 50%
       p
-          width: 40vw
+          width: 96%
           color: #ffffff
       button
           width: 20vw
+          margin-bottom: 2rem
           span
-            width: 15vw
-            font-size: 0.8vw
+            width: 17rem
+            font-size: 0.7rem
       h1
         color: #ffffff
-        font-size: clamp(1.5rem, 2vw, 2rem)
+        width: 90%
+        font-size: clamp(2.5rem, 2vw, 2rem)
 
 
 
 @media (max-width: 1024px)
   .service-item
-    flex: 1 1 calc(33.33% - 1rem) // 3 items per row
+    flex: 1 1 calc(33.33% - 1rem) 
 
 @media (max-width: 768px)
   .service-item
-    flex: 1 1 calc(50% - 1rem) // 2 items per row
+    flex: 1 1 calc(50% - 1rem) 
 
 @media (max-width: 480px)
   .service-item
-    flex: 1 1 100% // Full width for small screens
+    flex: 1 1 100% 
+
+@media (max-width: 767px)
+  .section-1
+    .button-container
+        display: flex
+        justify-content: center
+  .section-5
+    flex-direction: column-reverse
+    justify-content: center
+    gap: 0
+    .section-5-content
+      gap: 0
+      align-items: center
+    .img-container
+      img
+        position: static
+    .content-container
+      display: flex
+      justify-content: center
+    .section-5-content
+      h1
+        text-align: center
+      p
+        text-align: center
+      button
+        transform: translateY(14rem)
+        margin: 0
+        
+
+@media (max-width: 425px)
+  .section-1
+    .header-text
+
+      h1
+        display: none
+      h3
+        display: none
+      .cleaner
+          display: none
+    

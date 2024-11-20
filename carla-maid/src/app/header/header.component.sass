@@ -1,115 +1,29 @@
-// @import ../../variables
-// header
-//     display: flex
-//     justify-content: space-around
-    
-//     img
-//         width: 125px
-//         height: auto
-//         padding: 17px 
-//         object-fit: cover
-//     nav
-//         list-style-type: none
-//         display: flex
-//         gap: 10px
-//         align-items: center
-//         li
-//             padding: 10px
-//             cursor: pointer
-//             font-size: clamp(15px, 1.2vw, 17px)
-//     button 
-//         padding: 10px
-//     .translation-button
-//         display: flex
-//         border: 0
-//         background-color: #ffffff
-//         align-items: center
-//         gap: 10px
-//         cursor: pointer
+@import ../../variables
+header
+    display: flex
+    justify-content: space-around
+    padding: 0 20px
+    img
+        width: 125px
+        height: auto
+        padding: 17px 
+        object-fit: cover
+    nav
+        width: 100%
+    h4
+        font-size: 16px
+    button 
+        padding: 10px
+    .translation-button
+        display: flex
+        border: 0
+        background-color: #ffffff
+        align-items: center
+        gap: 10px
+        cursor: pointer
 
-
+::ng-deep
+    .p-menubar
+        border: none
+        background-color: white
         
-        @import ../../variables;
-
-header 
-  display: flex
-  justify-content: space-between
-  align-items: center
-  padding: 0 10px
-
-  .logo 
-    width: 125px
-    height: auto
-    padding: 17px
-    object-fit: cover
-  
-  .menu-button 
-    display: none // hidden by default for larger screens
-    background: none
-    border: none
-    font-size: 24px
-    cursor: pointer
-  
-
-  div.sidebar 
-    list-style-type: none
-    display: flex
-    gap: 10px
-    align-items: center
-
-    li 
-      padding: 10px
-      cursor: pointer
-      font-size: clamp(15px, 1.2vw, 17px)
-    
-  
-
-  .flex-center 
-    display: flex
-    gap: 10px
-  
-
-  .translation-button 
-    display: flex
-    border: 0
-    background-color: #ffffff
-    align-items: center
-    gap: 10px
-    cursor: pointer
-  
-
-
-// Responsive styles
-@media (max-width: 768px) 
-  header 
-    flex-wrap: wrap
-
-    .menu-button 
-      display: block // Show menu button on mobile
-    
-
-    div.sidebar 
-      position: fixed
-      top: 0
-      left: -250px// Hidden by default
-      width: 250px
-      height: 100%
-      background: #fff
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2)
-      display: flex
-      flex-direction: column
-      gap: 15px
-      padding: 20px
-      transition: left 0.3s ease
-
-      li 
-        font-size: 18px
-        padding: 15px 0
-      
-    
-
-    div.sidebar.active 
-      left: 0 // Sidebar slides in
-    
-  
-
