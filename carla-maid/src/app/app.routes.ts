@@ -5,7 +5,7 @@ import { BlogsComponent} from './blogs/blogs.component'
 export const routes: Routes = [
 
     {
-        path:'home',
+        path:'',
         loadComponent: () =>import('./landing/landing.component').then((m)=> m.LandingComponent )
     },
     {
@@ -13,7 +13,7 @@ export const routes: Routes = [
         loadComponent: () =>import('./our-services/our-services.component').then((m)=> m.OurServicesComponent )
     },
     {
-        path: 'Blogs',
+        path: 'blogs',
         loadComponent: () =>import('./blogs/blogs.component').then((m)=> m.BlogsComponent)
     },
     {
@@ -21,9 +21,8 @@ export const routes: Routes = [
         loadComponent: () => import('./about-us/about-us.component').then((m)=> m.AboutUSComponent)
     },
     {
-        path: 'BlogsOpen',
+        path: 'blogsOpen',
         loadComponent: () => import('./blogs-open/blogs-open.component').then((m)=> m.BlogsOpenComponent)
-        
     }
     
 ];
