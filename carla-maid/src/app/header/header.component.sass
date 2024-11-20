@@ -2,20 +2,14 @@
 header
     display: flex
     justify-content: space-around
-    
+    padding: 0 20px
     img
         width: 125px
         height: auto
         padding: 17px 
         object-fit: cover
     nav
-        list-style-type: none
-        display: flex
-        gap: 10px
-        align-items: center
-        li
-            padding: 10px
-            cursor: pointer
+        width: 100%
     h4
         font-size: 16px
     button 
@@ -27,4 +21,9 @@ header
         align-items: center
         gap: 10px
         cursor: pointer
+
+::ng-deep
+    .p-menubar
+        border: none
+        background-color: white
         
