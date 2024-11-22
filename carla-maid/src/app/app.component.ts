@@ -1,11 +1,12 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { provideRouter, RouterModule, RouterOutlet } from '@angular/router';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Languages } from './shared/interfaces/languages';
 import { ConfigService } from './shared/config/config.service';
 import { HeaderComponent } from './header/header.component';
 import { environment } from '../environments/environment';
-import { LandingComponent } from './landing/landing.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { FooterComponent } from './footer/footer.component';
 
 
@@ -17,18 +18,33 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     FooterComponent,
     RouterModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
 export class AppComponent implements OnInit {
   title = 'carla-maid';
-
+  isLoading = false;
   lang: Languages = environment.lang as Languages;
 
   constructor(
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    private router: Router
     ) {
+
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          this.isLoading = true;
+        } else if (
+          event instanceof NavigationEnd ||
+          event instanceof NavigationCancel ||
+          event instanceof NavigationError
+        ) {
+          this.isLoading = false;
+
+        }
+      });
    
   }
   ngOnInit(): void {
