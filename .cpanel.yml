@@ -2,11 +2,10 @@
 
 deployment:
   tasks:
-    - export DEPLOYMENT_SOURCE= /home/project/
+    - export DEPLOYMENT_SOURCE= /home/repositories/carlaMaid/carla-maid/
     - export DEPLOYMENT_TARGET= /home/public_html/
     - echo "Building Angular project..."
     - cd $DEPLOYMENT_SOURCE
-    - cd carla-maid
     - git checkout main
     - git pull origin main
     - echo "Installing Angular dependencies..."
