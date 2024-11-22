@@ -8,6 +8,10 @@
 
 html
     font-size: 16px
+    background-color: #F5F5F5
+
+h1
+   font-size: 1.8rem
 
 .flex-center 
     display: flex
@@ -306,6 +310,31 @@ button,a,.clickable
 
 .page-container
     padding: 20px
+
+.fade-in
+    opacity: 0
+    animation: fade-in 1s ease-in forwards
+
+.scroll-up
+    opacity: 0
+    animation: scroll-up 1s ease-in forwards
+    animation-delay: 0.5s
+    
+@keyframes fade-in 
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes scroll-up
+    0%
+        opacity: 0
+        transform: translateY(30%)
+    100%
+        opacity: 1
+        transform: translateY(0%)
+
+
 @media (max-width: 1024px) 
   html 
     font-size: 14px
