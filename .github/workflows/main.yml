@@ -12,9 +12,9 @@ jobs:
     steps: 
       - name: install ssh
         run: |
-          install -m  600 -d dev/null ~/.ssh/id_rsa
+          install -m  600 -D dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          ssh-keyscan -h ${{ secrets.SSH_HOST }} >~.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
       - name: connect and pull
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_RPO }} && git checkout ${{ secrets.MAIN }} && git pull
