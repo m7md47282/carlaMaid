@@ -2,8 +2,8 @@
 
 deployment:
   tasks:
-    - export DEPLOYMENT_SOURCE=https://github.com/m7md47282/carlaMaid.git
-    - export DEPLOYMENT_TARGET=home/carlamai/public_html
+    - export DEPLOYMENT_SOURCE=/home/carlamai/project
+    - export DEPLOYMENT_TARGET=/home/carlamai/public_html
     - echo "Building Angular project..."
     - cd $DEPLOYMENT_SOURCE
     - cd carla-maid
@@ -11,6 +11,6 @@ deployment:
     - git pull origin main
     - echo "Installing Angular dependencies..."
     - npm install
-    - ng build  --output-path=$DEPLOYMENT_SOURCE/dist
+    - ng build
     - echo "Copying build files to deployment target..."
-    - rsync -av --delete $DEPLOYMENT_SOURCE/dist/ $DEPLOYMENT_TARGET/
+    - rsync -av --delete $DEPLOYMENT_SOURCE/carla-maid/dist/ $DEPLOYMENT_TARGET/
