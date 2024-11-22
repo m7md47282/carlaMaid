@@ -1,15 +1,33 @@
-
-
+---
 deployment:
   tasks:
+    # Set environment variables for deployment
     - export DEPLOYMENT_SOURCE=/home/repositories/carlaMaid/carla-maid/
     - export DEPLOYMENT_TARGET=/home/public_html/
-    - echo "Building Angular project..."
+
+    # Navigate to the source directory
+    - echo "Navigating to source directory..."
     - cd $DEPLOYMENT_SOURCE
+
+    # Ensure we are on the main branch
+    - echo "Switching to the main branch..."
     - git checkout main
+
+    # Pull the latest changes from the repository
+    - echo "Pulling the latest changes..."
     - git pull origin main
+
+    # Install dependencies using npm
     - echo "Installing Angular dependencies..."
     - npm install
-    - ng build
-    - echo "Copying build files to deployment target..."
-    - rsync -av --delete $DEPLOYMENT_SOURCE/carla-maid/dist/ $DEPLOYMENT_TARGET/
+
+    # Build the Angular project for production
+    - echo "Building Angular project..."
+    - npm run build  --output-path=dist/ --base-href=/
+
+    # Deploy the build files to the target directory
+    - echo "Deploying build files to the target directory..."
+    - rsync -av --delete $DEPLOYMENT_SOURCE/dist/ $DEPLOYMENT_TARGET/
+
+    # Log completion
+    - echo "Angular project deployed successfully."
