@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Blogs',
         icon: 'pi pi-envelope',
-        link: '/blogs'
+        link: '/blogs-open'
       }
     ];
   }
