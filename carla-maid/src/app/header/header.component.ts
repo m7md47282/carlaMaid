@@ -58,8 +58,5 @@ export class HeaderComponent implements OnInit {
     this.environment.lang = this.currentLang;
     this.translate.use(this.environment.lang);
   }
-  servicesPage() {
-    this.router.navigate(['our-services']);
-  }
   
 }
