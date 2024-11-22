@@ -2,8 +2,8 @@
 
 deployment:
   tasks:
-    - export DEPLOYMENT_SOURCE=/home/carlamai/project
-    - export DEPLOYMENT_TARGET=/home/carlamai/backup
+    - export DEPLOYMENT_SOURCE=/home/carlamai/project/
+    - export DEPLOYMENT_TARGET=/home/carlamai/backup/
     - echo "Building Angular project..."
     - cd $DEPLOYMENT_SOURCE
     - cd carla-maid
