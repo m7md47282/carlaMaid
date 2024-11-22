@@ -31,15 +31,16 @@ export class AppComponent implements OnInit {
     ) {
    
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setLang()
+  }
 
-  toggleLang(){
-    this._configService.getLang() === 'ar'? this.setLang('en') : this.setLang('ar');
+  setLang() {
+    let lang = localStorage.getItem('lang') || environment.lang
+    
+    this._configService.setLang(lang as Languages);
 
     this.lang = this._configService.getLang()
-  }
-  setLang(lang: any) {
-    this._configService.setLang(lang);
   }
 
 
