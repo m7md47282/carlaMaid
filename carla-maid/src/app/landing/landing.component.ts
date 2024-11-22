@@ -7,6 +7,8 @@ import { TagModule } from 'primeng/tag';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Direction } from '../shared/interfaces/languages';
+import { ConfigService } from '../shared/config/config.service';
 
 @Component({
   selector: 'app-landing',
@@ -60,7 +62,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class LandingComponent implements OnInit  {
 
   private _translate = inject(TranslateService); 
-
+  private _configService= inject(ConfigService); 
 
   responsiveOptions = [
     {
@@ -219,6 +221,11 @@ ngAfterViewInit(): void {
     });
   });
 
+}
+
+
+direction(): Direction {
+  return this._configService.getDirection() as Direction;
 }
 
 

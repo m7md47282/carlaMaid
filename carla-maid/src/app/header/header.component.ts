@@ -52,11 +52,7 @@ export class HeaderComponent implements OnInit {
 
 
   switchLanguage(): void {
-    this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
-    localStorage.setItem('lang', this.currentLang);
-    document.documentElement.lang = this.currentLang;
-    this.environment.lang = this.currentLang;
-    this.translate.use(this.environment.lang);
+   this.configService.toggleLang()
   }
   
 }

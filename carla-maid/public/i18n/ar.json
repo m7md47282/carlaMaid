@@ -77,21 +77,21 @@
         "WhatAreTheCostsOfHiringTheBestCleaning": "ما هي تكاليف توظيف أفضل شركة تنظيف في قطر؟",
         "Conclusion": "الخاتمة: استمتع بمساحة نظيفة وصحية مع الخدمة المناسبة",
         "CarlaMaidQatarTrustedPartnerForComprehensiveCleaning": "كارلا ميد: شريك قطر الموثوق لخدمات التنظيف والعمالة الشاملة",
-        "FAQsAboutTheBestCleaningCompanyQatar" : "الأسئلة الشائعة حول أفضل شركة تنظيف في قطر",
-        "WhatShouldIExpectFromProfessionalCleaning" : "ماذا يجب أن أتوقع من خدمة تنظيف محترفة في قطر؟",
-        "HowOftenShouldIScheduleCleaningServices" : "كم مرة يجب أن أجدول خدمات التنظيف؟",
-        "ContactUsToday" : "تواصل معنا اليوم!",
-        "YourEmailAddress" : "عنوان بريدك الإلكتروني",
-        "YourMessage" : "رسالتك",
-        "Company" : "الشركة",
-        "OurVistion" :"رؤيتنا",
-        "OurMission" : "مهمتنا",
-        "OurValues" : "قيمنا",
-        "Services" : "الخدمات",
-        "HomeCleaning" : "تنظيف المنزل",
-        "HospitalityStaff" : "موظفو الضيافة",
-        "ContactUs" : "اتصل بنا",
-        "submit" : "إرسال"
+        "FAQsAboutTheBestCleaningCompanyQatar": "الأسئلة الشائعة حول أفضل شركة تنظيف في قطر",
+        "WhatShouldIExpectFromProfessionalCleaning": "ماذا يجب أن أتوقع من خدمة تنظيف محترفة في قطر؟",
+        "HowOftenShouldIScheduleCleaningServices": "كم مرة يجب أن أجدول خدمات التنظيف؟",
+        "ContactUsToday": "تواصل معنا اليوم!",
+        "YourEmailAddress": "عنوان بريدك الإلكتروني",
+        "YourMessage": "رسالتك",
+        "Company": "الشركة",
+        "OurVistion": "رؤيتنا",
+        "OurMission": "مهمتنا",
+        "OurValues": "قيمنا",
+        "Services": "الخدمات",
+        "HomeCleaning": "تنظيف المنزل",
+        "HospitalityStaff": "موظفو الضيافة",
+        "ContactUs": "اتصل بنا",
+        "submit": "إرسال"
     },
     "paragraph": {
         "trustMaidService": "خدمة تنظيف موثوقة وشركة تنظيف في قطر. تقدم كارلا ميد خدمات تنظيف مخصصة للمنازل والشركات، بما في ذلك خيارات صديقة للبيئة والتنظيف العميق للحصول على بيئة نظيفة وخالية من التوتر في الدوحة وما بعدها.",
@@ -196,8 +196,6 @@
         "carlaMaidCleaningTitle": "خدمات تنظيف كارلا للخادمات",
         "carlaMaidServicesTitle": "خدمات كارلا للخادمات",
         "tailoredSolutionsDescription": "حلول مخصصة لكل مكان"
-      
-     
     },
     "blogs": {
         "blog1Title": "شركات التنظيف في قطر: دليل شامل لخدمات التنظيف المهنية",
@@ -208,6 +206,8 @@
         "blog3Description": "شركات التنظيف في قطر: دليل شامل لخدمات التنظيف المهنية، الحفاظ على مساحة نظيفة ومنظمة أمر أساسي للراحة والصحة والإنتاجية. سواء كنت تسعى للحفاظ على منزلك.",
         "latestNewAndBlogs": "أحدث الأخبار والمقالات"
     },
-    "textTitle": "اختبر التنظيف الأفضل مع كارلا للخادمات",
-    "textDescription": "<b>كارلا للخادمات</b> ملتزمة بالموثوقية والجودة. يضمن فريق التنظيف الموثوق في قطر أن كل مساحة، سواء كانت منزلية أو مكتبية، تحصل على خدمة شاملة وموثوقة يمكنك الاعتماد عليها."
+    "experience": {
+        "textTitle": "اختبر التنظيف الأفضل مع كارلا للخادمات",
+        "textDescription": "كارلا للخادمات ملتزمة بالموثوقية والجودة. يضمن فريق التنظيف الموثوق في قطر أن كل مساحة، سواء كانت منزلية أو مكتبية، تحصل على خدمة شاملة وموثوقة يمكنك الاعتماد عليها."
+    }
 }

@@ -40,6 +40,10 @@ export class ConfigService {
     }
   }
 
+  toggleLang(){
+    this.setLang(this.getLang() === 'ar'? 'en' : 'ar');
+  }
+
   /**
    * Retrieves the text direction from local storage or falls back to the default direction.
    * @returns {Direction} The current text direction ('ltr' or 'rtl').
