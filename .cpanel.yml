@@ -2,8 +2,8 @@
 
 deployment:
   tasks:
-    - export DEPLOYMENT_SOURCE=project/
-    - export DEPLOYMENT_TARGET=public_html/
+    - export DEPLOYMENT_SOURCE= ~/project/
+    - export DEPLOYMENT_TARGET= ~/public_html/
     - echo "Building Angular project..."
     - cd $DEPLOYMENT_SOURCE
     - cd carla-maid
