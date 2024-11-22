@@ -2,12 +2,15 @@
     background-color: #5de6fe29
     
 .logo
+    width: 30%
+    min-width: 200px
     img
-        width: 300px
+        width: 15rem
+        max-width: 240px
         height: auto
     p
         font-size: 12px
-        width: 30%
+        line-height: 1.8
 h1
     color: #00A9FF
 hr
@@ -17,6 +20,11 @@ hr
     padding: 20px
     p
         font-size: 13px
+.form-section
+    width: 55%
+    max-width: 235px    
+    h1
+        font-size: 2rem
 .Copyright
     p
         margin: 10px
@@ -29,3 +37,10 @@ hr
         width: 40%
         p
             width: 100%
+@media (max-width: 425px)
+    .logo
+        p
+            text-align: center
+        .social-media
+            display: flex
+            justify-content: center
