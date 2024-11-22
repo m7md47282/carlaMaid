@@ -21,17 +21,17 @@
             
             h1
                 color: #FFFFFF
-                font-size: 3.3rem
+                font-size: 2.9rem
                 width: 50%
                 margin: 0
 
             h4
-                font-size: 1.5rem
+                font-size: 1rem
                 color: #ffffff
                 font-weight: 600
                 margin: 0
             p
-                font-size: 1rem
+                font-size: 0.8rem
                 color: #ffffff
                 font-weight: 400
                 width: 50%
@@ -53,10 +53,10 @@
             font-size: 0.9rem
             width: 100%
     .why-us-card
-       .card-header
-        width: 40% 
+        .card-header
+            width: 40% 
         svg
-            width: 25%
+            width: 5rem
             height: auto
         h3
             width: 100%
@@ -121,7 +121,7 @@
 .section-5-container
 
     .p-title
-        font-size: 24px
+        font-size: 1.2rem
     .our-cards
         display: flex
         flex-wrap: wrap
@@ -135,6 +135,7 @@
         display: flex
         align-items: center
         padding: 0 12rem
+        justify-content: center
         h1
             margin: 0
     .cards-container
@@ -156,7 +157,7 @@
         height: 350px
         position: relative
         .title
-            font-size: 1rem
+            font-size: 0.8rem
         .more-info
             display: none
             transition: 0.5s all ease-in-out
@@ -202,6 +203,9 @@
         .p-carousel-container
             height: 60vh
 
+.items-center
+    display: flex
+    align-items: center
 
 
 @media (max-width: 1024px)
@@ -211,6 +215,7 @@
             height: 219px
             object-fit: cover
             border-radius: 10px
+
 @media (max-width: 780px)
     .img-container
         .img-text
@@ -253,6 +258,14 @@
             width: 50%
             height: auto
 
+    .section-2-container
+
+        .why-us-card
+            .card-header
+                width: 90% 
+    .cleaning-position
+        padding: 20px
+        text-align: center
 
 
 
@@ -272,3 +285,7 @@
   to 
     opacity: 0
   
+@media (max-width: 480px) 
+    .section-6
+        .slider-title
+            padding: 10px

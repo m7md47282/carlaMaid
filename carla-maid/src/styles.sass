@@ -143,7 +143,8 @@ button,a,.clickable
 .gray-text-color
     color: #636363
 .title-size
-    font-size: 36px 
+    font-size: 2.8rem 
+    margin: 38px
 .flex
     display: flex
 
@@ -238,7 +239,6 @@ button,a,.clickable
     transform: translate3d(0px, 0%, 0px)
     text-decoration: none
     font-weight: 600
-
     letter-spacing: .05em
     transition-delay: .6s
     overflow: hidden
@@ -276,7 +276,7 @@ button,a,.clickable
     span
         position: absolute
         z-index: 1
-        top: -1px
+        top: 0px
         width: 100%
         text-align: center
         font-size: 0.8rem
@@ -307,10 +307,12 @@ button,a,.clickable
             &:last-child
                 transform: translateY(-24px)
       
-
+.gap-1
+    gap: 1rem
 .page-container
     padding: 20px
-
+.animation-delay
+    animation-delay: 1s
 .fade-in
     opacity: 0
     animation: fade-in 1s ease-in forwards
@@ -338,6 +340,8 @@ button,a,.clickable
 @media (max-width: 1024px) 
   html 
     font-size: 14px
+
+   
   
 
 
@@ -345,6 +349,9 @@ button,a,.clickable
 @media (max-width: 768px) 
   html 
     font-size: 12px
+    .btn-epic
+        span
+            font-size: 0.9rem
   
 
 
@@ -352,4 +359,8 @@ button,a,.clickable
 @media (max-width: 480px) 
   html 
     font-size: 10px
+
+    .title-size
+        font-size: 2.8rem 
+        margin: 20px
   
