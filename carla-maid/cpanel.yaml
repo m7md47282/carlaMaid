@@ -1,4 +1,10 @@
+
+
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/carlamai/public_html/
-    - /bin/cp -R images $DEPLOYPATH
+    - export DEPLOYMENT_SOURCE=https://github.com/m7md47282/carlaMaid.git
+    - export DEPLOYMENT_TARGET=home/carlamai/public_html
+    - echo "Building Angular project..."
+    - ng build --prod --output-path=$DEPLOYMENT_SOURCE/dist
+    - echo "Copying build files to deployment target..."
+    - rsync -av --delete $DEPLOYMENT_SOURCE/dist/ $DEPLOYMENT_TARGET/
