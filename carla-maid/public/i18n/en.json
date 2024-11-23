@@ -92,7 +92,8 @@
         "HomeCleaning" : "Home Cleaning",
         "HospitalityStaff" : "Hospitality Staff",
         "ContactUs" : "Contact Us",
-        "submit" : "Submit" 
+        "submit" : "Submit",
+        "contactYouSoon": "Thank you! We will contact you as soon as possible."
          
 
     },
@@ -221,5 +222,23 @@
     },
     "contactUs": {
         "contactUs": "Contact Us"
-    }
+    },
+    "contact": {
+        "title": "Contact Us Today!",
+        "subheading": "Looking for a spotless, stress-free space? Booking with Carla Maid is fast and convenient! Fill out our easy online form below to schedule the ideal cleaning service for your home or office. Our professional team is ready to bring a sparkling clean to your space.",
+        "form": {
+          "name": "Name",
+          "email": "Email",
+          "phone": "Phone",
+          "message": "Message",
+          "send": "Send"
+        },
+        "info": {
+          "callUs": "Call Us",
+          "support": "Support",
+          "address": "Address",
+          "website": "Website",
+          "location": "Lusail Marina, Doha, Qatar"
+        }
+      }
 }
