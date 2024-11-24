@@ -70,4 +70,5 @@ export class ConfigService {
   isServer(): boolean {
     return isPlatformServer(this.platformId)
   }
+  
 }

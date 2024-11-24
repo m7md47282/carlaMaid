@@ -12,7 +12,6 @@ import { MenubarModule } from 'primeng/menubar';
   imports: [
     MenubarModule,
     TranslateModule,
-    MatIcon
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'

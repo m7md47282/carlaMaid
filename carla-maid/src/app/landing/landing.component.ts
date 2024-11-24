@@ -159,67 +159,67 @@ ngAfterViewInit(): void {
   gsap.registerPlugin(ScrollTrigger);
 
   
-  gsap.utils.toArray('.animate-on-scroll').forEach((element: any) => {
-    gsap.fromTo(element, {
-      opacity: 0,
-      y: -50
-    }, 
-    {
-      ease: "power1.inOut",
-      duration: 0.8,
-      opacity: 1,
-      y: 0,
-      scrollTrigger: {
-        // markers: true,
-        trigger: element,
-        scrub: true,
-        start: "top 100%",
-        end: "top 50%"
-        // toggleActions: "play none none none"
-      }
-    });
-  });
+  // gsap.utils.toArray('.animate-on-scroll').forEach((element: any) => {
+  //   gsap.fromTo(element, {
+  //     opacity: 0,
+  //     y: -50
+  //   }, 
+  //   {
+  //     ease: "power1.inOut",
+  //     duration: 0.8,
+  //     opacity: 1,
+  //     y: 0,
+  //     scrollTrigger: {
+  //       // markers: true,
+  //       trigger: element,
+  //       scrub: true,
+  //       start: "top 100%",
+  //       end: "top 50%"
+  //       // toggleActions: "play none none none"
+  //     }
+  //   });
+  // });
 
-  gsap.utils.toArray('.left-to-right').forEach((element: any) => {
-    gsap.fromTo(element, {
-      opacity: 0,
-      x: -50
-    }, 
-    {
-      ease: "power1.inOut",
-      duration: 0.8,
-      opacity: 1,
-      x: 0,
+  // gsap.utils.toArray('.left-to-right').forEach((element: any) => {
+  //   gsap.fromTo(element, {
+  //     opacity: 0,
+  //     x: -50
+  //   }, 
+  //   {
+  //     ease: "power1.inOut",
+  //     duration: 0.8,
+  //     opacity: 1,
+  //     x: 0,
       
-      scrollTrigger: {
-        trigger: element,
-        scrub: true,
-        start: "top 100%",
-        end: "top 70%",
+  //     scrollTrigger: {
+  //       trigger: element,
+  //       scrub: true,
+  //       start: "top 100%",
+  //       end: "top 70%",
 
-      }
-    });
-  });
+  //     }
+  //   });
+  // });
 
-  gsap.utils.toArray('.fade-in-animation').forEach((element: any) => {
-    gsap.fromTo(element, {
-      opacity: 0,
-      y: -50
-    }, 
-    {
-      ease: "power1.inOut",
-      duration: 0.8,
-      opacity: 1,
-      y: 0,
+  // gsap.utils.toArray('.fade-in-animation').forEach((element: any) => {
+  //   gsap.fromTo(element, {
+  //     opacity: 0,
+  //     y: -50
+  //   }, 
+  //   {
+  //     ease: "power1.inOut",
+  //     duration: 0.8,
+  //     opacity: 1,
+  //     y: 0,
       
-      scrollTrigger: {
-        // markers: true,
-        trigger: element,
-        start: "top 100%",
-        end: "top 40%",
-      }
-    });
-  });
+  //     scrollTrigger: {
+  //       // markers: true,
+  //       trigger: element,
+  //       start: "top 100%",
+  //       end: "top 40%",
+  //     }
+  //   });
+  // });
 
 }
 

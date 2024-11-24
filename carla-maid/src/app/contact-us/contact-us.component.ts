@@ -125,7 +125,7 @@ export class ContactUsComponent {
         }, 3000);
         
       })
-     .catch(() => alert('There was an error submitting the form.'));
+     .catch(() => console.log('There was an error submitting the form.'));
   }
 
 }
