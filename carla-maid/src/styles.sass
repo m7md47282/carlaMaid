@@ -344,13 +344,30 @@ button,a,.clickable
         color: #015900
         background-color: #7cffa5
 
+.content-center
+    display: flex
+    justify-content: center
 
+
+.left-to-right
+    animation: lefToRight 1s forwards
+    animation-delay: 0.5s
+    opacity: 0
 
 @keyframes fade-in 
     0%
         opacity: 0
     100%
         opacity: 1
+
+@keyframes  lefToRight
+    0%
+        opacity: 0
+        transform: translateX(-10%)
+    100%
+        opacity: 1
+        transform: translateX(0)
+
 
 @keyframes scroll-up
     0%
