@@ -23,7 +23,7 @@ deployment:
 
     # Build the Angular project for production
     - echo "Building Angular project..."
-    - npm run build  --output-path=dist/ --base-href=/
+    - ng build --configuration production --output-path=/home/carlamai/public_html/
 
     # Deploy the build files to the target directory
     - echo "Deploying build files to the target directory..."
