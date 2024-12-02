@@ -1,6 +1,6 @@
-<header>
+<header [ngClass]="{'ar': direction() == 'rtl'}">
   <nav class="nav">
-    <p-menubar [model]="items">
+    <p-menubar [model]="items" [dir]="direction()" >
       <ng-template pTemplate="start">
         <div class="logo">
           <img src="../../assets/images/Logo-En.png" alt="no-no">
@@ -13,11 +13,14 @@
         </a>
       </ng-template>
       <ng-template pTemplate="end">
-        <span routerLink="/contact-us" class="clickable">{{'shared.contactUs' | translate}}</span>
-        <!-- <button class="translation-button" (click)="switchLanguage()">
-          <mat-icon>language</mat-icon>
-          {{ currentLang === 'en' ? 'العربية' : 'English' }}
-        </button> -->
+        <div class="flex gap-10 items-center">
+          <span routerLink="/contact-us" class="clickable">{{'shared.contactUs' | translate}}</span>
+          <button class="translation-button" (click)="switchLanguage()">
+            <mat-icon>language</mat-icon>
+            {{ currentLang === 'en' ? 'العربية' : 'English' }}
+          </button>
+        </div>
+
       </ng-template>
     </p-menubar>
   </nav>
