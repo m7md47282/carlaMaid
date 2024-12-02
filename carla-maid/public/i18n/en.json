@@ -80,22 +80,24 @@
         "WhatAreTheCostsOfHiringTheBestCleaning": "What are the costs of hiring the best cleaning company in Qatar?",
         "Conclusion": "Conclusion: Enjoy a Clean and Healthy Space with the Right Service",
         "CarlaMaidQatarTrustedPartnerForComprehensiveCleaning": "Carla Maid: Qatar's Trusted Partner for Comprehensive Cleaning and Staffing Services",
-        "FAQsAboutTheBestCleaningCompanyQatar" :"FAQs About the Best Cleaning Company in Qatar",
-        "ContactUsToday" : "Contact Us Today!",
-        "YourEmailAddress" : "Your Email Address",
-        "YourMessage" : "Your Message",
-        "Company" : "Company",
-        "OurVistion" : "Our Vistion",
-        "OurMission" : "Our Mission",
-        "OurValues" : "Our Values",
-        "Services" : "Services",
-        "HomeCleaning" : "Home Cleaning",
-        "HospitalityStaff" : "Hospitality Staff",
-        "ContactUs" : "Contact Us",
-        "submit" : "Submit",
-        "contactYouSoon": "Thank you! We will contact you as soon as possible."
-         
-
+        "FAQsAboutTheBestCleaningCompanyQatar": "FAQs About the Best Cleaning Company in Qatar",
+        "ContactUsToday": "Contact Us Today!",
+        "YourEmailAddress": "Your Email Address",
+        "YourMessage": "Your Message",
+        "Company": "Company",
+        "OurVistion": "Our Vistion",
+        "OurMission": "Our Mission",
+        "OurValues": "Our Values",
+        "Services": "Services",
+        "HomeCleaning": "Home Cleaning",
+        "HospitalityStaff": "Hospitality Staff",
+        "ContactUs": "Contact Us",
+        "submit": "Submit",
+        "contactYouSoon": "Thank you! We will contact you as soon as possible.",
+        "needsHelp": "Need Help?",
+        "HaveQuestionsBeforeBooking": "Have Questions Before Booking?",
+        "bookNowDesc": "If you’d like more information about our services or need help with the booking process, feel free to reach out. We’re here to assist!",
+        "booking_confirmation_message": "Thanks for booking with us, our call center will call you as soon as possible to confirm the booking and the details"
     },
     "paragraph": {
         "trustMaidService": "Your trusted maid service and cleaning company in Qatar. Carla Maid provides tailored cleaning services for homes and businesses, including eco-friendly options and deep cleaning for a spotless, stress-free environment in Doha and beyond.",
@@ -145,8 +147,7 @@
         "CostsVaryBased": "Costs vary based on factors like the type of cleaning, frequency, and specific requirements. The best companies provide clear, competitive pricing to suit different budgets.",
         "SelectingTheBestCleaningCompanyInQatar": "Selecting the best cleaning company in Qatar can transform your home or office into a spotless, inviting environment. By choosing a service that offers trained staff, eco-friendly products, flexible scheduling, and affordable pricing, you ensure that cleanliness is maintained without the hassle. Take the time to choose a cleaning company that aligns with your needs, and enjoy the benefits of a consistently clean and well-maintained space.",
         "AtCarlaMaidWeAreDedicatedToElevating": "At Carla Maid, we are dedicated to elevating the standards of cleanliness, comfort, and convenience in every home, office, and event across Qatar. Our services reflect a commitment to quality and professionalism, with a focus on delivering exceptional value. From residential to commercial cleaning, our customized solutions cater to unique client needs, ensuring a seamless experience every time.With a trained team of professionals and eco-friendly products, Carla Maid offers everything from flexible scheduling to cost-effective packages. Whether you’re booking a regular home cleaning, arranging hospitality staff for a corporate event, or needing reliable office cleaning, we’ve got you covered. Carla Maid is more than a cleaning service—it’s a promise of consistency, reliability, and satisfaction tailored to the demands of Qatar's lifestyle. Our friendly, highly skilled team is here to make every space shine, giving you more time and peace of mind.For all your cleaning needs in Qatar, look no further than Carla Maid, where convenience, quality, and affordability meet.",
-        "ExperienceConvenient" : "Experience convenient, eco-friendly cleaning solutions for your home or office. Carla Maid is Qatar’s trusted partner for a spotless, stress-free environment."
-
+        "ExperienceConvenient": "Experience convenient, eco-friendly cleaning solutions for your home or office. Carla Maid is Qatar’s trusted partner for a spotless, stress-free environment."
     },
     "landing": {
         "CarlaMaidPreferredService": "Carla Maid stands out as Qatar’s preferred cleaning service, offering reliable, high-quality solutions tailored to fit every client’s needs. With a commitment to excellence and a focus on customer satisfaction, we provide a level of service that’s unmatched in the industry. Here’s why so many in Qatar choose Carla Maid for their cleaning and staffing needs:",
@@ -204,15 +205,13 @@
         "carlaMaidCleaningTitle": "Carla Maid Cleaning Services",
         "carlaMaidServicesTitle": "Carla Maid Services",
         "tailoredSolutionsDescription": "Tailored Solutions for Every Space"
-      
-     
     },
     "blogs": {
         "blog1Title": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services",
-        "blog1Description": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services, Keeping a clean and organized space is essential for comfort, health, and productivity. Whether you’re looking to maintain your home.",
-        "blog2Title": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services",
-        "blog2Description": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services, Keeping a clean and organized space is essential for comfort, health, and productivity. Whether you’re looking to maintain your home.",
-        "blog3Title": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services",
+        "blog1Description": "Keeping a clean and organized space is essential for comfort, health, and productivity. Whether you’re looking to maintain your home, office, or a special event in Qatar, hiring a professional ...",
+        "blog2Title": "Commercial Cleaning Services Qatar Affordable, Professional, and Reliable Solutions for Your Business",
+        "blog2Description": "Discover top-notch commercial cleaning services in Qatar designed to keep your business clean, safe, and inviting. From office spaces to industrial sites, our expert cleaning team delivers eco-friendly, flexible, and cost-effective solutions for every need ...",
+        "blog3Title": "Best Cleaning Company in Qatar: Find Reliable & Professional Cleaning Services",
         "blog3Description": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services, Keeping a clean and organized space is essential for comfort, health, and productivity. Whether you’re looking to maintain your home.",
         "latestNewAndBlogs": "Latest New and Blogs"
     },
@@ -227,18 +226,82 @@
         "title": "Contact Us Today!",
         "subheading": "Looking for a spotless, stress-free space? Booking with Carla Maid is fast and convenient! Fill out our easy online form below to schedule the ideal cleaning service for your home or office. Our professional team is ready to bring a sparkling clean to your space.",
         "form": {
-          "name": "Name",
-          "email": "Email",
-          "phone": "Phone",
-          "message": "Message",
-          "send": "Send"
+            "name": "Name",
+            "email": "Email",
+            "phone": "Phone",
+            "message": "Message",
+            "send": "Send"
         },
         "info": {
-          "callUs": "Call Us",
-          "support": "Support",
-          "address": "Address",
-          "website": "Website",
-          "location": "Lusail Marina, Doha, Qatar"
+            "callUs": "Call Us",
+            "support": "Support",
+            "address": "Address",
+            "website": "Website",
+            "location": "Lusail Marina, Doha, Qatar"
         }
-      }
+    },
+    "form": {
+        "title": "Book Your Cleaning Service Now!",
+        "description": "Complete the form below to schedule your cleaning service with Carla Maid. We’ll confirm your booking and ensure everything is arranged for your preferred date and time.",
+        "fullName": "Enter your Full Name",
+        "email": "Enter your Email",
+        "phoneNumber": "Enter your Phone Number",
+        "location": "Enter your Location",
+        "addressDetails": "Enter your Address Details",
+        "arrivalTime": "Select Arrival Time",
+        "arrivalTimeOptions": {
+            "option1": "08:30 am - 12:30 pm",
+            "option2": "10:30 am - 02:30 pm",
+            "option3": "02:30 pm - 06:30 pm",
+            "option4": "04:30 pm - 08:30 pm"
+        },
+        "numberOfCleaners": "Number of Cleaners",
+        "cleanerOptions": {
+            "option1": "1 One Cleaner",
+            "option2": "2 Two Cleaners",
+            "option3": "3 Three Cleaners",
+            "option4": "4 Four Cleaners"
+        },
+        "materials": "Materials",
+        "materialOptions": {
+            "option1": "With Materials",
+            "option2": "Without Materials"
+        },
+        "hours": "Hours",
+        "hourOptions": {
+            "option1": "4 Four Hours",
+            "option2": "8 Eight Hours"
+        },
+        "address": "Your Address",
+        "phone": "Phone Number",
+        "arrivalDate": "Arrival Date",
+        "priceLabel": "Price",
+        "priceValue": "280 QR",
+        "submitButton": "Book A Cleaning"
+    },
+    "steps": {
+        "step1": {
+            "title": "1. Select Your Service",
+            "description": "Choose the type of cleaning that best suits your needs—whether it’s residential cleaning, commercial maintenance, or a thorough deep clean. We offer services customized to your space and preferences."
+        },
+        "step2": {
+            "title": "2. Pick a Date and Time",
+            "description": "Select a date and time that fits your lifestyle. Our flexible scheduling options make it easy to find a convenient time, even during a busy week."
+        },
+        "step3": {
+            "title": "3. Fill In Your Details",
+            "description": "Provide your contact information and any special instructions to ensure our maids can tailor the service to meet your exact needs."
+        },
+        "step4": {
+            "title": "4. Submit & Relax",
+            "description": "Once you submit your booking, you’re all set! Our team will confirm your appointment and handle the rest, giving you a hassle-free, professional cleaning experience."
+        }
+    },
+    "header": {
+        "home": "Home",
+        "ourServices": "Our Services",
+        "contact": "Contact Us",
+        "blog": "Blog",
+        "bookNow": "Book Now"
+    }
 }

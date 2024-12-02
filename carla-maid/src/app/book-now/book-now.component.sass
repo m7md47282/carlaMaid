@@ -1,0 +1,83 @@
+@import ../../variables
+.hero-img
+    background-image: url('../../assets/images/bookNowHero.png')
+    background-size: cover
+    background-position: center
+.side-info
+    width: 50%
+    padding: 2rem
+.form-desc
+    margin: 0
+    margin-bottom: 10px
+    font-size: 0.8rem
+.book-now-form
+    width: 50%
+    padding: 1.2rem
+    h1
+        margin: 0
+    .form-container
+        background: white
+        display: flex
+        flex-direction: column
+        gap: 0.7rem
+        border-radius: 10px
+        padding: 1.7rem 1.5rem
+        .form-row
+            width: 48%
+            mat-form-field
+                width: 100%
+
+    .inputs-holder
+        gap: 3%
+    mat-icon
+        padding: 6px
+
+    .price-section
+        display: flex
+        span
+            margin: 0
+            color: #9e9e9eee
+        p   
+            font-size: 2rem
+            font-weight: 600
+            color: $text-primary
+            margin: 0
+
+.info
+    color: white
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    .flex
+        gap: 1rem 
+        align-items: center
+        margin: 10px 0
+    h3,p
+        margin: 0
+
+
+.secion
+    margin: 3rem 0
+
+
+.desc
+    color: gray
+    text-align: center
+    p
+        font-weight: 200
+        font-size: 0.9rem
+        padding: 1.5rem
+    h3
+        font-weight: 400
+
+#map 
+  width: 100%
+  height: 300px
+
+@media  ( max-width: 800px )
+    .hero-img
+        flex-direction: column
+        .side-info, .book-now-form
+            width: 100%
+    
