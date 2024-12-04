@@ -1637,7 +1637,7 @@ a,
   color: #fff;
 }
 .secondary-card {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 5px;
   width: 20rem;
   height: 25rem;
@@ -1786,7 +1786,7 @@ a,
 .warn {
   padding: 10px;
   border-radius: 5px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .warn.warn-success {
   color: #0a9208;
@@ -1836,10 +1836,16 @@ a,
   html {
     font-size: 14px;
   }
+  html p {
+    font-size: 14px;
+  }
 }
 @media (max-width: 768px) {
   html {
     font-size: 12px;
+  }
+  html p {
+    font-size: 14px;
   }
   html .btn-epic span {
     font-size: 0.9rem;
@@ -1851,7 +1857,31 @@ a,
   }
   html .title-size {
     font-size: 2.8rem;
-    margin: 20px;
+    margin: 20px 0;
+  }
+  html .cleaning-service .carla-service-text {
+    font-size: 12px;
+  }
+  html .gap-70 {
+    gap: 20px;
+  }
+  html .primary-card h3,
+  html .secondary-card h3 {
+    font-size: 16px;
+  }
+  html .primary-card p,
+  html .secondary-card p {
+    font-size: 1.2rem;
+  }
+  html .btn-primary,
+  html .btn-secondary {
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+  }
+  html ::ng-deep .p-menubar .p-menubar-button svg.p-icon {
+    width: 14px;
+    height: 14px;
   }
 }
 
