@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/blogs-open/blogs-open.component.sass"],
+  "sourcesContent": [".section-1\n    background-image: url(../../assets/images/blogs-open-header.png)\n    object-fit: cover\n    background-size: cover\n    height: 50vh\n    h1\n        margin: 0\n        color: #ffffff\np\n    font-size: 0.9rem\nh1\n    font-size: 1.2rem\n\nh1.hero-title\n    font-size: 2.5rem\n\nb\n    color: #0f0f0f\n\n\n\n.page-container\n    width: 80%\n    margin-inline: auto\n"],
+  "mappings": ";AAAA,CAAA;AACI,oBAAA;AACA,cAAA;AACA,mBAAA;AACA,UAAA;;AACA,CALJ,UAKI;AACI,UAAA;AACA,SAAA;;AACR;AACI,aAAA;;AACJ;AACI,aAAA;;AAEJ,EAAA,CAAA;AACI,aAAA;;AAEJ;AACI,SAAA;;AAIJ,CAAA;AACI,SAAA;AACA,iBAAA;;",
+  "names": []
+}
