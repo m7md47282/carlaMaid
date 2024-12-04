@@ -4,7 +4,7 @@
         width: 100%
         min-width: 310px
     .header-text
-        margin-left: 5vw
+        margin-left: 20px
         .the-best-p
             border: 2px solid #51585480
             border-radius: 10px
@@ -49,13 +49,10 @@
         .service-content
             position: absolute
             bottom: 0
-            background: rgba(0, 0, 0, 0.6)
             color: #ffffff
             margin: 10px 0
-            border-radius: 15px
             bottom: 0.3rem
-            width: 98%
-            max-width: 24rem
+            padding: 10px 0
             h3
                 margin: 0 15px
                 font-size: 1rem
@@ -149,6 +146,8 @@
 
 @media (max-width: 767px)
   .section-1
+    .header-text
+          margin-left: 0
     .button-container
         display: flex
         justify-content: center
@@ -159,6 +158,11 @@
     .section-5-content
       gap: 0
       align-items: center
+      button.btn-secondary.hero-button
+        width: 100%
+        span
+          font-size: 12px
+          width: 100%
     .img-container
       img
         position: static
@@ -173,7 +177,11 @@
       button
         transform: translateY(14rem)
         margin: 0
-        
+
+  .section-5-content.flex-column.gap-10
+    width: 100%
+       
+
 
 @media (max-width: 425px)
   .section-1
@@ -185,4 +193,17 @@
         display: none
       .cleaner
           display: none
+
+
+  .section-3
+    .service-item
+        .service-content
+            h3
+                font-size: 16px
+
+            p
+                font-size: 1.2rem
+    .service-item
+      h3
+        font-size: 12px
     

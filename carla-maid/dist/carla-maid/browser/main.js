@@ -90,15 +90,15 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-L5SGHBRS.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-A6QBOGWX.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-Q4KSDBVT.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-SD57K5SR.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-CCACQ2YE.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-C4F2M52W.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
@@ -106,15 +106,15 @@ var routes = [
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-LPFNOCJL.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-AETI4STT.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-2C7G4KIM.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-DNKSATSD.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-MXLGG24T.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-BB72CPO2.js").then((m) => m.ContactUsComponent)
   }
 ];
 
