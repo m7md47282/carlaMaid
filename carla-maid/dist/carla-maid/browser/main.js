@@ -110,7 +110,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-DNKSATSD.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-NJYTAIPY.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
