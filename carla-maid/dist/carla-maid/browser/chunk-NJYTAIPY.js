@@ -7268,7 +7268,7 @@ var BookNowComponent = class _BookNowComponent {
   calculatePrice() {
     console.log(this.bookingForm);
     let cleanerPrice = 35;
-    let withMatPrice = 10;
+    let withMatPrice = 5;
     this.price = this.bookingForm.value.cleaners * cleanerPrice * this.bookingForm.value.hours + (this.bookingForm.value.materials ? this.bookingForm.value.hours * withMatPrice : 0);
   }
   switchLanguage(lang) {
@@ -7785,4 +7785,4 @@ var BookNowComponent = class _BookNowComponent {
 export {
   BookNowComponent
 };
-//# sourceMappingURL=chunk-DNKSATSD.js.map
+//# sourceMappingURL=chunk-NJYTAIPY.js.map
