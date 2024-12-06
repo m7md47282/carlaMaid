@@ -7269,7 +7269,7 @@ var BookNowComponent = class _BookNowComponent {
     console.log(this.bookingForm);
     let cleanerPrice = 35;
     let withMatPrice = 5;
-    this.price = this.bookingForm.value.cleaners * cleanerPrice * this.bookingForm.value.hours + (this.bookingForm.value.materials ? this.bookingForm.value.hours * withMatPrice : 0);
+    this.price = this.bookingForm.value.cleaners * cleanerPrice * this.bookingForm.value.hours + (this.bookingForm.value.materials ? this.bookingForm.value.hours * withMatPrice * this.bookingForm.value.cleaners : 0);
   }
   switchLanguage(lang) {
     this.translate.use(lang);
@@ -7785,4 +7785,4 @@ var BookNowComponent = class _BookNowComponent {
 export {
   BookNowComponent
 };
-//# sourceMappingURL=chunk-NJYTAIPY.js.map
+//# sourceMappingURL=chunk-32A6N2UB.js.map
