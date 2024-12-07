@@ -28,6 +28,8 @@ export class BookNowComponent implements OnInit{
   price: number = 0
   sent = false;
   datePipe = inject(DatePipe)
+  minDate: Date;
+  maxDate: Date;
 
   @ViewChild('addressInput') addressInput!: ElementRef;
   @ViewChild('mapContainer') mapContainer!: ElementRef;
@@ -48,6 +50,10 @@ export class BookNowComponent implements OnInit{
     });
 
     this.translate.setDefaultLang('en');
+    const today = new Date();
+    const daysRange = 30
+    this.minDate = today;
+    this.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysRange); 
   }
   ngOnInit(): void {
     this.bookingForm.valueChanges.subscribe(() => this.calculatePrice());

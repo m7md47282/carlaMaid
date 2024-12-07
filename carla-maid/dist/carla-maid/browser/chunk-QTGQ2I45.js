@@ -9226,7 +9226,6 @@ var MatSelectModule = class _MatSelectModule {
 
 export {
   MatLabel,
-  MatHint,
   MatPrefix,
   MatSuffix,
   MatFormFieldControl,
@@ -9248,4 +9247,4 @@ export {
   MatSelect,
   MatSelectModule
 };
-//# sourceMappingURL=chunk-2PKRATCF.js.map
+//# sourceMappingURL=chunk-QTGQ2I45.js.map
