@@ -110,7 +110,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-32A6N2UB.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-CERE2TOX.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -676,7 +676,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-4PWBCNQM.js").then((m) => m.HeaderComponent), import("./chunk-QAS6Z2U5.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-4PWBCNQM.js").then((m) => m.HeaderComponent), import("./chunk-MXURWJGF.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
