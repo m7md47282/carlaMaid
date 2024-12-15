@@ -5,6 +5,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterModule, Routes } from '@angular/router';
 import { OurServicesComponent } from '../our-services/our-services.component';
 import { MenubarModule } from 'primeng/menubar';
+import { Direction } from '../shared/interfaces/languages';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,8 @@ import { MenubarModule } from 'primeng/menubar';
   imports: [
     MenubarModule,
     TranslateModule,
+    MatIconModule,
+    CommonModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'
@@ -27,24 +31,29 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Home',
+        label: this.translate.instant('header.home'),
         icon: 'pi pi-home',
         link: '/'
       },
       {
-        label: 'Our Services',
+        label: this.translate.instant('header.ourServices'),
         icon: 'pi pi-star',
         link: "our-services"
       },
       {
-        label: 'About Us',
+        label: this.translate.instant('header.contact'),
         icon: 'pi pi-envelope',
         link: '/about-us'
       },
       {
-        label: 'Blogs',
+        label: this.translate.instant('header.blog'),
         icon: 'pi pi-envelope',
         link: '/blogs-open'
+      },
+      {
+        label: this.translate.instant('header.bookNow'),
+        icon: 'pi pi-envelope',
+        link: '/book-now'
       }
     ];
   }
@@ -54,4 +63,7 @@ export class HeaderComponent implements OnInit {
    this.configService.toggleLang()
   }
   
+  direction(): Direction {
+    return this.configService.getDirection() as Direction;
+  }
 }

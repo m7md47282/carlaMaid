@@ -4,6 +4,7 @@ header
     justify-content: space-around
     padding: 0 20px
     background-color: $gray
+  
     img
         width: 125px
         height: auto
@@ -18,7 +19,8 @@ header
     .translation-button
         display: flex
         border: 0
-        background-color: #ffffff
+        background-color: #ffffff00
+        color: gray
         align-items: center
         gap: 10px
         cursor: pointer
@@ -27,4 +29,9 @@ header
     .p-menubar
         border: none
         background-color: $gray
+    header
+        &.ar
+            .p-menubar-end
+                margin-right: auto
+                margin-left: 0  
         

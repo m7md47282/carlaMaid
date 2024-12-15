@@ -1,7 +1,4 @@
 import { Routes } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
-import { OurServicesComponent } from './our-services/our-services.component';
-import { BlogsComponent} from './blogs/blogs.component'
 export const routes: Routes = [
 
     {
@@ -23,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'blogs-open',
         loadComponent: () => import('./blogs-open/blogs-open.component').then((m)=> m.BlogsOpenComponent)
+    },
+    {
+        path: 'book-now',
+        loadComponent: () => import('./book-now/book-now.component').then((m)=> m.BookNowComponent)
     },
     {
         path: 'contact-us',
