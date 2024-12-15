@@ -1,5 +1,5 @@
 <section class="img-container">
-    <figure class=" img-text">
+    <figure class=" img-text" [ngClass]="{'ar': direction() =='rtl' }">
         <div class="img-info">
             <div class="cleaning-service top-title-service ">
                 <svg class="cleaner cleaner-margin" width="43" height="41" viewBox="0 0 43 41" fill="none"
@@ -26,8 +26,10 @@
                 <p>{{"paragraph.trustMaidService"| translate}}</p>
             </div>
             <div class="btn-epic margin-top30 scroll-up">
-                <div><span>{{"shared.bookCleanService"| translate}}</span><span>{{"shared.bookCleanService"|
-                        translate}}</span></div>
+                <div routerLink="/book-now" class="clickable">
+                    <span>{{"shared.bookCleanService"| translate}}</span>
+                    <span>{{"shared.bookCleanService"| translate}}</span>
+                </div>
             </div>
         </div>
     </figure>
@@ -314,7 +316,7 @@
                     </div>
                 </div>
 
-                <button class="btn-primary"><span>{{ 'services.bookNow' | translate }}</span></button>
+                <button class="btn-primary" routerLink="/book-now">{{ 'services.bookNow' | translate }}</button>
             </section>
 
         </div>
@@ -369,7 +371,7 @@
                     {{ 'services.homeCleaningDescriptionService' | translate }}
                 </p>
                 <button class="btn-secondary hover-btn">
-                    <span class="primary-text-color font-weight-700">{{ 'services.bookNow' | translate }}</span>
+                    <span class="primary-text-color font-weight-700" routerLink="/book-now" >{{ 'services.bookNow' | translate }}</span>
                 </button>
             </div>
 
@@ -421,7 +423,7 @@
                 <p>
                     {{ 'services.staffingBusinessesDescriptionService' | translate }}
                 </p>
-                <button class="btn-primary">
+                <button class="btn-primary" routerLink="/book-now">
                     <span>{{ 'services.bookNow' | translate }}</span>
                 </button>
             </div>
@@ -444,7 +446,7 @@
                     {{ 'services.hospitalityStaffDescription' | translate }}
                 </p>
                 <button class="btn-secondary">
-                    <span class="primary-text-color font-weight-700">{{ 'services.bookNow' | translate }}</span>
+                    <span class="primary-text-color font-weight-700" routerLink="/book-now">{{ 'services.bookNow' | translate }}</span>
                 </button>
             </div>
         </div>

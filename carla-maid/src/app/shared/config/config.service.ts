@@ -41,7 +41,8 @@ export class ConfigService {
   }
 
   toggleLang(){
-    this.setLang(this.getLang() === 'ar'? 'en' : 'ar');
+    this.setLang(this.getLang() === 'ar'? 'en' : 'ar'); 
+    location.reload();
   }
 
   /**
