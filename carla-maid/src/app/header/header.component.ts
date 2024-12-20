@@ -5,7 +5,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterModule, Routes } from '@angular/router';
 import { OurServicesComponent } from '../our-services/our-services.component';
 import { MenubarModule } from 'primeng/menubar';
-import { Direction } from '../shared/interfaces/languages';
+import { Direction, Languages } from '../shared/interfaces/languages';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,9 +22,6 @@ import { CommonModule } from '@angular/common';
 })
 
 export class HeaderComponent implements OnInit {
-  environment ={lang: 'en'};
-  textDir :string = 'ltr'
-  currentLang: string = 'en'
   items: any
 
   constructor(private translate: TranslateService ,private configService: ConfigService,private router: Router) {}
@@ -61,6 +58,10 @@ export class HeaderComponent implements OnInit {
 
   switchLanguage(): void {
    this.configService.toggleLang()
+  }
+
+  getLang(): Languages {
+    return this.configService.getLang();
   }
   
   direction(): Direction {
