@@ -66,7 +66,7 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-LWMJ5XTJ.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-27N52ACH.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
