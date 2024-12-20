@@ -29,8 +29,14 @@ header
     .p-menubar
         border: none
         background-color: $gray
-    .p-focus
-        background: none !important 
+  
+    .p-menuitem-content
+        background: none
+
+    .p-element.p-menuitem
+        &::hover
+            .p-menuitem-content
+                background-color: $gray
     header
         &.ar
             .p-menubar-end
