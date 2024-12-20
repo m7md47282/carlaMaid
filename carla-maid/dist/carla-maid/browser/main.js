@@ -725,7 +725,7 @@ var AppComponent = class _AppComponent {
     if (rf & 1) {
       \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 2, 0);
       \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
-      \u0275\u0275deferOnTimer(1e3);
+      \u0275\u0275deferOnTimer(2e3);
     }
   }, dependencies: [
     TranslateModule,
