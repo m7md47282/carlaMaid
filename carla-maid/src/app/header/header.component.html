@@ -3,7 +3,13 @@
     <p-menubar [model]="items" [dir]="direction()" >
       <ng-template pTemplate="start">
         <div class="logo">
-          <img src="../../assets/images/Logo-En.png" alt="no-no">
+          @if( getLang() == 'en'){
+            <img src="../../assets/images/Logo-En.png" alt="logo">
+          }@else {
+            <img src="../../assets/images/Logo-Ar.png" alt="logo-ar">
+          }
+        
+         
         </div>
       </ng-template>
       <ng-template pTemplate="item" let-item let-root="root">
