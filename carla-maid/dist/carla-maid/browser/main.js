@@ -678,7 +678,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-DXC4D4LE.js").then((m) => m.HeaderComponent), import("./chunk-MV4MTEOM.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-Q7EMFIGU.js").then((m) => m.HeaderComponent), import("./chunk-MV4MTEOM.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
