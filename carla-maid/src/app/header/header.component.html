@@ -17,7 +17,7 @@
           <span routerLink="/contact-us" class="clickable">{{'shared.contactUs' | translate}}</span>
           <button class="translation-button" (click)="switchLanguage()">
             <mat-icon>language</mat-icon>
-            {{ currentLang === 'en' ? 'العربية' : 'English' }}
+            {{ getLang() === 'en' ? 'العربية' : 'English' }}
           </button>
         </div>
 
