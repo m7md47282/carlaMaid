@@ -5,15 +5,15 @@ import {
   SERVER_CONTEXT,
   renderApplication,
   renderModule
-} from "./chunk-LCPQZKH6.mjs";
-import "./chunk-SAQ722TJ.mjs";
+} from "./chunk-H5UGRJJ6.mjs";
+import "./chunk-CEYSMZMP.mjs";
 import {
   Router,
   loadChildren
-} from "./chunk-FOVKUR36.mjs";
-import "./chunk-6ONAWCA2.mjs";
-import "./chunk-ACIMH4GH.mjs";
-import "./chunk-VCGU4JGB.mjs";
+} from "./chunk-NU7KL24N.mjs";
+import "./chunk-A4ZW5M3M.mjs";
+import "./chunk-V36CY64B.mjs";
+import "./chunk-FZPKIXOD.mjs";
 import {
   ApplicationRef,
   Compiler,
@@ -21,12 +21,13 @@ import {
   createPlatformFactory,
   platformCore,
   whenStable
-} from "./chunk-FKPQALD6.mjs";
+} from "./chunk-S6S6V7ZK.mjs";
 import {
   __asyncGenerator,
   __await,
+  __publicField,
   __yieldStar
-} from "./chunk-PTRYWQQD.mjs";
+} from "./chunk-CU4POASJ.mjs";
 
 // angular:server-render-utils:angular:server-render-utils
 function getRoutesFromRouterConfig(routes, compiler, parentInjector, parentRoute = "") {
@@ -71,7 +72,10 @@ function extractRoutes(bootstrapAppFnOrModule, document) {
         /** An Angular Console Provider that does not print a set of predefined logs. */
         useFactory: () => {
           class Console2 extends Console {
-            ignoredLogs = /* @__PURE__ */ new Set(["Angular is running in development mode."]);
+            constructor() {
+              super(...arguments);
+              __publicField(this, "ignoredLogs", /* @__PURE__ */ new Set(["Angular is running in development mode."]));
+            }
             log(message) {
               if (!this.ignoredLogs.has(message)) {
                 super.log(message);

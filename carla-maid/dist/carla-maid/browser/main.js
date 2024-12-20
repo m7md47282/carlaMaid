@@ -1,12 +1,12 @@
 import {
   MatProgressSpinner,
   MatProgressSpinnerModule
-} from "./chunk-G23NQGYZ.js";
+} from "./chunk-MUN4THVH.js";
 import {
   ConfigService,
   environment
-} from "./chunk-5CLWQFFG.js";
-import "./chunk-JLOCPT3Q.js";
+} from "./chunk-J6BNRUPU.js";
+import "./chunk-UFH4LKK6.js";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -16,21 +16,23 @@ import {
   RouterModule,
   RouterOutlet,
   provideRouter
-} from "./chunk-B443NQ2E.js";
+} from "./chunk-36YAIW4V.js";
 import {
   DomRendererFactory2,
   HttpClient,
   HttpClientModule,
   bootstrapApplication,
-  provideClientHydration
-} from "./chunk-FGSQZ2CG.js";
+  provideClientHydration,
+  provideHttpClient,
+  withFetch
+} from "./chunk-YXTJ2M6D.js";
 import {
   DOCUMENT
-} from "./chunk-OZEPEEJY.js";
+} from "./chunk-I43WMMWN.js";
 import {
   TranslateLoader,
   TranslateModule
-} from "./chunk-KH3TABCJ.js";
+} from "./chunk-E452PGT4.js";
 import {
   ANIMATION_MODULE_TYPE,
   ChangeDetectionScheduler,
@@ -39,6 +41,7 @@ import {
   NgZone,
   RendererFactory2,
   RuntimeError,
+  __publicField,
   importProvidersFrom,
   inject,
   makeEnvironmentProviders,
@@ -57,43 +60,43 @@ import {
   ɵɵelementStart,
   ɵɵinvalidFactory,
   ɵɵtemplate
-} from "./chunk-E6YKDRCU.js";
+} from "./chunk-OJDZ4X76.js";
 
 // src/app/app.routes.ts
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-QXMKT4JL.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-LWMJ5XTJ.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-A332N7KW.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-2QHZ7BHD.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-U6TRFDZ6.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-WMUKDW2Y.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-IYCTWM7D.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-PI2U4TA5.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-FGSKSZVR.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-ISBJCCFF.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-RQX43QLQ.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-WXQCBWKT.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-H5SNDHK6.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-52PEWPAC.js").then((m) => m.ContactUsComponent)
   }
 ];
 
 // node_modules/@angular/platform-browser/fesm2022/animations/async.mjs
 var ANIMATION_PREFIX = "@";
-var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
+var _AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
   /**
    *
    * @param moduleImpl allows to provide a mock implmentation (or will load the animation module)
@@ -120,7 +123,7 @@ var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-ROVXWMJJ.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-5AEAQUEU.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -180,18 +183,15 @@ var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
   whenRenderingDone() {
     return this.delegate.whenRenderingDone?.() ?? Promise.resolve();
   }
-  static {
-    this.\u0275fac = function AsyncAnimationRendererFactory_Factory(__ngFactoryType__) {
-      \u0275\u0275invalidFactory();
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-      token: _AsyncAnimationRendererFactory,
-      factory: _AsyncAnimationRendererFactory.\u0275fac
-    });
-  }
 };
+_AsyncAnimationRendererFactory.\u0275fac = function AsyncAnimationRendererFactory_Factory(__ngFactoryType__) {
+  \u0275\u0275invalidFactory();
+};
+_AsyncAnimationRendererFactory.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+  token: _AsyncAnimationRendererFactory,
+  factory: _AsyncAnimationRendererFactory.\u0275fac
+});
+var AsyncAnimationRendererFactory = _AsyncAnimationRendererFactory;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AsyncAnimationRendererFactory, [{
     type: Injectable
@@ -313,10 +313,10 @@ function provideAnimationsAsync(type = "animations") {
 
 // node_modules/@ngx-translate/http-loader/dist/fesm2022/ngx-translate-http-loader.mjs
 var TranslateHttpLoader = class {
-  http;
-  prefix;
-  suffix;
   constructor(http, prefix = "/assets/i18n/", suffix = ".json") {
+    __publicField(this, "http");
+    __publicField(this, "prefix");
+    __publicField(this, "suffix");
     this.http = http;
     this.prefix = prefix;
     this.suffix = suffix;
@@ -346,6 +346,7 @@ var appConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
     importProvidersFrom([
       HttpClientModule,
       TranslateModule.forRoot(provideTranslation())
@@ -355,7 +356,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-5HJXPOOI.js").then((m) => m.HeaderComponent), import("./chunk-2HMTKEJF.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-7LJWY46M.js").then((m) => m.HeaderComponent), import("./chunk-3IGCSZVF.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -368,13 +369,13 @@ function AppComponent_DeferPlaceholder_1_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-var AppComponent = class _AppComponent {
-  _configService;
-  router;
-  title = "carla-maid";
-  isLoading = false;
-  lang = environment.lang;
+var _AppComponent = class _AppComponent {
   constructor(_configService, router) {
+    __publicField(this, "_configService");
+    __publicField(this, "router");
+    __publicField(this, "title", "carla-maid");
+    __publicField(this, "isLoading", false);
+    __publicField(this, "lang", environment.lang);
     this._configService = _configService;
     this.router = router;
     this.router.events.subscribe((event) => {
@@ -395,22 +396,23 @@ var AppComponent = class _AppComponent {
       this.lang = this._configService.getLang();
     }
   }
-  static \u0275fac = function AppComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "loader"]], template: function AppComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 2, 0);
-      \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
-      \u0275\u0275deferOnTimer(1e3);
-    }
-  }, dependencies: [
-    TranslateModule,
-    RouterModule,
-    MatProgressSpinnerModule,
-    MatProgressSpinner
-  ], styles: ["\n\n.loader[_ngcontent-%COMP%] {\n  height: 100vh;\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n/*# sourceMappingURL=app.component.css.map */"] });
 };
+__publicField(_AppComponent, "\u0275fac", function AppComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
+});
+__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "loader"]], template: function AppComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 2, 0);
+    \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
+    \u0275\u0275deferOnTimer(1e3);
+  }
+}, dependencies: [
+  TranslateModule,
+  RouterModule,
+  MatProgressSpinnerModule,
+  MatProgressSpinner
+], styles: ["\n\n.loader[_ngcontent-%COMP%] {\n  height: 100vh;\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
+var AppComponent = _AppComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
 })();
