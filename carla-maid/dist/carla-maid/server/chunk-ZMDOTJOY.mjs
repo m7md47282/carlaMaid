@@ -388,7 +388,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-BSJLQQNV.mjs").then((m) => m.HeaderComponent), import("./chunk-V3M4P4LO.mjs").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-M4LBNFBM.mjs").then((m) => m.HeaderComponent), import("./chunk-V3M4P4LO.mjs").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -767,4 +767,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-XHJBBW2D.mjs.map
+//# sourceMappingURL=chunk-ZMDOTJOY.mjs.map

@@ -1,8 +1,3 @@
-import './polyfills.server.mjs';
-import {
-  Dir,
-  MatCommonModule
-} from "./chunk-KHPIZ3CA.mjs";
 import {
   BaseIcon,
   ConnectedOverlayScrollHandler,
@@ -15,25 +10,24 @@ import {
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-YIEV7HA7.mjs";
+} from "./chunk-K5JPPYXF.js";
 import {
   ConfigService
-} from "./chunk-CUUOHIWM.mjs";
+} from "./chunk-5CLWQFFG.js";
+import {
+  Dir,
+  MatCommonModule
+} from "./chunk-EBUGD3L2.js";
 import {
   Router,
   RouterLink,
   RouterLinkActive,
   RouterModule
-} from "./chunk-FOVKUR36.mjs";
+} from "./chunk-B443NQ2E.js";
 import {
   DomSanitizer,
   HttpClient
-} from "./chunk-6ONAWCA2.mjs";
-import {
-  TranslateModule,
-  TranslatePipe,
-  TranslateService
-} from "./chunk-NO6BMLK3.mjs";
+} from "./chunk-FGSQZ2CG.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -43,7 +37,12 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-VCGU4JGB.mjs";
+} from "./chunk-OZEPEEJY.js";
+import {
+  TranslateModule,
+  TranslatePipe,
+  TranslateService
+} from "./chunk-KH3TABCJ.js";
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -73,6 +72,8 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation$1,
+  __spreadProps,
+  __spreadValues,
   booleanAttribute,
   catchError,
   debounce,
@@ -143,11 +144,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-FKPQALD6.mjs";
-import {
-  __spreadProps,
-  __spreadValues
-} from "./chunk-PTRYWQQD.mjs";
+} from "./chunk-E6YKDRCU.js";
 
 // node_modules/@angular/material/fesm2022/icon.mjs
 var _c0 = ["*"];
@@ -4002,7 +3999,7 @@ var HeaderComponent = class _HeaderComponent {
       \u0275\u0275advance(2);
       \u0275\u0275property("model", ctx.items)("dir", ctx.direction());
     }
-  }, dependencies: [MenubarModule, Menubar, RouterLink, PrimeTemplate, TranslateModule, TranslatePipe, MatIconModule, MatIcon, Dir, CommonModule, NgClass], styles: ["\n\nheader[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-around;\n  padding: 0 20px;\n  background-color: #f5f5f5;\n}\nheader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 125px;\n  height: auto;\n  padding: 17px;\n  object-fit: cover;\n}\nheader[_ngcontent-%COMP%]   nav[_ngcontent-%COMP%] {\n  width: 100%;\n}\nheader[_ngcontent-%COMP%]   h4[_ngcontent-%COMP%] {\n  font-size: 16px;\n}\nheader[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  padding: 10px;\n}\nheader[_ngcontent-%COMP%]   .translation-button[_ngcontent-%COMP%] {\n  display: flex;\n  border: 0;\n  background-color: rgba(255, 255, 255, 0);\n  color: gray;\n  align-items: center;\n  gap: 10px;\n  cursor: pointer;\n}\n  .p-menubar {\n  border: none;\n  background-color: #f5f5f5;\n}\n  .p-focus {\n  background: none !important;\n}\n  header.ar .p-menubar-end {\n  margin-right: auto;\n  margin-left: 0;\n}\n/*# sourceMappingURL=header.component.css.map */"] });
+  }, dependencies: [MenubarModule, Menubar, RouterLink, PrimeTemplate, TranslateModule, TranslatePipe, MatIconModule, MatIcon, Dir, CommonModule, NgClass], styles: ["\n\nheader[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-around;\n  padding: 0 20px;\n  background-color: #f5f5f5;\n}\nheader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 125px;\n  height: auto;\n  padding: 17px;\n  object-fit: cover;\n}\nheader[_ngcontent-%COMP%]   nav[_ngcontent-%COMP%] {\n  width: 100%;\n}\nheader[_ngcontent-%COMP%]   h4[_ngcontent-%COMP%] {\n  font-size: 16px;\n}\nheader[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  padding: 10px;\n}\nheader[_ngcontent-%COMP%]   .translation-button[_ngcontent-%COMP%] {\n  display: flex;\n  border: 0;\n  background-color: rgba(255, 255, 255, 0);\n  color: gray;\n  align-items: center;\n  gap: 10px;\n  cursor: pointer;\n}\n  .p-menubar {\n  border: none;\n  background-color: #f5f5f5;\n}\n  .p-menuitem-content {\n  background: none;\n}\n  .p-element.p-menuitem::hover .p-menuitem-content {\n  background-color: #f5f5f5;\n}\n  header.ar .p-menubar-end {\n  margin-right: auto;\n  margin-left: 0;\n}\n/*# sourceMappingURL=header.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeaderComponent, { className: "HeaderComponent" });
@@ -4010,4 +4007,4 @@ var HeaderComponent = class _HeaderComponent {
 export {
   HeaderComponent
 };
-//# sourceMappingURL=chunk-BSJLQQNV.mjs.map
+//# sourceMappingURL=chunk-DXC4D4LE.js.map
