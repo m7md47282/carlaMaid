@@ -5515,12 +5515,6 @@ var _MatInternalFormField = class __MatInternalFormField {
 })();
 
 export {
-  coerceBooleanProperty,
-  coerceNumberProperty,
-  coerceArray,
-  coerceCssPixelValue,
-  coerceElement,
-  coerceStringArray,
   Platform,
   getSupportedInputTypes,
   normalizePassiveListenerOptions,
@@ -5544,6 +5538,12 @@ export {
   DOWN_ARROW,
   A,
   hasModifierKey,
+  coerceBooleanProperty,
+  coerceNumberProperty,
+  coerceArray,
+  coerceCssPixelValue,
+  coerceElement,
+  coerceStringArray,
   ObserversModule,
   addAriaReferencedId,
   removeAriaReferencedId,
@@ -5571,4 +5571,4 @@ export {
   MatOptionModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-EBUGD3L2.js.map
+//# sourceMappingURL=chunk-JLOCPT3Q.js.map

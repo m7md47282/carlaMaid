@@ -1,3 +1,4 @@
+import './polyfills.server.mjs';
 import {
   BaseIcon,
   ConnectedOverlayScrollHandler,
@@ -10,24 +11,29 @@ import {
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-K5JPPYXF.js";
+} from "./chunk-YIEV7HA7.mjs";
 import {
   ConfigService
-} from "./chunk-5CLWQFFG.js";
-import {
-  Dir,
-  MatCommonModule
-} from "./chunk-EBUGD3L2.js";
+} from "./chunk-CUUOHIWM.mjs";
 import {
   Router,
   RouterLink,
   RouterLinkActive,
   RouterModule
-} from "./chunk-B443NQ2E.js";
+} from "./chunk-FOVKUR36.mjs";
 import {
   DomSanitizer,
   HttpClient
-} from "./chunk-FGSQZ2CG.js";
+} from "./chunk-6ONAWCA2.mjs";
+import {
+  Dir,
+  MatCommonModule
+} from "./chunk-KHPIZ3CA.mjs";
+import {
+  TranslateModule,
+  TranslatePipe,
+  TranslateService
+} from "./chunk-NO6BMLK3.mjs";
 import {
   CommonModule,
   DOCUMENT,
@@ -37,12 +43,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-OZEPEEJY.js";
-import {
-  TranslateModule,
-  TranslatePipe,
-  TranslateService
-} from "./chunk-KH3TABCJ.js";
+} from "./chunk-VCGU4JGB.mjs";
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -72,8 +73,6 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation$1,
-  __spreadProps,
-  __spreadValues,
   booleanAttribute,
   catchError,
   debounce,
@@ -145,7 +144,11 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-E6YKDRCU.js";
+} from "./chunk-FKPQALD6.mjs";
+import {
+  __spreadProps,
+  __spreadValues
+} from "./chunk-PTRYWQQD.mjs";
 
 // node_modules/@angular/material/fesm2022/icon.mjs
 var _c0 = ["*"];
@@ -4023,4 +4026,4 @@ var HeaderComponent = class _HeaderComponent {
 export {
   HeaderComponent
 };
-//# sourceMappingURL=chunk-Q7EMFIGU.js.map
+//# sourceMappingURL=chunk-EJZBPDO3.mjs.map
