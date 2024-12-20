@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
         link: "our-services"
       },
       {
-        label: this.translate.instant('header.contact'),
+        label: this.translate.instant('shared.aboutUs'),
         icon: 'pi pi-envelope',
         link: '/about-us'
       },
