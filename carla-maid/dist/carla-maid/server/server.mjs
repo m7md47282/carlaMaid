@@ -1,34 +1,35 @@
 import './polyfills.server.mjs';
 import {
   main_server_default
-} from "./chunk-YSI3ADW2.mjs";
+} from "./chunk-ZTCMPZUR.mjs";
 import {
   SERVER_CONTEXT,
   renderApplication,
   renderModule
-} from "./chunk-LCPQZKH6.mjs";
-import "./chunk-SAQ722TJ.mjs";
-import "./chunk-4723CHMZ.mjs";
-import "./chunk-CUUOHIWM.mjs";
-import "./chunk-FOVKUR36.mjs";
-import "./chunk-6ONAWCA2.mjs";
-import "./chunk-ACIMH4GH.mjs";
-import "./chunk-KHPIZ3CA.mjs";
-import "./chunk-NO6BMLK3.mjs";
+} from "./chunk-H5UGRJJ6.mjs";
+import "./chunk-CEYSMZMP.mjs";
+import "./chunk-NGGOJZDC.mjs";
+import "./chunk-2BMABIRG.mjs";
+import "./chunk-NU7KL24N.mjs";
+import "./chunk-A4ZW5M3M.mjs";
+import "./chunk-V36CY64B.mjs";
+import "./chunk-S2PFZ4FR.mjs";
+import "./chunk-3Y7MHHCZ.mjs";
 import {
   APP_BASE_HREF
-} from "./chunk-VCGU4JGB.mjs";
-import "./chunk-FKPQALD6.mjs";
+} from "./chunk-FZPKIXOD.mjs";
+import "./chunk-S6S6V7ZK.mjs";
 import {
   __async,
   __commonJS,
   __export,
   __objRest,
+  __publicField,
   __require,
   __spreadProps,
   __spreadValues,
   __toESM
-} from "./chunk-PTRYWQQD.mjs";
+} from "./chunk-CU4POASJ.mjs";
 
 // node_modules/boolbase/index.js
 var require_boolbase = __commonJS({
@@ -36382,7 +36383,7 @@ var Critters = class {
       walkStyleRules(ast, markOnly((rule2) => {
         var _rule$nodes;
         if (rule2.type === "comment") {
-          const crittersComment = rule2.text.match(/^(?<!\! )critters:(.*)/);
+          const crittersComment = rule2.text.match(new RegExp("^(?<!\\! )critters:(.*)"));
           const command = crittersComment && crittersComment[1];
           if (command) {
             switch (command) {
@@ -36433,7 +36434,7 @@ var Critters = class {
             if (sel === ":root" || sel === "html" || sel === "body" || /^::?(before|after)$/.test(sel)) {
               return true;
             }
-            sel = sel.replace(/(?<!\\)::?[a-z-]+(?![a-z-(])/gi, "").replace(/::?not\(\s*\)/g, "").replace(/\(\s*,/g, "(").replace(/,\s*\)/g, ")").trim();
+            sel = sel.replace(new RegExp("(?<!\\\\)::?[a-z-]+(?![a-z-(])", "gi"), "").replace(/::?not\(\s*\)/g, "").replace(/\(\s*,/g, "(").replace(/,\s*\)/g, ")").trim();
             if (!sel) return false;
             try {
               return crittersContainer.exists(sel);
@@ -36565,13 +36566,6 @@ var LINK_LOAD_SCRIPT_CONTENT = [
   "})();"
 ].join("\n");
 var CrittersExtended = class extends critters_default {
-  optionsExtended;
-  resourceCache;
-  warnings = [];
-  errors = [];
-  initialEmbedLinkedStylesheet;
-  addedCspScriptsDocuments = /* @__PURE__ */ new WeakSet();
-  documentNonces = /* @__PURE__ */ new WeakMap();
   constructor(optionsExtended, resourceCache) {
     super({
       logger: {
@@ -36593,6 +36587,43 @@ var CrittersExtended = class extends critters_default {
       noscriptFallback: true,
       inlineFonts: true
     });
+    __publicField(this, "optionsExtended");
+    __publicField(this, "resourceCache");
+    __publicField(this, "warnings", []);
+    __publicField(this, "errors", []);
+    __publicField(this, "initialEmbedLinkedStylesheet");
+    __publicField(this, "addedCspScriptsDocuments", /* @__PURE__ */ new WeakSet());
+    __publicField(this, "documentNonces", /* @__PURE__ */ new WeakMap());
+    /**
+     * Override of the Critters `embedLinkedStylesheet` method
+     * that makes it work with Angular's CSP APIs.
+     */
+    __publicField(this, "embedLinkedStylesheetOverride", (link, document3) => __async(this, null, function* () {
+      if (link.getAttribute("media") === "print" && link.next?.name === "noscript") {
+        const media = link.getAttribute("onload")?.match(MEDIA_SET_HANDLER_PATTERN);
+        if (media) {
+          link.removeAttribute("onload");
+          link.setAttribute("media", media[1]);
+          link?.next?.remove();
+        }
+      }
+      const returnValue = yield this.initialEmbedLinkedStylesheet(link, document3);
+      const cspNonce = this.findCspNonce(document3);
+      if (cspNonce) {
+        const crittersMedia = link.getAttribute("onload")?.match(MEDIA_SET_HANDLER_PATTERN);
+        if (crittersMedia) {
+          link.removeAttribute("onload");
+          link.setAttribute(CSP_MEDIA_ATTR, crittersMedia[1]);
+          this.conditionallyInsertCspLoadingScript(document3, cspNonce, link);
+        }
+        document3.head.children.forEach((child) => {
+          if (child.tagName === "style" && !child.hasAttribute("nonce")) {
+            child.setAttribute("nonce", cspNonce);
+          }
+        });
+      }
+      return returnValue;
+    }));
     this.optionsExtended = optionsExtended;
     this.resourceCache = resourceCache;
     this.initialEmbedLinkedStylesheet = this.embedLinkedStylesheet;
@@ -36608,36 +36639,6 @@ var CrittersExtended = class extends critters_default {
       return resourceContent;
     });
   }
-  /**
-   * Override of the Critters `embedLinkedStylesheet` method
-   * that makes it work with Angular's CSP APIs.
-   */
-  embedLinkedStylesheetOverride = (link, document3) => __async(this, null, function* () {
-    if (link.getAttribute("media") === "print" && link.next?.name === "noscript") {
-      const media = link.getAttribute("onload")?.match(MEDIA_SET_HANDLER_PATTERN);
-      if (media) {
-        link.removeAttribute("onload");
-        link.setAttribute("media", media[1]);
-        link?.next?.remove();
-      }
-    }
-    const returnValue = yield this.initialEmbedLinkedStylesheet(link, document3);
-    const cspNonce = this.findCspNonce(document3);
-    if (cspNonce) {
-      const crittersMedia = link.getAttribute("onload")?.match(MEDIA_SET_HANDLER_PATTERN);
-      if (crittersMedia) {
-        link.removeAttribute("onload");
-        link.setAttribute(CSP_MEDIA_ATTR, crittersMedia[1]);
-        this.conditionallyInsertCspLoadingScript(document3, cspNonce, link);
-      }
-      document3.head.children.forEach((child) => {
-        if (child.tagName === "style" && !child.hasAttribute("nonce")) {
-          child.setAttribute("nonce", cspNonce);
-        }
-      });
-    }
-    return returnValue;
-  });
   /**
    * Finds the CSP nonce for a specific document.
    */
@@ -36670,9 +36671,9 @@ var CrittersExtended = class extends critters_default {
   }
 };
 var InlineCriticalCssProcessor = class {
-  options;
-  resourceCache = /* @__PURE__ */ new Map();
   constructor(options) {
+    __publicField(this, "options");
+    __publicField(this, "resourceCache", /* @__PURE__ */ new Map());
     this.options = options;
   }
   process(html, options) {
@@ -36733,11 +36734,11 @@ function noopRunMethodAndMeasurePerf(label, asyncMethod) {
 }
 var SSG_MARKER_REGEXP = /ng-server-context=["']\w*\|?ssg\|?\w*["']/;
 var CommonEngine = class {
-  options;
-  templateCache = /* @__PURE__ */ new Map();
-  inlineCriticalCssProcessor;
-  pageIsSSG = /* @__PURE__ */ new Map();
   constructor(options) {
+    __publicField(this, "options");
+    __publicField(this, "templateCache", /* @__PURE__ */ new Map());
+    __publicField(this, "inlineCriticalCssProcessor");
+    __publicField(this, "pageIsSSG", /* @__PURE__ */ new Map());
     this.options = options;
     this.inlineCriticalCssProcessor = new InlineCriticalCssProcessor({
       minify: false
