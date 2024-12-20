@@ -103,7 +103,7 @@ var routes = [
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-CG5CUDO2.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-IYCTWM7D.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
@@ -111,7 +111,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-YSWJ5RIZ.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-QNZ3R4AD.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -678,7 +678,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-LXSIOUZ6.js").then((m) => m.HeaderComponent), import("./chunk-MV4MTEOM.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-IN6PFYDF.js").then((m) => m.HeaderComponent), import("./chunk-MV4MTEOM.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -712,9 +712,11 @@ var AppComponent = class _AppComponent {
     this.setLang();
   }
   setLang() {
-    let lang = localStorage.getItem("lang") || environment.lang;
-    this._configService.setLang(lang);
-    this.lang = this._configService.getLang();
+    if (this._configService.isBrowser()) {
+      let lang = localStorage.getItem("lang") || environment.lang;
+      this._configService.setLang(lang);
+      this.lang = this._configService.getLang();
+    }
   }
   static \u0275fac = function AppComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
