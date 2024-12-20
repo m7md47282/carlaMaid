@@ -1,10 +1,14 @@
+import './polyfills.server.mjs';
+import {
+  provideServerRendering
+} from "./chunk-LCPQZKH6.mjs";
+import {
+  MatCommonModule
+} from "./chunk-KHPIZ3CA.mjs";
 import {
   ConfigService,
   environment
-} from "./chunk-5CLWQFFG.js";
-import {
-  MatCommonModule
-} from "./chunk-EBUGD3L2.js";
+} from "./chunk-CUUOHIWM.mjs";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -14,23 +18,23 @@ import {
   RouterModule,
   RouterOutlet,
   provideRouter
-} from "./chunk-B443NQ2E.js";
+} from "./chunk-FOVKUR36.mjs";
 import {
   DomRendererFactory2,
   HttpClient,
   HttpClientModule,
   bootstrapApplication,
   provideClientHydration
-} from "./chunk-FGSQZ2CG.js";
+} from "./chunk-6ONAWCA2.mjs";
+import {
+  TranslateLoader,
+  TranslateModule
+} from "./chunk-NO6BMLK3.mjs";
 import {
   CommonModule,
   DOCUMENT,
   NgTemplateOutlet
-} from "./chunk-OZEPEEJY.js";
-import {
-  TranslateLoader,
-  TranslateModule
-} from "./chunk-KH3TABCJ.js";
+} from "./chunk-VCGU4JGB.mjs";
 import {
   ANIMATION_MODULE_TYPE,
   ChangeDetectionScheduler,
@@ -51,6 +55,7 @@ import {
   importProvidersFrom,
   inject,
   makeEnvironmentProviders,
+  mergeApplicationConfig,
   numberAttribute,
   performanceMarkFeature,
   provideZoneChangeDetection,
@@ -85,302 +90,7 @@ import {
   ɵɵtemplate,
   ɵɵtemplateRefExtractor,
   ɵɵviewQuery
-} from "./chunk-E6YKDRCU.js";
-
-// src/app/app.routes.ts
-var routes = [
-  {
-    path: "",
-    loadComponent: () => import("./chunk-FBDT2HGI.js").then((m) => m.LandingComponent)
-  },
-  {
-    path: "our-services",
-    loadComponent: () => import("./chunk-A332N7KW.js").then((m) => m.OurServicesComponent)
-  },
-  {
-    path: "blogs",
-    loadComponent: () => import("./chunk-U6TRFDZ6.js").then((m) => m.BlogsComponent)
-  },
-  {
-    path: "about-us",
-    loadComponent: () => import("./chunk-CG5CUDO2.js").then((m) => m.AboutUSComponent)
-  },
-  {
-    path: "blogs-open",
-    loadComponent: () => import("./chunk-FGSKSZVR.js").then((m) => m.BlogsOpenComponent)
-  },
-  {
-    path: "book-now",
-    loadComponent: () => import("./chunk-YSWJ5RIZ.js").then((m) => m.BookNowComponent)
-  },
-  {
-    path: "contact-us",
-    loadComponent: () => import("./chunk-H5SNDHK6.js").then((m) => m.ContactUsComponent)
-  }
-];
-
-// node_modules/@angular/platform-browser/fesm2022/animations/async.mjs
-var ANIMATION_PREFIX = "@";
-var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
-  /**
-   *
-   * @param moduleImpl allows to provide a mock implmentation (or will load the animation module)
-   */
-  constructor(doc, delegate, zone, animationType, moduleImpl) {
-    this.doc = doc;
-    this.delegate = delegate;
-    this.zone = zone;
-    this.animationType = animationType;
-    this.moduleImpl = moduleImpl;
-    this._rendererFactoryPromise = null;
-    this.scheduler = inject(ChangeDetectionScheduler, {
-      optional: true
-    });
-    this.loadingSchedulerFn = inject(\u0275ASYNC_ANIMATION_LOADING_SCHEDULER_FN, {
-      optional: true
-    });
-  }
-  /** @nodoc */
-  ngOnDestroy() {
-    this._engine?.flush();
-  }
-  /**
-   * @internal
-   */
-  loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-ROVXWMJJ.js").then((m) => m);
-    let moduleImplPromise;
-    if (this.loadingSchedulerFn) {
-      moduleImplPromise = this.loadingSchedulerFn(loadFn);
-    } else {
-      moduleImplPromise = loadFn();
-    }
-    return moduleImplPromise.catch((e) => {
-      throw new RuntimeError(5300, (typeof ngDevMode === "undefined" || ngDevMode) && "Async loading for animations package was enabled, but loading failed. Angular falls back to using regular rendering. No animations will be displayed and their styles won't be applied.");
-    }).then(({
-      \u0275createEngine,
-      \u0275AnimationRendererFactory
-    }) => {
-      this._engine = \u0275createEngine(this.animationType, this.doc);
-      const rendererFactory = new \u0275AnimationRendererFactory(this.delegate, this._engine, this.zone);
-      this.delegate = rendererFactory;
-      return rendererFactory;
-    });
-  }
-  /**
-   * This method is delegating the renderer creation to the factories.
-   * It uses default factory while the animation factory isn't loaded
-   * and will rely on the animation factory once it is loaded.
-   *
-   * Calling this method will trigger as side effect the loading of the animation module
-   * if the renderered component uses animations.
-   */
-  createRenderer(hostElement, rendererType) {
-    const renderer = this.delegate.createRenderer(hostElement, rendererType);
-    if (renderer.\u0275type === 0) {
-      return renderer;
-    }
-    if (typeof renderer.throwOnSyntheticProps === "boolean") {
-      renderer.throwOnSyntheticProps = false;
-    }
-    const dynamicRenderer = new DynamicDelegationRenderer(renderer);
-    if (rendererType?.data?.["animation"] && !this._rendererFactoryPromise) {
-      this._rendererFactoryPromise = this.loadImpl();
-    }
-    this._rendererFactoryPromise?.then((animationRendererFactory) => {
-      const animationRenderer = animationRendererFactory.createRenderer(hostElement, rendererType);
-      dynamicRenderer.use(animationRenderer);
-      this.scheduler?.notify(
-        10
-        /* NotificationSource.AsyncAnimationsLoaded */
-      );
-    }).catch((e) => {
-      dynamicRenderer.use(renderer);
-    });
-    return dynamicRenderer;
-  }
-  begin() {
-    this.delegate.begin?.();
-  }
-  end() {
-    this.delegate.end?.();
-  }
-  whenRenderingDone() {
-    return this.delegate.whenRenderingDone?.() ?? Promise.resolve();
-  }
-  static {
-    this.\u0275fac = function AsyncAnimationRendererFactory_Factory(__ngFactoryType__) {
-      \u0275\u0275invalidFactory();
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-      token: _AsyncAnimationRendererFactory,
-      factory: _AsyncAnimationRendererFactory.\u0275fac
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AsyncAnimationRendererFactory, [{
-    type: Injectable
-  }], () => [{
-    type: Document
-  }, {
-    type: RendererFactory2
-  }, {
-    type: NgZone
-  }, {
-    type: void 0
-  }, {
-    type: Promise
-  }], null);
-})();
-var DynamicDelegationRenderer = class {
-  constructor(delegate) {
-    this.delegate = delegate;
-    this.replay = [];
-    this.\u0275type = 1;
-  }
-  use(impl) {
-    this.delegate = impl;
-    if (this.replay !== null) {
-      for (const fn of this.replay) {
-        fn(impl);
-      }
-      this.replay = null;
-    }
-  }
-  get data() {
-    return this.delegate.data;
-  }
-  destroy() {
-    this.replay = null;
-    this.delegate.destroy();
-  }
-  createElement(name, namespace) {
-    return this.delegate.createElement(name, namespace);
-  }
-  createComment(value) {
-    return this.delegate.createComment(value);
-  }
-  createText(value) {
-    return this.delegate.createText(value);
-  }
-  get destroyNode() {
-    return this.delegate.destroyNode;
-  }
-  appendChild(parent, newChild) {
-    this.delegate.appendChild(parent, newChild);
-  }
-  insertBefore(parent, newChild, refChild, isMove) {
-    this.delegate.insertBefore(parent, newChild, refChild, isMove);
-  }
-  removeChild(parent, oldChild, isHostElement) {
-    this.delegate.removeChild(parent, oldChild, isHostElement);
-  }
-  selectRootElement(selectorOrNode, preserveContent) {
-    return this.delegate.selectRootElement(selectorOrNode, preserveContent);
-  }
-  parentNode(node) {
-    return this.delegate.parentNode(node);
-  }
-  nextSibling(node) {
-    return this.delegate.nextSibling(node);
-  }
-  setAttribute(el, name, value, namespace) {
-    this.delegate.setAttribute(el, name, value, namespace);
-  }
-  removeAttribute(el, name, namespace) {
-    this.delegate.removeAttribute(el, name, namespace);
-  }
-  addClass(el, name) {
-    this.delegate.addClass(el, name);
-  }
-  removeClass(el, name) {
-    this.delegate.removeClass(el, name);
-  }
-  setStyle(el, style, value, flags) {
-    this.delegate.setStyle(el, style, value, flags);
-  }
-  removeStyle(el, style, flags) {
-    this.delegate.removeStyle(el, style, flags);
-  }
-  setProperty(el, name, value) {
-    if (this.shouldReplay(name)) {
-      this.replay.push((renderer) => renderer.setProperty(el, name, value));
-    }
-    this.delegate.setProperty(el, name, value);
-  }
-  setValue(node, value) {
-    this.delegate.setValue(node, value);
-  }
-  listen(target, eventName, callback) {
-    if (this.shouldReplay(eventName)) {
-      this.replay.push((renderer) => renderer.listen(target, eventName, callback));
-    }
-    return this.delegate.listen(target, eventName, callback);
-  }
-  shouldReplay(propOrEventName) {
-    return this.replay !== null && propOrEventName.startsWith(ANIMATION_PREFIX);
-  }
-};
-var \u0275ASYNC_ANIMATION_LOADING_SCHEDULER_FN = new InjectionToken(ngDevMode ? "async_animation_loading_scheduler_fn" : "");
-function provideAnimationsAsync(type = "animations") {
-  performanceMarkFeature("NgAsyncAnimations");
-  return makeEnvironmentProviders([{
-    provide: RendererFactory2,
-    useFactory: (doc, renderer, zone) => {
-      return new AsyncAnimationRendererFactory(doc, renderer, zone, type);
-    },
-    deps: [DOCUMENT, DomRendererFactory2, NgZone]
-  }, {
-    provide: ANIMATION_MODULE_TYPE,
-    useValue: type === "noop" ? "NoopAnimations" : "BrowserAnimations"
-  }]);
-}
-
-// node_modules/@ngx-translate/http-loader/dist/fesm2022/ngx-translate-http-loader.mjs
-var TranslateHttpLoader = class {
-  http;
-  prefix;
-  suffix;
-  constructor(http, prefix = "/assets/i18n/", suffix = ".json") {
-    this.http = http;
-    this.prefix = prefix;
-    this.suffix = suffix;
-  }
-  /**
-   * Gets the translations from the server
-   */
-  getTranslation(lang) {
-    return this.http.get(`${this.prefix}${lang}${this.suffix}`);
-  }
-};
-
-// src/app/app.config.ts
-function createTranslateLoader(http) {
-  return new TranslateHttpLoader(http, "/i18n/", ".json");
-}
-var provideTranslation = () => ({
-  defaultLanguage: "en",
-  loader: {
-    provide: TranslateLoader,
-    useFactory: createTranslateLoader,
-    deps: [HttpClient]
-  }
-});
-var appConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideAnimationsAsync(),
-    importProvidersFrom([
-      HttpClientModule,
-      TranslateModule.forRoot(provideTranslation())
-    ]),
-    provideClientHydration()
-  ]
-};
+} from "./chunk-FKPQALD6.mjs";
 
 // node_modules/@angular/material/fesm2022/progress-spinner.mjs
 var _c0 = ["determinateSpinner"];
@@ -678,7 +388,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-LXSIOUZ6.js").then((m) => m.HeaderComponent), import("./chunk-MV4MTEOM.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-P5MYVYOK.mjs").then((m) => m.HeaderComponent), import("./chunk-V3M4P4LO.mjs").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -736,8 +446,316 @@ var AppComponent = class _AppComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
 })();
 
-// src/main.ts
-bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+// src/app/app.routes.ts
+var routes = [
+  {
+    path: "",
+    loadComponent: () => import("./chunk-RALA3UW3.mjs").then((m) => m.LandingComponent)
+  },
+  {
+    path: "our-services",
+    loadComponent: () => import("./chunk-C255FPLD.mjs").then((m) => m.OurServicesComponent)
+  },
+  {
+    path: "blogs",
+    loadComponent: () => import("./chunk-RKC3WQZZ.mjs").then((m) => m.BlogsComponent)
+  },
+  {
+    path: "about-us",
+    loadComponent: () => import("./chunk-U65T7ZIB.mjs").then((m) => m.AboutUSComponent)
+  },
+  {
+    path: "blogs-open",
+    loadComponent: () => import("./chunk-DY7F72KW.mjs").then((m) => m.BlogsOpenComponent)
+  },
+  {
+    path: "book-now",
+    loadComponent: () => import("./chunk-UJEHRYL6.mjs").then((m) => m.BookNowComponent)
+  },
+  {
+    path: "contact-us",
+    loadComponent: () => import("./chunk-6GYPB753.mjs").then((m) => m.ContactUsComponent)
+  }
+];
+
+// node_modules/@angular/platform-browser/fesm2022/animations/async.mjs
+var ANIMATION_PREFIX = "@";
+var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
+  /**
+   *
+   * @param moduleImpl allows to provide a mock implmentation (or will load the animation module)
+   */
+  constructor(doc, delegate, zone, animationType, moduleImpl) {
+    this.doc = doc;
+    this.delegate = delegate;
+    this.zone = zone;
+    this.animationType = animationType;
+    this.moduleImpl = moduleImpl;
+    this._rendererFactoryPromise = null;
+    this.scheduler = inject(ChangeDetectionScheduler, {
+      optional: true
+    });
+    this.loadingSchedulerFn = inject(\u0275ASYNC_ANIMATION_LOADING_SCHEDULER_FN, {
+      optional: true
+    });
+  }
+  /** @nodoc */
+  ngOnDestroy() {
+    this._engine?.flush();
+  }
+  /**
+   * @internal
+   */
+  loadImpl() {
+    const loadFn = () => this.moduleImpl ?? import("./chunk-EU5YSVKY.mjs").then((m) => m);
+    let moduleImplPromise;
+    if (this.loadingSchedulerFn) {
+      moduleImplPromise = this.loadingSchedulerFn(loadFn);
+    } else {
+      moduleImplPromise = loadFn();
+    }
+    return moduleImplPromise.catch((e) => {
+      throw new RuntimeError(5300, (typeof ngDevMode === "undefined" || ngDevMode) && "Async loading for animations package was enabled, but loading failed. Angular falls back to using regular rendering. No animations will be displayed and their styles won't be applied.");
+    }).then(({
+      \u0275createEngine,
+      \u0275AnimationRendererFactory
+    }) => {
+      this._engine = \u0275createEngine(this.animationType, this.doc);
+      const rendererFactory = new \u0275AnimationRendererFactory(this.delegate, this._engine, this.zone);
+      this.delegate = rendererFactory;
+      return rendererFactory;
+    });
+  }
+  /**
+   * This method is delegating the renderer creation to the factories.
+   * It uses default factory while the animation factory isn't loaded
+   * and will rely on the animation factory once it is loaded.
+   *
+   * Calling this method will trigger as side effect the loading of the animation module
+   * if the renderered component uses animations.
+   */
+  createRenderer(hostElement, rendererType) {
+    const renderer = this.delegate.createRenderer(hostElement, rendererType);
+    if (renderer.\u0275type === 0) {
+      return renderer;
+    }
+    if (typeof renderer.throwOnSyntheticProps === "boolean") {
+      renderer.throwOnSyntheticProps = false;
+    }
+    const dynamicRenderer = new DynamicDelegationRenderer(renderer);
+    if (rendererType?.data?.["animation"] && !this._rendererFactoryPromise) {
+      this._rendererFactoryPromise = this.loadImpl();
+    }
+    this._rendererFactoryPromise?.then((animationRendererFactory) => {
+      const animationRenderer = animationRendererFactory.createRenderer(hostElement, rendererType);
+      dynamicRenderer.use(animationRenderer);
+      this.scheduler?.notify(
+        10
+        /* NotificationSource.AsyncAnimationsLoaded */
+      );
+    }).catch((e) => {
+      dynamicRenderer.use(renderer);
+    });
+    return dynamicRenderer;
+  }
+  begin() {
+    this.delegate.begin?.();
+  }
+  end() {
+    this.delegate.end?.();
+  }
+  whenRenderingDone() {
+    return this.delegate.whenRenderingDone?.() ?? Promise.resolve();
+  }
+  static {
+    this.\u0275fac = function AsyncAnimationRendererFactory_Factory(__ngFactoryType__) {
+      \u0275\u0275invalidFactory();
+    };
+  }
+  static {
+    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+      token: _AsyncAnimationRendererFactory,
+      factory: _AsyncAnimationRendererFactory.\u0275fac
+    });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AsyncAnimationRendererFactory, [{
+    type: Injectable
+  }], () => [{
+    type: Document
+  }, {
+    type: RendererFactory2
+  }, {
+    type: NgZone
+  }, {
+    type: void 0
+  }, {
+    type: Promise
+  }], null);
+})();
+var DynamicDelegationRenderer = class {
+  constructor(delegate) {
+    this.delegate = delegate;
+    this.replay = [];
+    this.\u0275type = 1;
+  }
+  use(impl) {
+    this.delegate = impl;
+    if (this.replay !== null) {
+      for (const fn of this.replay) {
+        fn(impl);
+      }
+      this.replay = null;
+    }
+  }
+  get data() {
+    return this.delegate.data;
+  }
+  destroy() {
+    this.replay = null;
+    this.delegate.destroy();
+  }
+  createElement(name, namespace) {
+    return this.delegate.createElement(name, namespace);
+  }
+  createComment(value) {
+    return this.delegate.createComment(value);
+  }
+  createText(value) {
+    return this.delegate.createText(value);
+  }
+  get destroyNode() {
+    return this.delegate.destroyNode;
+  }
+  appendChild(parent, newChild) {
+    this.delegate.appendChild(parent, newChild);
+  }
+  insertBefore(parent, newChild, refChild, isMove) {
+    this.delegate.insertBefore(parent, newChild, refChild, isMove);
+  }
+  removeChild(parent, oldChild, isHostElement) {
+    this.delegate.removeChild(parent, oldChild, isHostElement);
+  }
+  selectRootElement(selectorOrNode, preserveContent) {
+    return this.delegate.selectRootElement(selectorOrNode, preserveContent);
+  }
+  parentNode(node) {
+    return this.delegate.parentNode(node);
+  }
+  nextSibling(node) {
+    return this.delegate.nextSibling(node);
+  }
+  setAttribute(el, name, value, namespace) {
+    this.delegate.setAttribute(el, name, value, namespace);
+  }
+  removeAttribute(el, name, namespace) {
+    this.delegate.removeAttribute(el, name, namespace);
+  }
+  addClass(el, name) {
+    this.delegate.addClass(el, name);
+  }
+  removeClass(el, name) {
+    this.delegate.removeClass(el, name);
+  }
+  setStyle(el, style, value, flags) {
+    this.delegate.setStyle(el, style, value, flags);
+  }
+  removeStyle(el, style, flags) {
+    this.delegate.removeStyle(el, style, flags);
+  }
+  setProperty(el, name, value) {
+    if (this.shouldReplay(name)) {
+      this.replay.push((renderer) => renderer.setProperty(el, name, value));
+    }
+    this.delegate.setProperty(el, name, value);
+  }
+  setValue(node, value) {
+    this.delegate.setValue(node, value);
+  }
+  listen(target, eventName, callback) {
+    if (this.shouldReplay(eventName)) {
+      this.replay.push((renderer) => renderer.listen(target, eventName, callback));
+    }
+    return this.delegate.listen(target, eventName, callback);
+  }
+  shouldReplay(propOrEventName) {
+    return this.replay !== null && propOrEventName.startsWith(ANIMATION_PREFIX);
+  }
+};
+var \u0275ASYNC_ANIMATION_LOADING_SCHEDULER_FN = new InjectionToken(ngDevMode ? "async_animation_loading_scheduler_fn" : "");
+function provideAnimationsAsync(type = "animations") {
+  performanceMarkFeature("NgAsyncAnimations");
+  return makeEnvironmentProviders([{
+    provide: RendererFactory2,
+    useFactory: (doc, renderer, zone) => {
+      return new AsyncAnimationRendererFactory(doc, renderer, zone, type);
+    },
+    deps: [DOCUMENT, DomRendererFactory2, NgZone]
+  }, {
+    provide: ANIMATION_MODULE_TYPE,
+    useValue: type === "noop" ? "NoopAnimations" : "BrowserAnimations"
+  }]);
+}
+
+// node_modules/@ngx-translate/http-loader/dist/fesm2022/ngx-translate-http-loader.mjs
+var TranslateHttpLoader = class {
+  http;
+  prefix;
+  suffix;
+  constructor(http, prefix = "/assets/i18n/", suffix = ".json") {
+    this.http = http;
+    this.prefix = prefix;
+    this.suffix = suffix;
+  }
+  /**
+   * Gets the translations from the server
+   */
+  getTranslation(lang) {
+    return this.http.get(`${this.prefix}${lang}${this.suffix}`);
+  }
+};
+
+// src/app/app.config.ts
+function createTranslateLoader(http) {
+  return new TranslateHttpLoader(http, "/i18n/", ".json");
+}
+var provideTranslation = () => ({
+  defaultLanguage: "en",
+  loader: {
+    provide: TranslateLoader,
+    useFactory: createTranslateLoader,
+    deps: [HttpClient]
+  }
+});
+var appConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    importProvidersFrom([
+      HttpClientModule,
+      TranslateModule.forRoot(provideTranslation())
+    ]),
+    provideClientHydration()
+  ]
+};
+
+// src/app/app.config.server.ts
+var serverConfig = {
+  providers: [
+    provideServerRendering()
+  ]
+};
+var config = mergeApplicationConfig(appConfig, serverConfig);
+
+// src/main.server.ts
+var bootstrap = () => bootstrapApplication(AppComponent, config);
+var main_server_default = bootstrap;
+
+export {
+  main_server_default
+};
 /*! Bundled license information:
 
 @angular/platform-browser/fesm2022/animations/async.mjs:
@@ -747,4 +765,4 @@ bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err))
    * License: MIT
    *)
 */
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=chunk-S7URUXP2.mjs.map

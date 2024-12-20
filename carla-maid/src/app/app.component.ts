@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { FooterComponent } from './footer/footer.component';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -52,11 +53,14 @@ export class AppComponent implements OnInit {
   }
 
   setLang() {
-    let lang = localStorage.getItem('lang') || environment.lang
-    
-    this._configService.setLang(lang as Languages);
+    if (this._configService.isBrowser()) {
+      let lang = localStorage.getItem('lang') || environment.lang
 
-    this.lang = this._configService.getLang()
+      this._configService.setLang(lang as Languages);
+
+      this.lang = this._configService.getLang()
+    }
+
   }
 
 
