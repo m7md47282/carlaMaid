@@ -1,7 +1,7 @@
 import {
   ConfigService,
   environment
-} from "./chunk-RLLJ2J4X.js";
+} from "./chunk-DRKXYRZK.js";
 import {
   MatCommonModule
 } from "./chunk-NHHXG5KB.js";
@@ -90,31 +90,31 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-A6QBOGWX.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-NTWC25D3.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-SD57K5SR.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-PW2SFJUO.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-C4F2M52W.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-W4P67YSA.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-ZRNOMIMI.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-GTXGFDDU.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-AETI4STT.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-GNGJOHKC.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-CERE2TOX.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-LZYH7TPT.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-LYQYO65Y.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-5GLBU6Z3.js").then((m) => m.ContactUsComponent)
   }
 ];
 
@@ -676,7 +676,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-4PWBCNQM.js").then((m) => m.HeaderComponent), import("./chunk-MXURWJGF.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-5YFYA36F.js").then((m) => m.HeaderComponent), import("./chunk-XSDGIJ3J.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -731,7 +731,7 @@ var AppComponent = class _AppComponent {
   ], styles: ["\n\n.loader[_ngcontent-%COMP%] {\n  height: 100vh;\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n/*# sourceMappingURL=app.component.css.map */"] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src\\app\\app.component.ts", lineNumber: 26 });
 })();
 
 // src/main.ts
