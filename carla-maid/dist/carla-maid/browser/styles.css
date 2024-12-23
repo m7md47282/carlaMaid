@@ -1853,7 +1853,7 @@ a,
 }
 @media (max-width: 480px) {
   html {
-    font-size: 10px;
+    font-size: 12px;
   }
   html .title-size {
     font-size: 2.8rem;

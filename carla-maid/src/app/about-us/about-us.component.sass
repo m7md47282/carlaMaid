@@ -3,9 +3,9 @@
     flex: 1 1 calc(25% - 1rem)
     img
         width: 40%
-        min-width: 250px
-    .section-1-content
         min-width: 300px
+    .section-1-content
+        // min-width: 300px
         width: 40%
         margin-right: 50px
         p,h1,h2
@@ -39,10 +39,10 @@
 .section-4
     img
         width: 30vw
-        min-width: 220px
+        // min-width: 400px
     figcaption
         width: 37%
-        min-width: 500px
+        // min-width: 500px
         h2
             font-size: 3rem
 .section-5
@@ -54,7 +54,7 @@
         font-size: 1.2rem
     .highlight-card
         width: 20%
-        min-width: 450px
+        // min-width: 450px
         padding: 20px
         h3
             font-size: 20px
@@ -63,25 +63,15 @@
             font-size: 12px
         svg
             width: 300px
-@media (max-width:1024px)
-    .section-4
-        .mission
-            flex-direction: column-reverse
-        .vision
-            flex-direction: column
-        figcaption
-            text-align: center
-@media (max-width: 320px)
-    .section-1
-        .section-1-content
-            min-width: 200px
-    // .section-5
-    //     .highlight-card
-    //         min-width: 250px
-@media (max-width: 425px)
-    .section-4
-        figcaption
-            min-width: 292px
-    .section-5
-        .highlight-card
-            min-width: 320px
+
+
+@media ( max-width:  440px)
+    .center
+        flex-direction: column
+    .section-1 .section-1-content,   .section-5 .highlight-card,  .section-4 figcaption
+        width: 100%
+        padding: 10px
+    .section-4 img
+        width: 300px
+   
+  
