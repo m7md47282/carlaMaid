@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Direction } from '../shared/interfaces/languages';
 import { ConfigService } from '../shared/config/config.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-landing',
@@ -18,7 +19,8 @@ import { ConfigService } from '../shared/config/config.service';
     CarouselModule,
     ButtonModule,
     TagModule,
-    RouterLink
+    RouterLink,
+    MatProgressSpinnerModule
   ],
   animations: [
     trigger('openAnimation', [

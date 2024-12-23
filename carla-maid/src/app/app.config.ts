@@ -26,11 +26,14 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
+    provideHttpClient(
+      withFetch(),
+    ),
 
     importProvidersFrom([
       HttpClientModule, 
       TranslateModule.forRoot(provideTranslation())
-    ]),
+    ]), provideClientHydration(),
   ]
   
 };
