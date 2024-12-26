@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatLabel, MatSelectModule } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -35,11 +35,11 @@ export class BookNowComponent implements OnInit{
   @ViewChild('mapContainer') mapContainer!: ElementRef;
   
 
-  constructor(private fb: FormBuilder, private translate: TranslateService) {
+  constructor(private fb: FormBuilder, private translate: TranslateService,private router: Router) {
     this.bookingForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-8]{8}$')]],
       // location: ['', Validators.required],
       address: ['', Validators.required],
       arrivalDate: ['', Validators.required],
@@ -57,7 +57,14 @@ export class BookNowComponent implements OnInit{
   }
   ngOnInit(): void {
     this.bookingForm.valueChanges.subscribe(() => this.calculatePrice());
+    
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo({ top: 0 });
+      }
+    });
   }
+
 
   calculatePrice(): void {
     console.log(this.bookingForm)
@@ -106,9 +113,12 @@ export class BookNowComponent implements OnInit{
 
         setTimeout(() => {
           this.sent = false;
-        }, 3000);
+        }, 9000);
         
       })
      .catch(() => console.log('There was an error submitting the form.'));
+  }
+  openDatePicker(picker:any){
+    picker.open()
   }
 }

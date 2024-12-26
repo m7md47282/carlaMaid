@@ -18,5 +18,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrl: './footer.component.sass'
 })
 export class FooterComponent {
-
+  openInstagram(): void {
+    window.open('https://www.instagram.com/carlamaid.qa/profilecard/?igsh=ZjZhNXg0OWpoY2Zp', '_blank');
+  }
+  openFacebook(): void {
+    window.open('https://www.facebook.com/share/15JXvgi56G/?mibextid=wwXIfr', '_blank');
+  }
 }

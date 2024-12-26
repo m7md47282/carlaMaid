@@ -4,7 +4,7 @@
 
    <!-- section 2 -->
   
-    <section class="section-2 flex-column page-container">
+    <section class="section-2 flex-column page-container" [ngClass]="{'arabic-text': lang === 'ar'}">
   
       <p class="gray-text-color">{{"paragraph.KeepingACleanAndOrganizedSpace" | translate}}</p>
       <!-- point 1 -->
