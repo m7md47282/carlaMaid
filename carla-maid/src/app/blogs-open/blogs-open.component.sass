@@ -1,3 +1,4 @@
+
 .section-1
     background-image: url(../../assets/images/blogs-open-header.png)
     object-fit: cover
@@ -8,6 +9,8 @@
         color: #ffffff
 p
     font-size: 0.9rem
+    &[lang="ar"]
+        font-size: 1.1rem
 h1
     font-size: 1.2rem
 
@@ -18,11 +21,22 @@ b
     color: #0f0f0f
 
 
-
 .page-container
     width: 80%
     margin-inline: auto
 
+.section-2
+    p
+            font-size: 1.1rem
+    h1
+            font-size: 1.5rem
+    &.arabic-text
+        p
+            font-size: 1.2rem
+        h1
+            font-size: 1.5rem
+    b
+        font-size: 1.1rem
 @media  (max-width: 768px)
     p
         font-size: 1.4rem

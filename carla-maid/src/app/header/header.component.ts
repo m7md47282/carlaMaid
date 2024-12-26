@@ -28,8 +28,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   
     const savedLang = localStorage.getItem('currentLang') || 'en';
-    this.currentLang = savedLang;
-  
+
     this.items = [
       {
         label: this.translate.instant('header.home'),
@@ -62,8 +61,6 @@ export class HeaderComponent implements OnInit {
 
   switchLanguage(): void {
    this.configService.toggleLang()
-   this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
-   localStorage.setItem('currentLang', this.currentLang);
   }
 
   getLang(): Languages {
