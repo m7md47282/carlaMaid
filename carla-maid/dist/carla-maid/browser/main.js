@@ -1,11 +1,11 @@
 import {
   MatProgressSpinnerModule
-} from "./chunk-JTFM7LIY.js";
+} from "./chunk-W3C3RA2F.js";
 import {
   ConfigService,
   environment
-} from "./chunk-L2M5NJFC.js";
-import "./chunk-DX3QZHY4.js";
+} from "./chunk-AQ6GD4R7.js";
+import "./chunk-VYG2AAWE.js";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -15,7 +15,7 @@ import {
   RouterModule,
   RouterOutlet,
   provideRouter
-} from "./chunk-JSDG2O4B.js";
+} from "./chunk-MIBAEETC.js";
 import {
   DomRendererFactory2,
   HttpClient,
@@ -26,11 +26,11 @@ import {
   provideClientHydration,
   provideHttpClient,
   withFetch
-} from "./chunk-U2G6FG6X.js";
+} from "./chunk-2V5SYSX5.js";
 import {
   TranslateLoader,
   TranslateModule
-} from "./chunk-XMKAKXOA.js";
+} from "./chunk-ZM2LVCFZ.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_INITIALIZER,
@@ -85,37 +85,37 @@ import {
   ɵɵinject,
   ɵɵinvalidFactory,
   ɵɵtemplate
-} from "./chunk-M7RH2OZD.js";
+} from "./chunk-ZKS5XBW4.js";
 
 // src/app/app.routes.ts
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-LVIQ7Q4B.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-APE2HEQ2.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-RO4QDK5N.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-NUOCH7MU.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-IPFKSYQS.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-RCIKGEQW.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-YWAM4FLJ.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-QVUVBOFO.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-LTAJZYWZ.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-RDQIFDRY.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-KZNJT6I7.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-DETTAK6Y.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-DNZV36OW.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-XZFEMW5N.js").then((m) => m.ContactUsComponent)
   }
 ];
 
@@ -148,7 +148,7 @@ var _AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-2FTS3WCD.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-WT2VFWE7.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -729,7 +729,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-CT4FRXCC.js").then((m) => m.HeaderComponent), import("./chunk-OVQ3KSSZ.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-YS3T3UYW.js").then((m) => m.HeaderComponent), import("./chunk-CLKE3SNH.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
