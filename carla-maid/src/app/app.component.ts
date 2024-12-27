@@ -43,7 +43,9 @@ export class AppComponent implements OnInit {
           event instanceof NavigationError
         ) {
           this.isLoading = false;
-
+          if (this._configService.isBrowser()) {
+            window.scrollTo(0, 0);
+          }
         }
       });
    
