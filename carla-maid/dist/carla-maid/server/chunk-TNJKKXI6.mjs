@@ -91,7 +91,7 @@ import {
 } from "./chunk-CU4POASJ.mjs";
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-7J7OAA53.mjs").then((m) => m.HeaderComponent), import("./chunk-HIMHRCPB.mjs").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-UEIVKGDI.mjs").then((m) => m.HeaderComponent), import("./chunk-HIMHRCPB.mjs").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -113,6 +113,10 @@ var _AppComponent = class _AppComponent {
     __publicField(this, "lang", environment.lang);
     this._configService = _configService;
     this.router = router;
+  }
+  ngOnInit() {
+    this.setLang();
+    this.isLoading = false;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
@@ -123,9 +127,6 @@ var _AppComponent = class _AppComponent {
         }
       }
     });
-  }
-  ngOnInit() {
-    this.setLang();
   }
   setLang() {
     if (this._configService.isBrowser()) {
@@ -832,4 +833,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-FTSND5NL.mjs.map
+//# sourceMappingURL=chunk-TNJKKXI6.mjs.map

@@ -32,24 +32,26 @@ export class AppComponent implements OnInit {
     private router: Router
     ) {
 
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationStart) {
-          this.isLoading = true;
-        } else if (
-          event instanceof NavigationEnd ||
-          event instanceof NavigationCancel ||
-          event instanceof NavigationError
-        ) {
-          this.isLoading = false;
-          if (this._configService.isBrowser()) {
-            window.scrollTo(0, 0);
-          }
-        }
-      });
+      
    
   }
   ngOnInit(): void {
     this.setLang()
+    this.isLoading = false;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.isLoading = false;
+        if (this._configService.isBrowser()) {
+          window.scrollTo(0, 0);
+        }
+      }
+    });
   }
 
   setLang() {
