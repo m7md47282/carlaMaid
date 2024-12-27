@@ -10,6 +10,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Direction } from '../shared/interfaces/languages';
 import { ConfigService } from '../shared/config/config.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing',
@@ -65,6 +66,10 @@ export class LandingComponent implements OnInit  {
 
   private _translate = inject(TranslateService); 
   private _configService= inject(ConfigService); 
+  private meta = inject(Meta);
+  private titleService = inject(Title);
+
+  lang: string = 'en';
 
   responsiveOptions = [
     {
@@ -153,15 +158,65 @@ constructor() {}
       }
     ];
     
+    this.titleService.setTitle('Carla Maid Qatar | Professional Cleaning & Maid Services');
+
+    this.meta.addTags([
+      { name: 'description', content: 'Carla Maid Qatar offers professional cleaning and maid services for homes and businesses. Expert cleaners, eco-friendly solutions, and flexible scheduling. Book your cleaning service in Doha today!' },
+      { name: 'keywords', content: 'cleaning services Qatar, maid service Doha, professional cleaners, home cleaning, office cleaning, eco-friendly cleaning, housekeeping Qatar, cleaning company Doha' },
+      { property: 'og:title', content: 'Carla Maid Qatar | Professional Cleaning & Maid Services' },
+      { property: 'og:description', content: 'Transform your space with Qatar\'s trusted cleaning service. Professional maids, flexible scheduling, and competitive rates for homes and businesses in Doha.' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://carlamaid.qa' },
+      { property: 'og:image', content: 'https://carlamaid.qa/assets/images/why-us.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Carla Maid Qatar | Professional Cleaning & Maid Services' },
+      { name: 'twitter:description', content: 'Your trusted cleaning partner in Qatar. Book professional cleaning services for your home or business in Doha.' },
+      { name: 'twitter:image', content: 'https://carlamaid.qa/assets/images/why-us.png' },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'author', content: 'Carla Maid Qatar' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
+      { name: 'geo.region', content: 'QA' },
+      { name: 'geo.placename', content: 'Doha' },
+      { name: 'geo.position', content: '25.2866;51.5310' },
+      {
+        property: 'business:contact_data:street_address',
+        content: 'Lusail Marina'
+      },
+      {
+        property: 'business:contact_data:locality',
+        content: 'Doha'
+      },
+      {
+        property: 'business:contact_data:country',
+        content: 'Qatar'
+      }
+    ]);
+
+    this.lang = this._translate.currentLang;
     
-    
+    this._translate.onLangChange.subscribe((event) => {
+      this.lang = event.lang;
+      this.updateMetaForLanguage(event.lang);
+    });
+  }
+
+  private updateMetaForLanguage(lang: string) {
+    if (lang === 'ar') {
+      this.meta.updateTag({ 
+        name: 'description', 
+        content: 'كارلا ميد قطر تقدم خدمات تنظيف واستقدام عاملات منزليات احترافية للمنازل والشركات. عمال تنظيف محترفون، حلول صديقة للبيئة، ومواعيد مرنة. احجز خدمة التنظيف في الدوحة اليوم!' 
+      });
+    } else {
+      this.meta.updateTag({ 
+        name: 'description', 
+        content: 'Carla Maid Qatar offers professional cleaning and maid services for homes and businesses. Expert cleaners, eco-friendly solutions, and flexible scheduling. Book your cleaning service in Doha today!' 
+      });
+    }
   }
 
 ngAfterViewInit(): void {
   gsap.registerPlugin(ScrollTrigger);
-
-  
-  // gsap.utils.toArray('.animate-on-scroll').forEach((element: any) => {
   //   gsap.fromTo(element, {
   //     opacity: 0,
   //     y: -50

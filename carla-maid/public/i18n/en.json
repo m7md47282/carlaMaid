@@ -303,5 +303,12 @@
         "contact": "Contact Us",
         "blog": "Blog",
         "bookNow": "Book Now"
+    },
+    "meta": {
+        "services": {
+            "title": "Professional Cleaning Services in Qatar | Carla Maid Services",
+            "description": "Discover our comprehensive cleaning services in Qatar. Professional residential, commercial, and specialized cleaning solutions tailored to your needs. Book now!",
+            "keywords": "cleaning services qatar, maid services, commercial cleaning, residential cleaning, professional cleaners, janitorial services, office cleaning, home cleaning, qatar cleaning company"
+        }
     }
 }
