@@ -5,7 +5,6 @@ import { Languages } from './shared/interfaces/languages';
 import { ConfigService } from './shared/config/config.service';
 import { HeaderComponent } from './header/header.component';
 import { environment } from '../environments/environment';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { FooterComponent } from './footer/footer.component';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
@@ -19,7 +18,6 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     RouterModule,
-    MatProgressSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'

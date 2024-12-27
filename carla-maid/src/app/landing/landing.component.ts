@@ -9,7 +9,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Direction } from '../shared/interfaces/languages';
 import { ConfigService } from '../shared/config/config.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
 
@@ -22,7 +21,6 @@ import { NgOptimizedImage } from '@angular/common';
     ButtonModule,
     TagModule,
     RouterLink,
-    MatProgressSpinnerModule,
     NgOptimizedImage
   ],
   animations: [

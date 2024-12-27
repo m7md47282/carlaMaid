@@ -1,11 +1,7 @@
 import {
-  MatProgressSpinnerModule
-} from "./chunk-W3C3RA2F.js";
-import {
   ConfigService,
   environment
 } from "./chunk-AQ6GD4R7.js";
-import "./chunk-VYG2AAWE.js";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -91,7 +87,7 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-V5PQ77HX.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-XDCUF2L7.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
@@ -111,7 +107,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-DETTAK6Y.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-FCVNQQYE.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -729,7 +725,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-YS3T3UYW.js").then((m) => m.HeaderComponent), import("./chunk-CLKE3SNH.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-65YUIQVD.js").then((m) => m.HeaderComponent), import("./chunk-SXUBURGI.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -784,8 +780,7 @@ __publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
   }
 }, dependencies: [
   TranslateModule,
-  RouterModule,
-  MatProgressSpinnerModule
+  RouterModule
 ], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
 var AppComponent = _AppComponent;
 (() => {
