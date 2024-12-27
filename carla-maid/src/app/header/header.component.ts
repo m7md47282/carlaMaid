@@ -26,8 +26,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(private translate: TranslateService ,private configService: ConfigService,private router: Router) {}
   ngOnInit(): void {
-  
-    const savedLang = localStorage.getItem('currentLang') || 'en';
+    if (this.configService.isBrowser()) {
+      const savedLang = localStorage.getItem('currentLang') || 'en';
+    }
+   
 
     this.items = [
       {

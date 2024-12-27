@@ -1,8 +1,3 @@
-import './polyfills.server.mjs';
-import {
-  Dir,
-  MatCommonModule
-} from "./chunk-CDEIDZOX.mjs";
 import {
   BaseIcon,
   ConnectedOverlayScrollHandler,
@@ -15,25 +10,29 @@ import {
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-KSOK6L6P.mjs";
+} from "./chunk-Z7YLFHZC.js";
 import {
   ConfigService
-} from "./chunk-XRETUFVL.mjs";
+} from "./chunk-AQ6GD4R7.js";
+import {
+  Dir,
+  MatCommonModule
+} from "./chunk-BABYXPPB.js";
 import {
   Router,
   RouterLink,
   RouterLinkActive,
   RouterModule
-} from "./chunk-MMYAWKGK.mjs";
+} from "./chunk-MIBAEETC.js";
 import {
   DomSanitizer,
   HttpClient
-} from "./chunk-HLRZNC2Z.mjs";
+} from "./chunk-2V5SYSX5.js";
 import {
   TranslateModule,
   TranslatePipe,
   TranslateService
-} from "./chunk-TUQAKRBG.mjs";
+} from "./chunk-ZM2LVCFZ.js";
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -70,6 +69,9 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation$1,
+  __publicField,
+  __spreadProps,
+  __spreadValues,
   booleanAttribute,
   catchError,
   debounce,
@@ -142,12 +144,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-J4UFSZJR.mjs";
-import {
-  __publicField,
-  __spreadProps,
-  __spreadValues
-} from "./chunk-CU4POASJ.mjs";
+} from "./chunk-ZKS5XBW4.js";
 
 // node_modules/@angular/material/fesm2022/icon.mjs
 var _c0 = ["*"];
@@ -3966,7 +3963,9 @@ var _HeaderComponent = class _HeaderComponent {
     this.router = router;
   }
   ngOnInit() {
-    const savedLang = localStorage.getItem("currentLang") || "en";
+    if (this.configService.isBrowser()) {
+      const savedLang = localStorage.getItem("currentLang") || "en";
+    }
     this.items = [
       {
         label: this.translate.instant("header.home"),
@@ -4027,4 +4026,4 @@ var HeaderComponent = _HeaderComponent;
 export {
   HeaderComponent
 };
-//# sourceMappingURL=chunk-7J7OAA53.mjs.map
+//# sourceMappingURL=chunk-WH2PBYVW.js.map
