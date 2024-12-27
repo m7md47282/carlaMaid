@@ -6,15 +6,6 @@ import {
   Validators
 } from "./chunk-S7HLCUA6.mjs";
 import {
-  animate,
-  animateChild,
-  query,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-RLAMK7QY.mjs";
-import {
   A,
   ActiveDescendantKeyManager,
   BidiModule,
@@ -54,6 +45,15 @@ import {
   removeAriaReferencedId,
   supportsScrollBehavior
 } from "./chunk-CDEIDZOX.mjs";
+import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-RLAMK7QY.mjs";
 import {
   ANIMATION_MODULE_TYPE,
   ApplicationRef,
@@ -9084,4 +9084,4 @@ export {
   MatInput,
   MatInputModule
 };
-//# sourceMappingURL=chunk-PKHLDA5F.mjs.map
+//# sourceMappingURL=chunk-MMPH2BH2.mjs.map

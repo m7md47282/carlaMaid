@@ -1,13 +1,4 @@
 import {
-  animate,
-  animateChild,
-  query,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-ZBM6YT23.js";
-import {
   A,
   ActiveDescendantKeyManager,
   BidiModule,
@@ -46,7 +37,16 @@ import {
   normalizePassiveListenerOptions,
   removeAriaReferencedId,
   supportsScrollBehavior
-} from "./chunk-VYG2AAWE.js";
+} from "./chunk-BABYXPPB.js";
+import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-ZBM6YT23.js";
 import {
   FormGroupDirective,
   NgControl,
@@ -9081,4 +9081,4 @@ export {
   MatSelect,
   MatSelectModule
 };
-//# sourceMappingURL=chunk-QILJYY34.js.map
+//# sourceMappingURL=chunk-EKDZASJJ.js.map

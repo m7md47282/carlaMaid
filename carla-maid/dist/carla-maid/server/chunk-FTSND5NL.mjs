@@ -3,9 +3,6 @@ import {
   provideServerRendering
 } from "./chunk-WOI5RI5F.mjs";
 import {
-  MatProgressSpinnerModule
-} from "./chunk-HW527C7S.mjs";
-import {
   ConfigService,
   environment
 } from "./chunk-XRETUFVL.mjs";
@@ -94,7 +91,7 @@ import {
 } from "./chunk-CU4POASJ.mjs";
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-TWT47TDR.mjs").then((m) => m.HeaderComponent), import("./chunk-K2ZPGO2N.mjs").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-7J7OAA53.mjs").then((m) => m.HeaderComponent), import("./chunk-HIMHRCPB.mjs").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -149,8 +146,7 @@ __publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
   }
 }, dependencies: [
   TranslateModule,
-  RouterModule,
-  MatProgressSpinnerModule
+  RouterModule
 ], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
 var AppComponent = _AppComponent;
 (() => {
@@ -161,7 +157,7 @@ var AppComponent = _AppComponent;
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-U5CVMHME.mjs").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-YUOBOMPP.mjs").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
@@ -181,7 +177,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-2PYIDPGT.mjs").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-4QRVWNN7.mjs").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -836,4 +832,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-NFFSYLIG.mjs.map
+//# sourceMappingURL=chunk-FTSND5NL.mjs.map
