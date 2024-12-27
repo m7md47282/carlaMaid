@@ -39,7 +39,7 @@ export class BookNowComponent implements OnInit{
     this.bookingForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-8]{8}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       // location: ['', Validators.required],
       address: ['', Validators.required],
       arrivalDate: ['', Validators.required],

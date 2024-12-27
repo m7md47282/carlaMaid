@@ -11,6 +11,7 @@ import { Direction } from '../shared/interfaces/languages';
 import { ConfigService } from '../shared/config/config.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Meta, Title } from '@angular/platform-browser';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
@@ -21,7 +22,8 @@ import { Meta, Title } from '@angular/platform-browser';
     ButtonModule,
     TagModule,
     RouterLink,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgOptimizedImage
   ],
   animations: [
     trigger('openAnimation', [
