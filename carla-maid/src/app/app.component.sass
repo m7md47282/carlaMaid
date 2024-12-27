@@ -4,24 +4,33 @@
 //     display: flex
 //     justify-content: center
 //     align-items: center
-
-.loader 
-  display: inline-block
-  width: 100px
-  height: 100px
-  position: relative
+// .loader-container
+//   display: flex
+//   justify-content: center
+//   align-items: center
+.loader-container  
   display: flex
-  align-items: center
   justify-content: center
-  img 
-    width: 100%
-    height: 100%
-    animation: spin 1.5s linear infinite
+  align-items: center
+  position: relative
+  top: 40%
+  .loader 
+    display: inline-block
+    width: 100px
+    height: 100px
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    img 
+      width: 100%
+      height: 100%
+      animation: spin 2s linear infinite
+      animation-duration: 2s
 
-@keyframes spin 
-  0% 
-    transform: rotate(0deg)
-  
-  100% 
-    transform: rotate(360deg)
-  
+  @keyframes spin 
+    0%, 100%
+      transform: scale(1)
+    50%
+      transform: scale(1.5)
+    
