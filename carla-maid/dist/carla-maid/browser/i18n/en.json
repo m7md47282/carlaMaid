@@ -250,10 +250,10 @@
         "addressDetails": "Enter your Address Details",
         "arrivalTime": "Select Arrival Time",
         "arrivalTimeOptions": {
-            "option1": "08:30 am - 12:30 pm",
-            "option2": "10:30 am - 02:30 pm",
-            "option3": "02:30 pm - 06:30 pm",
-            "option4": "04:30 pm - 08:30 pm"
+            "option1": "08:30 am - 12:30 pm (Morning)",
+            "option2": "10:30 am - 02:30 pm (Morning)",
+            "option3": "02:30 pm - 06:30 pm (Afternoon)",
+            "option4": "04:30 pm - 08:30 pm (Afternoon)"
         },
         "numberOfCleaners": "Number of Cleaners",
         "cleanerOptions": {
@@ -303,5 +303,12 @@
         "contact": "Contact Us",
         "blog": "Blog",
         "bookNow": "Book Now"
+    },
+    "meta": {
+        "services": {
+            "title": "Professional Cleaning Services in Qatar | Carla Maid Services",
+            "description": "Discover our comprehensive cleaning services in Qatar. Professional residential, commercial, and specialized cleaning solutions tailored to your needs. Book now!",
+            "keywords": "cleaning services qatar, maid services, commercial cleaning, residential cleaning, professional cleaners, janitorial services, office cleaning, home cleaning, qatar cleaning company"
+        }
     }
 }
