@@ -1,0 +1,33 @@
+# robots.txt for CarlaMaid - Cleaning Services in Qatar
+
+# Allow all search engines to crawl the site
+User-agent: *
+
+# Block sensitive and irrelevant directories
+Disallow: /admin/
+Disallow: /user/
+Disallow: /login/
+Disallow: /register/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /temp/
+Disallow: /private/
+Disallow: /test/
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+
+# Allow important files within blocked directories
+Allow: /wp-admin/admin-ajax.php
+
+# Block certain file types
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.php$
+Disallow: /*.log$
+
+# Allow all public-facing content
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.carlamaid.qa/sitemap.xml

@@ -2,34 +2,32 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
 
     {
-        path:'',
-        loadComponent: () =>import('./landing/landing.component').then((m)=> m.LandingComponent )
+        path: '',
+        loadComponent: () => import('./landing/landing.component').then(m => m.LandingComponent)
     },
     {
-        path:'our-services',
-        loadComponent: () =>import('./our-services/our-services.component').then((m)=> m.OurServicesComponent )
+        path: 'our-services',
+        loadComponent: () => import('./our-services/our-services.component').then(m => m.OurServicesComponent)
     },
     {
         path: 'blogs',
-        loadComponent: () =>import('./blogs/blogs.component').then((m)=> m.BlogsComponent)
+        loadComponent: () => import('./blogs/blogs.component').then(m => m.BlogsComponent)
     },
     {
-        path: "about-us",
-        loadComponent: () => import('./about-us/about-us.component').then((m)=> m.AboutUSComponent)
+        path: 'about-us',
+        loadComponent: () => import('./about-us/about-us.component').then(m => m.AboutUSComponent)
     },
     {
         path: 'blogs-open',
-        loadComponent: () => import('./blogs-open/blogs-open.component').then((m)=> m.BlogsOpenComponent)
+        loadComponent: () => import('./blogs-open/blogs-open.component').then(m => m.BlogsOpenComponent)
     },
     {
         path: 'book-now',
-        loadComponent: () => import('./book-now/book-now.component').then((m)=> m.BookNowComponent)
+        loadComponent: () => import('./book-now/book-now.component').then(m => m.BookNowComponent)
     },
     {
         path: 'contact-us',
-        loadComponent: () => import('./contact-us/contact-us.component').then((m)=> m.ContactUsComponent)
+        loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent)
     }
-    
 ];
-
 export default routes;
