@@ -162,7 +162,7 @@ var routes = [
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-P4BMJXDT.mjs").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-LYTZUY36.mjs").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
@@ -170,19 +170,19 @@ var routes = [
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-4BCSFZVR.mjs").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-PSW6VAAC.mjs").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-7RJQS7OD.mjs").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-PFWBE65Z.mjs").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-4QRVWNN7.mjs").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-H4OOBJ3R.mjs").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-ZEMMXPKN.mjs").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-OU3IPVPN.mjs").then((m) => m.ContactUsComponent)
   }
 ];
 
@@ -833,4 +833,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-TNJKKXI6.mjs.map
+//# sourceMappingURL=chunk-TO4CQHSF.mjs.map

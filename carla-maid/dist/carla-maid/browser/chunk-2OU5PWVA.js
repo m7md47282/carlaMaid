@@ -1,12 +1,12 @@
-import './polyfills.server.mjs';
 import {
   TranslateModule,
   TranslatePipe,
   TranslateService
-} from "./chunk-TUQAKRBG.mjs";
+} from "./chunk-ZM2LVCFZ.js";
 import {
   CommonModule,
   NgClass,
+  __publicField,
   ɵsetClassDebugInfo,
   ɵɵStandaloneFeature,
   ɵɵadvance,
@@ -22,10 +22,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-J4UFSZJR.mjs";
-import {
-  __publicField
-} from "./chunk-CU4POASJ.mjs";
+} from "./chunk-ZKS5XBW4.js";
 
 // src/app/blogs-open/blogs-open.component.ts
 var _c0 = (a0) => ({ "arabic-text": a0 });
@@ -345,7 +342,7 @@ __publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defi
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(154, 146, "paragraph.AtCarlaMaidWeAreDedicatedToElevating"), " ");
   }
-}, dependencies: [TranslateModule, TranslatePipe, CommonModule, NgClass], styles: ['\n\n.section-1[_ngcontent-%COMP%] {\n  background-image: url("./media/blogs-open-header.png");\n  object-fit: cover;\n  background-size: cover;\n  height: 50vh;\n}\n.section-1[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  margin: 0;\n  color: #ffffff;\n}\np[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n}\np[lang=ar][_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\nh1[_ngcontent-%COMP%] {\n  font-size: 1.2rem;\n}\nh1.hero-title[_ngcontent-%COMP%] {\n  font-size: 2.5rem;\n}\nb[_ngcontent-%COMP%] {\n  color: #0f0f0f;\n}\n.page-container[_ngcontent-%COMP%] {\n  width: 80%;\n  margin-inline: auto;\n}\n.section-2[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\n.section-2[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\n.section-2.arabic-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 1.2rem;\n}\n.section-2.arabic-text[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\n.section-2[_ngcontent-%COMP%]   b[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\n@media (max-width: 768px) {\n  p[_ngcontent-%COMP%] {\n    font-size: 1.4rem;\n  }\n  h1[_ngcontent-%COMP%] {\n    font-size: 2rem;\n  }\n  section.section-2.flex-column.page-container[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n/*# sourceMappingURL=blogs-open.component.css.map */'] }));
+}, dependencies: [TranslateModule, TranslatePipe, CommonModule, NgClass], styles: ['\n\n.section-1[_ngcontent-%COMP%] {\n  background-image: url("./media/blogs-open-header.png");\n  object-fit: cover;\n  background-size: cover;\n  height: 50vh;\n}\n.section-1[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  margin: 0;\n  color: #ffffff;\n}\np[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n}\np[lang=ar][_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\nh1[_ngcontent-%COMP%] {\n  font-size: 1.2rem;\n}\nh1.hero-title[_ngcontent-%COMP%] {\n  font-size: 2.5rem;\n}\nb[_ngcontent-%COMP%] {\n  color: #0f0f0f;\n}\n.page-container[_ngcontent-%COMP%] {\n  width: 80%;\n  margin-inline: auto;\n}\n.section-2[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\n.section-2[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\n.section-2.arabic-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 1.2rem;\n}\n.section-2.arabic-text[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\n.section-2[_ngcontent-%COMP%]   b[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n}\n@media (max-width: 768px) {\n  p[_ngcontent-%COMP%] {\n    font-size: 1.4rem;\n  }\n  h1[_ngcontent-%COMP%] {\n    font-size: 2rem;\n  }\n  section.section-2.flex-column.page-container[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n@media (max-width: 425px) {\n  .section-1[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n    margin: 10px;\n  }\n}\n/*# sourceMappingURL=blogs-open.component.css.map */'] }));
 var BlogsOpenComponent = _BlogsOpenComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BlogsOpenComponent, { className: "BlogsOpenComponent" });
@@ -353,4 +350,4 @@ var BlogsOpenComponent = _BlogsOpenComponent;
 export {
   BlogsOpenComponent
 };
-//# sourceMappingURL=chunk-7RJQS7OD.mjs.map
+//# sourceMappingURL=chunk-2OU5PWVA.js.map

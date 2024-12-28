@@ -1,3 +1,4 @@
+import './polyfills.server.mjs';
 import {
   DefaultValueAccessor,
   FormsModule,
@@ -8,18 +9,17 @@ import {
   NumberValueAccessor,
   RequiredValidator,
   ɵNgNoValidate
-} from "./chunk-4WQTMWH7.js";
+} from "./chunk-S7HLCUA6.mjs";
 import {
   DomSanitizer
-} from "./chunk-2V5SYSX5.js";
+} from "./chunk-HLRZNC2Z.mjs";
 import {
   TranslateModule,
   TranslatePipe,
   TranslateService
-} from "./chunk-ZM2LVCFZ.js";
+} from "./chunk-TUQAKRBG.mjs";
 import {
   CommonModule,
-  __publicField,
   inject,
   ɵsetClassDebugInfo,
   ɵɵStandaloneFeature,
@@ -52,7 +52,10 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-ZKS5XBW4.js";
+} from "./chunk-J4UFSZJR.mjs";
+import {
+  __publicField
+} from "./chunk-CU4POASJ.mjs";
 
 // src/app/contact-us/contact-us.component.ts
 function ContactUsComponent_Conditional_32_Template(rf, ctx) {
@@ -113,7 +116,7 @@ var _ContactUsComponent = class _ContactUsComponent {
             </svg>
             `),
         title: this._translate.instant("contact.info.callUs"),
-        info: "+974-78882000"
+        info: "974-71236660"
       },
       {
         icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -307,4 +310,4 @@ var ContactUsComponent = _ContactUsComponent;
 export {
   ContactUsComponent
 };
-//# sourceMappingURL=chunk-XZFEMW5N.js.map
+//# sourceMappingURL=chunk-OU3IPVPN.mjs.map
