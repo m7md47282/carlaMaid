@@ -91,7 +91,7 @@ var routes = [
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-NUOCH7MU.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-UWOXSI7R.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
@@ -99,19 +99,19 @@ var routes = [
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-QVUVBOFO.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-XCMEPLC7.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-RDQIFDRY.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-2OU5PWVA.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-FCVNQQYE.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-G45TGW6G.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-XZFEMW5N.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-77IWVLRR.js").then((m) => m.ContactUsComponent)
   }
 ];
 
