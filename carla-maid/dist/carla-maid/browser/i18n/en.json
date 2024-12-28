@@ -23,6 +23,7 @@
         "HomeCleaninginQatar": " Home Cleaning in Qatar",
         "MaidServices": "Maid Services",
         "EventCleaning": "Event Cleaning",
+        "OurVision": "Our Vision",
         "DeepCleaningServices": "Deep Cleaning Services",
         "EcoFriendlyCleaning": "Eco-Friendly Cleaning",
         "HousekeepingServices": "Housekeeping Services",
@@ -119,7 +120,7 @@
         "FoundedIn2024": "Founded in 2024, Carla Maid began as a family-owned business rooted in a passion for spotless spaces and dedicated service. What started as a small venture has blossomed into a leading full-service cleaning and staffing company known for quality, trustworthiness, and a client-first approach. We've grown by focusing on what truly matters: creating clean, organized, and welcoming environments that make life easier for our clients, whether they’re at home, in the office, or hosting events.",
         "ourMission": "Our mission at Carla Maid is to enhance the quality of living and working environments across Qatar by providing exceptional cleaning and maid services. We aim to deliver reliable, tailored, and eco-friendly solutions for homes, offices, and events, ensuring a clean and healthy space for every client.",
         "ourVision": "Our vision is to be Qatar's most trusted cleaning company, known for our dedication to excellence, sustainable practices, and customer satisfaction. We strive to set new standards in the industry, becoming the top choice for cleaning services across Doha and beyond.",
-        "WeBelieveInEarning": "At Carla Maid, we believe in earning trust through professionalism and respect. Our team respects your time, space, and privacy, bringing integrity to every job we do.  ",
+        "WeBelieveInEarning": "At Carla Maid, we believe in earning trust through professionalism and respect. Our team respects your time, space, and privacy, bringing integrity to every job we do.",
         "CommittedToDelivering": "Carla Maid is committed to delivering top-quality service, ensuring every clean meets your standards—guaranteed.",
         "CarlaMaidValues": "Carla Maid values your time, providing reliable, punctual cleaning services across Qatar, every time.",
         "CommittedToDeliveringTopNotch": "Carla Maid is committed to delivering top-notch, reliable cleaning services in Qatar, ensuring every space shines with consistent quality and care.",
@@ -250,10 +251,10 @@
         "addressDetails": "Enter your Address Details",
         "arrivalTime": "Select Arrival Time",
         "arrivalTimeOptions": {
-            "option1": "08:30 am - 12:30 pm",
-            "option2": "10:30 am - 02:30 pm",
-            "option3": "02:30 pm - 06:30 pm",
-            "option4": "04:30 pm - 08:30 pm"
+            "option1": "08:30 am - 12:30 pm (Morning)",
+            "option2": "10:30 am - 02:30 pm (Morning)",
+            "option3": "02:30 pm - 06:30 pm (Afternoon)",
+            "option4": "04:30 pm - 08:30 pm (Afternoon)"
         },
         "numberOfCleaners": "Number of Cleaners",
         "cleanerOptions": {
@@ -303,5 +304,12 @@
         "contact": "Contact Us",
         "blog": "Blog",
         "bookNow": "Book Now"
+    },
+    "meta": {
+        "services": {
+            "title": "Professional Cleaning Services in Qatar | Carla Maid Services",
+            "description": "Discover our comprehensive cleaning services in Qatar. Professional residential, commercial, and specialized cleaning solutions tailored to your needs. Book now!",
+            "keywords": "cleaning services qatar, maid services, commercial cleaning, residential cleaning, professional cleaners, janitorial services, office cleaning, home cleaning, qatar cleaning company"
+        }
     }
 }

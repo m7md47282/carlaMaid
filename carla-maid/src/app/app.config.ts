@@ -7,11 +7,14 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { provideServiceWorker } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { Meta, Title } from '@angular/platform-browser';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader{
   return new TranslateHttpLoader(http, '/i18n/', ".json");
 }
+
 export const provideTranslation = () => ({
   defaultLanguage: 'en',
   loader: {
@@ -33,7 +36,13 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       HttpClientModule, 
       TranslateModule.forRoot(provideTranslation())
-    ]), provideClientHydration(),
+    ]),
+    provideClientHydration(),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    Meta,
+    Title
   ]
-  
 };

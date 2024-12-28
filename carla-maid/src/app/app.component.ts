@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { FooterComponent } from './footer/footer.component';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { isPlatformBrowser } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
@@ -43,7 +43,9 @@ export class AppComponent implements OnInit {
           event instanceof NavigationError
         ) {
           this.isLoading = false;
-
+          if (this._configService.isBrowser()) {
+            window.scrollTo(0, 0);
+          }
         }
       });
    
