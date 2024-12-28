@@ -47,7 +47,7 @@ export class ContactUsComponent {
             </svg>
             `),
       title: this._translate.instant('contact.info.callUs'),
-      info: '+974-78882000'
+      info: '974-71236660'
     },
     {
       icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
