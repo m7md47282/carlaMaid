@@ -107,7 +107,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-G45TGW6G.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-CWTSAE25.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -725,7 +725,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-WH2PBYVW.js").then((m) => m.HeaderComponent), import("./chunk-SXUBURGI.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-OZJYKNQ2.js").then((m) => m.HeaderComponent), import("./chunk-SXUBURGI.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
