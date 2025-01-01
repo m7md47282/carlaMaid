@@ -37,7 +37,8 @@
               "src/custom-theme.scss",
               "src/styles.sass",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
