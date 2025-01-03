@@ -91,7 +91,7 @@ import {
 } from "./chunk-CU4POASJ.mjs";
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-J36IJDUA.mjs").then((m) => m.HeaderComponent), import("./chunk-HIMHRCPB.mjs").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-J36IJDUA.mjs").then((m) => m.HeaderComponent), import("./chunk-QHXB2E6C.mjs").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
@@ -833,4 +833,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-EHSKREX3.mjs.map
+//# sourceMappingURL=chunk-JUMKQ4EU.mjs.map
