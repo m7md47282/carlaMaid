@@ -105,7 +105,7 @@ __publicField(_FooterComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineC
     \u0275\u0275pipe(48, "translate");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(49, "p", 15);
-    \u0275\u0275text(50, "+97 9937 398 38");
+    \u0275\u0275text(50, "+974 7123 6660");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(51, "p");
     \u0275\u0275text(52, "Info@carlamaid.qa");
@@ -148,4 +148,4 @@ var FooterComponent = _FooterComponent;
 export {
   FooterComponent
 };
-//# sourceMappingURL=chunk-SXUBURGI.js.map
+//# sourceMappingURL=chunk-AWS634FO.js.map
