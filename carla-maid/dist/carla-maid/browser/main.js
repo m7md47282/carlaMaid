@@ -99,7 +99,7 @@ var routes = [
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-XCMEPLC7.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-4YTH7KOB.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
