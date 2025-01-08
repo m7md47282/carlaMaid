@@ -174,7 +174,7 @@ var routes = [
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-PFWBE65Z.mjs").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-R2RGNSJR.mjs").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
@@ -833,4 +833,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-JUMKQ4EU.mjs.map
+//# sourceMappingURL=chunk-IW3COXYW.mjs.map

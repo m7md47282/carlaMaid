@@ -103,7 +103,7 @@ var routes = [
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-2OU5PWVA.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-EQUY4MSS.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",

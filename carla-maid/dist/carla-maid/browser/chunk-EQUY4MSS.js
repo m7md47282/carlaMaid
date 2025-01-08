@@ -1,12 +1,12 @@
-import './polyfills.server.mjs';
 import {
   TranslateModule,
   TranslatePipe,
   TranslateService
-} from "./chunk-TUQAKRBG.mjs";
+} from "./chunk-ZM2LVCFZ.js";
 import {
   CommonModule,
   NgClass,
+  __publicField,
   ɵsetClassDebugInfo,
   ɵɵStandaloneFeature,
   ɵɵadvance,
@@ -22,10 +22,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-J4UFSZJR.mjs";
-import {
-  __publicField
-} from "./chunk-CU4POASJ.mjs";
+} from "./chunk-ZKS5XBW4.js";
 
 // src/app/blogs-open/blogs-open.component.ts
 var _c0 = (a0) => ({ "arabic-text": a0 });
@@ -43,7 +40,7 @@ var _BlogsOpenComponent = class _BlogsOpenComponent {
 __publicField(_BlogsOpenComponent, "\u0275fac", function BlogsOpenComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BlogsOpenComponent)(\u0275\u0275directiveInject(TranslateService));
 });
-__publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BlogsOpenComponent, selectors: [["app-blogs-open"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 155, vars: 150, consts: [[1, "section-1", "center", "flex-column"], [1, "text-align-center", "hero-title"], [1, "section-2", "flex-column", "page-container", 3, "ngClass"], [1, "gray-text-color"], [1, "primary-text-color"], [1, "primary-text-color", "margin-top50"], [1, "margin-top30"], [1, "mid-page"], ["src", "../../assets/images/blogs-mid-Page.png", "alt", "", 1, "width-100"], [1, "margin-top30", "primary-text-color"], [1, "center", "gap-30", "margin-top50"], ["src", "../../assets/images/blog-img1.png", "alt", "", 1, "width-50"], ["src", "../../assets/images/blog-img2.png", "alt", "", 1, "width-50"], [1, "margin-top30", "gray-text-color"], [1, "gray-text-color", "margin-bottom50"]], template: function BlogsOpenComponent_Template(rf, ctx) {
+__publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BlogsOpenComponent, selectors: [["app-blogs-open"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 155, vars: 150, consts: [[1, "section-1", "center", "flex-column"], [1, "text-align-center", "hero-title"], [1, "section-2", "flex-column", "page-container", 3, "ngClass"], [1, "gray-text-color"], [1, "primary-text-color"], [1, "primary-text-color", "margin-top50"], [1, "margin-top30"], [1, "mid-page"], ["src", "../../assets/images/blogs-mid-Page.png", "alt", "", 1, "width-100"], [1, "margin-top30", "primary-text-color"], [2, "font-size", "1.5rem"], [1, "center", "gap-30", "margin-top50"], ["src", "../../assets/images/blog-img1.png", "alt", "", 1, "width-50"], ["src", "../../assets/images/blog-img2.png", "alt", "", 1, "width-50"], [1, "margin-top30", "gray-text-color"], [1, "gray-text-color", "margin-bottom50"]], template: function BlogsOpenComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "section", 0)(1, "h1", 1);
     \u0275\u0275text(2);
@@ -135,31 +132,35 @@ __publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defi
     \u0275\u0275text(68);
     \u0275\u0275pipe(69, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(70, "figcaption")(71, "p", 3)(72, "b");
-    \u0275\u0275text(73);
-    \u0275\u0275pipe(74, "translate");
+    \u0275\u0275elementStart(70, "figcaption")(71, "b", 10);
+    \u0275\u0275text(72);
+    \u0275\u0275pipe(73, "translate");
     \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(74, "p", 3);
     \u0275\u0275text(75);
     \u0275\u0275pipe(76, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(77, "p", 3)(78, "b");
-    \u0275\u0275text(79);
-    \u0275\u0275pipe(80, "translate");
+    \u0275\u0275elementStart(77, "b", 10);
+    \u0275\u0275text(78);
+    \u0275\u0275pipe(79, "translate");
     \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(80, "p", 3);
     \u0275\u0275text(81);
     \u0275\u0275pipe(82, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(83, "p", 3)(84, "b");
-    \u0275\u0275text(85);
-    \u0275\u0275pipe(86, "translate");
+    \u0275\u0275elementStart(83, "b", 10);
+    \u0275\u0275text(84);
+    \u0275\u0275pipe(85, "translate");
     \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(86, "p", 3);
     \u0275\u0275text(87);
     \u0275\u0275pipe(88, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(89, "p", 3)(90, "b");
-    \u0275\u0275text(91);
-    \u0275\u0275pipe(92, "translate");
+    \u0275\u0275elementStart(89, "b", 10);
+    \u0275\u0275text(90);
+    \u0275\u0275pipe(91, "translate");
     \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(92, "p", 3);
     \u0275\u0275text(93);
     \u0275\u0275pipe(94, "translate");
     \u0275\u0275elementEnd()();
@@ -223,14 +224,14 @@ __publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defi
     \u0275\u0275text(138);
     \u0275\u0275pipe(139, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(140, "figure", 10);
-    \u0275\u0275element(141, "img", 11)(142, "img", 12);
+    \u0275\u0275elementStart(140, "figure", 11);
+    \u0275\u0275element(141, "img", 12)(142, "img", 13);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(143, "h1", 5);
     \u0275\u0275text(144);
     \u0275\u0275pipe(145, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(146, "p", 13);
+    \u0275\u0275elementStart(146, "p", 14);
     \u0275\u0275text(147);
     \u0275\u0275pipe(148, "translate");
     \u0275\u0275elementEnd();
@@ -238,7 +239,7 @@ __publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defi
     \u0275\u0275text(150);
     \u0275\u0275pipe(151, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(152, "p", 14);
+    \u0275\u0275elementStart(152, "p", 15);
     \u0275\u0275text(153);
     \u0275\u0275pipe(154, "translate");
     \u0275\u0275elementEnd()();
@@ -290,22 +291,22 @@ __publicField(_BlogsOpenComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defi
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(66, 90, "paragraph.ForEventsAndGatherings"));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1("4. ", \u0275\u0275pipeBind1(69, 92, "shared.BenefitsOfHiringProfessionalCleaningCompany"), "");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(74, 94, "shared.Time-Saving:"), ":");
-    \u0275\u0275advance(2);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(73, 94, "shared.Time-Saving:"), "");
+    \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(76, 96, "paragraph.ProfessionalCleaningAllowsYouToFocus"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(80, 98, "shared.ImprovedHealthAndHygiene"), ":");
-    \u0275\u0275advance(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(79, 98, "shared.ImprovedHealthAndHygiene"), "");
+    \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(82, 100, "paragraph.ExpertCleaningReducesAllergens"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(86, 102, "shared.EnhancedAppearance"), ":");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(88, 104, "paragraph.RegularCleaningImprovesTheAesthetic"));
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(92, 106, "shared.ExtendedPropertyLife"), ":");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(94, 108, "paragraph.ProperMaintenanceOfSurfaces"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(85, 102, "shared.EnhancedAppearance"), "");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(88, 104, "paragraph.RegularCleaningImprovesTheAesthetic"), "");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(". ", \u0275\u0275pipeBind1(91, 106, "shared.ExtendedPropertyLife"), "");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(94, 108, "paragraph.ProperMaintenanceOfSurfaces"), "");
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1("5. ", \u0275\u0275pipeBind1(97, 110, "shared.HowToChooseTheBestCleaningCompanyQatar"), "");
     \u0275\u0275advance(3);
@@ -353,4 +354,4 @@ var BlogsOpenComponent = _BlogsOpenComponent;
 export {
   BlogsOpenComponent
 };
-//# sourceMappingURL=chunk-PFWBE65Z.mjs.map
+//# sourceMappingURL=chunk-EQUY4MSS.js.map
