@@ -1,4 +1,3 @@
-import './polyfills.server.mjs';
 import {
   DefaultValueAccessor,
   FormsModule,
@@ -9,17 +8,18 @@ import {
   NumberValueAccessor,
   RequiredValidator,
   ɵNgNoValidate
-} from "./chunk-S7HLCUA6.mjs";
+} from "./chunk-4WQTMWH7.js";
 import {
   DomSanitizer
-} from "./chunk-HLRZNC2Z.mjs";
+} from "./chunk-2V5SYSX5.js";
 import {
   TranslateModule,
   TranslatePipe,
   TranslateService
-} from "./chunk-TUQAKRBG.mjs";
+} from "./chunk-ZM2LVCFZ.js";
 import {
   CommonModule,
+  __publicField,
   inject,
   ɵsetClassDebugInfo,
   ɵɵStandaloneFeature,
@@ -52,10 +52,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-J4UFSZJR.mjs";
-import {
-  __publicField
-} from "./chunk-CU4POASJ.mjs";
+} from "./chunk-ZKS5XBW4.js";
 
 // src/app/contact-us/contact-us.component.ts
 function ContactUsComponent_Conditional_32_Template(rf, ctx) {
@@ -95,7 +92,7 @@ var _ContactUsComponent = class _ContactUsComponent {
   constructor() {
     __publicField(this, "_translate", inject(TranslateService));
     __publicField(this, "sanitizer", inject(DomSanitizer));
-    __publicField(this, "email", "info@ceriamaid.qa");
+    __publicField(this, "email", "info@carlamaid.qa");
     __publicField(this, "sent", false);
     __publicField(this, "formData", {
       name: "",
@@ -310,4 +307,4 @@ var ContactUsComponent = _ContactUsComponent;
 export {
   ContactUsComponent
 };
-//# sourceMappingURL=chunk-OU3IPVPN.mjs.map
+//# sourceMappingURL=chunk-KEPK3FGA.js.map

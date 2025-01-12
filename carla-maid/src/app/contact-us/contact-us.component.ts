@@ -16,7 +16,7 @@ export class ContactUsComponent {
   sanitizer = inject(DomSanitizer);
 
 
-  email = 'info@ceriamaid.qa';
+  email = 'info@carlamaid.qa';
   sent = false;
   formData = {
     name: '',

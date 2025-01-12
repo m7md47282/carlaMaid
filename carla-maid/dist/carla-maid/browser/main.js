@@ -111,7 +111,7 @@ var routes = [
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-77IWVLRR.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-KEPK3FGA.js").then((m) => m.ContactUsComponent)
   }
 ];
 

@@ -182,7 +182,7 @@ var routes = [
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-OU3IPVPN.mjs").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-QA3XKBSH.mjs").then((m) => m.ContactUsComponent)
   }
 ];
 
@@ -833,4 +833,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-35LZRSQQ.mjs.map
+//# sourceMappingURL=chunk-62UWKNEO.mjs.map
