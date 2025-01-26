@@ -65,7 +65,7 @@ export class OurServicesComponent implements OnInit {
     // Set canonical URL
     const link: HTMLLinkElement = document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', 'https://your-domain.com' + window.location.pathname);
+    link.setAttribute('href', 'https://carlamaid.qa' + window.location.pathname);
     document.head.appendChild(link);
   }
 }
