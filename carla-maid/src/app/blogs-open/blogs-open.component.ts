@@ -32,9 +32,11 @@ export class BlogsOpenComponent {
   }
 
   /**
-   * Retrieves posts from the WordPress service with the specified parameters.
-   */ 
+   * Retrieves posts filtered by multiple category names.
+   */
   getPosts(): void {
+    const categoriesNames = ['blogs', this.lang];
+
     const params = {
       per_page: 100,
       page: 1,
@@ -44,7 +46,7 @@ export class BlogsOpenComponent {
 
     const preparedParams = this._sharedService.prepareParams({ params: params });
 
-    this._wordPressService.getPostsByCategoryName('blogs', preparedParams).subscribe({
+    this._wordPressService.getPostsByCategoriesNames(categoriesNames, preparedParams).subscribe({
       next: (value: any) => {
         this.posts = value;
       }
