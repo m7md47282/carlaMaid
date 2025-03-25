@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, map, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,39 +33,34 @@ export class WordPressService {
   }
 
   /**
-   * Fetches posts from a specific category, identified by its name, with the provided parameters.
+   * Fetches posts from specific categories, identified by their names, with the provided parameters.
    * 
-   * This method first retrieves the list of categories from the WordPress API and searches for the category
-   * with the specified name. Once the category is found, it fetches the posts that belong to that category
-   * using the `getPosts` method.
-   * 
-   * @param categoryName - The name of the category for which to fetch posts.
+   * @param categoryNames - An array of category names for which to fetch posts.
    * @param postsParams - Additional query parameters for fetching posts (e.g., `orderby`, `order`, `per_page`).
    * 
-   * @returns An observable containing the response data from the API, which is an array of posts belonging to the specified category.
+   * @returns An observable containing an array of posts belonging to the specified categories.
    * 
-   * @throws {Error} If the category is not found, an error will be thrown with a message indicating that the category was not found.
+   * @throws {Error} If none of the categories are found, an error will be thrown.
    */
-  getPostsByCategoryName(categoryName: string, postsParams: any): Observable<any> {
-    return this.getCategories().pipe(
-      switchMap((categories) => {
-        const category = categories.find(
-          (cat) => cat.name.toLowerCase() === categoryName.toLowerCase()
-        );
+  getPostsByCategoriesNames(categoryNames: string[], postsParams: any): Observable<any[]> {
+    return forkJoin({
+      posts: this.getPosts(postsParams),
+      categories: this.getCategories()
+    }).pipe(
+      map(({ posts, categories }) => {
+        const categoryIds = categories
+          .filter(cat => categoryNames.some(name => cat.name.toLowerCase() === name.toLowerCase()))
+          .map(cat => cat.id);
 
-        if (category) {
-          const categoryId = category.id;
-          const params = {
-            categories: categoryId.toString(),
-            ...postsParams
-          };
-          return this.getPosts(params);
-        } else {
-          throw new Error(`Category "${categoryName}" not found`);
+        if (categoryIds.length === 0) {
+          return [];
         }
+
+        return (posts as any[]).filter((post: any) =>
+          categoryIds.every(catId => post.categories.includes(catId))
+        );
       })
     );
   }
-
 
 }
