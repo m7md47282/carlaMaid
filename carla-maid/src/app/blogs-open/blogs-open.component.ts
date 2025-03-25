@@ -35,7 +35,8 @@ export class BlogsOpenComponent {
    * Retrieves posts filtered by multiple category names.
    */
   getPosts(): void {
-    const categoriesNames = ['blogs', this.lang];
+    const postsPage = 'blogs';
+    const categoriesNames = [postsPage, this.lang];
 
     const params = {
       per_page: 100,
@@ -44,9 +45,7 @@ export class BlogsOpenComponent {
       order: 'asc'
     };
 
-    const preparedParams = this._sharedService.prepareParams({ params: params });
-
-    this._wordPressService.getPostsByCategoriesNames(categoriesNames, preparedParams).subscribe({
+    this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
       next: (value: any) => {
         this.posts = value;
       }

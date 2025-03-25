@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
-import { Observable, switchMap, map, forkJoin } from 'rxjs';
+import { Observable, switchMap, map, forkJoin, of } from 'rxjs';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Observable, switchMap, map, forkJoin } from 'rxjs';
 export class WordPressService {
   private wordpressApiBaseUrl = environment.wordpressApiBaseUrl;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _sharedService: SharedService) { }
 
   /**
    * Fetches posts from the WordPress API with the provided parameters.
@@ -42,25 +43,32 @@ export class WordPressService {
    * 
    * @throws {Error} If none of the categories are found, an error will be thrown.
    */
-  getPostsByCategoriesNames(categoryNames: string[], postsParams: any): Observable<any[]> {
-    return forkJoin({
-      posts: this.getPosts(postsParams),
-      categories: this.getCategories()
-    }).pipe(
-      map(({ posts, categories }) => {
+  getPostsByCategoriesNames(postsPage: string, categoryNames: string[], postsParams: any): Observable<any[]> {
+    return this.getCategories().pipe(
+      switchMap(categories => {
         const categoryIds = categories
           .filter(cat => categoryNames.some(name => cat.name.toLowerCase() === name.toLowerCase()))
           .map(cat => cat.id);
 
-        if (categoryIds.length === 0) {
-          return [];
+          const postsPageCategoryId = categories.find(cat => cat.name.toLowerCase() === postsPage.toLowerCase())?.id;
+        
+        if (categoryIds.length !== categoryNames.length) {
+          return of([]);
         }
+        const preparedParams = this._sharedService.prepareParams({ 
+          params: { ...postsParams, ...{ categories: postsPageCategoryId } } 
+        });
 
-        return (posts as any[]).filter((post: any) =>
-          categoryIds.every(catId => post.categories.includes(catId))
+        return this.getPosts(preparedParams).pipe(
+          map(posts => 
+            (posts as any[]).filter(post =>
+              categoryIds.every(catId => post.categories.includes(catId))
+            )
+          )
         );
       })
     );
   }
+  
 
 }
