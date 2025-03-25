@@ -22,7 +22,7 @@ export class BlogsOpenComponent {
     private _wordPressService: WordPressService,
     protected _sharedService: SharedService
   ) {
-    
+
     this.lang = this.translateService.currentLang || 'en';
     this.translateService.onLangChange.subscribe(() => {
       this.lang = this.translateService.currentLang || 'en';
@@ -44,7 +44,7 @@ export class BlogsOpenComponent {
 
     const preparedParams = this._sharedService.prepareParams({ params: params });
 
-    this._wordPressService.getPosts(preparedParams).subscribe({
+    this._wordPressService.getPostsByCategoryName('blogs', preparedParams).subscribe({
       next: (value: any) => {
         this.posts = value;
       }
