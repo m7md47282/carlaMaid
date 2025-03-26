@@ -1,7 +1,11 @@
+import './polyfills.server.mjs';
+import {
+  provideServerRendering
+} from "./chunk-EDJABN3F.mjs";
 import {
   ConfigService,
   environment
-} from "./chunk-JVPPFUTX.js";
+} from "./chunk-AIARUGVY.mjs";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -11,7 +15,7 @@ import {
   RouterModule,
   RouterOutlet,
   provideRouter
-} from "./chunk-QZASBZZQ.js";
+} from "./chunk-IPSRYR6P.mjs";
 import {
   DomRendererFactory2,
   HttpClient,
@@ -22,11 +26,11 @@ import {
   provideClientHydration,
   provideHttpClient,
   withFetch
-} from "./chunk-Y52M7CPX.js";
+} from "./chunk-VWANEM7D.mjs";
 import {
   TranslateLoader,
   TranslateModule
-} from "./chunk-X3HO6GYL.js";
+} from "./chunk-OXPP6M56.mjs";
 import {
   ANIMATION_MODULE_TYPE,
   APP_INITIALIZER,
@@ -43,8 +47,6 @@ import {
   RendererFactory2,
   RuntimeError,
   Subject,
-  __publicField,
-  __spreadValues,
   concat,
   defer,
   delay,
@@ -57,6 +59,7 @@ import {
   makeEnvironmentProviders,
   map,
   merge,
+  mergeApplicationConfig,
   of,
   performanceMarkFeature,
   provideZoneChangeDetection,
@@ -81,37 +84,105 @@ import {
   ɵɵinject,
   ɵɵinvalidFactory,
   ɵɵtemplate
-} from "./chunk-YZNLQPA3.js";
+} from "./chunk-WSWL4PGO.mjs";
+import {
+  __publicField,
+  __spreadValues
+} from "./chunk-CU4POASJ.mjs";
+
+// src/app/app.component.ts
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-DTYVLZGZ.mjs").then((m) => m.HeaderComponent), import("./chunk-JKIIUA4T.mjs").then((m) => m.FooterComponent), RouterOutlet];
+function AppComponent_Defer_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
+  }
+}
+function AppComponent_DeferPlaceholder_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+    \u0275\u0275element(2, "img", 2);
+    \u0275\u0275elementEnd()();
+  }
+}
+var _AppComponent = class _AppComponent {
+  constructor(_configService, router) {
+    __publicField(this, "_configService");
+    __publicField(this, "router");
+    __publicField(this, "title", "carla-maid");
+    __publicField(this, "isLoading", false);
+    __publicField(this, "lang", environment.lang);
+    this._configService = _configService;
+    this.router = router;
+  }
+  ngOnInit() {
+    this.setLang();
+    this.isLoading = false;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        this.isLoading = false;
+        if (this._configService.isBrowser()) {
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  }
+  setLang() {
+    if (this._configService.isBrowser()) {
+      let lang = localStorage.getItem("lang") || environment.lang;
+      this._configService.setLang(lang);
+      this.lang = this._configService.getLang();
+    }
+  }
+};
+__publicField(_AppComponent, "\u0275fac", function AppComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
+});
+__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "loader-container"], [1, "loader"], ["src", "../assets/images/Logo-En.png", "alt", ""]], template: function AppComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 3, 0);
+    \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
+    \u0275\u0275deferOnTimer(1e3);
+  }
+}, dependencies: [
+  TranslateModule,
+  RouterModule
+], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
+var AppComponent = _AppComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
+})();
 
 // src/app/app.routes.ts
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-6CT5IJKO.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-NRP23X6V.mjs").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-MEE2SCWU.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-7Z57QDFN.mjs").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-3KCPDGAZ.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-TEFZNOCZ.mjs").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-KRKXTZI4.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-CSFUPG5G.mjs").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-3JOCBHQH.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-JD2VPCBS.mjs").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-HMZSEVUL.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-7XCD5K65.mjs").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-EG57B2ZI.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-7D4JFU3U.mjs").then((m) => m.ContactUsComponent)
   }
 ];
 
@@ -144,7 +215,7 @@ var _AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-RSJ5QR3K.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-RXYYP3VU.mjs").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -724,72 +795,21 @@ var appConfig = {
   ]
 };
 
-// src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-5U2UL3YV.js").then((m) => m.HeaderComponent), import("./chunk-EFSYY4SN.js").then((m) => m.FooterComponent), RouterOutlet];
-function AppComponent_Defer_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
-  }
-}
-function AppComponent_DeferPlaceholder_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-    \u0275\u0275element(2, "img", 2);
-    \u0275\u0275elementEnd()();
-  }
-}
-var _AppComponent = class _AppComponent {
-  constructor(_configService, router) {
-    __publicField(this, "_configService");
-    __publicField(this, "router");
-    __publicField(this, "title", "carla-maid");
-    __publicField(this, "isLoading", false);
-    __publicField(this, "lang", environment.lang);
-    this._configService = _configService;
-    this.router = router;
-  }
-  ngOnInit() {
-    this.setLang();
-    this.isLoading = false;
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.isLoading = true;
-      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-        this.isLoading = false;
-        if (this._configService.isBrowser()) {
-          window.scrollTo(0, 0);
-        }
-      }
-    });
-  }
-  setLang() {
-    if (this._configService.isBrowser()) {
-      let lang = localStorage.getItem("lang") || environment.lang;
-      this._configService.setLang(lang);
-      this.lang = this._configService.getLang();
-    }
-  }
+// src/app/app.config.server.ts
+var serverConfig = {
+  providers: [
+    provideServerRendering()
+  ]
 };
-__publicField(_AppComponent, "\u0275fac", function AppComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
-});
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "loader-container"], [1, "loader"], ["src", "../assets/images/Logo-En.png", "alt", ""]], template: function AppComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 3, 0);
-    \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
-    \u0275\u0275deferOnTimer(1e3);
-  }
-}, dependencies: [
-  TranslateModule,
-  RouterModule
-], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
-var AppComponent = _AppComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
-})();
+var config = mergeApplicationConfig(appConfig, serverConfig);
 
-// src/main.ts
-bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+// src/main.server.ts
+var bootstrap = () => bootstrapApplication(AppComponent, config);
+var main_server_default = bootstrap;
+
+export {
+  main_server_default
+};
 /*! Bundled license information:
 
 @angular/platform-browser/fesm2022/animations/async.mjs:
@@ -813,4 +833,4 @@ bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err))
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=chunk-IWLGPTBI.mjs.map
