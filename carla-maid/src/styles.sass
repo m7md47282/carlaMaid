@@ -377,6 +377,23 @@ button,a,.clickable
     color: $text-primary
 
 
+// WordPress posts
+.post
+    margin-bottom: 30px
+    &:not(:last-child)
+        border-bottom: 1px solid #636363
+    .post-content
+        word-wrap: break-word
+        overflow-wrap: break-word
+        white-space: normal
+        max-width: 100%
+        .wp-block-image
+            img
+                width: 100%
+                height: auto
+                max-width: 100%
+
+
 @keyframes fade-in 
     0%
         opacity: 0

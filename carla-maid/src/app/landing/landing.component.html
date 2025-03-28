@@ -565,8 +565,20 @@
             </div>
         </div>
 
+        <div class="flex-column page-container blog-posts">
+            @if (blogsPosts.length > 0) {
+                @for (post of blogsPosts; track $index) {
+                  <div class="post">
+                    <h1 class="primary-text-color" [innerHTML]="($index+ 1) + '. ' + post.title.rendered"></h1>
+                    <p class=" gray-text-color post-content" [innerHTML]="_sharedService.sanitizeHtml(post.content.rendered)"></p>
+                  </div>
+                }
+              } @else {
+                  <h1 class="primary-text-color center title-size">{{"blogs.noPosts" | translate}}</h1>
+              }
+        </div>
+
     </section>
     } @placeholder { <div></div> }
-
 
 </section>
