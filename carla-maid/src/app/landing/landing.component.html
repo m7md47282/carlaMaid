@@ -525,7 +525,7 @@
                 <div class="img-width blog-card">
                     <img class="relative" [src]="getFirstImage(post.content.rendered)" alt="">
                     <div class="text-border blog-card-text">
-                        <p class="title">{{post.title.rendered}}</p>
+                        <p class="title">{{_sharedService.stripHtml(post.title.rendered)}}</p>
                         <div class="more-info">
                             <p class="text-wrap">
                                 {{_sharedService.stripHtml(post.content.rendered) | slice:0:200}}<span
