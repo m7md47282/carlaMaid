@@ -312,11 +312,11 @@ ngAfterViewInit(): void {
   }
 
   /**
- * Extracts the first image URL from an HTML string.
- *
- * @param {string} html - The HTML content.
- * @returns {string | null} - The first image URL or null if no image is found.
- */
+   * Extracts the first image URL from an HTML string.
+   *
+   * @param {string} html - The HTML content.
+   * @returns {string | null} - The first image URL or null if no image is found.
+   */
   getFirstImage(html: string): string | null {
     const doc = new DOMParser().parseFromString(html, "text/html");
     const img = doc.querySelector("img");
