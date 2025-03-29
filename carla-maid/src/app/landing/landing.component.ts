@@ -101,7 +101,6 @@ export class LandingComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
-    this.getBlogsPosts();
     this.services = [
       {
         image: '../../assets/images/our-services/our-services-1.png',
@@ -206,6 +205,8 @@ export class LandingComponent implements OnInit {
       this.lang = event.lang;
       this.updateMetaForLanguage(event.lang);
     });
+
+    this.getBlogsPosts();
   }
 
   private updateMetaForLanguage(lang: string) {
@@ -300,7 +301,7 @@ ngAfterViewInit(): void {
     const categoriesNames = [postsPage, this.lang];
 
     const params = {
-      per_page: 10,
+      per_page: 20,
       page: 1
     };
 
