@@ -11,6 +11,8 @@ import { Direction } from '../shared/interfaces/languages';
 import { ConfigService } from '../shared/config/config.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
+import { WordPressService } from '../shared/services/word-press.service';
+import { SharedService } from '../shared/services/shared.service';
 
 @Component({
   selector: 'app-landing',
@@ -62,10 +64,13 @@ import { NgOptimizedImage } from '@angular/common';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.sass'
 })
-export class LandingComponent implements OnInit  {
+export class LandingComponent implements OnInit {
 
-  private _translate = inject(TranslateService); 
-  private _configService= inject(ConfigService); 
+  private _translate = inject(TranslateService);
+  private _configService = inject(ConfigService);
+  private _wordPressService = inject(WordPressService);
+  protected _sharedService = inject(SharedService);
+
   private meta = inject(Meta);
   private titleService = inject(Title);
 
@@ -73,27 +78,28 @@ export class LandingComponent implements OnInit  {
 
   responsiveOptions = [
     {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
+      breakpoint: '1199px',
+      numVisible: 1,
+      numScroll: 1
     },
     {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
+      breakpoint: '991px',
+      numVisible: 2,
+      numScroll: 1
     },
     {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
+      breakpoint: '767px',
+      numVisible: 1,
+      numScroll: 1
     }
-];
+  ];
 
-services: {}[] = []
+  services: {}[] = []
+  blogsPosts!: any[];
 
-isInView = false;
+  isInView = false;
 
-constructor() {}
+  constructor() { }
   ngOnInit(): void {
     this.services = [
       {
@@ -157,7 +163,7 @@ constructor() {}
         description: this._translate.instant('services.seasonalCleaningDescription')
       }
     ];
-    
+
     this.titleService.setTitle('Carla Maid Qatar | Professional Cleaning & Maid Services');
 
     this.meta.addTags([
@@ -199,6 +205,8 @@ constructor() {}
       this.lang = event.lang;
       this.updateMetaForLanguage(event.lang);
     });
+
+    this.getBlogsPosts();
   }
 
   private updateMetaForLanguage(lang: string) {
@@ -278,15 +286,41 @@ ngAfterViewInit(): void {
   //   });
   // });
 
-}
+  }
 
 
-direction(): Direction {
-  return this._configService.getDirection() as Direction;
-}
+  direction(): Direction {
+    return this._configService.getDirection() as Direction;
+  }
 
+  /**
+   * Retrieves posts filtered by multiple category names.
+   */
+  getBlogsPosts(): void {
+    const postsPage = 'blogs';
+    const categoriesNames = [postsPage, this.lang];
 
+    const params = {
+      per_page: 20,
+      page: 1
+    };
 
+    this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
+      next: (value: any) => {
+        this.blogsPosts = value;
+      }
+    });
+  }
 
-
+  /**
+   * Extracts the first image URL from an HTML string.
+   *
+   * @param {string} html - The HTML content.
+   * @returns {string | null} - The first image URL or null if no image is found.
+   */
+  getFirstImage(html: string): string | null {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const img = doc.querySelector("img");
+    return img ? img.src : "../../assets/images/posts/default.png";
+  }
 }

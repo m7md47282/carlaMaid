@@ -58,4 +58,18 @@ export class SharedService {
     return this._sanitizer.bypassSecurityTrustHtml(content);
   }
 
+  /**
+   * Removes all HTML tags and decodes HTML entities from a given string.
+   *
+   * @param {string} html - The input HTML string containing HTML content.
+   * @returns {string} The plain text content without HTML tags and with decoded entities.
+   */
+  stripHtml(html: string): string {
+    const text = html.replace(/<[^>]*>/g, '');
+
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
+
 }

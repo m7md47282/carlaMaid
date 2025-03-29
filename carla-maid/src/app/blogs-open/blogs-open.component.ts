@@ -40,9 +40,7 @@ export class BlogsOpenComponent {
 
     const params = {
       per_page: 100,
-      page: 1,
-      orderby: 'date',
-      order: 'asc'
+      page: 1
     };
 
     this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
@@ -51,5 +49,4 @@ export class BlogsOpenComponent {
       }
     });
   }
-
 }
