@@ -1808,6 +1808,11 @@ a,
 .text-primary {
   color: #0346FF;
 }
+.text-wrap {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  max-width: 100%;
+}
 @keyframes fade-in {
   0% {
     opacity: 0;
