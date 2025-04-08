@@ -1,0 +1,10 @@
+<section class="section-1 center flex-column">
+    <h1 class="text-align-center hero-title">{{"shared.BestCleaningCompanyInQatar" | translate}}:<br>
+      {{"shared.FindReliableProfessionalCleaningServices" | translate}}</h1>
+  </section>
+
+
+  <div *ngIf="selectedPost">
+    <h2>{{ selectedPost.title.rendered }}</h2>
+    <p [innerHTML]="_sharedService.sanitizeHtml(selectedPost.content.rendered)"></p>
+</div>

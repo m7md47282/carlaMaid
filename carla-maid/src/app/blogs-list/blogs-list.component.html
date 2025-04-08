@@ -1,0 +1,35 @@
+<section class="section-1 center flex-column">
+    <h1 class="text-align-center hero-title">{{"shared.BestCleaningCompanyInQatar" | translate}}</h1>
+</section>
+
+
+
+@defer(on viewport){
+  <section class="section-7 fade-in animation-delay">
+      <h1 class="primary-text-color center title-size">{{ 'blogs.latestNewAndBlogs' | translate }}</h1>
+
+      <div class="gap-30 flex-wrap center new-blogs fade-in-animation">
+          @for (post of blogsPosts.slice(0, 3); track $index) {
+              <div class="img-width blog-card">
+                  <img class="relative" [src]="getFirstImage(post.content.rendered)" alt="">
+                  <div class="text-border blog-card-text">
+                      <p class="title">{{_sharedService.stripHtml(post.title.rendered)}}</p>
+                      <div class="more-info">
+                          <p class="text-wrap">
+                              {{_sharedService.stripHtml(post.content.rendered) | slice:0:200}}<span
+                                  *ngIf="_sharedService.stripHtml(post.content.rendered).length > 200">...</span>
+                          </p>
+                          <!-- <button class="btn-secondary btn-hover" routerLink="blogs-open">
+                              <span class="primary-text-color">{{ 'shared.ReadMore' | translate }}</span>
+                          </button> -->
+                          <button class="btn-secondary btn-hover" (click)="sendPost(post)">
+                            <span class="primary-text-color">{{ 'shared.ReadMore' | translate }}</span>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+          }
+      </div>
+
+  </section>
+  } @placeholder { <div></div> }
