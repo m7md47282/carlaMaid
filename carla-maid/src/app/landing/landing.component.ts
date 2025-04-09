@@ -99,7 +99,7 @@ export class LandingComponent implements OnInit {
 
   isInView = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit(): void {
     this.services = [
       {
@@ -322,5 +322,10 @@ ngAfterViewInit(): void {
     const doc = new DOMParser().parseFromString(html, "text/html");
     const img = doc.querySelector("img");
     return img ? img.src : "../../assets/images/posts/default.png";
+  }
+
+  sendPost(post: any) {
+    this._sharedService.selectPost(post);
+    this.router.navigate(['/view-blogs']);
   }
 }
