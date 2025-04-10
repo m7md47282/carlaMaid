@@ -1,7 +1,7 @@
 import {
   ConfigService,
   environment
-} from "./chunk-2KSMHPPE.js";
+} from "./chunk-3KKD4EA6.js";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -10,8 +10,9 @@ import {
   Router,
   RouterModule,
   RouterOutlet,
-  provideRouter
-} from "./chunk-QEBUXKU3.js";
+  provideRouter,
+  withComponentInputBinding
+} from "./chunk-YW3WYN43.js";
 import {
   DomRendererFactory2,
   HttpClient,
@@ -22,11 +23,11 @@ import {
   provideClientHydration,
   provideHttpClient,
   withFetch
-} from "./chunk-57ESDWVB.js";
+} from "./chunk-UF3EVCM4.js";
 import {
   TranslateLoader,
   TranslateModule
-} from "./chunk-3XY34MOB.js";
+} from "./chunk-S267V3UA.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_INITIALIZER,
@@ -81,37 +82,45 @@ import {
   ɵɵinject,
   ɵɵinvalidFactory,
   ɵɵtemplate
-} from "./chunk-UGN4COGY.js";
+} from "./chunk-7A2U3HSL.js";
 
 // src/app/app.routes.ts
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-LJYLZMYN.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-BRDXMTQH.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-6GXTFSSU.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-IEE4C7RK.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-ASPNXDK4.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-OP4I2N5U.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-OHMMALSM.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-PXGG42YA.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-KAO26OIL.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-DIQETRJ4.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-T3GII7RA.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-V3QRCMD7.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-2QXDJM2V.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-JLAVTJLN.js").then((m) => m.ContactUsComponent)
+  },
+  {
+    path: "blogs-list",
+    loadComponent: () => import("./chunk-4MMMTG4M.js").then((m) => m.BlogsListComponent)
+  },
+  {
+    path: "view-blogs/:id",
+    loadComponent: () => import("./chunk-Q7IBQ6OQ.js").then((m) => m.ViewBlogsComponent)
   }
 ];
 
@@ -144,7 +153,7 @@ var _AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-X5KDOTWA.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-5VIJBSOJ.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -707,7 +716,7 @@ var provideTranslation = () => ({
 var appConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     importProvidersFrom([
@@ -725,7 +734,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-KFQ3C27T.js").then((m) => m.HeaderComponent), import("./chunk-M54JRM5I.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-EFFJM4VV.js").then((m) => m.HeaderComponent), import("./chunk-YZYARJ5Y.js").then((m) => m.FooterComponent), RouterOutlet];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
