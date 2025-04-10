@@ -1,27 +1,31 @@
 import { Component } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
 import { WordPressService } from '../shared/services/word-press.service';
 import { SharedService } from '../shared/services/shared.service';
+import { BlogsListComponent } from '../blogs-list/blogs-list.component';
+import { CommonModule } from '@angular/common';
+
 @Component({
-  selector: 'app-blogs-open',
+  selector: 'app-view-blogs',
   standalone: true,
   imports: [
     TranslateModule,
-    CommonModule,
+    CommonModule
   ],
-  templateUrl: './blogs-open.component.html',
-  styleUrl: './blogs-open.component.sass'
+  templateUrl: './view-blogs.component.html',
+  styleUrl: './view-blogs.component.sass'
 })
-export class BlogsOpenComponent {
+export class ViewBlogsComponent {
   lang: string;
   posts!: any[];
   blogsPosts!: any[];
 
+  selectedPost: any;
+
   constructor(
     private translateService: TranslateService,
     private _wordPressService: WordPressService,
-    protected _sharedService: SharedService
+    protected _sharedService: SharedService,
   ) {
 
     this.lang = this.translateService.currentLang || 'en';
@@ -31,10 +35,12 @@ export class BlogsOpenComponent {
 
     this.getPosts();
   }
+  ngOnInit(){
+    this._sharedService.selectedPost$.subscribe(post => {
+      this.selectedPost = post;
+    });
+  }
 
-  /**
-   * Retrieves posts filtered by multiple category names.
-   */
   getPosts(): void {
     const postsPage = 'blogs';
     const categoriesNames = [postsPage, this.lang];
@@ -50,11 +56,8 @@ export class BlogsOpenComponent {
       }
     });
   }
-  getFirstImage(html: string): string | null {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const img = doc.querySelector("img");
-    return img ? img.src : "../../assets/images/posts/default.png";
-  }
+
+  
   getBlogsPosts(): void {
     const postsPage = 'blogs';
     const categoriesNames = [postsPage, this.lang];
@@ -70,4 +73,11 @@ export class BlogsOpenComponent {
       }
     });
   }
+
+  sendpost(post:any){
+    this._sharedService.selectPost(post);
+    this.selectedPost = post;
+  }
+
+
 }
