@@ -59,7 +59,7 @@ export class BlogsListComponent {
     const categoriesNames = [postsPage, this.lang];
 
     const params = {
-      per_page: 20,
+      per_page: 100,
       page: 1
     };
 
@@ -71,8 +71,7 @@ export class BlogsListComponent {
     });
   }
 
-  sendPost(post: any) {
-    this._sharedService.selectPost(post);
-    this.router.navigate(['/view-blogs']);
+  sendPost(postId: any) {
+    this.router.navigate(['/view-blogs', postId]);
   }
 }

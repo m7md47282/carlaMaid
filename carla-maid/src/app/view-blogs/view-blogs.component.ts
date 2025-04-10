@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { WordPressService } from '../shared/services/word-press.service';
 import { SharedService } from '../shared/services/shared.service';
@@ -22,6 +22,8 @@ export class ViewBlogsComponent {
 
   selectedPost: any;
 
+  id = input.required<string>();
+
   constructor(
     private translateService: TranslateService,
     private _wordPressService: WordPressService,
@@ -36,9 +38,7 @@ export class ViewBlogsComponent {
     this.getPosts();
   }
   ngOnInit(){
-    this._sharedService.selectedPost$.subscribe(post => {
-      this.selectedPost = post;
-    });
+    this.getPosts();
   }
 
   getPosts(): void {
@@ -50,33 +50,11 @@ export class ViewBlogsComponent {
       page: 1
     };
 
-    this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
+    this._wordPressService.getPosts(params).subscribe({
       next: (value: any) => {
-        this.posts = value;
+        this.selectedPost = value.filter((post:any) => post.id == this.id())[0];
       }
     });
-  }
-
-  
-  getBlogsPosts(): void {
-    const postsPage = 'blogs';
-    const categoriesNames = [postsPage, this.lang];
-
-    const params = {
-      per_page: 20,
-      page: 1
-    };
-
-    this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
-      next: (value: any) => {
-        this.blogsPosts = value;
-      }
-    });
-  }
-
-  sendpost(post:any){
-    this._sharedService.selectPost(post);
-    this.selectedPost = post;
   }
 
 

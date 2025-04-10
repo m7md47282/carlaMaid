@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, APP_INITIALIZER, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -27,10 +27,11 @@ export const provideTranslation = () => ({
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes,  withComponentInputBinding()),
     provideAnimationsAsync(),
     provideHttpClient(
       withFetch(),
+
     ),
 
     importProvidersFrom([

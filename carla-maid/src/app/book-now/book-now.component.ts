@@ -63,11 +63,14 @@ export class BookNowComponent implements OnInit{
         window.scrollTo({ top: 0 });
       }
     });
+
+    this.bookingForm.get('hours')?.valueChanges.subscribe(() => {
+      this.bookingForm.get('arrivalTime')?.setValue('')
+    })
   }
 
 
   calculatePrice(): void {
-    console.log(this.bookingForm)
     let cleanerPrice = 35;
     let withMatPrice = 5
     this.price = this.bookingForm.value.cleaners * cleanerPrice  * this.bookingForm.value.hours + (this.bookingForm.value.materials? this.bookingForm.value.hours * withMatPrice * this.bookingForm.value.cleaners : 0 );

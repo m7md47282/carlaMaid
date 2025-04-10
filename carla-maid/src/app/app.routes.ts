@@ -34,7 +34,7 @@ export const routes: Routes = [
         loadComponent: () => import('./blogs-list/blogs-list.component').then(m => m.BlogsListComponent)
     },
     {
-        path: 'view-blogs',
+        path: 'view-blogs/:id',
         loadComponent: () => import('./view-blogs/view-blogs.component').then(m => m.ViewBlogsComponent)
     }
 ];
