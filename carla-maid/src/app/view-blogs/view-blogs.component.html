@@ -4,7 +4,7 @@
   </section>
 
 
-  <div *ngIf="selectedPost">
-    <h2>{{ selectedPost.title.rendered }}</h2>
+  <div *ngIf="selectedPost" class="container">
+    <h2 [innerHTML]="_sharedService.sanitizeHtml( selectedPost.title.rendered)"></h2>
     <p [innerHTML]="_sharedService.sanitizeHtml(selectedPost.content.rendered)"></p>
 </div>

@@ -58,7 +58,7 @@ export class WordPressService {
         const preparedParams = this._sharedService.prepareParams({ 
           params: { ...postsParams, ...{ categories: postsPageCategoryId } } 
         });
-
+        
         return this.getPosts(preparedParams).pipe(
           map(posts => 
             (posts as any[]).filter(post =>
