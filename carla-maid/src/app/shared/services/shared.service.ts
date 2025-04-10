@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 interface Params {
   [key: string]: string | number | boolean | (string | number | boolean)[];
@@ -14,9 +15,11 @@ interface Options {
   providedIn: 'root',
 })
 export class SharedService {
+  private selectedPostSubject = new BehaviorSubject<any>(null);
+  selectedPost$ = this.selectedPostSubject.asObservable();
 
   constructor(
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
   ) { }
 
   /**
@@ -70,6 +73,9 @@ export class SharedService {
     const textarea = document.createElement("textarea");
     textarea.innerHTML = text;
     return textarea.value;
+  }
+  selectPost(post: any) {
+    this.selectedPostSubject.next(post);
   }
 
 }

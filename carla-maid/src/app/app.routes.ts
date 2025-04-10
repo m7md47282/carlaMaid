@@ -28,6 +28,14 @@ export const routes: Routes = [
     {
         path: 'contact-us',
         loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent)
+    },
+    {
+        path: 'blogs-list',
+        loadComponent: () => import('./blogs-list/blogs-list.component').then(m => m.BlogsListComponent)
+    },
+    {
+        path: 'view-blogs',
+        loadComponent: () => import('./view-blogs/view-blogs.component').then(m => m.ViewBlogsComponent)
     }
 ];
 export default routes;

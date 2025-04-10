@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
       {
         label: this.translate.instant('header.blog'),
         icon: 'pi pi-envelope',
-        link: '/blogs-open'
+        link: '/blogs-list'
       },
       {
         label: this.translate.instant('header.bookNow'),
