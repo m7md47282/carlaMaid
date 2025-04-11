@@ -3,23 +3,22 @@
 </section>
 
 
+<section class="section-7 fade-in animation-delay">
+    <h1 class="primary-text-color center title-size">{{ 'blogs.latestNewAndBlogs' | translate }}</h1>
 
-@defer(on viewport){
-  <section class="section-7 fade-in animation-delay">
-      <h1 class="primary-text-color center title-size">{{ 'blogs.latestNewAndBlogs' | translate }}</h1>
+    <div class="gap-30 flex-wrap center new-blogs fade-in-animation">
+        @for (post of blogsPosts; track $index) {
 
-      <div class="gap-30 flex-wrap center new-blogs fade-in-animation">
-          @for (post of blogsPosts; track $index) {
-
-              <figure class="service-item center" (click)="sendPost(post.id)" [style.backgroundImage]="'url(' + getFirstImage(post.content.rendered) + ')'" style="background-size: cover; background-position: center;">
-                 <figure class="service-content">
-                     <h3>{{_sharedService.stripHtml(post.title.rendered)}}</h3>
-                     <p>{{_sharedService.stripHtml(post.content.rendered) | slice:0:200}}<span
+        <figure class="service-item center" (click)="sendPost(post.id)"
+            [style.backgroundImage]="'url(' + getFirstImage(post.content.rendered) + ')'"
+            style="background-size: cover; background-position: center;">
+            <figure class="service-content">
+                <h3>{{_sharedService.stripHtml(post.title.rendered)}}</h3>
+                <p>{{_sharedService.stripHtml(post.content.rendered) | slice:0:200}}<span
                         *ngIf="_sharedService.stripHtml(post.content.rendered).length > 200">...</span></p>
-                 </figure>
-             </figure>
-          }
-      </div>
+            </figure>
+        </figure>
+        }
+    </div>
 
-  </section>
-  } @placeholder { <div></div> }
+</section>
