@@ -4,6 +4,42 @@
         <app-header></app-header>
         <router-outlet></router-outlet>
         <app-footer></app-footer> 
+        <div class="social-media-container">
+            <div class="social-media-item">
+                <mat-icon 
+                class="social-media-icon instagram" 
+                svgIcon="instagram"
+                (click)="openUrl('https://www.instagram.com/carlamaid.qa/')"
+                ></mat-icon>
+            </div>
+            <div class="social-media-item">
+                <mat-icon 
+                class="social-media-icon facebook" 
+                svgIcon="facebook"
+                (click)="openUrl('https://www.facebook.com/carlamaid.qa')"
+                ></mat-icon>
+            </div>
+            <div class="social-media-item">
+                <mat-icon 
+                class="social-media-icon linkedin" 
+                svgIcon="linkedin"
+                (click)="openUrl('https://www.linkedin.com/company/carlamaid/')"
+                ></mat-icon>
+            </div>
+            <div class="social-media-item">
+                <mat-icon 
+                class="social-media-icon x" 
+                svgIcon="x"
+                (click)="openUrl('https://x.com/MaidQa84948')"
+                ></mat-icon>
+            </div>
+            <div class="social-media-item">
+                <mat-icon class="social-media-icon whatsapp" svgIcon="whatsapp"
+                (click)="openUrl('https://wa.me/97471236660')"
+                ></mat-icon>
+            </div>
+
+        </div>
     }
     @placeholder {
     <div class="loader-container">
