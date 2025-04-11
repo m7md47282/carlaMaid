@@ -1,7 +1,13 @@
 import {
+  MatIcon,
+  MatIconModule,
+  MatIconRegistry
+} from "./chunk-2CTNWTG3.js";
+import {
   ConfigService,
   environment
-} from "./chunk-3KKD4EA6.js";
+} from "./chunk-SS4VBDOO.js";
+import "./chunk-AON6FPK4.js";
 import {
   NavigationCancel,
   NavigationEnd,
@@ -12,22 +18,21 @@ import {
   RouterOutlet,
   provideRouter,
   withComponentInputBinding
-} from "./chunk-YW3WYN43.js";
+} from "./chunk-CEWNI52Z.js";
 import {
   DomRendererFactory2,
+  DomSanitizer,
   HttpClient,
   HttpClientModule,
   Meta,
   Title,
+  TranslateLoader,
+  TranslateModule,
   bootstrapApplication,
   provideClientHydration,
   provideHttpClient,
   withFetch
-} from "./chunk-UF3EVCM4.js";
-import {
-  TranslateLoader,
-  TranslateModule
-} from "./chunk-S267V3UA.js";
+} from "./chunk-7UAYIXGG.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_INITIALIZER,
@@ -79,8 +84,13 @@ import {
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
+  ɵɵgetCurrentView,
   ɵɵinject,
   ɵɵinvalidFactory,
+  ɵɵlistener,
+  ɵɵnextContext,
+  ɵɵresetView,
+  ɵɵrestoreView,
   ɵɵtemplate
 } from "./chunk-7A2U3HSL.js";
 
@@ -88,39 +98,39 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-BRDXMTQH.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-RURWCCZ2.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-IEE4C7RK.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-CMQP2MAB.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-OP4I2N5U.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-IEFI3SH2.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-PXGG42YA.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-DIRCUK7D.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-DIQETRJ4.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-BQ6A2KST.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-V3QRCMD7.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-SX4IUBDB.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-JLAVTJLN.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-2SD5HYRC.js").then((m) => m.ContactUsComponent)
   },
   {
     path: "blogs-list",
-    loadComponent: () => import("./chunk-4MMMTG4M.js").then((m) => m.BlogsListComponent)
+    loadComponent: () => import("./chunk-EBQYYYZJ.js").then((m) => m.BlogsListComponent)
   },
   {
     path: "view-blogs/:id",
-    loadComponent: () => import("./chunk-Q7IBQ6OQ.js").then((m) => m.ViewBlogsComponent)
+    loadComponent: () => import("./chunk-SZPC7LJI.js").then((m) => m.ViewBlogsComponent)
   }
 ];
 
@@ -734,28 +744,68 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-EFFJM4VV.js").then((m) => m.HeaderComponent), import("./chunk-YZYARJ5Y.js").then((m) => m.FooterComponent), RouterOutlet];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-5TKLNS6B.js").then((m) => m.HeaderComponent), import("./chunk-7V2TFFFZ.js").then((m) => m.FooterComponent), RouterOutlet, MatIcon];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275element(0, "app-header")(1, "router-outlet")(2, "app-footer");
+    \u0275\u0275elementStart(3, "div", 0)(4, "div", 1)(5, "mat-icon", 2);
+    \u0275\u0275listener("click", function AppComponent_Defer_0_Template_mat_icon_click_5_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.openUrl("https://www.instagram.com/carlamaid.qa/"));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 1)(7, "mat-icon", 3);
+    \u0275\u0275listener("click", function AppComponent_Defer_0_Template_mat_icon_click_7_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.openUrl("https://www.facebook.com/carlamaid.qa"));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(8, "div", 1)(9, "mat-icon", 4);
+    \u0275\u0275listener("click", function AppComponent_Defer_0_Template_mat_icon_click_9_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.openUrl("https://www.linkedin.com/company/carlamaid/"));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "div", 1)(11, "mat-icon", 5);
+    \u0275\u0275listener("click", function AppComponent_Defer_0_Template_mat_icon_click_11_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.openUrl("https://x.com/MaidQa84948"));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "div", 1)(13, "mat-icon", 6);
+    \u0275\u0275listener("click", function AppComponent_Defer_0_Template_mat_icon_click_13_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.openUrl("https://wa.me/97471236660"));
+    });
+    \u0275\u0275elementEnd()()();
   }
 }
 function AppComponent_DeferPlaceholder_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-    \u0275\u0275element(2, "img", 2);
+    \u0275\u0275elementStart(0, "div", 7)(1, "div", 8);
+    \u0275\u0275element(2, "img", 9);
     \u0275\u0275elementEnd()();
   }
 }
 var _AppComponent = class _AppComponent {
-  constructor(_configService, router) {
+  constructor(_configService, router, iconRegistry, sanitizer) {
     __publicField(this, "_configService");
     __publicField(this, "router");
+    __publicField(this, "iconRegistry");
+    __publicField(this, "sanitizer");
     __publicField(this, "title", "carla-maid");
     __publicField(this, "isLoading", false);
     __publicField(this, "lang", environment.lang);
     this._configService = _configService;
     this.router = router;
+    this.iconRegistry = iconRegistry;
+    this.sanitizer = sanitizer;
   }
   ngOnInit() {
     this.setLang();
@@ -770,6 +820,11 @@ var _AppComponent = class _AppComponent {
         }
       }
     });
+    this.iconRegistry.addSvgIcon("instagram", this.sanitizer.bypassSecurityTrustResourceUrl("/assets/images/icons/instagram.svg"));
+    this.iconRegistry.addSvgIcon("x", this.sanitizer.bypassSecurityTrustResourceUrl("/assets/images/icons/x.svg"));
+    this.iconRegistry.addSvgIcon("facebook", this.sanitizer.bypassSecurityTrustResourceUrl("/assets/images/icons/facebook.svg"));
+    this.iconRegistry.addSvgIcon("linkedin", this.sanitizer.bypassSecurityTrustResourceUrl("/assets/images/icons/linkedin.svg"));
+    this.iconRegistry.addSvgIcon("whatsapp", this.sanitizer.bypassSecurityTrustResourceUrl("/assets/images/icons/whatsapp.svg"));
   }
   setLang() {
     if (this._configService.isBrowser()) {
@@ -778,20 +833,24 @@ var _AppComponent = class _AppComponent {
       this.lang = this._configService.getLang();
     }
   }
+  openUrl(url) {
+    window.open(url, "_blank");
+  }
 };
 __publicField(_AppComponent, "\u0275fac", function AppComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router));
+  return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(ConfigService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatIconRegistry), \u0275\u0275directiveInject(DomSanitizer));
 });
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "loader-container"], [1, "loader"], ["src", "../assets/images/Logo-En.png", "alt", ""]], template: function AppComponent_Template(rf, ctx) {
+__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: true, features: [\u0275\u0275StandaloneFeature], decls: 4, vars: 0, consts: [[1, "social-media-container"], [1, "social-media-item"], ["svgIcon", "instagram", 1, "social-media-icon", "instagram", 3, "click"], ["svgIcon", "facebook", 1, "social-media-icon", "facebook", 3, "click"], ["svgIcon", "linkedin", 1, "social-media-icon", "linkedin", 3, "click"], ["svgIcon", "x", 1, "social-media-icon", "x", 3, "click"], ["svgIcon", "whatsapp", 1, "social-media-icon", "whatsapp", 3, "click"], [1, "loader-container"], [1, "loader"], ["src", "../assets/images/Logo-En.png", "alt", ""]], template: function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, AppComponent_Defer_0_Template, 3, 0)(1, AppComponent_DeferPlaceholder_1_Template, 3, 0);
+    \u0275\u0275template(0, AppComponent_Defer_0_Template, 14, 0)(1, AppComponent_DeferPlaceholder_1_Template, 3, 0);
     \u0275\u0275defer(2, 0, AppComponent_Defer_2_DepsFn, null, 1);
     \u0275\u0275deferOnTimer(1e3);
   }
 }, dependencies: [
   TranslateModule,
-  RouterModule
-], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
+  RouterModule,
+  MatIconModule
+], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n.social-media-container[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  border-radius: 11px;\n  background: rgba(0, 0, 0, 0.0823529412);\n  margin: 5px;\n}\n  .social-media-icon {\n  cursor: pointer;\n  transition: 0.3s all ease-in-out;\n}\n  .x:hover path {\n  fill: #000000;\n}\n  .facebook:hover path {\n  fill: #3275e2;\n}\n  .linkedin:hover path {\n  fill: #0a0ae1;\n}\n  .whatsapp:hover path {\n  fill: #25d366;\n}\n  .instagram:hover path {\n  fill: #e1306c;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
 var AppComponent = _AppComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });

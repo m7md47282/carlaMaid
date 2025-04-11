@@ -11,8 +11,8 @@ import {
   Router,
   loadChildren
 } from "./chunk-UFOZR5SN.mjs";
-import "./chunk-3RL2LK7B.mjs";
 import "./chunk-4Q3HI7BM.mjs";
+import "./chunk-3RL2LK7B.mjs";
 import {
   ApplicationRef,
   Compiler,
