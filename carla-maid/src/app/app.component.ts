@@ -8,6 +8,8 @@ import { environment } from '../environments/environment';
 
 import { FooterComponent } from './footer/footer.component';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,6 +20,7 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     RouterModule,
+    MatIconModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
@@ -29,7 +32,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _configService: ConfigService,
-    private router: Router
+    private router: Router,
+    private iconRegistry: MatIconRegistry, 
+    private sanitizer: DomSanitizer
     ) {
 
       
@@ -52,6 +57,33 @@ export class AppComponent implements OnInit {
         }
       }
     });
+
+
+
+    this.iconRegistry.addSvgIcon(
+      'instagram',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/instagram.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'x',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/x.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'facebook',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/facebook.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'linkedin',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/linkedin.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'whatsapp',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/whatsapp.svg')
+    );
+
+
+
+
   }
 
   setLang() {
@@ -63,6 +95,10 @@ export class AppComponent implements OnInit {
       this.lang = this._configService.getLang()
     }
 
+  }
+
+  openUrl(url: string) {
+    window.open(url, '_blank');
   }
 
 

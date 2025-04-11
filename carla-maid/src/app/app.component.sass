@@ -18,6 +18,40 @@
       animation: spin 2s linear infinite
       animation-duration: 2s
 
+
+.social-media-container
+  position: fixed
+  bottom: 0
+  right: 0
+  padding: 20px
+  display: flex
+  flex-direction: column
+  gap: 10px
+  border-radius: 11px
+  background: #00000015
+  margin: 5px
+
+::ng-deep
+  .social-media-icon
+    cursor: pointer
+    transition:  0.3s all ease-in-out
+
+  .x:hover path
+    fill: #000000
+
+  .facebook:hover path
+    fill: #3275e2
+
+  .linkedin:hover path
+    fill: #0a0ae1
+
+  .whatsapp:hover path
+    fill: #25d366
+
+  .instagram:hover path
+    fill: #e1306c
+
+
   @keyframes spin 
     0%, 100%
       transform: scale(1)
