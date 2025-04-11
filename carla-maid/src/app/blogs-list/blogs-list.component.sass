@@ -58,3 +58,37 @@ b
             font-size: 0.9rem
             font-weight: 500
     
+
+.service-item 
+    min-width: 350px
+    aspect-ratio: 1/1
+    position: relative
+    overflow: hidden
+    border-radius: 8px
+    transition: transform 0.3s ease    
+    &:hover
+        transform: scale(1.1)
+    &::before
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: #00000080
+        z-index: 1
+    .service-content
+        z-index: 2
+        color: #ffffff
+        margin: 10px 0
+        padding: 10px 0
+        width: 350px
+        margin-top: auto
+        h3
+            margin: 0 15px
+            font-size: 1rem
+
+        p
+            margin: 0 15px
+            font-size: 0.7rem
+            word-wrap: break-word
