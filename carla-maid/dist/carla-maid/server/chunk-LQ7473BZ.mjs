@@ -239,7 +239,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-OTJ2JSUY.mjs").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-SX64IUBM.mjs").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
@@ -902,4 +902,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-DC4JWH25.mjs.map
+//# sourceMappingURL=chunk-LQ7473BZ.mjs.map

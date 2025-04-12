@@ -118,7 +118,7 @@ var routes = [
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-SX4IUBDB.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-PL4SS2ZL.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
