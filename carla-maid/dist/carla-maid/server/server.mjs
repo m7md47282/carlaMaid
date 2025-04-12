@@ -1,7 +1,7 @@
 import './polyfills.server.mjs';
 import {
   main_server_default
-} from "./chunk-DC4JWH25.mjs";
+} from "./chunk-LQ7473BZ.mjs";
 import {
   SERVER_CONTEXT,
   renderApplication,
