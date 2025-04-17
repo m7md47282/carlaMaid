@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["src/app/view-blogs/view-blogs.component.sass"],
-  "sourcesContent": ["\n.container\n    padding: 30px 50px\n    line-height: 2\n\n.section-1\n    background-image: url(../../assets/images/blogs-open-header.png)\n    object-fit: cover\n    background-size: cover\n    height: 50vh\n    h1\n        margin: 0\n        color: #ffffff\np\n    font-size: 0.9rem\n    &[lang=\"ar\"]\n        font-size: 1.1rem\nh1\n    font-size: 1.2rem\n\nh1.hero-title\n    font-size: 2.5rem\n\nb\n    color: #0f0f0f\n"],
+  "sourcesContent": ["\r\n.container\r\n    padding: 30px 50px\r\n    line-height: 2\r\n\r\n.section-1\r\n    background-image: url(../../assets/images/blogs-open-header.png)\r\n    object-fit: cover\r\n    background-size: cover\r\n    height: 50vh\r\n    h1\r\n        margin: 0\r\n        color: #ffffff\r\np\r\n    font-size: 0.9rem\r\n    &[lang=\"ar\"]\r\n        font-size: 1.1rem\r\nh1\r\n    font-size: 1.2rem\r\n\r\nh1.hero-title\r\n    font-size: 2.5rem\r\n\r\nb\r\n    color: #0f0f0f\r\n"],
   "mappings": ";AACA,CAAA;AACI,WAAA,KAAA;AACA,eAAA;;AAEJ,CAAA;AACI,oBAAA;AACA,cAAA;AACA,mBAAA;AACA,UAAA;;AACA,CALJ,UAKI;AACI,UAAA;AACA,SAAA;;AACR;AACI,aAAA;;AACA,CAAA,CAAA;AACI,aAAA;;AACR;AACI,aAAA;;AAEJ,EAAA,CAAA;AACI,aAAA;;AAEJ;AACI,SAAA;;",
   "names": []
 }
