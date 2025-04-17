@@ -6,7 +6,7 @@ import {
 import {
   ConfigService,
   environment
-} from "./chunk-SS4VBDOO.js";
+} from "./chunk-NKGWJKNL.js";
 import "./chunk-AON6FPK4.js";
 import {
   NavigationCancel,
@@ -98,39 +98,39 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-RURWCCZ2.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-AMECQW2B.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
-    loadComponent: () => import("./chunk-CMQP2MAB.js").then((m) => m.OurServicesComponent)
+    loadComponent: () => import("./chunk-V2HFWIFC.js").then((m) => m.OurServicesComponent)
   },
   {
     path: "blogs",
-    loadComponent: () => import("./chunk-IEFI3SH2.js").then((m) => m.BlogsComponent)
+    loadComponent: () => import("./chunk-XWE2W6NE.js").then((m) => m.BlogsComponent)
   },
   {
     path: "about-us",
-    loadComponent: () => import("./chunk-DIRCUK7D.js").then((m) => m.AboutUSComponent)
+    loadComponent: () => import("./chunk-GZQD7FT3.js").then((m) => m.AboutUSComponent)
   },
   {
     path: "blogs-open",
-    loadComponent: () => import("./chunk-BQ6A2KST.js").then((m) => m.BlogsOpenComponent)
+    loadComponent: () => import("./chunk-J2LS2ZKF.js").then((m) => m.BlogsOpenComponent)
   },
   {
     path: "book-now",
-    loadComponent: () => import("./chunk-PL4SS2ZL.js").then((m) => m.BookNowComponent)
+    loadComponent: () => import("./chunk-YRQZDMF3.js").then((m) => m.BookNowComponent)
   },
   {
     path: "contact-us",
-    loadComponent: () => import("./chunk-2SD5HYRC.js").then((m) => m.ContactUsComponent)
+    loadComponent: () => import("./chunk-47HYLWPP.js").then((m) => m.ContactUsComponent)
   },
   {
     path: "blogs-list",
-    loadComponent: () => import("./chunk-EBQYYYZJ.js").then((m) => m.BlogsListComponent)
+    loadComponent: () => import("./chunk-ZCGKACLF.js").then((m) => m.BlogsListComponent)
   },
   {
     path: "view-blogs/:id",
-    loadComponent: () => import("./chunk-SZPC7LJI.js").then((m) => m.ViewBlogsComponent)
+    loadComponent: () => import("./chunk-IOSSVMHI.js").then((m) => m.ViewBlogsComponent)
   }
 ];
 
@@ -744,7 +744,7 @@ var appConfig = {
 };
 
 // src/app/app.component.ts
-var AppComponent_Defer_2_DepsFn = () => [import("./chunk-5TKLNS6B.js").then((m) => m.HeaderComponent), import("./chunk-7V2TFFFZ.js").then((m) => m.FooterComponent), RouterOutlet, MatIcon];
+var AppComponent_Defer_2_DepsFn = () => [import("./chunk-WERQRRMQ.js").then((m) => m.HeaderComponent), import("./chunk-B3WDSJSL.js").then((m) => m.FooterComponent), RouterOutlet, MatIcon];
 function AppComponent_Defer_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -853,7 +853,7 @@ __publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
 ], styles: ["\n\n.loader-container[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: relative;\n  top: 40%;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-container[_ngcontent-%COMP%]   .loader[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n  animation: _ngcontent-%COMP%_spin 2s linear infinite;\n  animation-duration: 2s;\n}\n.social-media-container[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  border-radius: 11px;\n  background: rgba(0, 0, 0, 0.0823529412);\n  margin: 5px;\n}\n  .social-media-icon {\n  cursor: pointer;\n  transition: 0.3s all ease-in-out;\n}\n  .x:hover path {\n  fill: #000000;\n}\n  .facebook:hover path {\n  fill: #3275e2;\n}\n  .linkedin:hover path {\n  fill: #0a0ae1;\n}\n  .whatsapp:hover path {\n  fill: #25d366;\n}\n  .instagram:hover path {\n  fill: #e1306c;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.5);\n  }\n}\n/*# sourceMappingURL=app.component.css.map */"] }));
 var AppComponent = _AppComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent" });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src\\app\\app.component.ts", lineNumber: 28 });
 })();
 
 // src/main.ts
