@@ -325,7 +325,6 @@ ngAfterViewInit(): void {
   }
 
   sendPost(post: any) {
-    this._sharedService.selectPost(post);
-    this.router.navigate(['/view-blogs']);
+    this.router.navigate(['/view-blogs', post.id]);
   }
 }
