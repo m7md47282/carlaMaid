@@ -98,7 +98,7 @@ import {
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-AMECQW2B.js").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-YGLQLY3O.js").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",

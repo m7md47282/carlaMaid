@@ -219,7 +219,7 @@ var AppComponent = _AppComponent;
 var routes = [
   {
     path: "",
-    loadComponent: () => import("./chunk-5HU75SXD.mjs").then((m) => m.LandingComponent)
+    loadComponent: () => import("./chunk-UZZHDSYO.mjs").then((m) => m.LandingComponent)
   },
   {
     path: "our-services",
@@ -902,4 +902,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-52WUYHJJ.mjs.map
+//# sourceMappingURL=chunk-KP5OGO7U.mjs.map
