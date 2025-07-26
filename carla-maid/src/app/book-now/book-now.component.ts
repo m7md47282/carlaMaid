@@ -7,6 +7,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
+import { AnalyticsService } from '../shared/services/analytics.service';
 
 @Component({
   selector: 'app-book-now',
@@ -35,7 +36,12 @@ export class BookNowComponent implements OnInit{
   @ViewChild('mapContainer') mapContainer!: ElementRef;
   
 
-  constructor(private fb: FormBuilder, private translate: TranslateService,private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private translate: TranslateService,
+    private router: Router,
+    private analyticsService: AnalyticsService
+  ) {
     this.bookingForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -85,6 +91,9 @@ export class BookNowComponent implements OnInit{
   }
 
   onSubmit() {
+    // Track form submission for analytics
+    this.analyticsService.trackFormSubmission('booking_form', 'book-now-form');
+    
     var formData = new FormData();
     formData.append('entry.1390915916', this.bookingForm.value.fullName); 
     formData.append('entry.1883668962', this.bookingForm.value.email); 
@@ -113,6 +122,16 @@ export class BookNowComponent implements OnInit{
      .then((res: any) => {
         this.sent = true;
         this.resetForm()
+
+        // Track successful booking completion
+        this.analyticsService.trackBookingComplete('cleaning_service', this.price);
+        
+        // Track purchase event for Google Ads conversion
+        this.analyticsService.trackPurchase(
+          `booking_${Date.now()}`, 
+          this.price, 
+          'QAR'
+        );
 
         setTimeout(() => {
           this.sent = false;
