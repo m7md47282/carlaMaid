@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AnalyticsService } from '../shared/services/analytics.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -14,6 +15,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class ContactUsComponent { 
   _translate = inject(TranslateService);
   sanitizer = inject(DomSanitizer);
+  analyticsService = inject(AnalyticsService);
 
 
   email = 'info@carlamaid.qa';
@@ -98,6 +100,9 @@ export class ContactUsComponent {
 
   // Method to submit the form data
   onSubmit() {
+    // Track contact form submission
+    this.analyticsService.trackFormSubmission('contact_form', 'contact-us-form');
+    
     const formData = new FormData();
     formData.append('entry.1423087057', this.formData.name); 
     formData.append('entry.999466525', this.formData.email);
@@ -119,6 +124,9 @@ export class ContactUsComponent {
      .then((res: any) => {
         this.sent = true;
         this.resetForm()
+
+        // Track successful contact form submission
+        this.analyticsService.trackServiceInquiry('contact_inquiry');
 
         setTimeout(() => {
           this.sent = false;
