@@ -238,8 +238,25 @@
                 h1,h4,p
                     width: 100%
                     text-align: center
-            .btn-epic
-                min-width: 250px
+                .btn-epic
+        min-width: 250px
+        
+    .call-btn
+        background: #25d366
+        border-color: #25d366
+        
+        &:before
+            background-image: linear-gradient(90deg, #25d366, #128c7e)
+        
+        &:hover
+            background: linear-gradient(90deg, #25d366, #128c7e)
+            border-color: #25d366
+            
+        span:first-child
+            color: white
+            
+        span:last-child
+            background-image: linear-gradient(90deg, #25d366, #128c7e)
         
     .section-2-container
         flex-direction: column

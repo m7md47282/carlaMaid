@@ -82,6 +82,10 @@ export class AppComponent implements OnInit {
       'whatsapp',
       this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/whatsapp.svg')
     );
+    this.iconRegistry.addSvgIcon(
+      'phone',
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/icons/phone.svg')
+    );
 
 
 
@@ -101,6 +105,10 @@ export class AppComponent implements OnInit {
 
   openUrl(url: string) {
     window.open(url, '_blank');
+  }
+
+  makePhoneCall(phoneNumber: string) {
+    window.open(`tel:${phoneNumber}`, '_self');
   }
 
 
