@@ -13,6 +13,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
 import { WordPressService } from '../shared/services/word-press.service';
 import { SharedService } from '../shared/services/shared.service';
+import { PhoneTrackDirective } from '../shared/directives/phone-track.directive';
 
 @Component({
   selector: 'app-landing',
@@ -23,7 +24,8 @@ import { SharedService } from '../shared/services/shared.service';
     ButtonModule,
     TagModule,
     RouterLink,
-    NgOptimizedImage
+    NgOptimizedImage,
+    PhoneTrackDirective
   ],
   animations: [
     trigger('openAnimation', [
@@ -326,5 +328,9 @@ ngAfterViewInit(): void {
 
   sendPost(post: any) {
     this.router.navigate(['/view-blogs', post.id]);
+  }
+
+  makePhoneCall(phoneNumber: string) {
+    window.open(`tel:${phoneNumber}`, '_self');
   }
 }

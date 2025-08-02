@@ -6,6 +6,13 @@
             <div class="social-media-container">
                 <div class="social-media-item">
                     <mat-icon 
+                    class="social-media-icon phone" 
+                    svgIcon="phone"
+                    (click)="makePhoneCall('+97471236660')"
+                    ></mat-icon>
+                </div>
+                <div class="social-media-item">
+                    <mat-icon 
                     class="social-media-icon instagram" 
                     svgIcon="instagram"
                     (click)="openUrl('https://www.instagram.com/carlamaid.qa/')"
@@ -56,8 +63,15 @@
             </div>
             <div>
                 <h1>{{"shared.ContactUs" | translate}}</h1>
-                <p dir="ltr">+974 7123 6660</p>
-                <p>Info&#64;carlamaid.qa</p>
+                <a href="tel:+97471236660" 
+                   dir="ltr" 
+                   appPhoneTrack="+974 7123 6660"
+                   class="phone-link">+974 7123 6660</a>
+                <a (click)="sendEmail()"
+                   class="email-link"
+                   appEmailTrack="info@carlamaid.qa"
+                   [emailSubject]="'shared.emailSubject' | translate"
+                   [title]="'shared.emailForQuote' | translate">Info&#64;carlamaid.qa</a>
 
             </div>
         </section>

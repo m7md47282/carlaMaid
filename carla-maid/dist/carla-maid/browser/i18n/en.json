@@ -8,6 +8,7 @@
         "bookNow": "Book Now",
         "CarlaMaidCleaningServices": "Carla Maid Cleaning Services",
         "bookCleanService": "Book Your Cleaning Service Today!",
+        "callNow": "Call Now on +974 7123 6660",
         "ProfessionalCleaningServices": "Professional Cleaning Services in Qatar",
         "LetUsHandleTheMess": "Let Us Handle the Mess!",
         "ourServices": "Our Services",
@@ -94,6 +95,9 @@
         "HospitalityStaff": "Hospitality Staff",
         "ContactUs": "Contact Us",
         "submit": "Submit",
+        "emailForQuote": "Email for Quote",
+        "emailSubject": "Price Quotation Request - Cleaning Services",
+        "emailBody": "Hello Carla Maid,\n\nI would like to request a price quotation for your cleaning services.\n\nPlease provide me with information about:\n- Service type needed\n- Pricing details\n- Availability\n\nThank you!",
         "contactYouSoon": "Thank you! We will contact you as soon as possible.",
         "needsHelp": "Need Help?",
         "HaveQuestionsBeforeBooking": "Have Questions Before Booking?",
@@ -232,6 +236,7 @@
             "email": "Email",
             "phone": "Phone",
             "message": "Message",
+            "defaultMessage": "Hello Carla Maid Team,\n\nI would like to request a quotation for your cleaning services. Please provide me with information about:\n\n• Types of cleaning services available\n• Pricing for residential/commercial cleaning\n• Scheduling and availability\n• Any special packages or offers\n• Service area coverage in Qatar\n\nProperty details:\n- Property type: [Residential/Commercial/Office]\n- Size: [Square meters or rooms]\n- Cleaning frequency needed: [One-time/Weekly/Monthly]\n- Preferred schedule: [Morning/Afternoon/Evening]\n\nAdditional requirements or questions:\n[Please specify any special cleaning needs]\n\nThank you for your time. I look forward to hearing from you soon.\n\nBest regards,",
             "send": "Send"
         },
         "info": {
