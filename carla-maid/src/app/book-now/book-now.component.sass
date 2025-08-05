@@ -27,6 +27,11 @@ mat-form-field
             width: 48%
             mat-form-field
                 width: 100%
+            .payment-note
+                color: #666
+                font-size: 12px
+                margin-top: 5px
+                display: block
 
     .inputs-holder
         gap: 3%
@@ -46,6 +51,37 @@ mat-form-field
             font-weight: 600
             color: $text-primary
             margin: 0
+
+    // Payment processing styles
+    .loading-spinner
+        display: inline-block
+        width: 16px
+        height: 16px
+        border: 2px solid #ffffff
+        border-radius: 50%
+        border-top-color: transparent
+        animation: spin 1s ease-in-out infinite
+        margin-right: 8px
+
+    .warn
+        padding: 10px
+        border-radius: 5px
+        margin: 10px 0
+        font-size: 14px
+        
+        &.warn-success
+            background-color: #d4edda
+            color: #155724
+            border: 1px solid #c3e6cb
+            
+        &.warn-error
+            background-color: #f8d7da
+            color: #721c24
+            border: 1px solid #f5c6cb
+
+@keyframes spin
+    to
+        transform: rotate(360deg)
             
 ::ng-deep 
     .gray-option 
@@ -115,3 +151,114 @@ mat-form-field
     .desc
         button
             width: 80%
+
+// Payment Popup Styles
+.popup-overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.5)
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
+
+.popup-container
+    background: white
+    border-radius: 10px
+    padding: 2rem
+    max-width: 500px
+    width: 90%
+    text-align: center
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15)
+
+.popup-content
+    h1
+        color: #333
+        margin-bottom: 1rem
+        font-size: 1.5rem
+    
+    p
+        color: #666
+        margin-bottom: 1.5rem
+        line-height: 1.5
+
+.cancel-icon, .failed-icon
+    margin-bottom: 1rem
+    
+    svg
+        width: 64px
+        height: 64px
+
+.payment-details
+    background: #f8f9fa
+    border-radius: 8px
+    padding: 1rem
+    margin: 1rem 0
+    
+    .detail-row
+        display: flex
+        justify-content: space-between
+        margin-bottom: 0.5rem
+        
+        &:last-child
+            margin-bottom: 0
+        
+        span:first-child
+            font-weight: 600
+            color: #333
+        
+        span:last-child
+            color: #666
+
+.status-cancelled
+    color: #EF4444 !important
+    font-weight: 600
+
+.status-failed
+    color: #EF4444 !important
+    font-weight: 600
+
+.actions
+    display: flex
+    gap: 1rem
+    justify-content: center
+    margin-top: 1.5rem
+    
+    button
+        padding: 0.75rem 1.5rem
+        border-radius: 5px
+        font-weight: 600
+        cursor: pointer
+        transition: all 0.3s ease
+        
+        &.btn-primary
+            background: linear-gradient(90deg, #0188FF, #0346FF)
+            color: white
+            border: none
+            
+            &:hover
+                transform: translateY(-2px)
+                box-shadow: 0 4px 12px rgba(1, 136, 255, 0.3)
+        
+        &.btn-secondary
+            background: transparent
+            color: #666
+            border: 2px solid #ddd
+            
+            &:hover
+                border-color: #999
+                color: #333
+
+@media (max-width: 600px)
+    .popup-container
+        padding: 1.5rem
+        width: 95%
+    
+    .actions
+        flex-direction: column
+        
+        button
+            width: 100%

@@ -134,6 +134,108 @@ export class AnalyticsService {
   }
 
   /**
+   * Track SkipCash payment success with enhanced marketing data
+   */
+  trackSkipCashPaymentSuccess(orderId: string, value: number, currency: string = 'QAR', serviceType?: string): void {
+    // Standard purchase tracking
+    this.pushToDataLayer({
+      event: 'purchase',
+      transaction_id: orderId,
+      value: value,
+      currency: currency,
+      payment_method: 'skipcash',
+      service_type: serviceType || 'cleaning_service'
+    });
+
+    // Enhanced marketing tracking
+    this.pushToDataLayer({
+      event: 'payment_success',
+      payment_gateway: 'skipcash',
+      order_id: orderId,
+      amount: value,
+      currency: currency,
+      service_type: serviceType || 'cleaning_service',
+      conversion_type: 'payment_completion',
+      marketing_channel: 'website_direct'
+    });
+
+    // Revenue tracking for marketing campaigns
+    this.pushToDataLayer({
+      event: 'revenue_tracking',
+      revenue: value,
+      currency: currency,
+      order_id: orderId,
+      payment_method: 'skipcash',
+      conversion_source: 'website_booking'
+    });
+  }
+
+  /**
+   * Track payment initiation for funnel analysis
+   */
+  trackPaymentInitiation(orderId: string, value: number, currency: string = 'QAR'): void {
+    this.pushToDataLayer({
+      event: 'payment_initiated',
+      order_id: orderId,
+      amount: value,
+      currency: currency,
+      payment_gateway: 'skipcash',
+      funnel_step: 'payment_processing'
+    });
+  }
+
+  /**
+   * Track payment failure for optimization
+   */
+  trackPaymentFailure(orderId: string, errorReason?: string): void {
+    this.pushToDataLayer({
+      event: 'payment_failed',
+      order_id: orderId,
+      payment_gateway: 'skipcash',
+      error_reason: errorReason || 'unknown',
+      funnel_step: 'payment_processing'
+    });
+  }
+
+  /**
+   * Track booking completion with payment
+   */
+  trackBookingWithPayment(orderId: string, bookingOrderId: string, value: number, currency: string = 'QAR'): void {
+    this.pushToDataLayer({
+      event: 'booking_completed_with_payment',
+      payment_order_id: orderId,
+      booking_order_id: bookingOrderId,
+      amount: value,
+      currency: currency,
+      payment_method: 'skipcash',
+      conversion_type: 'full_booking_conversion'
+    });
+  }
+
+  /**
+   * Track customer lifetime value events
+   */
+  trackCustomerLifetimeValue(customerId: string, totalSpent: number, currency: string = 'QAR'): void {
+    this.pushToDataLayer({
+      event: 'customer_lifetime_value',
+      customer_id: customerId,
+      total_spent: totalSpent,
+      currency: currency,
+      payment_method: 'skipcash'
+    });
+  }
+
+  /**
+   * Track custom events
+   */
+  trackEvent(eventName: string, parameters: any = {}): void {
+    this.pushToDataLayer({
+      event: eventName,
+      ...parameters
+    });
+  }
+
+  /**
    * Track user engagement
    */
   trackEngagement(action: string, category: string, label?: string): void {
