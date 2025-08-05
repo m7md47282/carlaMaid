@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Chrome - Angular Dev Server",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/carla-maid",
+            "preLaunchTask": "start-angular-dev-server"
+        },
+        {
+            "name": "Launch Chrome - Production Server",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4000",
+            "webRoot": "${workspaceFolder}/carla-maid",
+            "preLaunchTask": "start-production-server"
+        }
+    ]
+}

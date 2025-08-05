@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ import { AnalyticsService } from '../shared/services/analytics.service';
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.sass'
 })
-export class ContactUsComponent { 
+export class ContactUsComponent implements OnInit { 
   _translate = inject(TranslateService);
   sanitizer = inject(DomSanitizer);
   analyticsService = inject(AnalyticsService);
@@ -27,13 +27,29 @@ export class ContactUsComponent {
     message: '',
   };
 
+  ngOnInit(): void {
+    // Set default quotation request message
+    this.formData.message = this._translate.instant('contact.form.defaultMessage');
+    
+    // Update message when language changes
+    this._translate.onLangChange.subscribe(() => {
+      if (this.formData.message === this._translate.instant('contact.form.defaultMessage')) {
+        this.formData.message = this._translate.instant('contact.form.defaultMessage');
+      }
+    });
+  }
+
   resetForm(){
     this.formData = {
       name: '',
       email: '',
       phone: '',
-      message: '',
+      message: this._translate.instant('contact.form.defaultMessage'),
     };
+  }
+
+  isDefaultMessage(): boolean {
+    return this.formData.message === this._translate.instant('contact.form.defaultMessage');
   }
 
   contacts = [

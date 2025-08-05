@@ -329,4 +329,8 @@ ngAfterViewInit(): void {
   sendPost(post: any) {
     this.router.navigate(['/view-blogs', post.id]);
   }
+
+  makePhoneCall(phoneNumber: string) {
+    window.open(`tel:${phoneNumber}`, '_self');
+  }
 }
