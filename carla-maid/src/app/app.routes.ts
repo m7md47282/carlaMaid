@@ -26,6 +26,14 @@ export const routes: Routes = [
         loadComponent: () => import('./book-now/book-now.component').then(m => m.BookNowComponent)
     },
     {
+        path: 'book-now/success',
+        loadComponent: () => import('./book-now/payment-success/payment-success.component').then(m => m.PaymentSuccessComponent)
+    },
+    {
+        path: 'book-now/cancel',
+        loadComponent: () => import('./book-now/payment-cancel/payment-cancel.component').then(m => m.PaymentCancelComponent)
+    },
+    {
         path: 'contact-us',
         loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent)
     },

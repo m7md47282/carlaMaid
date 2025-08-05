@@ -1,0 +1,23 @@
+{
+  "/api/skipcash/*": {
+    "target": "https://skipcashtest.azurewebsites.net",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/skipcash": ""
+    },
+    "headers": {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization"
+    }
+  },
+  "/api/woocommerce/*": {
+    "target": "https://carlamaid.qa",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/woocommerce": "/wp-json/wc/v3"
+    }
+  }
+} 

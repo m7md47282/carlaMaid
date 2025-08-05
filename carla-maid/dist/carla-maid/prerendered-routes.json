@@ -6,6 +6,8 @@
     "/blogs-list",
     "/blogs-open",
     "/book-now",
+    "/book-now/cancel",
+    "/book-now/success",
     "/contact-us",
     "/our-services"
   ]
