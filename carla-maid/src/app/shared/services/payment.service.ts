@@ -36,6 +36,42 @@ export interface PaymentStatus {
   error?: string;
 }
 
+// SkipCash Webhook interfaces
+export interface SkipCashWebhookPayload {
+  PaymentId: string;
+  Amount: string;
+  StatusId: number;
+  TransactionId: string | null;
+  Custom1: string | null;
+  Custom2: string | null;
+  Custom3: string | null;
+  Custom4: string | null;
+  Custom5: string | null;
+  Custom6: string | null;
+  Custom7: string | null;
+  Custom8: string | null;
+  Custom9: string | null;
+  Custom10: string | null;
+  VisaId: string;
+  TokenId: string;
+  CardType: string;
+  CardNumber: string | null;
+  RecurringSubscriptionId: string;
+}
+
+// SkipCash Status ID mapping
+export const SKIPCASH_STATUS_MAP: Record<number, PaymentStatusType> = {
+  0: 'pending',    // New
+  1: 'pending',    // Pending
+  2: 'completed',  // Paid
+  3: 'cancelled',  // Canceled
+  4: 'failed',     // Failed
+  5: 'failed',     // Rejected
+  6: 'completed',  // Refunded
+  7: 'pending',    // Pending refund
+  8: 'failed'      // Refund failed
+};
+
 // Backend API response interfaces
 interface BackendPaymentResponse {
   success: boolean;
@@ -95,6 +131,34 @@ export class PaymentService {
         map(response => this.handleStatusResponse(response, orderId)),
         catchError(this.handleStatusError.bind(this))
       );
+  }
+
+  /**
+   * Map SkipCash StatusId to PaymentStatusType
+   * @param statusId - SkipCash StatusId (0-8)
+   * @returns PaymentStatusType
+   */
+  mapSkipCashStatus(statusId: number): PaymentStatusType {
+    return SKIPCASH_STATUS_MAP[statusId] || 'failed';
+  }
+
+  /**
+   * Process SkipCash webhook payload
+   * @param webhookPayload - Raw webhook data from SkipCash
+   * @returns Processed payment status
+   */
+  processWebhookPayload(webhookPayload: SkipCashWebhookPayload): PaymentStatus {
+    const status = this.mapSkipCashStatus(webhookPayload.StatusId);
+    const amount = webhookPayload.Amount ? parseFloat(webhookPayload.Amount) : undefined;
+    
+    return {
+      orderId: webhookPayload.TransactionId || webhookPayload.PaymentId,
+      status,
+      amount,
+      currency: 'QAR', // SkipCash uses QAR by default
+      transactionId: webhookPayload.PaymentId,
+      error: status === 'failed' ? `SkipCash StatusId: ${webhookPayload.StatusId}` : undefined
+    };
   }
 
   /**
@@ -198,8 +262,10 @@ export class PaymentService {
    * @returns Success URL
    */
   getPaymentSuccessUrl(orderId?: string): string {
+    // We no longer append the orderId in the URL. It is stored locally and
+    // retrieved on the success page from sessionStorage.
     const baseUrl = environment.skipCash.returnUrl;
-    return orderId ? `${baseUrl}${orderId}` : baseUrl;
+    return baseUrl;
   }
 
   /**
@@ -208,11 +274,11 @@ export class PaymentService {
    * @returns Cancel URL
    */
   getPaymentCancelUrl(orderId?: string): string {
+    // We no longer append the orderId in the URL. It is stored locally and
+    // retrieved on the cancel page from sessionStorage.
     const baseUrl = environment.skipCash.cancelUrl;
-    return orderId ? `${baseUrl}${orderId}` : baseUrl;
+    return baseUrl;
   }
-
-
 
   /**
    * Log payment attempt for analytics
@@ -243,6 +309,22 @@ export class PaymentService {
     });
   }
 
+  /**
+   * Log webhook processing for analytics
+   * @param webhookPayload - Webhook data received
+   * @param processedStatus - Processed payment status
+   */
+  logWebhookProcessing(webhookPayload: SkipCashWebhookPayload, processedStatus: PaymentStatus): void {
+    console.log('Webhook processed:', {
+      skipCashPaymentId: webhookPayload.PaymentId,
+      orderId: processedStatus.orderId,
+      originalStatusId: webhookPayload.StatusId,
+      mappedStatus: processedStatus.status,
+      amount: processedStatus.amount,
+      timestamp: new Date().toISOString()
+    });
+  }
+
   // Private helper methods
 
   /**
@@ -250,7 +332,7 @@ export class PaymentService {
    */
   private buildPaymentPayload(paymentRequest: PaymentRequest): any {
     return {
-      amount: paymentRequest.amount,
+      amount: paymentRequest.amount.toString(),
       currency: paymentRequest.currency,
       customerName: paymentRequest.customerName,
       customerEmail: paymentRequest.customerEmail,

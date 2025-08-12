@@ -238,6 +238,8 @@ export class BookNowComponent implements OnInit {
   private handleSuccessfulPaymentCreation(paymentOrderId: string, response: any): void {
     this.trackPaymentInitiation(paymentOrderId);
     this.storePaymentData(paymentOrderId);
+    // Persist the orderId locally to be read on success/cancel pages without URL params
+    sessionStorage.setItem('paymentOrderId', paymentOrderId);
     this.paymentService.logPaymentResult(paymentOrderId, 'initiated');
     this.paymentService.redirectToPayment(response.data.payUrl);
   }

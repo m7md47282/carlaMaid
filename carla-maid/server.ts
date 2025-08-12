@@ -54,7 +54,7 @@ export function app(): express.Express {
       apiKey: environment['SKIPCASH_SANDBOX_API_KEY'] || '',
       secretKey: environment['SKIPCASH_SANDBOX_SECRET_KEY'] || ''
     },
-    isTestMode: true
+    isTestMode: false
   };
 
   const currentConfig = skipCashConfig.isTestMode ? skipCashConfig.sandbox : skipCashConfig.production;
@@ -221,7 +221,13 @@ export function app(): express.Express {
         country: 'QA', // Required field (ISO country code)
         postalCode: '00000', // Required field
         transactionId: orderId,
-        custom1: description || ''
+        custom1: description || '',
+        // Pass full redirect URLs along with the payment so SkipCash can return to our system
+        // Include both camelCase and snake_case to maximize compatibility
+        returnUrl: returnUrl,
+        cancelUrl: cancelUrl,
+        return_url: returnUrl,
+        cancel_url: cancelUrl
       };
 
       // Build signature data
@@ -319,6 +325,80 @@ export function app(): express.Express {
       return res.status(500).json({
         success: false,
         error: 'Failed to check payment status'
+      });
+    }
+  });
+
+  // SkipCash Webhook endpoint for real-time payment updates
+  server.post('/api/skipcash/webhook', async (req, res) => {
+    try {
+      console.log('SkipCash webhook received:', req.body);
+      
+      const webhookData = req.body;
+      const authorizationHeader = req.headers.authorization;
+
+      if (!authorizationHeader) {
+        console.error('Webhook missing authorization header');
+        return res.status(401).json({ success: false, error: 'Missing authorization header' });
+      }
+
+      // Verify webhook signature using HMAC-SHA256
+      const isValidSignature = verifyWebhookSignature(webhookData, authorizationHeader, currentConfig.secretKey);
+      
+      if (!isValidSignature) {
+        console.error('Webhook signature verification failed');
+        return res.status(401).json({ success: false, error: 'Invalid signature' });
+      }
+
+      // Process the webhook data
+      const { PaymentId, Amount, StatusId, TransactionId, Custom1, VisaId } = webhookData;
+      
+      console.log('Processing webhook:', {
+        PaymentId,
+        Amount,
+        StatusId,
+        TransactionId,
+        Custom1,
+        VisaId
+      });
+
+      // Map SkipCash StatusId to payment status
+      const paymentStatus = mapSkipCashStatus(StatusId);
+      
+      // Update booking status if we have a TransactionId (our order ID)
+      if (TransactionId) {
+        try {
+          // Update the booking status based on payment result
+          await updateBookingStatus(TransactionId, paymentStatus, Amount);
+          console.log(`Booking ${TransactionId} status updated to: ${paymentStatus}`);
+        } catch (updateError) {
+          console.error('Failed to update booking status:', updateError);
+          // Don't fail the webhook - log the error but return success
+        }
+      }
+
+      // Log webhook processing
+      console.log('Webhook processed successfully:', {
+        PaymentId,
+        StatusId,
+        mappedStatus: paymentStatus,
+        orderId: TransactionId,
+        amount: Amount
+      });
+
+      // Return 200 to acknowledge receipt (SkipCash requirement)
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Webhook processed successfully',
+        paymentId: PaymentId,
+        status: paymentStatus
+      });
+
+    } catch (error) {
+      console.error('Webhook processing error:', error);
+      return res.status(500).json({ 
+        success: false, 
+        error: 'Webhook processing failed' 
       });
     }
   });
@@ -713,6 +793,95 @@ export function app(): express.Express {
     // Add WooCommerce-specific verification logic here
     // This would typically involve verifying the callback with WooCommerce
     return true; // Placeholder
+  }
+
+  // Helper function to verify webhook signature
+  function verifyWebhookSignature(webhookData: any, authorizationHeader: string, secretKey: string): boolean {
+    try {
+      // Extract the signature from the authorization header
+      const receivedSignature = authorizationHeader.replace('Bearer ', '');
+      
+      // Build signature data according to SkipCash documentation
+      // Required fields: PaymentId, Amount, StatusId, TransactionId, Custom1, VisaId
+      const signatureFields = [
+        'PaymentId', 'Amount', 'StatusId', 'TransactionId', 'Custom1', 'VisaId'
+      ];
+      
+      const signatureData = signatureFields
+        .map(field => {
+          const value = webhookData[field];
+          return value !== null && value !== undefined ? `${field}=${value}` : null;
+        })
+        .filter(Boolean)
+        .join(',');
+      
+      console.log('Signature data for verification:', signatureData);
+      
+      // Generate expected signature using HMAC-SHA256
+      const expectedSignature = crypto
+        .createHmac('sha256', secretKey)
+        .update(signatureData)
+        .digest('base64');
+      
+      console.log('Signature verification:', {
+        received: receivedSignature,
+        expected: expectedSignature,
+        matches: receivedSignature === expectedSignature
+      });
+      
+      return receivedSignature === expectedSignature;
+      
+    } catch (error) {
+      console.error('Signature verification error:', error);
+      return false;
+    }
+  }
+
+  // Helper function to map SkipCash StatusId to payment status
+  function mapSkipCashStatus(statusId: number): string {
+    const statusMap: Record<number, string> = {
+      0: 'pending',    // New
+      1: 'pending',    // Pending
+      2: 'completed',  // Paid
+      3: 'cancelled',  // Canceled
+      4: 'failed',     // Failed
+      5: 'failed',     // Rejected
+      6: 'completed',  // Refunded
+      7: 'pending',    // Pending refund
+      8: 'failed'      // Refund failed
+    };
+    
+    return statusMap[statusId] || 'failed';
+  }
+
+  // Helper function to update booking status
+  async function updateBookingStatus(orderId: string, status: string, amount?: string): Promise<void> {
+    try {
+      // Since we're using mock data, we'll just log the status update
+      // In a real implementation, this would update the database
+      console.log(`Webhook: Updating booking ${orderId} status to: ${status}`);
+      
+      if (amount) {
+        console.log(`Webhook: Payment amount: ${amount}`);
+      }
+      
+      // Log what would happen in production:
+      if (status === 'completed') {
+        console.log(`Webhook: Would update booking ${orderId} to confirmed status with payment`);
+      } else if (status === 'failed' || status === 'cancelled') {
+        console.log(`Webhook: Would update booking ${orderId} to failed payment status`);
+      }
+      
+      // In production, you would:
+      // 1. Find the booking in your database
+      // 2. Update the status and payment information
+      // 3. Send notifications if needed
+      // 4. Update any related systems
+      
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      throw error;
+    }
   }
 
   server.set('view engine', 'html');

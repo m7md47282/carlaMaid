@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/shared/directives/phone-track.directive.ts"],
-  "sourcesContent": ["import { Directive, ElementRef, Input, HostListener, inject } from '@angular/core';\nimport { AnalyticsService } from '../services/analytics.service';\n\n@Directive({\n  selector: '[appPhoneTrack]',\n  standalone: true\n})\nexport class PhoneTrackDirective {\n  @Input('appPhoneTrack') phoneNumber: string = '';\n  \n  private analyticsService = inject(AnalyticsService);\n  private element = inject(ElementRef);\n\n  @HostListener('click', ['$event'])\n  onClick(event: Event) {\n    // Track phone call click\n    this.analyticsService.trackPhoneCall(this.phoneNumber);\n    \n    // Track button click\n    this.analyticsService.trackButtonClick('phone_call', 'contact_info');\n    \n    // Track engagement\n    this.analyticsService.trackEngagement('click', 'contact', 'phone_call');\n  }\n} "],
-  "mappings": ";;;;;;;;;;;;;;;AAOM,IAAO,uBAAP,MAAO,qBAAmB;EAA1B;AACoB,uCAAsB;AAEtC,4CAAmB,OAAO,gBAAgB;AAC1C,mCAAU,OAAO,UAAU;;EAGnC,QAAQ,OAAY;AAElB,SAAK,iBAAiB,eAAe,KAAK,WAAW;AAGrD,SAAK,iBAAiB,iBAAiB,cAAc,cAAc;AAGnE,SAAK,iBAAiB,gBAAgB,SAAS,WAAW,YAAY;EACxE;;cAhBW;mCAAA,sBAAmB;AAAA;cAAnB,uFAAA,sBAAmB,WAAA,CAAA,CAAA,IAAA,iBAAA,EAAA,CAAA,GAAA,cAAA,SAAA,iCAAA,IAAA,KAAA;AAAA,MAAA,KAAA,GAAA;AAAnB,IAAA,qBAAA,SAAA,SAAA,6CAAA,QAAA;AAAA,aAAA,IAAA,QAAA,MAAA;IAAe,CAAA;;;AAAtB,IAAO,sBAAP;",
-  "names": []
-}
