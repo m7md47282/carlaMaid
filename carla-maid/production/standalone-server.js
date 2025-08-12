@@ -96,33 +96,244 @@ app.get('/api/skipcash/health', async (req, res) => {
   }
 });
 
+// SkipCash Webhook endpoint according to official documentation
 app.post('/api/skipcash/webhook', async (req, res) => {
   try {
-    console.log('Received webhook data:', req.body);
-    const callbackData = req.body;
-
-    // Verify the callback signature
-    const isValidSignature = verifyCallbackSignature(callbackData, skipCashConfig.secretKey);
+    console.log('Received SkipCash webhook data:', req.body);
+    
+    const webhookData = req.body;
+    const authHeader = req.headers.authorization;
+    
+    // Verify webhook signature using webhook key
+    const isValidSignature = verifyWebhookSignature(webhookData, authHeader, currentConfig.webhookKey);
+    
     if (!isValidSignature) {
-      return res.status(400).json({
+      console.error('Invalid webhook signature. Rejecting webhook.');
+      return res.status(401).json({
         success: false,
         error: 'Invalid signature'
       });
     }
-
-    // Process the callback data
-    console.log('Received valid webhook data:', callbackData);
-
-    // Respond with success
-    return res.json({
-      success: true,
-      message: 'Webhook processed successfully'
+    
+    // Extract webhook data
+    const {
+      PaymentId,
+      Amount,
+      StatusId,
+      TransactionId,
+      Custom1,
+      Custom2,
+      Custom3,
+      Custom4,
+      Custom5,
+      Custom6,
+      Custom7,
+      Custom8,
+      Custom9,
+      Custom10,
+      VisaId,
+      TokenId,
+      CardType,
+      CardNubmer,
+      RecurringSubscriptionId
+    } = webhookData;
+    
+    console.log('Processing webhook for payment:', {
+      PaymentId,
+      Amount,
+      StatusId,
+      TransactionId,
+      Custom1,
+      VisaId,
+      CardType
     });
+    
+    // Process webhook based on status
+    let statusMessage = '';
+    let shouldUpdateBooking = false;
+    
+    switch (StatusId) {
+      case 0: // new
+        statusMessage = 'Payment created';
+        break;
+      case 1: // pending
+        statusMessage = 'Payment pending';
+        break;
+      case 2: // paid
+        statusMessage = 'Payment successful';
+        shouldUpdateBooking = true;
+        break;
+      case 3: // canceled
+        statusMessage = 'Payment canceled';
+        break;
+      case 4: // failed
+        statusMessage = 'Payment failed';
+        break;
+      case 5: // rejected
+        statusMessage = 'Payment rejected';
+        break;
+      case 6: // refunded
+        statusMessage = 'Payment refunded';
+        break;
+      case 7: // pending refund
+        statusMessage = 'Refund pending';
+        break;
+      case 8: // refund failed
+        statusMessage = 'Refund failed';
+        break;
+      default:
+        statusMessage = 'Unknown status';
+        break;
+    }
+    
+    console.log(`Payment status: ${StatusId} - ${statusMessage}`);
+    
+    // If payment is successful and we have a transaction ID, update the booking
+    if (shouldUpdateBooking && TransactionId) {
+      try {
+        // Update booking status in Google Form
+        await updateBookingPaymentStatus(TransactionId, PaymentId, true, StatusId, Amount);
+        console.log('Booking payment status updated successfully');
+      } catch (updateError) {
+        console.error('Failed to update booking payment status:', updateError);
+        // Don't fail the webhook if Google Form update fails
+      }
+    }
+    
+    // Log webhook processing
+    console.log('Webhook processed successfully:', {
+      PaymentId,
+      StatusId,
+      statusMessage,
+      TransactionId,
+      processedAt: new Date().toISOString()
+    });
+    
+    // Return HTTP 200 to acknowledge receipt
+    return res.status(200).json({
+      success: true,
+      message: 'Webhook processed successfully',
+      status: statusMessage
+    });
+    
   } catch (error) {
-    console.error('Error processing webhook:', error);
+    console.error('Error processing SkipCash webhook:', error);
+    
+    // Return HTTP 500 to trigger retry
     return res.status(500).json({
       success: false,
       error: 'Failed to process webhook'
+    });
+  }
+});
+
+// Test webhook endpoint for development and testing
+app.post('/api/skipcash/webhook/test', async (req, res) => {
+  try {
+    console.log('Testing webhook signature verification...');
+    
+    const testWebhookData = {
+      PaymentId: "test-payment-id-123",
+      Amount: "100.00",
+      StatusId: 2,
+      TransactionId: "test-transaction-456",
+      Custom1: "test-custom-data",
+      VisaId: "test-visa-id-789"
+    };
+    
+    // Generate test signature using webhook key
+    const testSignatureData = [
+      'PaymentId=test-payment-id-123',
+      'Amount=100.00',
+      'StatusId=2',
+      'TransactionId=test-transaction-456',
+      'Custom1=test-custom-data',
+      'VisaId=test-visa-id-789'
+    ].join(',');
+    
+    const testSignature = crypto
+      .createHmac('sha256', currentConfig.webhookKey)
+      .update(testSignatureData)
+      .digest('base64');
+    
+    // Test signature verification
+    const isValidTestSignature = verifyWebhookSignature(
+      testWebhookData, 
+      testSignature, 
+      currentConfig.webhookKey
+    );
+    
+    return res.json({
+      success: true,
+      message: 'Webhook test completed',
+      testData: {
+        webhookData: testWebhookData,
+        signatureData: testSignatureData,
+        generatedSignature: testSignature,
+        verificationResult: isValidTestSignature,
+        webhookKey: currentConfig.webhookKey.substring(0, 8) + '...',
+        mode: skipCashConfig.isTestMode ? 'sandbox' : 'production'
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error testing webhook:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to test webhook'
+    });
+  }
+});
+
+// Webhook configuration and information endpoint
+app.get('/api/skipcash/webhook/config', (req, res) => {
+  try {
+    const webhookUrl = `${req.protocol}://${req.get('host')}/api/skipcash/webhook`;
+    
+    return res.json({
+      success: true,
+      message: 'Webhook configuration information',
+      config: {
+        webhookUrl: webhookUrl,
+        method: 'POST',
+        contentType: 'application/json',
+        signatureHeader: 'Authorization',
+        signatureAlgorithm: 'HMAC-SHA256',
+        signatureEncoding: 'base64',
+        requiredFields: [
+          'PaymentId',
+          'Amount', 
+          'StatusId',
+          'TransactionId',
+          'Custom1',
+          'VisaId'
+        ],
+        statusCodes: {
+          0: 'new',
+          1: 'pending',
+          2: 'paid',
+          3: 'canceled',
+          4: 'failed',
+          5: 'rejected',
+          6: 'refunded',
+          7: 'pending refund',
+          8: 'refund failed'
+        },
+        retryPolicy: {
+          attempts: 3,
+          intervals: ['immediately', '1 hour later', '1 day later'],
+          timeout: '10 seconds'
+        },
+        environment: skipCashConfig.isTestMode ? 'sandbox' : 'production',
+        webhookKeyConfigured: !!currentConfig.webhookKey
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error getting webhook config:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to get webhook configuration'
     });
   }
 });
@@ -989,6 +1200,102 @@ function createVerificationPayload(callbackData) {
     .sort();
   
   return sortedKeys.map(key => `${key}=${callbackData[key]}`).join('&');
+}
+
+// SkipCash webhook signature verification function
+function verifyWebhookSignature(webhookData, authHeader, webhookKey) {
+  try {
+    if (!authHeader || !webhookData || !webhookKey) {
+      console.error('Missing required data for webhook verification');
+      return false;
+    }
+    
+    // Extract the signature from Authorization header
+    const receivedSignature = authHeader;
+    
+    // Build signature data according to SkipCash documentation
+    // Required parameters: PaymentId, Amount, StatusId, TransactionId, Custom1, VisaId
+    // Order is important: PaymentId,Amount,StatusId,TransactionId,Custom1,VisaId
+    const signatureFields = [
+      'PaymentId',
+      'Amount', 
+      'StatusId',
+      'TransactionId',
+      'Custom1',
+      'VisaId'
+    ];
+    
+    const signatureParts = [];
+    for (const field of signatureFields) {
+      if (webhookData[field] !== undefined && webhookData[field] !== null) {
+        signatureParts.push(`${field}=${webhookData[field]}`);
+      }
+    }
+    
+    const signatureData = signatureParts.join(',');
+    console.log('Building signature with data:', signatureData);
+    
+    // Calculate HMAC-SHA256 signature
+    const expectedSignature = crypto
+      .createHmac('sha256', webhookKey)
+      .update(signatureData)
+      .digest('base64');
+    
+    console.log('Signature verification:', {
+      received: receivedSignature,
+      expected: expectedSignature,
+      matches: receivedSignature === expectedSignature
+    });
+    
+    return receivedSignature === expectedSignature;
+    
+  } catch (error) {
+    console.error('Error verifying webhook signature:', error);
+    return false;
+  }
+}
+
+// Function to update booking payment status in Google Form
+async function updateBookingPaymentStatus(transactionId, paymentId, isPaid, statusId, amount) {
+  try {
+    // Create form data for Google Form submission
+    const formData = new FormData();
+    
+    // Add payment-related fields
+    formData.append(googleFormConfig.formFields.orderId, transactionId);
+    formData.append(googleFormConfig.formFields.paymentId, paymentId);
+    formData.append(googleFormConfig.formFields.isPaid, isPaid ? 'true' : 'false');
+    
+    // Add minimal required Google Form fields
+    formData.append('fvv', '1');
+    formData.append('pageHistory', '0');
+    
+    // Submit to Google Form
+    const response = await axios.post(googleFormConfig.formUrl, formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      timeout: 10000
+    });
+    
+    if (response.status === 200) {
+      console.log('Google Form updated successfully for payment:', {
+        transactionId,
+        paymentId,
+        isPaid,
+        statusId,
+        amount,
+        timestamp: new Date().toISOString()
+      });
+      return true;
+    } else {
+      throw new Error(`Google Form update failed with status: ${response.status}`);
+    }
+    
+  } catch (error) {
+    console.error('Failed to update Google Form for payment:', error);
+    throw error;
+  }
 }
 
 // Health check endpoint
