@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:carla-maid": "node dist/carla-maid/server/server.mjs",
@@ -15,7 +16,7 @@
     "dev": "concurrently \"npm run backend:dev\" \"npm run start\"",
     "dev:full": "concurrently \"npm run backend:dev\" \"npm run start\" \"npm run watch\"",
     "create:production": "./deploy-production.sh",
-    "build:production": "npm run build && npm run create:production"
+    "build:production": "npm run build:prod && npm run create:production"
   },
   "private": true,
   "dependencies": {

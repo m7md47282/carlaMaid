@@ -68,11 +68,19 @@ export class SharedService {
    * @returns {string} The plain text content without HTML tags and with decoded entities.
    */
   stripHtml(html: string): string {
-    const text = html.replace(/<[^>]*>/g, '');
+    if (!html || typeof html !== 'string') {
+      return '';
+    }
+    try {
+      const text = html.replace(/<[^>]*>/g, '');
 
-    const textarea = document.createElement("textarea");
-    textarea.innerHTML = text;
-    return textarea.value;
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = text;
+      return textarea.value;
+    } catch (error) {
+      console.error('Error stripping HTML:', error);
+      return '';
+    }
   }
   selectPost(post: any) {
     this.selectedPostSubject.next(post);

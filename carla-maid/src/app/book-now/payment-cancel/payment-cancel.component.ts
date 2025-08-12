@@ -58,7 +58,9 @@ export class PaymentCancelComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.orderId = this.route.snapshot.queryParams['orderId'];
+    // Prefer reading orderId from sessionStorage to avoid URL params
+    const storedOrderId = sessionStorage.getItem('paymentOrderId');
+    this.orderId = storedOrderId || this.route.snapshot.queryParams['orderId'];
     
     if (this.orderId) {
       this.checkPaymentStatus();

@@ -97,7 +97,8 @@ export class LandingComponent implements OnInit {
   ];
 
   services: {}[] = []
-  blogsPosts!: any[];
+  blogsPosts: any[] = [];
+  isLoadingBlogs: boolean = false;
 
   isInView = false;
 
@@ -299,6 +300,7 @@ ngAfterViewInit(): void {
    * Retrieves posts filtered by multiple category names.
    */
   getBlogsPosts(): void {
+    this.isLoadingBlogs = true;
     const postsPage = 'blogs';
     const categoriesNames = [postsPage, this.lang];
 
@@ -307,9 +309,25 @@ ngAfterViewInit(): void {
       page: 1
     };
 
+    // Add timeout to prevent hanging requests
+    const timeout = setTimeout(() => {
+      this.isLoadingBlogs = false;
+      if (!this.blogsPosts || this.blogsPosts.length === 0) {
+        this.blogsPosts = [];
+      }
+    }, 10000); // 10 second timeout
+
     this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
       next: (value: any) => {
-        this.blogsPosts = value;
+        clearTimeout(timeout);
+        this.blogsPosts = value || [];
+        this.isLoadingBlogs = false;
+      },
+      error: (error: any) => {
+        clearTimeout(timeout);
+        console.error('Error fetching blog posts:', error);
+        this.blogsPosts = [];
+        this.isLoadingBlogs = false;
       }
     });
   }
@@ -321,12 +339,38 @@ ngAfterViewInit(): void {
    * @returns {string | null} - The first image URL or null if no image is found.
    */
   getFirstImage(html: string): string | null {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const img = doc.querySelector("img");
-    return img ? img.src : "../../assets/images/posts/default.png";
+    if (!html || typeof html !== 'string') {
+      return "../../assets/images/posts/default.png";
+    }
+    try {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const img = doc.querySelector("img");
+      return img ? img.src : "../../assets/images/posts/default.png";
+    } catch (error) {
+      console.error('Error parsing HTML for image:', error);
+      return "../../assets/images/posts/default.png";
+    }
   }
 
   sendPost(post: any) {
-    this.router.navigate(['/view-blogs', post.id]);
+    if (post && post.id) {
+      this.router.navigate(['/view-blogs', post.id]);
+    } else {
+      console.error('Invalid post data:', post);
+    }
+  }
+
+  makePhoneCall(phoneNumber: string) {
+    window.open(`tel:${phoneNumber}`, '_self');
+  }
+
+  /**
+   * Safely checks if blogsPosts is valid and has the expected structure
+   */
+  hasValidBlogsPosts(): boolean {
+    return this.blogsPosts && 
+           Array.isArray(this.blogsPosts) && 
+           this.blogsPosts.length > 0 &&
+           this.blogsPosts.every(post => post && post.title && post.content);
   }
 }

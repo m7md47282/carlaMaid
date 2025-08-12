@@ -238,8 +238,31 @@
                 h1,h4,p
                     width: 100%
                     text-align: center
-            .btn-epic
-                min-width: 250px
+    
+    .hero-buttons-container
+        gap: 15px
+        
+        .btn-epic
+            min-width: 250px
+            width: 100%
+            max-width: 300px
+        
+    .call-btn
+        background: #25d366
+        border-color: #25d366
+        
+        &:before
+            background-image: linear-gradient(90deg, #25d366, #128c7e)
+        
+        &:hover
+            background: linear-gradient(90deg, #25d366, #128c7e)
+            border-color: #25d366
+            
+        span:first-child
+            color: white
+            
+        span:last-child
+            background-image: linear-gradient(90deg, #25d366, #128c7e)
         
     .section-2-container
         flex-direction: column
@@ -309,6 +332,20 @@
             .hero-content
                 p
                     font-size: 12px
+    
+    .hero-buttons-container
+        gap: 12px
+        padding: 0 10px
+        
+        .btn-epic
+            min-width: 220px
+            height: 44px
+            
+            div
+                top: 12px
+                
+            span
+                font-size: 0.7rem
 
     .section-2-container
         .text-section
@@ -356,3 +393,54 @@
         color: white
         transform: translateY(-2px)
         box-shadow: 0 4px 12px rgba(1, 136, 255, 0.3)
+
+// Button container responsive styles
+.hero-buttons-container
+    display: flex
+    flex-direction: column
+    gap: 20px
+    align-items: center
+    width: 100%
+    
+    @media (min-width: 600px)
+        gap: 25px
+        
+    @media (min-width: 768px)
+        flex-direction: row
+        justify-content: center
+        gap: 30px
+        
+    @media (min-width: 1024px)
+        gap: 40px
+        justify-content: flex-start
+        margin-left: 10rem
+
+// Responsive button adjustments
+.btn-epic
+    @media (max-width: 767px)
+        min-width: 280px
+        max-width: 100%
+        width: calc(100% - 40px)
+        margin: 0 auto
+        
+    @media (max-width: 600px)
+        min-width: 260px
+        width: calc(100% - 30px)
+        height: 50px
+        
+        div
+            top: 15px
+            
+        span
+            font-size: 0.8rem
+        
+    @media (max-width: 480px)
+        min-width: 250px
+        width: calc(100% - 20px)
+        height: 48px
+        
+        div
+            top: 14px
+            
+        span
+            font-size: 0.75rem

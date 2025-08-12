@@ -1,39 +1,43 @@
+@import ../../../variables
+
 .payment-success-container
   min-height: 100vh
   display: flex
   align-items: center
   justify-content: center
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  background: $gray
   padding: 20px
 
 .success-card
-  background: white
+  background: #ffffff
   border-radius: 15px
   padding: 40px
   text-align: center
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1)
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06)
   max-width: 500px
   width: 100%
 
 .success-icon
   margin-bottom: 20px
+  color: $text-primary
 
 h1
-  color: #10B981
+  color: $text-primary
   margin-bottom: 15px
   font-size: 28px
 
 p
-  color: #6B7280
+  color: #4D4D4D
   margin-bottom: 30px
   font-size: 16px
 
 .payment-details
-  background: #F9FAFB
+  background: #FFFFFF
   border-radius: 10px
   padding: 20px
   margin: 20px 0
   text-align: left
+  border: 1px solid #E5E7EB
 
 .detail-row
   display: flex
@@ -49,28 +53,7 @@ p
   gap: 15px
   justify-content: center
   flex-wrap: wrap
-
-.btn-primary, .btn-secondary
-  padding: 12px 24px
-  border-radius: 8px
-  border: none
-  font-size: 16px
-  cursor: pointer
-  transition: all 0.3s ease
-
-.btn-primary
-  background: #10B981
-  color: white
-
-  &:hover
-    background: #059669
-
-.btn-secondary
-  background: #F3F4F6
-  color: #374151
-
-  &:hover
-    background: #E5E7EB
+  margin-top: 10px
 
 @media (max-width: 600px)
   .success-card
@@ -80,4 +63,4 @@ p
     flex-direction: column
 
   .btn-primary, .btn-secondary
-    width: 100% 
+    width: 100%
