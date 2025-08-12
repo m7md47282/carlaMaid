@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'carla-maid-backend',
-    script: 'server.mjs',
+    script: 'standalone-server.js',
     instances: 1,
     autorestart: true,
     watch: false,

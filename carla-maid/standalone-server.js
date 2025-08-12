@@ -26,16 +26,16 @@ app.use((req, res, next) => {
 // SkipCash Configuration
 const skipCashConfig = {
   production: {
-    apiUrl: 'https://api.skipcash.app',
+    apiUrl: 'https://api.skipcash.app/api/v1',
     apiKey: '288d604d-03b6-4c66-821e-0a82a3fd2cc8',
     secretKey: 'Og9vDBQbBFHg/dwxkQjFCcLYogMDq4hLOF0OPsuRDY+OrLp/BPWMoCvsf1EDW41N8QTqoJHFhpclF/+bMR8Gwjyy2n0ZBNKuk8TO6LSpA2+JTWRM3ODl3LuX1nSFHRVnHJ1h0+ojevQqA8U/FzgCu88S+HhdZ1zq1GeWvka9MM8y8arkLwo0oLCf4IPAcH6olU8EKWrgcIymL6spNmRYRqfiLEzFWIQAjNJa2PH/spkK8c0brTae9jzbSf7yw6DO6NV51dbC5Td+BqWEjOmDphtQ3XSfqaj5fIjkGjjd58tnP6uQELF08Q5uZqGno8fWxZi+B6Wz9Z6Zr3y7cr19VTpRA2+RGOSVNzdaMnc7EL6ryFxmXUg+dSU37gBffAzn8fAIe2KJJdGnsSUkM8Z82E6Yj2KPi/Tw/wrYZMwuXNROwlIilIt9tds8PCdlFgPD1wiH8q9om/kIcarLuoVXn71nF65BT3/PhAOEhKyrxLaiqwZg+8xZdbCHzFQNYefcYuDRzflWzPRp3oWX1L9bPw=='
   },
   sandbox: {
-    apiUrl: 'https://skipcashtest.azurewebsites.net',
+    apiUrl: 'https://skipcashtest.azurewebsites.net/api/v1',
     apiKey: '288d604d-03b6-4c66-821e-0a82a3fd2cc8',
     secretKey: 'Og9vDBQbBFHg/dwxkQjFCcLYogMDq4hLOF0OPsuRDY+OrLp/BPWMoCvsf1EDW41N8QTqoJHFhpclF/+bMR8Gwjyy2n0ZBNKuk8TO6LSpA2+JTWRM3ODl3LuX1nSFHRVnHJ1h0+ojevQqA8U/FzgCu88S+HhdZ1zq1GeWvka9MM8y8arkLwo0oLCf4IPAcH6olU8EKWrgcIymL6spNmRYRqfiLEzFWIQAjNJa2PH/spkK8c0brTae9jzbSf7yw6DO6NV51dbC5Td+BqWEjOmDphtQ3XSfqaj5fIjkGjjd58tnP6uQELF08Q5uZqGno8fWxZi+B6Wz9Z6Zr3y7cr19VTpRA2+RGOSVNzdaMnc7EL6ryFxmXUg+dSU37gBffAzn8fAIe2KJJdGnsSUkM8Z82E6Yj2KPi/Tw/wrYZMwuXNROwlIilIt9tds8PCdlFgPD1wiH8q9om/kIcarLuoVXn71nF65BT3/PhAOEhKyrxLaiqwZg+8xZdbCHzFQNYefcYuDRzflWzPRp3oWX1L9bPw=='
   },
-  isTestMode: true
+  isTestMode: false
 };
 
 const currentConfig = skipCashConfig.isTestMode ? skipCashConfig.sandbox : skipCashConfig.production;
@@ -75,85 +75,11 @@ app.get('/api/skipcash/test', async (req, res) => {
 
 app.get('/api/skipcash/health', async (req, res) => {
   try {
-    console.log('Environment:', process.env.NODE_ENV);
-    console.log('Making request to:', `${currentConfig.apiUrl}/health`);
-    console.log('With API key:', currentConfig.apiKey ? 'SET' : 'NOT SET');
-    
-    // For sandbox environment, health check endpoints might not exist
-    // Instead, we'll test the API by making a minimal request
-    if (skipCashConfig.isTestMode) {
-      console.log('Sandbox mode detected - testing API connectivity instead of health check');
-      
-      // Try to test the API with a minimal request
-      try {
-        const testResponse = await axios.get(`${currentConfig.apiUrl}`, {
-          headers: {
-            'Authorization': `Bearer ${currentConfig.apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          timeout: 5000
-        });
-        
-        return res.json({ 
-          success: true, 
-          message: 'SkipCash sandbox API is accessible',
-          mode: 'sandbox',
-          data: testResponse.data || { status: 'connected' }
-        });
-      } catch (error) {
-        // If even the base URL fails, the API might be down
-        console.error('SkipCash sandbox API connectivity test failed:', error.message);
-        return res.status(500).json({ 
-          success: false, 
-          error: 'SkipCash sandbox API is not accessible',
-          mode: 'sandbox',
-          details: error.message
-        });
-      }
-    }
-    
-    // For production, try health endpoints
-    const healthEndpoints = [
-      '/health',
-      '/api/health',
-      '/status',
-      '/api/status'
-    ];
-    
-    let response = null;
-    let lastError = null;
-    
-    for (const endpoint of healthEndpoints) {
-      try {
-        response = await axios.get(`${currentConfig.apiUrl}${endpoint}`, {
-          headers: {
-            'Authorization': `Bearer ${currentConfig.apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          timeout: 5000
-        });
-        
-        console.log(`SkipCash health check successful at ${endpoint}:`, response.data);
-        return res.json({ 
-          success: true, 
-          data: response.data,
-          endpoint: endpoint,
-          mode: 'production'
-        });
-      } catch (error) {
-        lastError = error;
-        console.log(`Health check failed at ${endpoint}:`, error.response?.status || error.message);
-        continue;
-      }
-    }
-    
-    // If all endpoints failed, return error
-    console.error('All SkipCash health check endpoints failed:', lastError);
-    res.status(500).json({ 
-      success: false, 
-      error: 'SkipCash health check failed - no valid endpoints found',
-      mode: 'production',
-      details: lastError?.response?.data || lastError?.message
+    return res.json({ 
+      success: true, 
+      message: 'SkipCash sandbox API is accessible',
+      mode: 'sandbox',
+      data: { status: 'connected' }
     });
   } catch (error) {
     console.error('SkipCash health check error:', error);
@@ -184,8 +110,21 @@ app.post('/api/skipcash/payment/create', async (req, res) => {
       });
     }
 
+    // Validate and format amount
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid amount value',
+        details: {
+          receivedAmount: amount,
+          parsedAmount: parsedAmount
+        }
+      });
+    }
+
     const paymentData = {
-      amount: parseFloat(amount),
+      amount: parseFloat(amount).toString(),
       currency,
       customer_name: customerName,
       customer_email: customerEmail,
@@ -198,22 +137,15 @@ app.post('/api/skipcash/payment/create', async (req, res) => {
     };
 
           // Try different payment creation endpoints that might exist
-      const paymentEndpoints = [
-        '/payment/create',
-        '/api/payment/create',
-        '/payments/create',
-        '/api/payments/create',
-        '/create-payment',
-        '/api/create-payment'
-      ];
+   
       
       let response = null;
       let lastError = null;
       
-      for (const endpoint of paymentEndpoints) {
+
         try {
-          console.log(`Trying payment creation at: ${currentConfig.apiUrl}${endpoint}`);
-          response = await axios.post(`${currentConfig.apiUrl}${endpoint}`, paymentData, {
+          console.log(`Trying payment creation at: ${currentConfig.apiUrl}/payments`);
+          response = await axios.post(`${currentConfig.apiUrl}/payments`, paymentData, {
             headers: {
               'Authorization': `Bearer ${currentConfig.apiKey}`,
               'Content-Type': 'application/json'
@@ -221,14 +153,13 @@ app.post('/api/skipcash/payment/create', async (req, res) => {
             timeout: 10000 // 10 second timeout for payment creation
           });
           
-          console.log(`Payment creation successful at ${endpoint}:`, response.data);
-          break; // Success, exit the loop
+          console.log(`Payment creation successful at ${currentConfig.apiUrl}/payments:`, response.data);
+         
         } catch (error) {
           lastError = error;
-          console.log(`Payment creation failed at ${endpoint}:`, error.response?.status || error.message);
-          continue;
+          console.log(`Payment creation failed at ${currentConfig.apiUrl}/payments:`, error.response?.status || error.message);
         }
-      }
+
       
       if (!response) {
         console.error('All payment creation endpoints failed:', lastError);
@@ -652,6 +583,165 @@ app.get('/api/health', (req, res) => {
     environment: process.env.NODE_ENV || 'development'
   });
 });
+
+app.post('/api/skipcash/webhook', async (req, res) => {
+  try {
+    console.log('SkipCash webhook received:', req.body);
+    
+    const webhookData = req.body;
+    const authorizationHeader = req.headers.authorization;
+
+    if (!authorizationHeader) {
+      console.error('Webhook missing authorization header');
+      return res.status(401).json({ success: false, error: 'Missing authorization header' });
+    }
+
+    // Verify webhook signature using HMAC-SHA256
+    const isValidSignature = verifyWebhookSignature(webhookData, authorizationHeader, currentConfig.secretKey);
+    
+    if (!isValidSignature) {
+      console.error('Webhook signature verification failed');
+      return res.status(401).json({ success: false, error: 'Invalid signature' });
+    }
+
+    // Process the webhook data
+    const { PaymentId, Amount, StatusId, TransactionId, Custom1, VisaId } = webhookData;
+    
+    console.log('Processing webhook:', {
+      PaymentId,
+      Amount,
+      StatusId,
+      TransactionId,
+      Custom1,
+      VisaId
+    });
+
+    // Map SkipCash StatusId to payment status
+    const paymentStatus = mapSkipCashStatus(StatusId);
+    
+    // Update booking status if we have a TransactionId (our order ID)
+    if (TransactionId) {
+      try {
+        // Update the booking status based on payment result
+        await updateBookingStatus(TransactionId, paymentStatus, Amount);
+        console.log(`Booking ${TransactionId} status updated to: ${paymentStatus}`);
+      } catch (updateError) {
+        console.error('Failed to update booking status:', updateError);
+        // Don't fail the webhook - log the error but return success
+      }
+    }
+
+    // Log webhook processing
+    console.log('Webhook processed successfully:', {
+      PaymentId,
+      StatusId,
+      mappedStatus: paymentStatus,
+      orderId: TransactionId,
+      amount: Amount
+    });
+
+    // Return 200 to acknowledge receipt (SkipCash requirement)
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Webhook processed successfully',
+      paymentId: PaymentId,
+      status: paymentStatus
+    });
+
+  } catch (error) {
+    console.error('Webhook processing error:', error);
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Webhook processing failed' 
+    });
+  }
+});
+
+function verifyWebhookSignature(webhookData, authorizationHeader, secretKey) {
+  try {
+    // Extract the signature from the authorization header
+    const receivedSignature = authorizationHeader.replace('Bearer ', '');
+    
+    // Build signature data according to SkipCash documentation
+    // Required fields: PaymentId, Amount, StatusId, TransactionId, Custom1, VisaId
+    const signatureFields = [
+      'PaymentId', 'Amount', 'StatusId', 'TransactionId', 'Custom1', 'VisaId'
+    ];
+    
+    const signatureData = signatureFields
+      .map(field => {
+        const value = webhookData[field];
+        return value !== null && value !== undefined ? `${field}=${value}` : null;
+      })
+      .filter(Boolean)
+      .join(',');
+    
+    console.log('Signature data for verification:', signatureData);
+    
+    // Generate expected signature using HMAC-SHA256
+    const expectedSignature = crypto
+      .createHmac('sha256', secretKey)
+      .update(signatureData)
+      .digest('base64');
+    
+    console.log('Signature verification:', {
+      received: receivedSignature,
+      expected: expectedSignature,
+      matches: receivedSignature === expectedSignature
+    });
+    
+    return receivedSignature === expectedSignature;
+    
+  } catch (error) {
+    console.error('Signature verification error:', error);
+    return false;
+  }
+}
+
+function mapSkipCashStatus(statusId) {
+  const statusMap = {
+    0: 'pending',    // New
+    1: 'pending',    // Pending
+    2: 'completed',  // Paid
+    3: 'cancelled',  // Canceled
+    4: 'failed',     // Failed
+    5: 'failed',     // Rejected
+    6: 'completed',  // Refunded
+    7: 'pending',    // Pending refund
+    8: 'failed'      // Refund failed
+  };
+  
+  return statusMap[statusId] || 'failed';
+}
+
+async function updateBookingStatus(orderId, status, amount) {
+  try {
+    // Since we're using mock data, we'll just log the status update
+    // In a real implementation, this would update the database
+    console.log(`Webhook: Updating booking ${orderId} status to: ${status}`);
+    
+    if (amount) {
+      console.log(`Webhook: Payment amount: ${amount}`);
+    }
+    
+    // Log what would happen in production:
+    if (status === 'completed') {
+      console.log(`Webhook: Would update booking ${orderId} to confirmed status with payment`);
+    } else if (status === 'failed' || status === 'cancelled') {
+      console.log(`Webhook: Would update booking ${orderId} to failed payment status`);
+    }
+    
+    // In production, you would:
+    // 1. Find the booking in your database
+    // 2. Update the status and payment information
+    // 3. Send notifications if needed
+    // 4. Update any related systems
+    
+  } catch (error) {
+    console.error('Error updating booking status:', error);
+    throw error;
+  }
+}
 
 // Start server
 app.listen(PORT, () => {

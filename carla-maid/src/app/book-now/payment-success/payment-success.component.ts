@@ -16,7 +16,7 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
       <div class="success-card">
         <div class="success-icon">
           <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h1>{{ 'payment.success.title' | translate }}</h1>
@@ -76,7 +76,9 @@ export class PaymentSuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.orderId = this.route.snapshot.queryParams['orderId'];
+    // Prefer reading orderId from sessionStorage to avoid URL params
+    const storedOrderId = sessionStorage.getItem('paymentOrderId');
+    this.orderId = storedOrderId || this.route.snapshot.queryParams['orderId'];
     
     if (this.orderId) {
       this.checkPaymentStatus();
@@ -133,6 +135,10 @@ export class PaymentSuccessComponent implements OnInit {
               next: (response) => {
                 if (response.success && response.orderId) {
                   this.bookingOrderId = response.orderId;
+                 // Clean up local state now that booking is confirmed
+                 sessionStorage.removeItem('paymentOrderId');
+                 sessionStorage.removeItem('paymentAmount');
+                 sessionStorage.removeItem('bookingData');
                   
                   // Clean up payment data after successful booking creation
                   this.paymentDataService.cleanupPaymentData(paymentOrderId).subscribe({

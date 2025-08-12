@@ -38,9 +38,9 @@ const skipCashConfig = {
     clientId: '3d8fecfa-f2c0-4fc8-a913-91634b306eec',
     apiKey: '288d604d-03b6-4c66-821e-0a82a3fd2cc8',
     secretKey: 'Og9vDBQbBFHg/dwxkQjFCcLYogMDq4hLOF0OPsuRDY+OrLp/BPWMoCvsf1EDW41N8QTqoJHFhpclF/+bMR8Gwjyy2n0ZBNKuk8TO6LSpA2+JTWRM3ODl3LuX1nSFHRVnHJ1h0+ojevQqA8U/FzgCu88S+HhdZ1zq1GeWvka9MM8y8arkLwo0oLCf4IPAcH6olU8EKWrgcIymL6spNmRYRqfiLEzFWIQAjNJa2PH/spkK8c0brTae9jzbSf7yw6DO6NV51dbC5Td+BqWEjOmDphtQ3XSfqaj5fIjkGjjd58tnP6uQELF08Q5uZqGno8fWxZi+B6Wz9Z6Zr3y7cr19VTpRA2+RGOSVNzdaMnc7EL6ryFxmXUg+dSU37gBffAzn8fAIe2KJJdGnsSUkM8Z82E6Yj2KPi/Tw/wrYZMwuXNROwlIilIt9tds8PCdlFgPD1wiH8q9om/kIcarLuoVXn71nF65BT3/PhAOEhKyrxLaiqwZg+8xZdbCHzFQNYefcYuDRzflWzPRp3oWX1L9bPw==',
-    webhookKey: 'YOUR_SANDBOX_WEBHOOK_KEY'
+    webhookKey: 'a269aaab-8381-4b63-8c83-f1e612494183'
   },
-  isTestMode: false
+  isTestMode: true
 };
 
 const currentConfig = skipCashConfig.isTestMode ? skipCashConfig.sandbox : skipCashConfig.production;
@@ -92,6 +92,37 @@ app.get('/api/skipcash/health', async (req, res) => {
       success: false, 
       error: 'SkipCash API is not accessible',
       mode: skipCashConfig.isTestMode ? 'sandbox' : 'production'
+    });
+  }
+});
+
+app.post('/api/skipcash/webhook', async (req, res) => {
+  try {
+    console.log('Received webhook data:', req.body);
+    const callbackData = req.body;
+
+    // Verify the callback signature
+    const isValidSignature = verifyCallbackSignature(callbackData, skipCashConfig.secretKey);
+    if (!isValidSignature) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid signature'
+      });
+    }
+
+    // Process the callback data
+    console.log('Received valid webhook data:', callbackData);
+
+    // Respond with success
+    return res.json({
+      success: true,
+      message: 'Webhook processed successfully'
+    });
+  } catch (error) {
+    console.error('Error processing webhook:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to process webhook'
     });
   }
 });
