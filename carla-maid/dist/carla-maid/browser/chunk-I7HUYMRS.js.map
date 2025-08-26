@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/environments/environment.ts"],
+  "sourcesContent": ["export const environment = {\n    production: true, // Production mode enabled\n    // WordPress API Configuration\n    wordpressApiBaseUrl: 'https://api.carlamaid.qa/wp/wp-json/wp/v2',\n    lang: 'en', // Default language setting\n    languages: ['ar', 'en'], // Supported languages\n\n    direction: 'ltr', // Text direction, left-to-right\n    \n    // Backend API Configuration\n    // backendApiUrl: 'http://127.0.0.1:5001/carlamaid-9/us-central1',\n\n    backendApiUrl: 'https://us-central1-carlamaid-9.cloudfunctions.net',\n};"],
+  "mappings": ";AAAO,IAAM,cAAc;EACvB,YAAY;;;EAEZ,qBAAqB;EACrB,MAAM;;EACN,WAAW,CAAC,MAAM,IAAI;;EAEtB,WAAW;;;;EAKX,eAAe;;",
+  "names": []
+}

@@ -1,2 +1,0 @@
-import './polyfills.server.mjs';
-var a={production:!0,wordpressApiBaseUrl:"https://carlamaid.qa/wordpress/index.php/wp-json/wp/v2",lang:"en",languages:["ar","en"],direction:"ltr",backendApiUrl:"https://api.carlamaid.qa/api",skipCash:{apiUrl:"https://api.skipcash.app",returnUrl:"https://carlamaid.qa/book-now/success",cancelUrl:"https://carlamaid.qa/book-now/cancel",callbackUrl:"https://carlamaid.qa/api/payment/callback",webhookKey:"a269aaab-8381-4b63-8c83-f1e612494183",webhookUrl:"https://carlamaid.qa/api/skipcash/webhook"}};export{a};

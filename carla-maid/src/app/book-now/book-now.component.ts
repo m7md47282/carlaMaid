@@ -20,6 +20,19 @@ const PRICING_CONFIG = {
   DATE_RANGE_DAYS: 30
 };
 
+// ✅ SkipCash payment status constants (numeric values)
+const SKIPCASH_STATUS = {
+  NEW: 0,           // new
+  PENDING: 1,       // pending
+  PAID: 2,          // paid - triggers booking update
+  CANCELLED: 3,     // canceled
+  FAILED: 4,        // failed
+  REJECTED: 5,      // rejected
+  REFUNDED: 6,      // refunded - treated as successful completion
+  PENDING_REFUND: 7, // pending refund
+  REFUND_FAILED: 8  // refund failed
+} as const;
+
 const FORM_TIMEOUT = 9000;
 
 @Component({
@@ -44,7 +57,15 @@ export class BookNowComponent implements OnInit {
   price: number = 0;
   sent = false;
   isProcessingPayment = false;
+  isSubmitting = false;
   paymentError = '';
+  
+  // Click prevention
+  private lastClickTime = 0;
+  private readonly CLICK_DEBOUNCE_MS = 1000; // 1 second debounce
+  
+  // Payment processing prevention
+  private readonly PAYMENT_PROCESSING_KEY = 'payment_processing_in_progress';
   
   // Payment success popup state
   showPaymentSuccessPopup = false;
@@ -60,6 +81,7 @@ export class BookNowComponent implements OnInit {
   // ViewChild references
   @ViewChild('addressInput') addressInput!: ElementRef;
   @ViewChild('mapContainer') mapContainer!: ElementRef;
+  @ViewChild('submitButton') submitButton!: ElementRef;
 
   // Injected services
   private datePipe = inject(DatePipe);
@@ -82,8 +104,7 @@ export class BookNowComponent implements OnInit {
     this.setupFormSubscriptions();
     this.setupRouterEvents();
     this.checkPaymentSuccessFromUrl();
-    this.checkPaymentCancelFromUrl();
-    this.checkPaymentFailedFromUrl();
+
   }
 
   // ==================== INITIALIZATION METHODS ====================
@@ -148,16 +169,52 @@ export class BookNowComponent implements OnInit {
   // ==================== FORM SUBMISSION METHODS ====================
 
   async onSubmit(): Promise<void> {
+    // Prevent multi-clicking with debounce
+    const now = Date.now();
+    if (this.isSubmitting || this.isProcessingPayment) {
+      console.log('Form submission already in progress, ignoring click');
+      return;
+    }
+    
+    // Debounce rapid clicks
+    if (now - this.lastClickTime < this.CLICK_DEBOUNCE_MS) {
+      console.log('Click debounced, ignoring rapid clicks');
+      return;
+    }
+    
+    this.lastClickTime = now;
+
     if (this.bookingForm.invalid) {
       return;
     }
 
-    const paymentOption = this.bookingForm.value.paymentOption;
+    // Set submitting state to prevent multiple clicks
+    this.isSubmitting = true;
+    this.disableSubmitButton();
     
-    if (paymentOption === 'pay_now') {
-      await this.processPayment();
-    } else {
-      await this.submitBookingWithoutPayment();
+    try {
+      // Additional validation to ensure all required fields have actual values
+      const formValue = this.bookingForm.value;
+      const requiredFields = ['fullName', 'email', 'phone', 'address', 'arrivalDate', 'arrivalTime', 'cleaners', 'hours'];
+      const missingFields = requiredFields.filter(field => !formValue[field] || formValue[field] === '');
+      
+      if (missingFields.length > 0) {
+        console.error('Missing required field values:', missingFields);
+        this.setPaymentError(`Please fill in all required fields: ${missingFields.join(', ')}`);
+        return;
+      }
+
+      const paymentOption = this.bookingForm.value.paymentOption;
+      
+      if (paymentOption === 'pay_now') {
+        await this.processPayment();
+      } else {
+        await this.submitBookingWithoutPayment();
+      }
+    } finally {
+      // Reset submitting state after completion (success or error)
+      this.isSubmitting = false;
+      this.enableSubmitButton();
     }
   }
 
@@ -171,10 +228,19 @@ export class BookNowComponent implements OnInit {
         return;
       }
 
-      await this.testPaymentServiceConnection();
+      // Call payment creation directly without health check
+      this.createPaymentOrder();
     } catch (error) {
       this.handlePaymentError('An unexpected error occurred. Please try again.', error);
     }
+  }
+
+  /**
+   * Retry payment processing
+   */
+  retryPayment(): void {
+    this.paymentError = '';
+    this.onSubmit();
   }
 
   private validatePaymentAmount(): boolean {
@@ -185,29 +251,17 @@ export class BookNowComponent implements OnInit {
     return true;
   }
 
-  private async testPaymentServiceConnection(): Promise<void> {
-    this.paymentService.testSkipCashConnection().subscribe({
-      next: (healthCheck) => {
-        if (!healthCheck.success) {
-          this.setPaymentError('Payment service is temporarily unavailable. Please try again later.');
-          return;
-        }
-        this.createPaymentOrder();
-      },
-      error: (error) => {
-        this.handlePaymentError('Payment service is unavailable. Please try again later.', error);
-      }
-    });
-  }
-
-  private createPaymentOrder(): void {
+    private createPaymentOrder(): void {
     const paymentOrderId = this.paymentService.generateOrderId();
     const paymentRequest = this.buildPaymentRequest(paymentOrderId);
 
+    console.log('Creating payment order:', { orderId: paymentOrderId, request: paymentRequest });
     this.paymentService.logPaymentAttempt(paymentRequest);
 
     this.paymentService.createPayment(paymentRequest).subscribe({
       next: (response: any) => {
+        console.log('Payment API response received:', response);
+        
         if (response.success) {
           this.handleSuccessfulPaymentCreation(paymentOrderId, response);
         } else {
@@ -215,23 +269,58 @@ export class BookNowComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.handlePaymentError('Payment processing failed. Please try again.', error, paymentOrderId);
+        console.error('Payment API error:', error);
+        let errorMessage = 'Payment processing failed. Please try again.';
+        
+        if (error.status === 0) {
+          errorMessage = 'Network error. Please check your connection and try again.';
+        } else if (error.status >= 500) {
+          errorMessage = 'Server error. Please try again later.';
+        } else if (error.status === 404) {
+          errorMessage = 'Payment service not found. Please contact support.';
+        }
+        
+        this.handlePaymentError(errorMessage, error, paymentOrderId);
       }
     });
   }
 
   private buildPaymentRequest(paymentOrderId: string): PaymentRequest {
     const formValue = this.bookingForm.value;
+    
+    // Ensure all required fields have values
+    if (!formValue.fullName || !formValue.email || !formValue.phone || !formValue.address || 
+        !formValue.arrivalDate || !formValue.arrivalTime || !formValue.cleaners || !formValue.hours) {
+      throw new Error('All required fields must have values');
+    }
+    
+    // Additional validation to ensure values are meaningful
+    if (formValue.fullName.trim() === '' || formValue.email.trim() === '' || 
+        formValue.phone.trim() === '' || formValue.address.trim() === '' || 
+        formValue.arrivalTime.trim() === '') {
+      throw new Error('All required fields must have meaningful values');
+    }
+    
+    // Validate numeric fields
+    if (formValue.cleaners <= 0 || formValue.hours <= 0) {
+      throw new Error('Cleaners and hours must be greater than 0');
+    }
+    
     return {
       amount: this.price,
       currency: 'QAR',
       orderId: paymentOrderId,
-      customerName: formValue.fullName,
-      customerEmail: formValue.email,
-      customerPhone: formValue.phone,
+      customerName: formValue.fullName.trim(),
+      customerEmail: formValue.email.trim(),
+      customerPhone: formValue.phone.trim(),
       description: `Cleaning Service - ${formValue.cleaners} cleaner(s), ${formValue.hours} hour(s)`,
-      returnUrl: this.paymentService.getPaymentSuccessUrl(paymentOrderId),
-      cancelUrl: this.paymentService.getPaymentCancelUrl(paymentOrderId)
+      address: formValue.address.trim(),
+      serviceType: 'Cleaning Service',
+      cleaners: formValue.cleaners,
+      hours: formValue.hours,
+      materials: formValue.materials || false,
+      scheduledDate: formValue.arrivalDate,
+      scheduledTime: formValue.arrivalTime.trim()
     };
   }
 
@@ -241,7 +330,28 @@ export class BookNowComponent implements OnInit {
     // Persist the orderId locally to be read on success/cancel pages without URL params
     sessionStorage.setItem('paymentOrderId', paymentOrderId);
     this.paymentService.logPaymentResult(paymentOrderId, 'initiated');
-    this.paymentService.redirectToPayment(response.data.payUrl);
+    
+    // Extract payment URL from the updated API response structure
+    const paymentUrl = this.paymentService.extractPaymentUrl(response);
+    
+    if (paymentUrl) {
+      console.log('Redirecting to payment gateway:', paymentUrl);
+      // Store the payment URL in session storage as backup
+      sessionStorage.setItem('paymentUrl', paymentUrl);
+      
+      try {
+        this.paymentService.redirectToPayment(paymentUrl);
+      } catch (redirectError) {
+        console.error('Redirect error:', redirectError);
+        this.setPaymentError('Failed to redirect to payment gateway. Please try again.');
+        this.setPaymentProcessingState(false);
+      }
+    } else {
+      console.error('Payment URL not found in response:', response);
+      this.setPaymentError('Payment URL not found. Please try again.');
+      // Reset processing state to allow retry
+      this.setPaymentProcessingState(false);
+    }
   }
 
   private handlePaymentCreationFailure(paymentOrderId: string, response: any): void {
@@ -280,10 +390,16 @@ export class BookNowComponent implements OnInit {
   private async submitBookingWithoutPayment(): Promise<void> {
     this.analyticsService.trackFormSubmission('booking_form', 'book-now-form');
     
+    // Set processing state for "pay later" option
+    this.setPaymentProcessingState(true);
+    
     const bookingRequest = this.buildBookingRequest('pay_later');
 
     this.bookingService.createBooking(bookingRequest).subscribe({
       next: (bookingResponse: BookingResponse) => {
+
+        console.log("bookingResponse", bookingResponse);
+        
         if (bookingResponse.success) {
           this.handleSuccessfulBooking();
         } else {
@@ -316,16 +432,23 @@ export class BookNowComponent implements OnInit {
 
   private buildBookingData(): any {
     const formValue = this.bookingForm.value;
+    
+    // Ensure all required fields have meaningful values
+    if (!formValue.fullName || !formValue.email || !formValue.phone || !formValue.address || 
+        !formValue.arrivalDate || !formValue.arrivalTime || !formValue.cleaners || !formValue.hours) {
+      throw new Error('All required fields must have values');
+    }
+    
     return {
-      customerName: formValue.fullName,
-      customerEmail: formValue.email,
-      customerPhone: formValue.phone,
-      address: formValue.address,
+      customerName: formValue.fullName.trim(),
+      customerEmail: formValue.email.trim(),
+      customerPhone: formValue.phone.trim(),
+      address: formValue.address.trim(),
       cleaners: formValue.cleaners,
       hours: formValue.hours,
-      materials: formValue.materials,
+      materials: formValue.materials || false,
       scheduledDate: this.formatDate(formValue.arrivalDate),
-      scheduledTime: formValue.arrivalTime
+      scheduledTime: formValue.arrivalTime.trim()
     };
   }
 
@@ -334,6 +457,15 @@ export class BookNowComponent implements OnInit {
     this.resetForm();
     this.trackBookingCompletion();
     this.scheduleFormReset();
+    
+    // Reset processing state after successful booking
+    this.setPaymentProcessingState(false);
+    
+    // Show appropriate success message based on payment option
+    if (this.isPayLaterOption()) {
+      console.log('Booking created successfully with pay later option');
+      // You can add specific success handling for pay later here
+    }
   }
 
   private trackBookingCompletion(): void {
@@ -374,6 +506,7 @@ export class BookNowComponent implements OnInit {
 
   private setPaymentProcessingState(isProcessing: boolean): void {
     this.isProcessingPayment = isProcessing;
+    this.isSubmitting = isProcessing; // Also set submitting state
     if (!isProcessing) {
       this.paymentError = '';
     }
@@ -385,18 +518,33 @@ export class BookNowComponent implements OnInit {
   }
 
   private handlePaymentError(message: string, error: any, paymentOrderId?: string): void {
-    console.error('Payment error:', error);
+    console.error('Payment error:', { message, error, paymentOrderId });
+    
+    // Log additional error details for debugging
+    if (error?.error) {
+      console.error('Error details:', error.error);
+    }
+    if (error?.message) {
+      console.error('Error message:', error.message);
+    }
+    if (error?.status) {
+      console.error('Error status:', error.status);
+    }
+    
     this.setPaymentError(message);
     if (paymentOrderId) {
       this.paymentService.logPaymentResult(paymentOrderId, 'error', 'Payment processing failed');
       // Track payment failure for marketing optimization
-      this.analyticsService.trackPaymentFailure(paymentOrderId, 'payment_processing_error');
+      this.analyticsService.trackPaymentFailure(paymentOrderId, 'error');
     }
   }
 
   private handleBookingError(error: any): void {
     console.error('Booking creation error:', error);
     this.setPaymentError('Failed to create booking. Please try again.');
+    
+    // Reset processing state after booking error
+    this.setPaymentProcessingState(false);
   }
 
   private scheduleFormReset(): void {
@@ -407,6 +555,111 @@ export class BookNowComponent implements OnInit {
 
   // ==================== PUBLIC METHODS ====================
 
+  /**
+   * Disable submit button to prevent multiple submissions
+   */
+  private disableSubmitButton(): void {
+    if (this.submitButton?.nativeElement) {
+      this.submitButton.nativeElement.disabled = true;
+    }
+  }
+
+  /**
+   * Enable submit button after submission completes
+   */
+  private enableSubmitButton(): void {
+    if (this.submitButton?.nativeElement) {
+      this.submitButton.nativeElement.disabled = false;
+    }
+  }
+
+  /**
+   * Check if payment is already being processed to prevent double processing
+   */
+  private isPaymentAlreadyBeingProcessed(orderId: string): boolean {
+    const processingData = sessionStorage.getItem(this.PAYMENT_PROCESSING_KEY);
+    if (!processingData) return false;
+    
+    try {
+      const data = JSON.parse(processingData);
+      const now = Date.now();
+      
+      // Check if this specific order is being processed and is within timeout period
+      if (data.orderId === orderId && (now - data.timestamp) < 30000) { // 30 seconds timeout
+        return true;
+      }
+      
+      // Clean up expired data
+      if ((now - data.timestamp) >= 30000) {
+        sessionStorage.removeItem(this.PAYMENT_PROCESSING_KEY);
+      }
+      
+      return false;
+    } catch (error) {
+      console.error('Error parsing payment processing data:', error);
+      sessionStorage.removeItem(this.PAYMENT_PROCESSING_KEY);
+      return false;
+    }
+  }
+
+  /**
+   * Mark payment as being processed
+   */
+  private markPaymentAsBeingProcessed(orderId: string): void {
+    const processingData = {
+      orderId: orderId,
+      timestamp: Date.now()
+    };
+    
+    sessionStorage.setItem(this.PAYMENT_PROCESSING_KEY, JSON.stringify(processingData));
+  }
+
+  /**
+   * Clear payment processing flag after completion
+   */
+  private clearPaymentProcessingFlag(): void {
+    sessionStorage.removeItem(this.PAYMENT_PROCESSING_KEY);
+  }
+
+  /**
+   * Get current payment option from form
+   */
+  getCurrentPaymentOption(): string {
+    return this.bookingForm.get('paymentOption')?.value || '';
+  }
+
+  /**
+   * Check if current payment option is "pay now"
+   */
+  isPayNowOption(): boolean {
+    return this.getCurrentPaymentOption() === 'pay_now';
+  }
+
+  /**
+   * Check if current payment option is "pay later"
+   */
+  isPayLaterOption(): boolean {
+    return this.getCurrentPaymentOption() === 'pay_later';
+  }
+
+  /**
+   * Remove URL parameters after successful payment processing
+   */
+  private removeUrlParameters(): void {
+    try {
+      // Get current URL without query parameters
+      const url = new URL(window.location.href);
+      const cleanUrl = url.origin + url.pathname;
+      
+      // Replace current URL without query parameters
+      window.history.replaceState({}, document.title, cleanUrl);
+      
+      console.log('URL parameters removed after successful payment processing');
+    } catch (error) {
+      console.error('Error removing URL parameters:', error);
+    }
+  }
+
   switchLanguage(lang: string): void {
     this.translate.use(lang);
   }
@@ -415,6 +668,7 @@ export class BookNowComponent implements OnInit {
     this.bookingForm.reset();
     this.paymentError = '';
     this.isProcessingPayment = false;
+    this.isSubmitting = false;
   }
 
   openDatePicker(picker: any): void {
@@ -423,53 +677,78 @@ export class BookNowComponent implements OnInit {
 
   // ==================== PAYMENT SUCCESS POPUP METHODS ====================
 
-  private checkPaymentSuccessFromUrl(): void {
+  /**
+   * Extract and validate SkipCash return URL parameters
+   * @returns Object with validated parameters
+   */
+  private extractSkipCashReturnParams(): {
+    orderId: string | null;
+    status: string | null;
+    paymentId: string | null;
+    transactionId: string | null;
+    amount: string | null;
+    currency: string | null;
+  } {
     const urlParams = new URLSearchParams(window.location.search);
-    const paymentSuccess = urlParams.get('payment_success');
-    const orderId = urlParams.get('order_id');
-        
-    if (paymentSuccess === 'true' && orderId) {
-      
-      // Show popup immediately with basic info
-      const mockPaymentStatus: PaymentStatus = {
-        orderId: orderId,
-        status: 'completed',
-        amount: 280,
-        currency: 'QAR',
-        transactionId: `TXN_${orderId}`
-      };
-      
-      // Show popup immediately
-      this.showPaymentSuccess(mockPaymentStatus, orderId);
-      
-      // Also try to check actual payment status
-      this.paymentService.checkPaymentStatus(orderId).subscribe({
-        next: (status) => {
-          console.log('Payment status check result:', status);
-          if (status.status === 'completed') {
-            // Enhanced tracking for SkipCash payment success
-            this.analyticsService.trackSkipCashPaymentSuccess(
-              status.orderId,
-              status.amount || 0,
-              status.currency || 'QAR',
-              'cleaning_service'
-            );
+    
+    return {
+      orderId: urlParams.get('order_id'),
+      status: urlParams.get('statusId'),
+      paymentId: urlParams.get('paymentId'),
+      transactionId: urlParams.get('transId'),
+      amount: urlParams.get('amount'),
+      currency: urlParams.get('currency')
+    };
+  }
 
-            // Update popup with real payment data
-            this.paymentStatus = status;
-            
-            // Try to create booking with payment information
-            this.createBookingWithPayment(status);
-          } else {
-            console.error('Payment not completed:', status);
-          }
-        },
-        error: (error) => {
-          console.error('Error checking payment status:', error);
-          // Keep the popup open even if status check fails
-        }
-      });
+  private checkPaymentSuccessFromUrl(): void {
+    // ✅ Extract SkipCash return URL parameters using helper method
+    const params = this.extractSkipCashReturnParams();
+    const { orderId, status, transactionId, amount } = params;
+    
+    console.log('SkipCash return URL parameters received:', params);
+    
+    // ✅ Check if this is a SkipCash return callback (numeric status)
+    if (orderId && status && (
+      parseInt(status) === SKIPCASH_STATUS.PAID && transactionId && orderId
+    )) {
+      
+      // Check if payment is already being processed to prevent double processing
+      if (this.isPaymentAlreadyBeingProcessed(orderId)) {
+        console.log('Payment already being processed for orderId:', orderId);
+        return;
+      }
+      
+      // Mark payment as being processed
+      this.markPaymentAsBeingProcessed(orderId);
+      
+      const bookingInfo = localStorage.getItem('bookingInfo');
+      const paymentInfo = {
+        orderId: orderId,
+        transactionId: transactionId,
+        status: status,
+        amount: amount,
+        bookingInfo: bookingInfo
+      }
+      this.saveBookingWithPayment(paymentInfo);
     }
+  }
+
+  saveBookingWithPayment(paymentInfo: any) {
+    this.paymentService.savePayment(paymentInfo).subscribe({
+      next: (response) => {
+        console.log('Booking saved with payment:', response);
+        // Clear payment processing flag after successful completion
+        this.clearPaymentProcessingFlag();
+        // Remove URL parameters after successful processing
+        this.removeUrlParameters();
+      },
+      error: (error) => {
+        console.error('Error saving booking with payment:', error);
+        // Clear payment processing flag on error as well
+        this.clearPaymentProcessingFlag();
+      }
+    });
   }
 
   private createBookingWithPayment(paymentStatus: PaymentStatus): void {

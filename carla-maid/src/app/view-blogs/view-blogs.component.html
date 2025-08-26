@@ -1,10 +1,23 @@
 <section class="section-1 center flex-column">
     <h1 class="text-align-center hero-title">{{"shared.BestCleaningCompanyInQatar" | translate}}:<br>
       {{"shared.FindReliableProfessionalCleaningServices" | translate}}</h1>
-  </section>
+</section>
 
+<div *ngIf="selectedPost" class="blog-container">
+    <div class="blog-header">
+        <div class="blog-meta">
+            <span class="blog-date">{{ selectedPost.date | date:'longDate' }}</span>
+            <span class="blog-category" *ngIf="selectedPost.categories && selectedPost.categories.length > 0">
+                {{ 'blogs.category' | translate }}
+            </span>
+        </div>
+        <h1 class="blog-title" [innerHTML]="_sharedService.sanitizeHtml(selectedPost.title.rendered)"></h1>
+    </div>
+    
+    <div class="blog-content" [innerHTML]="_sharedService.sanitizeHtml(selectedPost.content.rendered)"></div>
+</div>
 
-  <div *ngIf="selectedPost" class="container">
-    <h2 [innerHTML]="_sharedService.sanitizeHtml( selectedPost.title.rendered)"></h2>
-    <p [innerHTML]="_sharedService.sanitizeHtml(selectedPost.content.rendered)"></p>
+<div *ngIf="!selectedPost" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>{{ 'blogs.loading' | translate }}</p>
 </div>

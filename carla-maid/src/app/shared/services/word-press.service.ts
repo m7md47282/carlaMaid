@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
-import { Observable, switchMap, map, forkJoin, of } from 'rxjs';
+import { Observable, switchMap, map, forkJoin, of, tap } from 'rxjs';
 import { SharedService } from './shared.service';
 
 @Injectable({
@@ -45,29 +45,21 @@ export class WordPressService {
    */
   getPostsByCategoriesNames(postsPage: string, categoryNames: string[], postsParams: any): Observable<any[]> {
     return this.getCategories().pipe(
-      switchMap(categories => {
-        const categoryIds = categories
-          .filter(cat => categoryNames.some(name => cat.name.toLowerCase() === name.toLowerCase()))
-          .map(cat => cat.id);
-
-          const postsPageCategoryId = categories.find(cat => cat.name.toLowerCase() === postsPage.toLowerCase())?.id;
-        
-        if (categoryIds.length !== categoryNames.length) {
-          return of([]);
-        }
-        const preparedParams = this._sharedService.prepareParams({ 
-          params: { ...postsParams, ...{ categories: postsPageCategoryId } } 
-        });
-        
-        return this.getPosts(preparedParams).pipe(
-          map(posts => 
-            (posts as any[]).filter(post =>
-              categoryIds.every(catId => post.categories.includes(catId))
-            )
-          )
-        );
+      tap(categories => {
+        console.log('categories', categories);
       })
     );
+  }
+
+  /**
+   * Fetches a post by its ID from the WordPress API.
+   * 
+   * @param id - The ID of the post to fetch.
+   * 
+   * @returns An observable containing the response data from the API, which is the post with the specified ID.
+   */
+  getPostById(id: string) {
+    return this._http.get(`${this.wordpressApiBaseUrl}/posts/${id}`);
   }
   
 

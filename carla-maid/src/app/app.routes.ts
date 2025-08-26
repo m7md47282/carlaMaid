@@ -34,11 +34,19 @@ export const routes: Routes = [
         loadComponent: () => import('./book-now/payment-success/payment-success.component').then(m => m.PaymentSuccessComponent)
     },
     {
+        path: 'booking/success',
+        loadComponent: () => import('./book-now/payment-success/payment-success.component').then(m => m.PaymentSuccessComponent)
+    },
+    {
         path: 'book-now/cancel',
         loadComponent: () => import('./book-now/payment-cancel/payment-cancel.component').then(m => m.PaymentCancelComponent)
     },
     {
         path: 'payment/cancel',
+        loadComponent: () => import('./book-now/payment-cancel/payment-cancel.component').then(m => m.PaymentCancelComponent)
+    },
+    {
+        path: 'booking/cancel',
         loadComponent: () => import('./book-now/payment-cancel/payment-cancel.component').then(m => m.PaymentCancelComponent)
     },
     {

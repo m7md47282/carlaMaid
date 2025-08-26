@@ -9,11 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:carla-maid": "node dist/carla-maid/server/server.mjs",
-    "backend": "node standalone-server.js",
     "backend:dev": "NODE_ENV=development PORT=4000 node standalone-server.js",
     "backend:prod": "NODE_ENV=production PORT=3000 node standalone-server.js",
-    "backend:start": "./start-backend.sh",
-    "dev": "concurrently \"npm run backend:dev\" \"npm run start\"",
     "dev:full": "concurrently \"npm run backend:dev\" \"npm run start\" \"npm run watch\"",
     "create:production": "./deploy-production.sh",
     "build:production": "npm run build:prod && npm run create:production"

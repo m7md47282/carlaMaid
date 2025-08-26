@@ -1,5 +1,39 @@
 @import ../../../variables
 
+// Top Progress Bar
+.top-progress-bar
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  background: #ffffff
+  border-bottom: 1px solid #e9ecef
+  z-index: 1000
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1)
+  
+  .progress-container
+    padding: 15px 20px
+    
+    .progress-text
+      color: $text-primary
+      font-size: 14px
+      font-weight: 500
+      margin-bottom: 10px
+      text-align: center
+    
+    .progress-bar
+      height: 6px
+      background: #e9ecef
+      border-radius: 3px
+      overflow: hidden
+      
+      .progress-fill
+        height: 100%
+        background: linear-gradient(90deg, #2196f3, #4caf50)
+        border-radius: 3px
+        transition: width 0.5s ease
+        width: 0%
+
 .payment-success-container
   min-height: 100vh
   display: flex
@@ -7,6 +41,136 @@
   justify-content: center
   background: $gray
   padding: 20px
+  margin-top: 80px
+
+// Processing State Styles
+.processing-state
+  text-align: center
+  
+  .loading-spinner
+    margin-bottom: 30px
+    
+    .spinner
+      width: 60px
+      height: 60px
+      border: 4px solid #e3e3e3
+      border-top: 4px solid $text-primary
+      border-radius: 50%
+      animation: spin 1s linear infinite
+      margin: 0 auto
+
+  h1
+    color: $text-primary
+    margin-bottom: 15px
+    font-size: 28px
+
+  .processing-message
+    color: #4D4D4D
+    margin-bottom: 25px
+    font-size: 16px
+
+  .warning-box
+    background: #fff3cd
+    border: 1px solid #ffeaa7
+    border-radius: 10px
+    padding: 20px
+    margin: 25px 0
+    display: flex
+    align-items: center
+    gap: 15px
+    
+    .warning-icon
+      font-size: 24px
+      flex-shrink: 0
+    
+    .warning-text
+      color: #856404
+      margin: 0
+      font-size: 14px
+      font-weight: 500
+      text-align: left
+
+  .progress-steps
+    margin-top: 30px
+    
+    .step
+      display: flex
+      align-items: center
+      gap: 15px
+      margin-bottom: 20px
+      padding: 15px
+      border-radius: 8px
+      background: #f8f9fa
+      border: 1px solid #e9ecef
+      transition: all 0.3s ease
+      
+      &.active
+        background: #e3f2fd
+        border-color: #2196f3
+        
+        .step-icon
+          background: #2196f3
+          color: white
+          animation: pulse 1.5s infinite
+      
+      &.completed
+        background: #e8f5e8
+        border-color: #4caf50
+        
+        .step-icon
+          background: #4caf50
+          color: white
+      
+      .step-icon
+        width: 30px
+        height: 30px
+        border-radius: 50%
+        background: #6c757d
+        color: white
+        display: flex
+        align-items: center
+        justify-content: center
+        font-size: 14px
+        font-weight: bold
+        flex-shrink: 0
+      
+      span
+        color: $text-primary
+        font-size: 16px
+        font-weight: 500
+
+// Completion Message Styles
+.completion-message
+  text-align: center
+  
+  .completion-badge
+    display: inline-flex
+    align-items: center
+    gap: 8px
+    background: #e8f5e8
+    color: #2e7d32
+    padding: 8px 16px
+    border-radius: 20px
+    margin: 20px 0
+    font-size: 14px
+    font-weight: 500
+    
+    .badge-icon
+      font-size: 16px
+      font-weight: bold
+
+// Animations
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@keyframes pulse
+  0%, 100%
+    transform: scale(1)
+  50%
+    transform: scale(1.1)
 
 .success-card
   background: #ffffff
@@ -38,6 +202,20 @@ p
   margin: 20px 0
   text-align: left
   border: 1px solid #E5E7EB
+
+.skipcash-details
+  background: #F8F9FA
+  border-radius: 10px
+  padding: 20px
+  margin: 20px 0
+  text-align: left
+  border: 1px solid #DEE2E6
+
+  h3
+    color: $text-primary
+    margin-bottom: 15px
+    font-size: 18px
+    text-align: center
 
 .detail-row
   display: flex

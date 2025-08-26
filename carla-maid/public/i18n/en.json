@@ -219,7 +219,11 @@
         "blog3Title": "Best Cleaning Company in Qatar: Find Reliable & Professional Cleaning Services",
         "blog3Description": "Cleaning Companies in Qatar: A Comprehensive Guide to Professional Cleaning Services, Keeping a clean and organized space is essential for comfort, health, and productivity. Whether you're looking to maintain your home.",
         "latestNewAndBlogs": "Latest New and Blogs",
-        "noPosts": "No posts available."
+        "blogCategories": "Blog Categories",
+        "noPosts": "No posts available.",
+        "readMore": "Read More",
+        "category": "Category",
+        "loading": "Loading blog..."
     },
     "experience": {
         "textTitle": "Experience the Finest Clean with Carla Maid",
@@ -291,6 +295,8 @@
         },
         "paymentNote": "Choose to pay now or pay when the cleaning service is completed. Both options are available for your convenience.",
         "processingPayment": "Processing Payment...",
+        "creatingBooking": "Creating Booking...",
+        "createBooking": "Create Booking",
         "paymentError": "Payment processing failed. Please try again.",
         "priceLabel": "Price",
         "priceValue": "280 QR",
@@ -319,22 +325,65 @@
             "title": "Payment Successful!",
             "message": "Your payment has been processed successfully. We'll contact you shortly to confirm your booking details."
         },
-        "cancel": {
+        "pending": {
+            "title": "Payment Pending",
+            "message": "Your payment is being processed. Please wait while we confirm your transaction."
+        },
+        "failed": {
+            "title": "Payment Failed",
+            "message": "Your payment could not be processed. Please try again or contact support if the issue persists."
+        },
+        "cancelled": {
             "title": "Payment Cancelled",
             "message": "Your payment was cancelled. You can try again or choose to pay later when the service is completed."
         },
-        "orderId": "Order ID",
-        "amount": "Amount",
-        "transactionId": "Transaction ID",
-        "status": "Status",
-        "status.cancelled": "Cancelled",
+        "unknown": {
+            "title": "Payment Status Unknown",
+            "message": "We couldn't determine the status of your payment. Please contact support for assistance."
+        },
+        "checkingStatus": "Checking Payment Status...",
+        "checkingStatus.message": "Please wait while we verify your payment status.",
+        "creatingBooking": "Creating your booking...",
+        "processing": {
+          "title": "Processing Your Payment",
+          "message": "Please wait while we complete your booking. This may take a few moments.",
+          "warning": "⚠️ IMPORTANT: Please do not close this page until the process is complete. Your booking is being finalized.",
+          "savingPayment": "Saving Payment Information",
+          "creatingBooking": "Creating Your Booking",
+          "progressText": "Processing your payment and creating your booking...",
+          "completed": "All Done! Your booking is complete."
+        },
+        "checkAgain": "Check Again",
+        "retry": "Retry Payment",
         "tryAgain": "Try Again",
         "backToHome": "Back to Home",
         "bookAnother": "Book Another Service",
+        "orderId": "Order ID",
+        "amount": "Amount",
+        "currency": "Currency",
+        "transactionId": "Transaction ID",
+        "error": "Error"
+    },
+    "booking": {
         "orderId": "Booking Order ID"
-      },
-      "booking": {
-        "orderId": "Booking Order ID"
+    },
+    "receipt": {
+        "title": "Payment Receipt",
+        "print": "Print Receipt",
+        "receiptNumber": "Receipt Number",
+        "date": "Date & Time",
+        "orderId": "Order ID",
+        "bookingId": "Booking ID",
+        "serviceDetails": "Service Details",
+        "cleaningService": "Professional Cleaning Service",
+        "subtotal": "Subtotal",
+        "tax": "Tax",
+        "total": "Total",
+        "paymentMethod": "Payment Method",
+        "status": "Payment Status",
+        "paid": "Paid",
+        "thankYou": "Thank you for choosing Carla Maid!",
+        "footerNote": "This receipt serves as proof of payment. Please keep it for your records. For any questions, contact us at +974 7123 6660."
     },
     "header": {
         "home": "Home",

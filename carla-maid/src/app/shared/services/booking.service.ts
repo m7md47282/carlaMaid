@@ -109,7 +109,7 @@ export class BookingService {
   createBooking(bookingRequest: BookingRequest): Observable<BookingResponse> {
     const orderData = this.transformBookingRequestToApiFormat(bookingRequest);
 
-    return this.http.post<BookingApiResponse>(`${this.backendApiUrl}/bookings/create`, orderData)
+    return this.http.post<BookingApiResponse>(`${this.backendApiUrl}/book`, orderData)
       .pipe(
         map(this.handleBookingApiResponse),
         catchError(this.handleHttpError.bind(this))

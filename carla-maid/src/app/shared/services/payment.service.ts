@@ -13,8 +13,14 @@ export interface PaymentRequest {
   customerEmail: string;
   customerPhone: string;
   description: string;
-  returnUrl: string;
-  cancelUrl: string;
+  // Additional form fields for booking
+  address?: string;
+  serviceType?: string;
+  cleaners?: number;
+  hours?: number;
+  materials?: boolean;
+  scheduledDate?: string;
+  scheduledTime?: string;
 }
 
 export interface PaymentResponse {
@@ -23,6 +29,10 @@ export interface PaymentResponse {
   orderId?: string;
   error?: string;
   data?: any;
+  // New fields from updated API response
+  requiresRedirect?: boolean;
+  redirectUrl?: string;
+  message?: string;
 }
 
 export type PaymentStatusType = 'pending' | 'completed' | 'failed' | 'cancelled';
@@ -59,17 +69,17 @@ export interface SkipCashWebhookPayload {
   RecurringSubscriptionId: string;
 }
 
-// SkipCash Status ID mapping
+// SkipCash Status ID mapping - Updated to match exact SkipCash values
 export const SKIPCASH_STATUS_MAP: Record<number, PaymentStatusType> = {
-  0: 'pending',    // New
-  1: 'pending',    // Pending
-  2: 'completed',  // Paid
-  3: 'cancelled',  // Canceled
-  4: 'failed',     // Failed
-  5: 'failed',     // Rejected
-  6: 'completed',  // Refunded
-  7: 'pending',    // Pending refund
-  8: 'failed'      // Refund failed
+  0: 'pending',    // new
+  1: 'pending',    // pending
+  2: 'completed',  // paid - triggers booking update
+  3: 'cancelled',  // canceled
+  4: 'failed',     // failed
+  5: 'failed',     // rejected
+  6: 'completed',  // refunded - treated as successful completion
+  7: 'pending',    // pending refund
+  8: 'failed'      // refund failed
 };
 
 // Backend API response interfaces
@@ -107,9 +117,27 @@ export class PaymentService {
    * @returns Observable of payment response
    */
   createPayment(paymentRequest: PaymentRequest): Observable<PaymentResponse> {
-    const apiUrl = `${this.backendApiUrl}/skipcash/payment/create`;
+    const apiUrl = `${this.backendApiUrl}/book`;
     
-    const payload = this.buildPaymentPayload(paymentRequest);
+    // Transform payment request to booking format expected by Firebase functions
+    const payload = {
+      order_id: paymentRequest?.orderId || '',
+      transaction_id: paymentRequest?.orderId || '',
+      customer_name: paymentRequest.customerName,
+      customer_email: paymentRequest.customerEmail,
+      customer_phone: paymentRequest.customerPhone,
+      address: paymentRequest.address || '',
+      service_type: paymentRequest.serviceType || 'Cleaning Service',
+      cleaners: paymentRequest.cleaners || 1,
+      hours: paymentRequest.hours || 4,
+      materials: paymentRequest.materials || false,
+      total: paymentRequest.amount,
+      payment_method: 'pay_now',
+      scheduled_date: paymentRequest.scheduledDate || new Date().toISOString().split('T')[0],
+      scheduled_time: paymentRequest.scheduledTime || '10:00'
+    };
+
+    console.log('Sending payload to Firebase functions:', payload);
 
     return this.http.post<BackendPaymentResponse>(apiUrl, payload)
       .pipe(
@@ -162,27 +190,6 @@ export class PaymentService {
   }
 
   /**
-   * Test SkipCash API connectivity
-   * @returns Observable of connection test result
-   */
-  testSkipCashConnection(): Observable<{ success: boolean; message?: string; error?: string }> {
-    const apiUrl = `${this.backendApiUrl}/skipcash/health`;
-
-    return this.http.get<{ success: boolean; message?: string }>(apiUrl)
-      .pipe(
-        map(response => ({
-          success: response.success,
-          message: response.success ? 'SkipCash API is accessible' : 'SkipCash API is not accessible',
-          error: response.success ? undefined : 'SkipCash API is not accessible'
-        })),
-        catchError(error => {
-          console.error('SkipCash health check error:', error);
-          return throwError(() => new Error('SkipCash API health check failed'));
-        })
-      );
-  }
-
-  /**
    * Generate a unique order ID
    * @returns Unique order ID string
    */
@@ -215,69 +222,51 @@ export class PaymentService {
   }
 
   /**
+   * Extract payment URL from API response
+   * @param response - API response object
+   * @returns Payment URL or null if not found
+   */
+  extractPaymentUrl(response: any): string | null {
+    // Try different possible locations for the payment URL
+    const paymentUrl = response.redirectUrl || 
+                      response.data?.paymentUrl || 
+                      response.data?.payUrl || 
+                      response.payUrl;
+    
+    return paymentUrl || null;
+  }
+
+  /**
+   * Validate payment URL format
+   * @param url - URL to validate
+   * @returns true if URL is valid
+   */
+  validatePaymentUrl(url: string): boolean {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.protocol === 'https:' || urlObj.protocol === 'http:';
+    } catch {
+      return false;
+    }
+  }
+
+  /**
    * Redirect to payment gateway
    * @param paymentUrl - URL to redirect to
    */
   redirectToPayment(paymentUrl: string): void {
     if (paymentUrl && paymentUrl.trim()) {
-      window.location.href = paymentUrl;
+      if (this.validatePaymentUrl(paymentUrl)) {
+        console.log('Redirecting to payment gateway:', paymentUrl);
+        window.location.href = paymentUrl;
+      } else {
+        console.error('Invalid payment URL format:', paymentUrl);
+        throw new Error('Invalid payment URL format');
+      }
+    } else {
+      console.error('Empty or missing payment URL');
+      throw new Error('Payment URL is required');
     }
-  }
-
-  /**
-   * Handle payment callback from URL parameters
-   * @returns Payment status from URL parameters
-   */
-  handlePaymentCallbackFromUrl(): PaymentStatus {
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('order_id');
-    const status = urlParams.get('status');
-    const transactionId = urlParams.get('transaction_id');
-    const amount = urlParams.get('amount');
-    const currency = urlParams.get('currency');
-
-    if (!orderId || !status) {
-      return {
-        orderId: '',
-        status: 'failed',
-        error: 'Missing required callback parameters'
-      };
-    }
-
-    const validStatus = this.validatePaymentStatus(status);
-    const parsedAmount = amount ? parseFloat(amount) : undefined;
-
-    return {
-      orderId,
-      status: validStatus,
-      amount: parsedAmount,
-      currency: currency || 'QAR',
-      transactionId: transactionId || undefined
-    };
-  }
-
-  /**
-   * Get payment success URL
-   * @param orderId - Optional order ID to append
-   * @returns Success URL
-   */
-  getPaymentSuccessUrl(orderId?: string): string {
-    // We no longer append the orderId in the URL. It is stored locally and
-    // retrieved on the success page from sessionStorage.
-    const baseUrl = environment.skipCash.returnUrl;
-    return baseUrl;
-  }
-
-  /**
-   * Get payment cancel URL
-   * @param orderId - Optional order ID to append
-   * @returns Cancel URL
-   */
-  getPaymentCancelUrl(orderId?: string): string {
-    // We no longer append the orderId in the URL. It is stored locally and
-    // retrieved on the cancel page from sessionStorage.
-    const baseUrl = environment.skipCash.cancelUrl;
-    return baseUrl;
   }
 
   /**
@@ -338,8 +327,6 @@ export class PaymentService {
       customerEmail: paymentRequest.customerEmail,
       customerPhone: paymentRequest.customerPhone,
       description: paymentRequest.description,
-      returnUrl: paymentRequest.returnUrl,
-      cancelUrl: paymentRequest.cancelUrl,
       orderId: paymentRequest.orderId
     };
   }
@@ -410,5 +397,14 @@ export class PaymentService {
     return this.validPaymentStatuses.includes(status as PaymentStatusType) 
       ? status as PaymentStatusType
       : 'failed';
+  }
+
+  savePayment({orderId, transactionId, statusId, bookingInfo}: {orderId: string, transactionId: string, statusId: string, bookingInfo: any}): Observable<BackendPaymentResponse> {
+    if(orderId && transactionId && statusId) {
+      const apiUrl = `${this.backendApiUrl}/saveBooking`;
+      return this.http.post<BackendPaymentResponse>(apiUrl, { orderId, transactionId, statusId, bookingInfo });
+    } else {
+      return throwError(() => new Error('Invalid payment data'));
+    }
   }
 } 

@@ -84,7 +84,7 @@ export class PaymentDataService {
    * @returns Observable with payment data
    */
   retrievePaymentData(paymentOrderId: string): Observable<PaymentDataRetrieval> {
-    const apiUrl = `${this.backendApiUrl}/bookings/payment-data/${paymentOrderId}`;
+    const apiUrl = `${this.backendApiUrl}/getBookingDetails/${paymentOrderId}`;
 
     return this.http.get<PaymentDataRetrieval>(apiUrl)
       .pipe(
@@ -143,62 +143,23 @@ export class PaymentDataService {
    * @param paymentOrderId - The payment order ID
    * @returns Observable with payment data
    */
-  getPaymentDataFromMultipleSources(paymentOrderId: string): Observable<PaymentDataRetrieval> {
+  getPaymentDataFromMultipleSources(orderId: string): Observable<PaymentDataRetrieval> {
     return new Observable(observer => {
       // First try to get from backend
-      this.retrievePaymentData(paymentOrderId).subscribe({
+      this.retrievePaymentData(orderId).subscribe({
         next: (backendResponse) => {
           if (backendResponse.success && backendResponse.data) {
             observer.next(backendResponse);
             observer.complete();
-          } else {
-            // Fallback to sessionStorage
-            this.getPaymentDataFromSessionStorage(paymentOrderId).subscribe({
-              next: (sessionResponse) => {
-                if (sessionResponse.success && sessionResponse.data) {
-                  observer.next(sessionResponse);
-                  observer.complete();
-                } else {
-                  observer.next({
-                    success: false,
-                    error: 'Payment data not found in backend or session storage'
-                  });
-                  observer.complete();
-                }
-              },
-              error: (error) => {
-                observer.next({
-                  success: false,
-                  error: 'Failed to retrieve payment data from session storage'
-                });
-                observer.complete();
-              }
-            });
-          }
+          } 
         },
         error: (error) => {
           // Fallback to sessionStorage
-          this.getPaymentDataFromSessionStorage(paymentOrderId).subscribe({
-            next: (sessionResponse) => {
-              if (sessionResponse.success && sessionResponse.data) {
-                observer.next(sessionResponse);
-                observer.complete();
-              } else {
-                observer.next({
-                  success: false,
-                  error: 'Payment data not found in backend or session storage'
-                });
-                observer.complete();
-              }
-            },
-            error: (sessionError) => {
-              observer.next({
-                success: false,
-                error: 'Failed to retrieve payment data from any source'
-              });
-              observer.complete();
-            }
+          observer.next({
+            success: false,
+            error: 'Failed to retrieve payment data from backend'
           });
+          observer.complete();
         }
       });
     });

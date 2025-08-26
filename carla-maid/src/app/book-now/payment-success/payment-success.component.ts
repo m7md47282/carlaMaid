@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaymentService, PaymentStatus } from '../../shared/services/payment.service';
@@ -12,59 +12,156 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   template: `
+    <!-- Progress Bar at Top -->
+    @if(isProcessing){
+      <div class="top-progress-bar">
+        <div class="progress-container">
+          <div class="progress-text">{{ 'payment.processing.progressText' | translate }}</div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+          </div>
+        </div>
+      </div>
+    }
+    
     <div class="payment-success-container">
       <div class="success-card">
-        <div class="success-icon">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h1>{{ 'payment.success.title' | translate }}</h1>
-        <p>{{ 'payment.success.message' | translate }}</p>
-        
-        @if(paymentStatus){
-          <div class="payment-details">
-            <div class="detail-row">
-              <span>{{ 'payment.orderId' | translate }}:</span>
-              <span>{{ paymentStatus.orderId }}</span>
+        <!-- Loading State -->
+        @if(isProcessing){
+          <div class="processing-state">
+            <div class="loading-spinner">
+              <div class="spinner"></div>
             </div>
-            <div class="detail-row">
-              <span>{{ 'payment.amount' | translate }}:</span>
-              <span>{{ paymentStatus.amount }} {{ paymentStatus.currency }}</span>
+            <h1>{{ 'payment.processing.title' | translate }}</h1>
+            <p class="processing-message">{{ 'payment.processing.message' | translate }}</p>
+            <div class="warning-box">
+              <div class="warning-icon">⚠️</div>
+              <p class="warning-text">{{ 'payment.processing.warning' | translate }}</p>
             </div>
-            @if(paymentStatus.transactionId){
-              <div class="detail-row">
-                <span>{{ 'payment.transactionId' | translate }}:</span>
-                <span>{{ paymentStatus.transactionId }}</span>
+            <div class="progress-steps">
+              <div class="step" [class.active]="isSavingPayment" [class.completed]="paymentSaved">
+                <div class="step-icon">{{ paymentSaved ? '✓' : (isSavingPayment ? '⟳' : '1') }}</div>
+                <span>{{ 'payment.processing.savingPayment' | translate }}</span>
               </div>
-            }
-            @if(bookingOrderId){
-              <div class="detail-row">
-                <span>{{ 'booking.orderId' | translate }}:</span>
-                <span>{{ bookingOrderId }}</span>
+              <div class="step" [class.active]="isCreatingBooking" [class.completed]="bookingCreated">
+                <div class="step-icon">{{ bookingCreated ? '✓' : (isCreatingBooking ? '⟳' : '2') }}</div>
+                <span>{{ 'payment.processing.creatingBooking' | translate }}</span>
               </div>
-            }
+            </div>
           </div>
         }
         
-        <div class="actions">
-          <button class="btn-primary" (click)="goToHome()">
-            {{ 'payment.backToHome' | translate }}
-          </button>
-          <button class="btn-secondary" (click)="bookAnother()">
-            {{ 'payment.bookAnother' | translate }}
-          </button>
-        </div>
+        <!-- Success State -->
+        @if(!isProcessing){
+          <div class="completion-message">
+            <div class="success-icon">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h1>{{ 'payment.success.title' | translate }}</h1>
+            <p>{{ 'payment.success.message' | translate }}</p>
+                        <div class="completion-badge">
+              <span class="badge-icon">✓</span>
+              <span>{{ 'payment.processing.completed' | translate }}</span>
+            </div>
+          </div>
+          
+          <!-- Payment Details Section -->
+          @if(paymentStatus){
+            <div class="payment-details">
+              <div class="detail-row">
+                <span>{{ 'payment.orderId' | translate }}:</span>
+                <span>{{ paymentStatus.orderId }}</span>
+              </div>
+              <div class="detail-row">
+                <span>{{ 'payment.amount' | translate }}:</span>
+                <span>{{ paymentStatus.amount }} {{ paymentStatus.currency }}</span>
+              </div>
+              @if(paymentStatus.transactionId){
+                <div class="detail-row">
+                  <span>{{ 'payment.transactionId' | translate }}:</span>
+                  <span>{{ paymentStatus.transactionId }}</span>
+                </div>
+              }
+              @if(bookingOrderId){
+                <div class="detail-row">
+                  <span>{{ 'booking.orderId' | translate }}:</span>
+                  <span>{{ bookingOrderId }}</span>
+                </div>
+              }
+            </div>
+          }
+          
+          <!-- SkipCash Payment Details Section -->
+          @if(skipCashId || skipCashStatus || skipCashTransId){
+            <div class="skipcash-details">
+              <h3>SkipCash Payment Details</h3>
+              @if(skipCashId){
+                <div class="detail-row">
+                  <span>SkipCash ID:</span>
+                  <span>{{ skipCashId }}</span>
+                </div>
+              }
+              @if(skipCashStatus){
+                <div class="detail-row">
+                  <span>Payment Status:</span>
+                  <span>{{ skipCashStatus }}</span>
+                </div>
+              }
+              @if(skipCashTransId){
+                <div class="detail-row">
+                  <span>Transaction ID:</span>
+                  <span>{{ skipCashTransId }}</span>
+                </div>
+              }
+              @if(skipCashCustom1){
+                <div class="detail-row">
+                  <span>Service:</span>
+                  <span>{{ skipCashCustom1 }}</span>
+                </div>
+              }
+            </div>
+          }
+          
+          <!-- Action Buttons -->
+          <div class="actions">
+            <button class="btn-primary" (click)="goToHome()">
+              {{ 'payment.backToHome' | translate }}
+            </button>
+            <button class="btn-secondary" (click)="bookAnother()">
+              {{ 'payment.bookAnother' | translate }}
+            </button>
+          </div>
+        }
       </div>
     </div>
   `,
   styleUrls: ['./payment-success.component.sass']
 })
-export class PaymentSuccessComponent implements OnInit {
+export class PaymentSuccessComponent implements OnInit, OnDestroy {
+  // Payment status and order information
   paymentStatus?: PaymentStatus;
   orderId?: string;
   bookingOrderId?: string;
+  
+  // Processing states
+  isProcessing = true;
+  isSavingPayment = false;
   isCreatingBooking = false;
+  paymentSaved = false;
+  bookingCreated = false;
+  
+  // Prevention of double processing
+  private readonly PROCESSING_KEY = 'payment_processing_completed';
+  private readonly PROCESSING_TIMEOUT = 30000; // 30 seconds timeout
+  
+  // SkipCash payment parameters
+  skipCashId?: string;
+  skipCashStatusId?: string;
+  skipCashStatus?: string;
+  skipCashTransId?: string;
+  skipCashCustom1?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,119 +173,449 @@ export class PaymentSuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Prefer reading orderId from sessionStorage to avoid URL params
-    const storedOrderId = sessionStorage.getItem('paymentOrderId');
-    this.orderId = storedOrderId || this.route.snapshot.queryParams['orderId'];
+    // Check if payment has already been processed to prevent double saving
+    if (this.isPaymentAlreadyProcessed()) {
+      this.showAlreadyProcessedState();
+      return;
+    }
+    
+    this.initializePaymentData();
+    this.handlePaymentFlow();
+    this.setupPageUnloadWarning();
+    this.setupRouterEvents();
+  }
+
+  /**
+   * Setup warning when user tries to close/refresh the page during processing
+   */
+  private setupPageUnloadWarning(): void {
+    window.addEventListener('beforeunload', this.handleBeforeUnload);
+    
+    // Also handle page visibility change to detect refresh
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+  }
+
+  /**
+   * Cleanup event listeners when component is destroyed
+   */
+  ngOnDestroy(): void {
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+  }
+
+  /**
+   * Handle beforeunload event
+   */
+  private handleBeforeUnload = (event: BeforeUnloadEvent) => {
+    if (this.isProcessing) {
+      event.preventDefault();
+      event.returnValue = '⚠️ Please do not close this page until your booking is complete. Your payment is being processed.';
+      return event.returnValue;
+    }
+  }
+
+  /**
+   * Handle visibility change event to detect page refresh
+   */
+  private handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible' && this.isPaymentAlreadyProcessed()) {
+      // Page was refreshed and payment was already processed
+      console.log('Page refreshed after payment was already processed');
+      this.showAlreadyProcessedState();
+    }
+  }
+
+  /**
+   * Setup router events to handle navigation
+   */
+  private setupRouterEvents(): void {
+    // Listen for route changes to prevent double processing
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Check if we're still on the success page and payment was already processed
+        if (this.router.url.includes('payment-success') && this.isPaymentAlreadyProcessed()) {
+          this.showAlreadyProcessedState();
+        }
+      }
+    });
+  }
+
+  /**
+   * Calculate progress percentage based on current state
+   */
+  getProgressPercentage(): number {
+    let progress = 0;
+    if (this.paymentSaved) progress += 50;
+    if (this.bookingCreated) progress += 50;
+    return progress;
+  }
+
+  /**
+   * Initialize payment data from various sources
+   */
+  private initializePaymentData(): void {
+    // Get orderId from URL parameters
+    const urlOrderId = this.route.snapshot.queryParams['order_id'] || '';
+    
+    this.orderId = urlOrderId;
+    
+    // Extract SkipCash payment parameters
+    this.extractSkipCashParameters();
+  }
+
+  /**
+   * Extract SkipCash specific parameters from URL
+   */
+  private extractSkipCashParameters(): void {
+    this.skipCashId = this.route.snapshot.queryParams['id'];
+    this.skipCashStatusId = this.route.snapshot.queryParams['statusId'];
+    this.skipCashStatus = this.route.snapshot.queryParams['status'];
+    this.skipCashTransId = this.route.snapshot.queryParams['transId'];
+    this.skipCashCustom1 = this.route.snapshot.queryParams['custom1'];
+  }
+
+  /**
+   * Handle the payment flow based on available data
+   */
+  private handlePaymentFlow(): void {
+    
+    // Check if we have valid payment data to process
+    if (!this.hasValidPaymentData()) {
+      console.warn('No valid payment data found, redirecting to home');
+      this.router.navigate(['/']);
+      return;
+    }
     
     if (this.orderId) {
-      this.checkPaymentStatus();
+      this.savePayment();
+    } else if (this.isSkipCashSuccessRedirect()) {
+      this.createMinimalPaymentStatus();
+      this.completeProcessing();
     }
   }
 
-  checkPaymentStatus() {
-    if (this.orderId) {
-      this.paymentService.checkPaymentStatus(this.orderId).subscribe({
-        next: (status) => {
-          this.paymentStatus = status;
-          
-          if (status.status === 'completed') {
-            // Enhanced tracking for SkipCash payment success
-            this.analyticsService.trackSkipCashPaymentSuccess(
-              status.orderId,
-              status.amount || 0,
-              status.currency || 'QAR',
-              'cleaning_service'
-            );
-
-            // Create booking with payment information
-            this.createBookingWithPayment(status);
-          }
-        },
-        error: (error) => {
-          console.error('Error checking payment status:', error);
-        }
-      });
+  /**
+   * Check if we have valid payment data to process
+   */
+  private hasValidPaymentData(): boolean {
+    // Check if payment parameters are expired
+    if (this.arePaymentParametersExpired()) {
+      console.warn('Payment parameters are expired');
+      return false;
     }
+    
+    return !!(this.orderId || (this.skipCashId && this.skipCashStatus === 'Paid'));
   }
 
-  createBookingWithPayment(paymentStatus: PaymentStatus) {
-    const paymentOrderId = paymentStatus.orderId;
-
-    if (paymentOrderId) {
-      this.isCreatingBooking = true;
+  /**
+   * Check if payment parameters are expired (older than 1 hour)
+   */
+  private arePaymentParametersExpired(): boolean {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const timestamp = urlParams.get('timestamp');
       
-      // Try to get payment data from multiple sources
-      this.paymentDataService.getPaymentDataFromMultipleSources(paymentOrderId).subscribe({
-        next: (paymentDataResponse) => {
-          if (paymentDataResponse.success && paymentDataResponse.data) {
-            const bookingInfo = paymentDataResponse.data.bookingData;
-            const paymentAmount = paymentDataResponse.data.paymentAmount;
-            
-            // Update session storage with payment amount for booking service
-            sessionStorage.setItem('paymentAmount', paymentAmount.toString());
-            
-            this.bookingService.createBookingWithPayment(
-              bookingInfo, 
-              paymentOrderId, 
-              paymentStatus.status
-            ).subscribe({
-              next: (response) => {
-                if (response.success && response.orderId) {
-                  this.bookingOrderId = response.orderId;
-                 // Clean up local state now that booking is confirmed
-                 sessionStorage.removeItem('paymentOrderId');
-                 sessionStorage.removeItem('paymentAmount');
-                 sessionStorage.removeItem('bookingData');
-                  
-                  // Clean up payment data after successful booking creation
-                  this.paymentDataService.cleanupPaymentData(paymentOrderId).subscribe({
-                    next: (cleanupResponse) => {
-                      if (cleanupResponse.success) {
-                        console.log('Payment data cleaned up successfully');
-                      } else {
-                        console.error('Failed to clean up payment data:', cleanupResponse.error);
-                      }
-                    },
-                    error: (cleanupError) => {
-                      console.error('Error cleaning up payment data:', cleanupError);
-                    }
-                  });
-                  
-                  // Also clear session storage
-                  this.paymentDataService.clearPaymentDataFromSessionStorage();
-                  
-                  console.log('Booking created successfully with payment:', response.orderId);
-                } else {
-                  console.error('Failed to create booking with payment:', response.error);
-                }
-                this.isCreatingBooking = false;
-              },
-              error: (error) => {
-                console.error('Error creating booking with payment:', error);
-                this.isCreatingBooking = false;
-              }
-            });
-          } else {
-            console.error('Failed to retrieve payment data:', paymentDataResponse.error);
-            this.isCreatingBooking = false;
-          }
-        },
-        error: (error) => {
-          console.error('Error retrieving payment data:', error);
-          this.isCreatingBooking = false;
-        }
-      });
-    } else {
-      console.error('Missing payment order ID');
-      this.isCreatingBooking = false;
+      if (!timestamp) return false;
+      
+      const paramTime = parseInt(timestamp);
+      const now = Date.now();
+      const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
+      
+      return (now - paramTime) > oneHour;
+    } catch (error) {
+      console.error('Error checking payment parameter expiration:', error);
+      return false;
     }
   }
 
-  goToHome() {
+  /**
+   * Check if user came directly from SkipCash success redirect
+   */
+  private isSkipCashSuccessRedirect(): boolean {
+    return !!(this.skipCashId && this.skipCashStatus === 'Paid');
+  }
+
+  /**
+   * Create minimal payment status for SkipCash redirects
+   */
+  private createMinimalPaymentStatus(): void {
+    this.paymentStatus = {
+      orderId: this.orderId || 'Unknown',
+      status: 'completed',
+      amount: 0, // Will be updated when actual data is retrieved
+      currency: 'QAR'
+    };
+  }
+
+  /**
+   * Save payment information to backend
+   */
+  private savePayment(): void {       
+    this.isSavingPayment = true;
+    
+    this.paymentService.savePayment(
+      {
+        orderId: this.orderId || '',
+        transactionId: this.skipCashTransId || '',
+        statusId: this.skipCashStatusId || '',
+        bookingInfo: this.bookingOrderId || ''
+      }
+    ).subscribe({
+      next: () => {
+        // Payment saved successfully
+        console.log('Payment saved successfully');
+        this.paymentSaved = true;
+        this.isSavingPayment = false;
+        
+        // Now create the booking
+        this.createBookingWithPayment();
+      },
+      error: (error) => {
+        // Handle payment save error
+        console.error('Failed to save payment:', error);
+        this.isSavingPayment = false;
+        this.completeProcessing();
+      }
+    });
+  }
+  
+  /**
+   * Create booking with payment information
+   */
+  private createBookingWithPayment(): void {
+    if (!this.orderId) {
+      this.completeProcessing();
+      return;
+    }
+
+    this.isCreatingBooking = true;
+    this.retrievePaymentDataAndCreateBooking(this.orderId);
+  }
+
+  /**
+   * Retrieve payment data and create booking
+   */
+  private retrievePaymentDataAndCreateBooking(paymentOrderId: string): void {
+    this.paymentDataService.getPaymentDataFromMultipleSources(paymentOrderId).subscribe({
+      next: (paymentDataResponse) => {
+        if (paymentDataResponse.success && paymentDataResponse.data) {
+          this.processPaymentDataAndCreateBooking(paymentDataResponse.data, paymentOrderId);
+        } else {
+          this.handlePaymentDataError();
+        }
+      },
+      error: () => {
+        this.handlePaymentDataError();
+      }
+    });
+  }
+
+  /**
+   * Process payment data and create booking
+   */
+  private processPaymentDataAndCreateBooking(paymentData: any, paymentOrderId: string): void {
+    const { bookingData, paymentAmount } = paymentData;
+    
+    // Store payment amount for booking service
+    sessionStorage.setItem('paymentAmount', paymentAmount.toString());
+    
+    this.createBooking(bookingData, paymentOrderId);
+  }
+
+  /**
+   * Create the actual booking
+   */
+  private createBooking(bookingData: any, paymentOrderId: string): void {
+    this.bookingService.createBookingWithPayment(bookingData, paymentOrderId, 'completed').subscribe({
+      next: (response) => {
+        if (response.success && response.orderId) {
+          this.handleSuccessfulBooking(response.orderId, paymentOrderId);
+        }
+        this.bookingCreated = true;
+        this.isCreatingBooking = false;
+        this.completeProcessing();
+      },
+      error: () => {
+        this.isCreatingBooking = false;
+        this.completeProcessing();
+      }
+    });
+  }
+
+  /**
+   * Handle successful booking creation
+   */
+  private handleSuccessfulBooking(bookingOrderId: string, paymentOrderId: string): void {
+    this.bookingOrderId = bookingOrderId;
+    
+    // Clean up session storage
+    this.cleanupSessionStorage();
+    
+    // Clean up payment data
+    this.cleanupPaymentData(paymentOrderId);
+    
+    // Mark payment processing as completed
+    this.markPaymentProcessingCompleted();
+  }
+
+  /**
+   * Complete the processing and show success state
+   */
+  private completeProcessing(): void {
+    // Add a small delay to show the completion state
+    setTimeout(() => {
+      this.isProcessing = false;
+      
+      // Mark payment processing as completed to prevent double saving
+      this.markPaymentProcessingCompleted();
+      
+      // Remove URL parameters after successful processing
+      this.removeUrlParameters();
+    }, 1000);
+  }
+
+  /**
+   * Clean up session storage after successful booking
+   */
+  private cleanupSessionStorage(): void {
+    sessionStorage.removeItem('paymentOrderId');
+    sessionStorage.removeItem('paymentAmount');
+    sessionStorage.removeItem('bookingData');
+    this.paymentDataService.clearPaymentDataFromSessionStorage();
+  }
+
+  /**
+   * Clean up payment data from backend
+   */
+  private cleanupPaymentData(paymentOrderId: string): void {
+    this.paymentDataService.cleanupPaymentData(paymentOrderId).subscribe({
+      next: (cleanupResponse) => {
+        if (!cleanupResponse.success) {
+          // Handle cleanup failure silently for better UX
+        }
+      },
+      error: () => {
+        // Handle cleanup error silently for better UX
+      }
+    });
+  }
+
+  /**
+   * Check if payment has already been processed to prevent double saving
+   */
+  private isPaymentAlreadyProcessed(): boolean {
+    const processingData = sessionStorage.getItem(this.PROCESSING_KEY);
+    if (!processingData) return false;
+    
+    try {
+      const data = JSON.parse(processingData);
+      const now = Date.now();
+      
+      // Check if processing was completed and is within timeout period
+      if (data.completed && (now - data.timestamp) < this.PROCESSING_TIMEOUT) {
+        return true;
+      }
+      
+      // Clean up expired data
+      sessionStorage.removeItem(this.PROCESSING_KEY);
+      return false;
+    } catch (error) {
+      console.error('Error parsing processing data:', error);
+      sessionStorage.removeItem(this.PROCESSING_KEY);
+      return false;
+    }
+  }
+
+  /**
+   * Show state when payment has already been processed
+   */
+  private showAlreadyProcessedState(): void {
+    this.isProcessing = false;
+    this.paymentSaved = true;
+    this.bookingCreated = true;
+    
+    // Try to restore data from session storage
+    this.restoreProcessedData();
+    
+    // Remove URL parameters to prevent further processing
+    this.removeUrlParameters();
+  }
+
+  /**
+   * Restore processed data from session storage
+   */
+  private restoreProcessedData(): void {
+    try {
+      const processingData = sessionStorage.getItem(this.PROCESSING_KEY);
+      if (processingData) {
+        const data = JSON.parse(processingData);
+        if (data.paymentStatus) {
+          this.paymentStatus = data.paymentStatus;
+        }
+        if (data.bookingOrderId) {
+          this.bookingOrderId = data.bookingOrderId;
+        }
+        if (data.orderId) {
+          this.orderId = data.orderId;
+        }
+      }
+    } catch (error) {
+      console.error('Error restoring processed data:', error);
+    }
+  }
+
+  /**
+   * Mark payment processing as completed
+   */
+  private markPaymentProcessingCompleted(): void {
+    const processingData = {
+      completed: true,
+      timestamp: Date.now(),
+      paymentStatus: this.paymentStatus,
+      bookingOrderId: this.bookingOrderId,
+      orderId: this.orderId
+    };
+    
+    sessionStorage.setItem(this.PROCESSING_KEY, JSON.stringify(processingData));
+  }
+
+  /**
+   * Remove URL parameters after successful processing
+   */
+  private removeUrlParameters(): void {
+    try {
+      // Get current URL without query parameters
+      const url = new URL(window.location.href);
+      const cleanUrl = url.origin + url.pathname;
+      
+      // Replace current URL without query parameters
+      window.history.replaceState({}, document.title, cleanUrl);
+      
+      console.log('URL parameters removed after successful processing');
+    } catch (error) {
+      console.error('Error removing URL parameters:', error);
+    }
+  }
+
+  /**
+   * Handle payment data retrieval errors
+   */
+  private handlePaymentDataError(): void {
+    this.isCreatingBooking = false;
+    this.completeProcessing();
+  }
+
+  /**
+   * Navigate to home page
+   */
+  goToHome(): void {
     this.router.navigate(['/']);
   }
 
-  bookAnother() {
+  /**
+   * Navigate to book now page
+   */
+  bookAnother(): void {
     this.router.navigate(['/book-now']);
   }
 } 

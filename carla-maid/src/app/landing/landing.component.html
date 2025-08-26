@@ -528,45 +528,30 @@
     <section class="section-7 fade-in animation-delay">
         <h1 class="primary-text-color center title-size">{{ 'blogs.latestNewAndBlogs' | translate }}</h1>
 
-        <div class="gap-30 flex-wrap center new-blogs fade-in-animation">
+        <div class="landing-blogs-grid">
             @if (isLoadingBlogs) {
-                <div class="img-width blog-card">
-                    <div class="text-border blog-card-text">
-                        <p class="title">Loading blogs...</p>
-                    </div>
+                <div class="loading-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>{{ 'blogs.loading' | translate }}</p>
                 </div>
-            } @else if (hasValidBlogsPosts()) {
-                @for (post of blogsPosts.slice(0, 3); track $index) {
-                    @if (post && post.title && post.content) {
-                        <div class="img-width blog-card">
-                            <img class="relative" [src]="getFirstImage(post.content?.rendered)" alt="">
-                            <div class="text-border blog-card-text">
-                                <p class="title">{{_sharedService.stripHtml(post.title?.rendered || '')}}</p>
-                                <div class="more-info">
-                                    <p class="text-wrap">
-                                        @if (_sharedService.stripHtml(post.content?.rendered || '')) {
-                                            {{_sharedService.stripHtml(post.content?.rendered || '') | slice:0:200}}<span
-                                                *ngIf="_sharedService.stripHtml(post.content?.rendered || '').length > 200">...</span>
-                                        } @else {
-                                            No content available
-                                        }
-                                    </p>
-                                    <button class="btn-secondary btn-hover" (click)="sendPost(post)">
-                                        <span class="primary-text-color">{{ 'shared.ReadMore' | translate }}</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    }
+            } @else if (latestBlogs.length > 0) {
+                @for (blog of latestBlogs; track blog.id) {
+                    <app-blog-card [blog]="blog"></app-blog-card>
                 }
             } @else {
-                <div class="img-width blog-card">
-                    <div class="text-border blog-card-text">
-                        <p class="title">No blogs available</p>
-                    </div>
+                <div class="no-blogs-placeholder">
+                    <p>{{ 'blogs.noPosts' | translate }}</p>
                 </div>
             }
         </div>
+
+        @if (latestBlogs.length > 0) {
+            <div class="view-all-blogs center">
+                <button class="btn-secondary" routerLink="/blogs-list">
+                    <span class="primary-text-color font-weight-700">{{ 'shared.ReadMore' | translate }}</span>
+                </button>
+            </div>
+        }
 
     </section>
     } @placeholder { <div></div> }

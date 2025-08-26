@@ -2,23 +2,62 @@
     <h1 class="text-align-center hero-title">{{"shared.BestCleaningCompanyInQatar" | translate}}</h1>
 </section>
 
-
 <section class="section-7 fade-in animation-delay">
     <h1 class="primary-text-color center title-size">{{ 'blogs.latestNewAndBlogs' | translate }}</h1>
-
-    <div class="gap-30 flex-wrap center new-blogs fade-in-animation">
-        @for (post of blogsPosts; track $index) {
-
-        <figure class="service-item center" (click)="sendPost(post.id)"
-            [style.backgroundImage]="'url(' + getFirstImage(post.content.rendered) + ')'"
-            style="background-size: cover; background-position: center;">
-            <figure class="service-content">
-                <h3>{{_sharedService.stripHtml(post.title.rendered)}}</h3>
-                <p>{{_sharedService.stripHtml(post.content.rendered) | slice:0:200}}<span
-                        *ngIf="_sharedService.stripHtml(post.content.rendered).length > 200">...</span></p>
-            </figure>
-        </figure>
-        }
+    
+    <!-- Blog Stats -->
+    <div class="blog-stats">
+        <p class="blog-count">{{ 'blogs.totalBlogs' | translate }}: {{ totalBlogs }}</p>
     </div>
 
+    <!-- Loading State -->
+    @if (isLoadingBlogs && currentPage === 1) {
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>{{ 'blogs.loading' | translate }}</p>
+        </div>
+    }
+
+    <!-- Error State -->
+    @if (errorMessage && !isLoadingBlogs) {
+        <div class="error-container">
+            <p class="error-message">{{ errorMessage }}</p>
+            <button class="btn-secondary retry-btn" (click)="retryLoading()">
+                <span class="primary-text-color font-weight-700">{{ 'blogs.retry' | translate }}</span>
+            </button>
+        </div>
+    }
+
+    <!-- Blogs Grid -->
+    @if (!isLoadingBlogs || currentPage > 1) {
+        <div class="blogs-grid">
+            @for (post of blogsPosts; track post.id) {
+                <app-blog-card [blog]="post"></app-blog-card>
+            }
+        </div>
+    }
+
+    <!-- Load More Button -->
+    @if (hasMoreBlogs && !isLoadingBlogs && !errorMessage) {
+        <div class="load-more-container">
+            <button class="btn-secondary load-more-btn" (click)="loadMoreBlogs()">
+                <span class="primary-text-color font-weight-700">{{ 'blogs.loadMore' | translate }}</span>
+            </button>
+        </div>
+    }
+
+    <!-- Loading More State -->
+    @if (isLoadingBlogs && currentPage > 1) {
+        <div class="loading-more-container">
+            <div class="loading-spinner"></div>
+            <p>{{ 'blogs.loadingMore' | translate }}</p>
+        </div>
+    }
+
+    <!-- No Blogs State -->
+    @if (!isLoadingBlogs && blogsPosts.length === 0 && !errorMessage) {
+        <div class="no-blogs-container">
+            <p>{{ 'blogs.noPosts' | translate }}</p>
+        </div>
+    }
 </section>

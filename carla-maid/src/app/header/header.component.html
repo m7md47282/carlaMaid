@@ -1,43 +1,53 @@
 <header [ngClass]="{'ar': direction() == 'rtl'}">
   <nav class="nav">
-    <p-menubar [model]="items" [dir]="direction()" >
-      <ng-template pTemplate="start">
-        <div class="logo">
-          @if( getLang() == 'en'){
-            <img src="../../assets/images/carla-en.png" alt="logo">
-          }@else {
-            <img src="../../assets/images/carla-ar.png" alt="logo-ar">
-          }
+    <div class="nav-container">
+      <div class="logo">
+        @if( getLang() == 'en'){
+          <img src="../../assets/images/carla-en.png" alt="logo">
+        }@else {
+          <img src="../../assets/images/carla-ar.png" alt="logo-ar">
+        }
+      </div>
+      
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <ul class="nav-menu" [class.mobile-open]="isMobileMenuOpen">
+        <!-- Close button for mobile menu -->
+        <button class="mobile-close-btn" (click)="closeMobileMenu()" *ngIf="isMobileMenuOpen">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         
-         
-        </div>
-      </ng-template>
-      <ng-template pTemplate="item" let-item let-root="root">
-        <a pRipple [routerLink]="item.link" class="flex align-items-center p-menuitem-link">
-          <span [class]="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      </ng-template>
-      <ng-template pTemplate="end">
-        <div class="flex gap-10 items-center">
-          <span routerLink="/contact-us" class="clickable">{{'shared.contactUs' | translate}}</span>
-          <button class="translation-button" (click)="switchLanguage()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="Navigation / Globe">
-              <path id="Vector" d="M3 12H8M3 12C3 16.9706 7.02944 21 12 21M3 12C3 7.02944 7.02944 3 12 3M8 12H16M8 12C8 16.9706 9.79086 21 12 21M8 12C8 7.02944 9.79086 3 12 3M16 12H21M16 12C16 7.02944 14.2091 3 12 3M16 12C16 16.9706 14.2091 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12C21 16.9706 16.9706 21 12 21" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              </svg>
-              
-            <span>
-              {{ getLang() === 'en' ? 'العربية' : 'English' }}
-            </span>
-          </button>
-        </div>
-
-      </ng-template>
-    </p-menubar>
+        @for (item of items; track item.link) {
+          <li class="nav-item">
+            <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+      
+      <div class="nav-end">
+        <span routerLink="/contact-us" class="clickable contact-link">{{'shared.contactUs' | translate}}</span>
+        <button class="translation-button" (click)="switchLanguage()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="Navigation / Globe">
+            <path id="Vector" d="M3 12H8M3 12C3 16.9706 7.02944 21 12 21M3 12C3 7.02944 7.02944 3 12 3M8 12H16M8 12C8 16.9706 9.79086 21 12 21M8 12C8 7.02944 9.79086 3 12 3M16 12H21M16 12C16 7.02944 14.2091 3 12 3M16 12C16 16.9706 14.2091 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12C21 16.9706 16.9706 21 12 21" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            </svg>
+            
+          <span>
+            {{ getLang() === 'en' ? 'العربية' : 'English' }}
+          </span>
+        </button>
+      </div>
+    </div>
   </nav>
-
-
-
 </header>

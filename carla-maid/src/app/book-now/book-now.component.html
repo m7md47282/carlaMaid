@@ -369,14 +369,28 @@
                         <button 
                             mat-raised-button 
                             class="btn-primary" 
+                            [class.processing]="isProcessingPayment || isSubmitting"
                             color="primary" 
                             type="submit" 
-                            [disabled]="bookingForm.invalid || isProcessingPayment">
+                            [disabled]="bookingForm.invalid || isProcessingPayment || isSubmitting"
+                            (click)="onSubmit()"
+                            #submitButton>
                             @if(isProcessingPayment){
                                 <span class="loading-spinner"></span>
                                 {{ 'form.processingPayment' | translate }}
+                            } @else if(isSubmitting) {
+                                <span class="loading-spinner"></span>
+                                @if(isPayNowOption()){
+                                    {{ 'form.processingPayment' | translate }}
+                                } @else {
+                                    {{ 'form.creatingBooking' | translate }}
+                                }
                             } @else {
-                                {{'form.submitButton' | translate}}
+                                @if(isPayNowOption()){
+                                    {{'form.submitButton' | translate}}
+                                } @else {
+                                    {{'form.createBooking' | translate}}
+                                }
                             }
                         </button>
                     </div>

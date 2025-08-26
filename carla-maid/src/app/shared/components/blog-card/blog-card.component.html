@@ -1,0 +1,23 @@
+<div class="blog-card" [routerLink]="['/view-blogs', blog().id]">
+  <div class="blog-image">
+    <img [src]="getFirstImage(blog().content.rendered)" 
+         [alt]="stripHtml(blog().title.rendered)"
+         (error)="onImageError($event)">
+  </div>
+  
+  <div class="blog-content">
+    <h3 class="blog-title">{{ stripHtml(blog().title.rendered) }}</h3>
+    <p class="blog-excerpt">{{ getExcerpt(blog().content.rendered) }}</p>
+    
+    <div class="blog-meta">
+      <span class="blog-date">{{ blog().date | date:'mediumDate' }}</span>
+      <span class="blog-category" *ngIf="blog().categories && blog().categories.length > 0">
+        {{ 'blogs.category' | translate }}
+      </span>
+    </div>
+    
+    <div class="read-more-overlay">
+      <span class="read-more-text">{{ 'blogs.readMore' | translate }}</span>
+    </div>
+  </div>
+</div>

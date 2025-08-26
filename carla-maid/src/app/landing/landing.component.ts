@@ -14,6 +14,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { WordPressService } from '../shared/services/word-press.service';
 import { SharedService } from '../shared/services/shared.service';
 import { PhoneTrackDirective } from '../shared/directives/phone-track.directive';
+import { BlogCardComponent } from '../shared/components/blog-card/blog-card.component';
 
 @Component({
   selector: 'app-landing',
@@ -25,7 +26,8 @@ import { PhoneTrackDirective } from '../shared/directives/phone-track.directive'
     TagModule,
     RouterLink,
     NgOptimizedImage,
-    PhoneTrackDirective
+    PhoneTrackDirective,
+    BlogCardComponent
   ],
   animations: [
     trigger('openAnimation', [
@@ -98,6 +100,7 @@ export class LandingComponent implements OnInit {
 
   services: {}[] = []
   blogsPosts: any[] = [];
+  latestBlogs: any[] = [];
   isLoadingBlogs: boolean = false;
 
   isInView = false;
@@ -317,16 +320,20 @@ ngAfterViewInit(): void {
       }
     }, 10000); // 10 second timeout
 
-    this._wordPressService.getPostsByCategoriesNames(postsPage, categoriesNames, params).subscribe({
+    this._wordPressService.getPosts({}).subscribe({
       next: (value: any) => {
+        console.log('value', value);
         clearTimeout(timeout);
         this.blogsPosts = value || [];
+        // Get the latest 3 blogs
+        this.latestBlogs = this.blogsPosts.slice(0, 3);
         this.isLoadingBlogs = false;
       },
       error: (error: any) => {
         clearTimeout(timeout);
         console.error('Error fetching blog posts:', error);
         this.blogsPosts = [];
+        this.latestBlogs = [];
         this.isLoadingBlogs = false;
       }
     });
@@ -360,6 +367,15 @@ ngAfterViewInit(): void {
     }
   }
 
+  navigateToCategory(category: any) {
+    if (category && category.slug) {
+      // Navigate to blogs page with category filter
+      this.router.navigate(['/blogs'], { queryParams: { category: category.slug } });
+    } else {
+      console.error('Invalid category data:', category);
+    }
+  }
+
   makePhoneCall(phoneNumber: string) {
     window.open(`tel:${phoneNumber}`, '_self');
   }
@@ -367,10 +383,10 @@ ngAfterViewInit(): void {
   /**
    * Safely checks if blogsPosts is valid and has the expected structure
    */
-  hasValidBlogsPosts(): boolean {
+  hasValidCategories(): boolean {
     return this.blogsPosts && 
            Array.isArray(this.blogsPosts) && 
            this.blogsPosts.length > 0 &&
-           this.blogsPosts.every(post => post && post.title && post.content);
+           this.blogsPosts.every(category => category && category.name);
   }
 }

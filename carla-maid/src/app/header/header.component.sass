@@ -1,4 +1,5 @@
 @import ../../variables
+
 header
     display: flex
     justify-content: space-around
@@ -9,12 +10,105 @@ header
         width: 125px
         height: auto
         object-fit: cover
+    
     nav
         width: 100%
+        
+        .nav-container
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 100%
+            
+        .logo
+            flex-shrink: 0
+            
+        .mobile-menu-toggle
+            display: none
+            flex-direction: column
+            background: none
+            border: none
+            cursor: pointer
+            padding: 5px
+            z-index: 1000
+            transition: all 0.3s ease
+            
+            &:hover
+                transform: scale(1.1)
+                
+            .hamburger-line
+                width: 25px
+                height: 3px
+                background-color: #333
+                margin: 3px 0
+                transition: 0.3s
+                border-radius: 2px
+                
+            // Animated hamburger when menu is open
+            &.active
+                .hamburger-line
+                    &:nth-child(1)
+                        transform: rotate(-45deg) translate(-5px, 6px)
+                    &:nth-child(2)
+                        opacity: 0
+                    &:nth-child(3)
+                        transform: rotate(45deg) translate(-5px, -6px)
+                
+        .nav-menu
+            display: flex
+            list-style: none
+            margin: 0
+            padding: 0
+            gap: 20px
+            align-items: center
+            position: relative
+            
+            .mobile-close-btn
+                display: none
+                position: absolute
+                top: 20px
+                right: 20px
+                background: none
+                border: none
+                cursor: pointer
+                padding: 10px
+                border-radius: 50%
+                transition: all 0.3s ease
+                z-index: 1001
+                    
+                svg
+                    width: 24px
+                    height: 24px
+                    
+        .nav-item
+            .nav-link
+                display: flex
+                align-items: center
+                text-decoration: none
+                color: inherit
+                padding: 10px
+                border-radius: 4px
+                transition: background-color 0.3s ease
+                
+
+                    
+                span
+                    margin-left: 8px
+                    
+        .nav-end
+            display: flex
+            align-items: center
+            gap: 20px
+            
+            .contact-link
+                display: block
+                
     h4
         font-size: 16px
+        
     button 
         padding: 10px
+        
     .translation-button
         display: flex
         border: 0
@@ -23,22 +117,127 @@ header
         align-items: center
         gap: 10px
         cursor: pointer
+        
+    .clickable
+        cursor: pointer
+        transition: opacity 0.3s ease
+        
+        &:hover
+            opacity: 0.8
 
-::ng-deep
-    .p-menubar
-        border: none
-        background-color: $gray
-  
-    .p-menuitem-content
-        background: none
+header.ar
+    .nav-container
+        flex-direction: row-reverse
+        
+    .nav-menu
+        flex-direction: row-reverse
 
-    .p-element.p-menuitem
-        &::hover
-            .p-menuitem-content
-                background-color: $gray
+// Mobile responsive styles
+@media (max-width: 768px)
     header
-        &.ar
-            .p-menubar-end
-                margin-right: auto
-                margin-left: 0  
+        padding: 0 15px
+        
+        nav
+            .nav-container
+                position: relative
+                
+            .mobile-menu-toggle
+                display: flex
+                
+            .nav-menu
+                position: fixed
+                top: 0
+                left: 0
+                right: 0
+                bottom: 0
+                background-color: rgba(0, 0, 0, 0.9)
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                gap: 30px
+                transform: translateX(-100%)
+                transition: transform 0.3s ease-in-out
+                z-index: 999
+                
+                &.mobile-open
+                    transform: translateX(0)
+                    
+                .mobile-close-btn
+                    display: block
+                    opacity: 0
+                    animation: fadeIn 0.3s ease-in-out 0.2s forwards
+                    
+                .nav-item
+                    opacity: 0
+                    animation: slideInUp 0.4s ease-in-out 0.3s forwards
+                    
+                    &:nth-child(2)
+                        animation-delay: 0.4s
+                    &:nth-child(3)
+                        animation-delay: 0.5s
+                    &:nth-child(4)
+                        animation-delay: 0.6s
+                    &:nth-child(5)
+                        animation-delay: 0.7s
+                    &:nth-child(6)
+                        animation-delay: 0.8s
+                    
+                .nav-item
+                    .nav-link
+                        color: white
+                        font-size: 18px
+                        padding: 15px 20px
+                        
+                        span
+                            margin-left: 12px
+                            
+            .nav-end
+                .contact-link
+                    display: none
+                    
+                .translation-button
+                    font-size: 14px
+                    
+        img
+            width: 100px
+
+@media (max-width: 480px)
+    header
+        padding: 0 10px
+        
+        nav
+            .nav-container
+                .logo img
+                    width: 80px
+                    
+            .nav-menu
+                .nav-item
+                    .nav-link
+                        font-size: 16px
+                        padding: 12px 15px
+                        
+            .nav-end
+                .translation-button
+                    font-size: 12px
+                    gap: 5px
+                    
+                    svg
+                        width: 20px
+                        height: 20px
+        
+
+// Keyframe animations
+@keyframes fadeIn
+    from
+        opacity: 0
+    to
+        opacity: 1
+
+@keyframes slideInUp
+    from
+        opacity: 0
+        transform: translateY(20px)
+    to
+        opacity: 1
+        transform: translateY(0)
         
