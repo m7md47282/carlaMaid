@@ -223,11 +223,7 @@
         "noPosts": "No posts available.",
         "readMore": "Read More",
         "category": "Category",
-        "loading": "Loading blog...",
-        "totalBlogs": "Total Blogs",
-        "loadMore": "Load More Blogs",
-        "loadingMore": "Loading more blogs...",
-        "retry": "Retry"
+        "loading": "Loading blog..."
     },
     "experience": {
         "textTitle": "Experience the Finest Clean with Carla Maid",
@@ -336,6 +332,12 @@
         "failed": {
             "title": "Payment Failed",
             "message": "Your payment could not be processed. Please try again or contact support if the issue persists."
+        },
+        "incomplete": {
+            "title": "Payment Not Completed",
+            "message": "Your payment was not completed successfully. You can still book your service without payment and pay later when the service is completed.",
+            "bookWithoutPayment": "Book Without Payment",
+            "tryPaymentAgain": "Try Payment Again"
         },
         "cancelled": {
             "title": "Payment Cancelled",

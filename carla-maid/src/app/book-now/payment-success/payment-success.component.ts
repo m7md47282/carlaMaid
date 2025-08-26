@@ -13,7 +13,7 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
   imports: [CommonModule, TranslateModule],
   template: `
     <!-- Progress Bar at Top -->
-    @if(isProcessing){
+    @if(isProcessing && !isPaymentFailed){
       <div class="top-progress-bar">
         <div class="progress-container">
           <div class="progress-text">{{ 'payment.processing.progressText' | translate }}</div>
@@ -26,8 +26,59 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
     
     <div class="payment-success-container">
       <div class="success-card">
+        <!-- Failed Payment State -->
+        @if(isPaymentFailed){
+          <div class="failed-payment-state">
+            <div class="failed-icon">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+              </svg>
+            </div>
+            <h1>{{ 'payment.incomplete.title' | translate }}</h1>
+            <p>{{ 'payment.incomplete.message' | translate }}</p>
+            
+            <!-- Payment Details Section for Failed Payment -->
+            @if(paymentStatus){
+              <div class="payment-details">
+                <div class="detail-row">
+                  <span>{{ 'payment.orderId' | translate }}:</span>
+                  <span>{{ paymentStatus.orderId }}</span>
+                </div>
+                @if(paymentStatus.amount){
+                  <div class="detail-row">
+                    <span>{{ 'payment.amount' | translate }}:</span>
+                    <span>{{ paymentStatus.amount }} {{ paymentStatus.currency }}</span>
+                  </div>
+                }
+                @if(paymentStatus.transactionId){
+                  <div class="detail-row">
+                    <span>{{ 'payment.transactionId' | translate }}:</span>
+                    <span>{{ paymentStatus.transactionId }}</span>
+                  </div>
+                }
+                @if(paymentStatus.error){
+                  <div class="detail-row error">
+                    <span>{{ 'payment.error' | translate }}:</span>
+                    <span>{{ paymentStatus.error }}</span>
+                  </div>
+                }
+              </div>
+            }
+            
+            <!-- Action Buttons for Failed Payment -->
+            <div class="actions">
+              <button class="btn-primary" (click)="bookWithoutPayment()">
+                {{ 'payment.incomplete.bookWithoutPayment' | translate }}
+              </button>
+              <button class="btn-outline" (click)="goToHome()">
+                {{ 'payment.backToHome' | translate }}
+              </button>
+            </div>
+          </div>
+        }
+        
         <!-- Loading State -->
-        @if(isProcessing){
+        @if(isProcessing && !isPaymentFailed){
           <div class="processing-state">
             <div class="loading-spinner">
               <div class="spinner"></div>
@@ -52,7 +103,7 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
         }
         
         <!-- Success State -->
-        @if(!isProcessing){
+        @if(!isProcessing && !isPaymentFailed){
           <div class="completion-message">
             <div class="success-icon">
               <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,6 +202,7 @@ export class PaymentSuccessComponent implements OnInit, OnDestroy {
   isCreatingBooking = false;
   paymentSaved = false;
   bookingCreated = false;
+  isPaymentFailed = false;
   
   // Prevention of double processing
   private readonly PROCESSING_KEY = 'payment_processing_completed';
@@ -180,6 +232,13 @@ export class PaymentSuccessComponent implements OnInit, OnDestroy {
     }
     
     this.initializePaymentData();
+    
+    // Check if payment failed before proceeding with normal flow
+    if (this.isPaymentFailedFromUrl()) {
+      this.handleFailedPayment();
+      return;
+    }
+    
     this.handlePaymentFlow();
     this.setupPageUnloadWarning();
     this.setupRouterEvents();
@@ -617,5 +676,67 @@ export class PaymentSuccessComponent implements OnInit, OnDestroy {
    */
   bookAnother(): void {
     this.router.navigate(['/book-now']);
+  }
+
+  /**
+   * Handle failed payment scenario
+   */
+  private handleFailedPayment(): void {
+    this.isPaymentFailed = true;
+    this.isProcessing = false;
+    
+    // Create payment status for failed payment
+    this.createFailedPaymentStatus();
+    
+    // Track failed payment
+    this.analyticsService.trackEvent('payment_failed', {
+      orderId: this.orderId,
+      status: this.skipCashStatus,
+      statusId: this.skipCashStatusId,
+      transactionId: this.skipCashTransId
+    });
+  }
+
+  /**
+   * Create payment status for failed payment
+   */
+  private createFailedPaymentStatus(): void {
+    this.paymentStatus = {
+      orderId: this.orderId || this.skipCashTransId || 'Unknown',
+      status: 'failed',
+      amount: 0,
+      currency: 'QAR',
+      transactionId: this.skipCashTransId,
+      error: this.skipCashStatus === 'Failed' ? 'Payment was not completed successfully' : 'Payment status indicates incomplete transaction'
+    };
+  }
+
+  /**
+   * Check if payment failed based on URL parameters
+   */
+  private isPaymentFailedFromUrl(): boolean {
+    // Check if status is 'Failed' or statusId is not 2 (completed)
+    const status = this.route.snapshot.queryParams['status'];
+    const statusId = this.route.snapshot.queryParams['statusId'];
+    
+    return status === 'Failed' || (statusId && statusId !== '2');
+  }
+
+  /**
+   * Navigate to book now page without completing payment
+   */
+  bookWithoutPayment(): void {
+    this.router.navigate(['/book-now']);
+  }
+
+  /**
+   * Navigate to payment page again to try payment
+   */
+  tryPaymentAgain(): void {
+    // This functionality would require a way to re-trigger the payment flow
+    // For now, we'll just show a message or redirect to a payment page
+    alert('Payment failed. Please try again or contact support.');
+    // In a real app, you might redirect to a payment page with the same orderId
+    // this.router.navigate(['/book-now'], { queryParams: { order_id: this.orderId } });
   }
 } 

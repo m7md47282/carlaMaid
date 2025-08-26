@@ -126,15 +126,15 @@ var routes = [
   },
   {
     path: "book-now/success",
-    loadComponent: () => import("./chunk-S6KD5P6D.js").then((m) => m.PaymentSuccessComponent)
+    loadComponent: () => import("./chunk-7GSFU6GN.js").then((m) => m.PaymentSuccessComponent)
   },
   {
     path: "payment/success",
-    loadComponent: () => import("./chunk-S6KD5P6D.js").then((m) => m.PaymentSuccessComponent)
+    loadComponent: () => import("./chunk-7GSFU6GN.js").then((m) => m.PaymentSuccessComponent)
   },
   {
     path: "booking/success",
-    loadComponent: () => import("./chunk-S6KD5P6D.js").then((m) => m.PaymentSuccessComponent)
+    loadComponent: () => import("./chunk-7GSFU6GN.js").then((m) => m.PaymentSuccessComponent)
   },
   {
     path: "book-now/cancel",

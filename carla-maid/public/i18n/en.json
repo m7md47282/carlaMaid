@@ -333,6 +333,12 @@
             "title": "Payment Failed",
             "message": "Your payment could not be processed. Please try again or contact support if the issue persists."
         },
+        "incomplete": {
+            "title": "Payment Not Completed",
+            "message": "Your payment was not completed successfully. You can still book your service without payment and pay later when the service is completed.",
+            "bookWithoutPayment": "Book Without Payment",
+            "tryPaymentAgain": "Try Payment Again"
+        },
         "cancelled": {
             "title": "Payment Cancelled",
             "message": "Your payment was cancelled. You can try again or choose to pay later when the service is completed."
