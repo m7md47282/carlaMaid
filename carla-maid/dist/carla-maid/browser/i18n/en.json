@@ -338,9 +338,17 @@
     },
     "header": {
         "home": "Home",
+        "services": "Services",
+        "allServices": "All Services",
+        "cleaningServices": "Cleaning Services",
+        "maidServices": "Maid Services",
+        "deepCleaning": "Deep Cleaning",
+        "carpetCleaning": "Carpet Cleaning",
+        "eventCleaning": "Event Cleaning",
         "ourServices": "Our Services",
         "contact": "Contact Us",
         "blog": "Blog",
+        "getQuote": "Get Quote",
         "bookNow": "Book Now"
     },
     "meta": {

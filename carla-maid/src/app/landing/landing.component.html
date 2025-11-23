@@ -539,7 +539,7 @@
                 @for (post of blogsPosts.slice(0, 3); track $index) {
                     @if (post && post.title && post.content) {
                         <div class="img-width blog-card">
-                            <img class="relative" [src]="getFirstImage(post.content?.rendered)" alt="">
+                            <img class="relative" [src]="getPostImage(post)" alt="">
                             <div class="text-border blog-card-text">
                                 <p class="title">{{_sharedService.stripHtml(post.title?.rendered || '')}}</p>
                                 <div class="more-info">

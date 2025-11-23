@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.EcoFriendlyCleaning" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.ChooseOurEcoFriendly" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Clean & Green Solutions</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Environmentally Responsible Cleaning</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Sustainable Cleaning Plans</h2>
+      <p class="pricing-description">
+        Choose eco-friendly cleaning that's good for your home and the planet. Our green cleaning services are competitively priced.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-leaf"></i>
+          <h4>Green Basic</h4>
+          <p>Essential eco-friendly clean</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-star"></i>
+          <h4>Green Plus</h4>
+          <p>Enhanced sustainable service</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-heart"></i>
+          <h4>Green Premium</h4>
+          <p>Complete eco-care package</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Make a Positive Environmental Impact</h2>
+      <p>Join us in creating a cleaner, greener future with our eco-friendly cleaning services.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

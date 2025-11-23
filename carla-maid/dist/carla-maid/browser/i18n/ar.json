@@ -338,9 +338,17 @@
       },
       "header": {
         "home": "الرئيسية",
+        "services": "الخدمات",
+        "allServices": "جميع الخدمات",
+        "cleaningServices": "خدمات التنظيف",
+        "maidServices": "خدمات العاملات المنزلية",
+        "deepCleaning": "التنظيف العميق",
+        "carpetCleaning": "تنظيف السجاد",
+        "eventCleaning": "تنظيف المناسبات",
         "ourServices": "خدماتنا",
         "contact": "اتصل بنا",
         "blog": "المدونة",
+        "getQuote": "طلب عرض سعر",
         "bookNow": "احجز الآن"
       },
       "meta": {

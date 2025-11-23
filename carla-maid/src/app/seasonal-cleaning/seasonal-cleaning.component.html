@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.SeasonalCleaningServices" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.EnjoyThoroughSeasonal" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Seasonal Deep Cleaning Services</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Thorough Seasonal Care</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Seasonal Cleaning Packages</h2>
+      <p class="pricing-description">
+        Prepare your home for each season with our comprehensive cleaning services. Perfect for spring renewal, summer prep, or holiday readiness.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-clock"></i>
+          <h4>Single Season</h4>
+          <p>One-time deep clean</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-sync"></i>
+          <h4>Bi-Annual</h4>
+          <p>Spring & Fall cleaning</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-calendar-times"></i>
+          <h4>Quarterly</h4>
+          <p>Year-round coverage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Welcome Every Season with a Fresh Home</h2>
+      <p>Book your seasonal cleaning today and enjoy a thoroughly cleaned home all year long.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

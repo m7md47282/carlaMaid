@@ -21,7 +21,9 @@ export class WordPressService {
    * @returns An observable containing the response data from the API, which is an array of posts.
    */
   getPosts(params: any) {
-    return this._http.get(`${this.wordpressApiBaseUrl}/posts`, { params: params });
+    // Add _embed parameter to get featured media
+    const paramsWithEmbed = { ...params, _embed: true };
+    return this._http.get(`${this.wordpressApiBaseUrl}/posts`, { params: paramsWithEmbed });
   }
 
   /**

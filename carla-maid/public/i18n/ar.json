@@ -334,13 +334,32 @@
         "orderId": "رقم طلب الحجز"
       },
       "booking": {
-        "orderId": "رقم طلب الحجز"
+        "orderId": "رقم طلب الحجز",
+        "success": {
+            "title": "شكراً لحجزك معنا!"
+        }
+      },
+      "quotation": {
+        "thankYou": {
+            "title": "تم إرسال طلب العرض!",
+            "message": "شكراً لاهتمامك بخدمات التنظيف لدينا. سيقوم فريقنا بمراجعة طلب العرض الخاص بك والتواصل معك خلال 24 ساعة مع عرض سعر مفصل.",
+            "backToHome": "العودة للرئيسية",
+            "requestAnother": "طلب عرض سعر آخر"
+        }
       },
       "header": {
         "home": "الرئيسية",
+        "services": "الخدمات",
+        "allServices": "جميع الخدمات",
+        "cleaningServices": "خدمات التنظيف",
+        "maidServices": "خدمات العاملات المنزلية",
+        "deepCleaning": "التنظيف العميق",
+        "carpetCleaning": "تنظيف السجاد",
+        "eventCleaning": "تنظيف المناسبات",
         "ourServices": "خدماتنا",
         "contact": "اتصل بنا",
         "blog": "المدونة",
+        "getQuote": "طلب عرض سعر",
         "bookNow": "احجز الآن"
       },
       "meta": {

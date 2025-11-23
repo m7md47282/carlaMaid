@@ -10,7 +10,7 @@
         @for (post of blogsPosts; track $index) {
 
         <figure class="service-item center" (click)="sendPost(post.id)"
-            [style.backgroundImage]="'url(' + getFirstImage(post.content.rendered) + ')'"
+            [style.backgroundImage]="'url(' + getPostImage(post) + ')'"
             style="background-size: cover; background-position: center;">
             <figure class="service-content">
                 <h3>{{_sharedService.stripHtml(post.title.rendered)}}</h3>

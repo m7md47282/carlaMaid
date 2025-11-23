@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 // Create Express app
 const app = express();
@@ -39,6 +40,41 @@ const skipCashConfig = {
 };
 
 const currentConfig = skipCashConfig.isTestMode ? skipCashConfig.sandbox : skipCashConfig.production;
+
+const emailConfig = {
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587', 10),
+  secure: process.env.SMTP_SECURE === 'true',
+  user: process.env.SMTP_USER || '',
+  pass: process.env.SMTP_PASS || '',
+  defaultFrom: process.env.QUOTATION_FROM_EMAIL || process.env.SMTP_USER || 'no-reply@carlamaid.qa',
+  defaultTo: process.env.QUOTATION_TO_EMAIL || 'info@carlamaid.qa'
+};
+
+const isEmailTransportConfigured = () => !!(emailConfig.user && emailConfig.pass);
+let mailTransporter = null;
+
+function getMailTransporter() {
+  if (!mailTransporter) {
+    if (isEmailTransportConfigured()) {
+      mailTransporter = nodemailer.createTransport({
+        host: emailConfig.host,
+        port: emailConfig.port,
+        secure: emailConfig.secure,
+        auth: {
+          user: emailConfig.user,
+          pass: emailConfig.pass
+        }
+      });
+    } else {
+      console.warn('[Quotation Email] SMTP credentials are not fully configured. Emails will be logged locally.');
+      mailTransporter = nodemailer.createTransport({
+        jsonTransport: true
+      });
+    }
+  }
+  return mailTransporter;
+}
 
 // Debug: Log configuration
 console.log('SkipCash Configuration:', {
@@ -531,6 +567,66 @@ app.put('/api/bookings/:orderId/cancel', async (req, res) => {
   }
 });
 
+app.post('/api/quotation-request/email', async (req, res) => {
+  try {
+    const incomingPayload = req.body || {};
+    const normalizedPayload = normalizeQuotationPayload(incomingPayload);
+
+    const requiredFields = [
+      'companyName',
+      'contactPerson',
+      'contactNumber',
+      'email',
+      'location',
+      'propertyType',
+      'contractDuration',
+      'startDate',
+      'cleaningService',
+      'workingDays',
+      'startTime',
+      'endTime',
+      'cleaningMaterials',
+      'numberOfCleaners'
+    ];
+
+    const missingFields = listMissingFields(normalizedPayload, requiredFields);
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        success: false,
+        error: `Missing required fields: ${missingFields.join(', ')}`
+      });
+    }
+
+    const transporter = getMailTransporter();
+    const mailOptions = {
+      from: emailConfig.defaultFrom,
+      to: emailConfig.defaultTo,
+      replyTo: normalizedPayload.email,
+      subject: `New Quotation Request - ${normalizedPayload.companyName}`,
+      html: buildQuotationEmailHtml(normalizedPayload),
+      text: buildQuotationEmailText(normalizedPayload)
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Quotation request email dispatched', {
+      messageId: info?.messageId || 'json-transport',
+      to: emailConfig.defaultTo
+    });
+
+    return res.json({
+      success: true,
+      message: 'Quotation request submitted successfully',
+      emailPreview: isEmailTransportConfigured() ? undefined : info?.message
+    });
+  } catch (error) {
+    console.error('Quotation request email error:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to submit quotation request'
+    });
+  }
+});
+
 // Helper function to verify callback signature
 function verifyCallbackSignature(callbackData, secretKey) {
   try {
@@ -741,6 +837,195 @@ async function updateBookingStatus(orderId, status, amount) {
     console.error('Error updating booking status:', error);
     throw error;
   }
+}
+
+function normalizeQuotationPayload(payload) {
+  const workingDays = normalizeArray(payload?.workingDays);
+  const startDate = normalizeDateValue(payload?.startDate);
+
+  return {
+    companyName: (payload?.companyName || '').trim(),
+    contactPerson: (payload?.contactPerson || '').trim(),
+    contactNumber: payload?.contactNumber || '',
+    email: payload?.email || '',
+    location: payload?.location || '',
+    propertyType: payload?.propertyType || '',
+    contractDuration: payload?.contractDuration || '',
+    customDuration: payload?.contractDuration === 'custom' ? (payload?.customDuration || '') : '',
+    startDate,
+    cleaningService: payload?.cleaningService || '',
+    workingDays,
+    startTime: payload?.startTime || '',
+    endTime: payload?.endTime || '',
+    cleaningMaterials: payload?.cleaningMaterials || 'withMaterials',
+    cleaningMaterialsLabel: mapCleaningMaterials(payload?.cleaningMaterials),
+    numberOfCleaners: Number(payload?.numberOfCleaners) || 0,
+    needSupervisor: formatBoolean(payload?.needSupervisor),
+    propertySize: payload?.propertySize || '',
+    budget: payload?.budget || '',
+    additionalNotes: payload?.additionalNotes || ''
+  };
+}
+
+function listMissingFields(payload, requiredFields) {
+  return requiredFields.filter(field => {
+    const value = payload[field];
+    if (field === 'workingDays') {
+      return !value || (Array.isArray(value) && value.length === 0);
+    }
+    return value === undefined || value === null || value === '';
+  });
+}
+
+function normalizeArray(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map(item => String(item).trim())
+      .filter(Boolean);
+  }
+
+  if (typeof value === 'string') {
+    return value
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizeDateValue(value) {
+  if (!value) {
+    return '';
+  }
+
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return value.toISOString().split('T')[0];
+  }
+
+  const parsed = new Date(value);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.toISOString().split('T')[0];
+  }
+
+  return String(value);
+}
+
+function formatBoolean(value) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'number') {
+    return value === 1;
+  }
+
+  if (typeof value === 'string') {
+    return ['true', '1', 'yes', 'on'].includes(value.toLowerCase());
+  }
+
+  return false;
+}
+
+function mapCleaningMaterials(value) {
+  const normalized = (value || 'withMaterials').toLowerCase();
+  if (normalized.includes('without')) {
+    return 'Without Materials';
+  }
+  return 'With Materials';
+}
+
+function sanitizeValue(value) {
+  if (value === null || value === undefined || value === '') {
+    return 'Not specified';
+  }
+
+  if (Array.isArray(value)) {
+    return value.length ? value.join(', ') : 'Not specified';
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+
+  return String(value);
+}
+
+function formatWorkingDays(days) {
+  if (!days || !days.length) {
+    return 'Not specified';
+  }
+
+  return days
+    .map(day => day.charAt(0).toUpperCase() + day.slice(1))
+    .join(', ');
+}
+
+function buildQuotationEmailHtml(data) {
+  const rows = [
+    ['Company Name', sanitizeValue(data.companyName)],
+    ['Contact Person', sanitizeValue(data.contactPerson)],
+    ['Contact Number', sanitizeValue(data.contactNumber)],
+    ['Email Address', sanitizeValue(data.email)],
+    ['Location / Address', sanitizeValue(data.location)],
+    ['Property Type', sanitizeValue(data.propertyType)],
+    ['Property Size', sanitizeValue(data.propertySize)],
+    ['Service Requested', sanitizeValue(data.cleaningService)],
+    ['Contract Duration', sanitizeValue(data.contractDuration === 'custom' ? data.customDuration : data.contractDuration)],
+    ['Preferred Start Date', sanitizeValue(data.startDate)],
+    ['Working Days', formatWorkingDays(data.workingDays)],
+    ['Working Hours', `${sanitizeValue(data.startTime)} - ${sanitizeValue(data.endTime)}`],
+    ['Cleaning Materials', sanitizeValue(data.cleaningMaterialsLabel)],
+    ['Number of Cleaners', sanitizeValue(data.numberOfCleaners)],
+    ['Need Supervisor', sanitizeValue(data.needSupervisor)],
+    ['Estimated Budget', sanitizeValue(data.budget)],
+    ['Additional Notes', sanitizeValue(data.additionalNotes)]
+  ];
+
+  const tableRows = rows
+    .map(
+      ([label, value]) =>
+        `<tr>
+            <td style="padding:8px 12px;border:1px solid #e2e8f0;background:#f7fafc;font-weight:600;">${label}</td>
+            <td style="padding:8px 12px;border:1px solid #e2e8f0;">${value}</td>
+          </tr>`
+    )
+    .join('');
+
+  return `
+      <div style="font-family: Arial, sans-serif; color:#1a202c;">
+        <h2 style="color:#0f9d58;">New Quotation Request</h2>
+        <p>You have received a new quotation request from <strong>${sanitizeValue(data.companyName)}</strong>.</p>
+        <table style="border-collapse:collapse;width:100%;margin-top:16px;">${tableRows}</table>
+        <p style="margin-top:24px;color:#4a5568;">
+          This request was submitted via the Carla Maid website.
+        </p>
+      </div>
+    `;
+}
+
+function buildQuotationEmailText(data) {
+  return [
+    'New Quotation Request',
+    '----------------------',
+    `Company Name: ${sanitizeValue(data.companyName)}`,
+    `Contact Person: ${sanitizeValue(data.contactPerson)}`,
+    `Contact Number: ${sanitizeValue(data.contactNumber)}`,
+    `Email: ${sanitizeValue(data.email)}`,
+    `Location: ${sanitizeValue(data.location)}`,
+    `Property Type: ${sanitizeValue(data.propertyType)}`,
+    `Property Size: ${sanitizeValue(data.propertySize)}`,
+    `Service Requested: ${sanitizeValue(data.cleaningService)}`,
+    `Contract Duration: ${sanitizeValue(data.contractDuration === 'custom' ? data.customDuration : data.contractDuration)}`,
+    `Preferred Start Date: ${sanitizeValue(data.startDate)}`,
+    `Working Days: ${formatWorkingDays(data.workingDays)}`,
+    `Working Hours: ${sanitizeValue(data.startTime)} - ${sanitizeValue(data.endTime)}`,
+    `Cleaning Materials: ${sanitizeValue(data.cleaningMaterialsLabel)}`,
+    `Number of Cleaners: ${sanitizeValue(data.numberOfCleaners)}`,
+    `Need Supervisor: ${sanitizeValue(data.needSupervisor)}`,
+    `Estimated Budget: ${sanitizeValue(data.budget)}`,
+    `Additional Notes: ${sanitizeValue(data.additionalNotes)}`
+  ].join('\n');
 }
 
 // Start server

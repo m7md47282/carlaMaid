@@ -334,13 +334,32 @@
         "orderId": "Booking Order ID"
       },
       "booking": {
-        "orderId": "Booking Order ID"
+        "orderId": "Booking Order ID",
+        "success": {
+            "title": "Thank You for Your Booking!"
+        }
+    },
+    "quotation": {
+        "thankYou": {
+            "title": "Quotation Request Submitted!",
+            "message": "Thank you for your interest in our cleaning services. Our team will review your quotation request and contact you within 24 hours with a detailed quote.",
+            "backToHome": "Back to Home",
+            "requestAnother": "Request Another Quote"
+        }
     },
     "header": {
         "home": "Home",
+        "services": "Services",
+        "allServices": "All Services",
+        "cleaningServices": "Cleaning Services",
+        "maidServices": "Maid Services",
+        "deepCleaning": "Deep Cleaning",
+        "carpetCleaning": "Carpet Cleaning",
+        "eventCleaning": "Event Cleaning",
         "ourServices": "Our Services",
         "contact": "Contact Us",
         "blog": "Blog",
+        "getQuote": "Get Quote",
         "bookNow": "Book Now"
     },
     "meta": {

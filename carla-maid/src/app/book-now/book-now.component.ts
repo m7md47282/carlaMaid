@@ -285,6 +285,10 @@ export class BookNowComponent implements OnInit {
     this.bookingService.createBooking(bookingRequest).subscribe({
       next: (bookingResponse: BookingResponse) => {
         if (bookingResponse.success) {
+          // Store booking order ID in sessionStorage for thank you page
+          if (bookingResponse.orderId) {
+            sessionStorage.setItem('bookingOrderId', bookingResponse.orderId);
+          }
           this.handleSuccessfulBooking();
         } else {
           this.setPaymentError(bookingResponse.error || 'Failed to create booking');
@@ -330,10 +334,14 @@ export class BookNowComponent implements OnInit {
   }
 
   private handleSuccessfulBooking(): void {
-    this.sent = true;
-    this.resetForm();
     this.trackBookingCompletion();
-    this.scheduleFormReset();
+    // Navigate to thank you page instead of showing text message
+    this.router.navigate(['/book-now/success'], { 
+      queryParams: { 
+        booking_type: 'pay_later',
+        booking_confirmed: 'true'
+      } 
+    });
   }
 
   private trackBookingCompletion(): void {

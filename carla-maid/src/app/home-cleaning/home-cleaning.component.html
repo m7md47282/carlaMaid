@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.HomeCleaninginQatar" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.theBestHomeCleaning" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Your Home, Perfectly Clean</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Complete Home Cleaning Service</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Affordable Home Cleaning Packages</h2>
+      <p class="pricing-description">
+        Choose from our flexible cleaning plans designed to fit your schedule and budget. Weekly, bi-weekly, or monthly options available.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-calendar-plus"></i>
+          <h4>One-Time Clean</h4>
+          <p>Perfect for special occasions</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-sync"></i>
+          <h4>Regular Service</h4>
+          <p>Weekly or bi-weekly cleaning</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-star"></i>
+          <h4>Premium Package</h4>
+          <p>Includes all extras</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Experience a Spotless Home Today</h2>
+      <p>Let our professional cleaners transform your home into a pristine sanctuary.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

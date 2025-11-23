@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.HospitalityStaffinQatar" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.SpecializedHospitality" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Why Choose Our Hospitality Staff?</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>What's Included</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Flexible Staffing Solutions</h2>
+      <p class="pricing-description">
+        We offer customized staffing packages based on your specific needs, event size, and duration. Contact us for a personalized quote.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-briefcase"></i>
+          <h4>Daily Rates</h4>
+          <p>Perfect for one-time events</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-calendar"></i>
+          <h4>Weekly Contracts</h4>
+          <p>Ideal for extended events</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-building"></i>
+          <h4>Long-term Staffing</h4>
+          <p>For ongoing hospitality needs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Elevate Your Service?</h2>
+      <p>Book our professional hospitality staff today and ensure your guests receive exceptional service.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>
