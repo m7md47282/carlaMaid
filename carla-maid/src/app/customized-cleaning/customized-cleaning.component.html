@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.CustomizedCleaning" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.OfferingFlexibleScheduling" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Your Cleaning, Your Way</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Personalized Cleaning Solutions</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Build Your Perfect Cleaning Plan</h2>
+      <p class="pricing-description">
+        Create a cleaning package that matches your exact requirements. Choose your tasks, frequency, and add-ons for a truly personalized service.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-list"></i>
+          <h4>Basic Custom</h4>
+          <p>3-5 selected tasks</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-star"></i>
+          <h4>Standard Custom</h4>
+          <p>6-10 selected tasks</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-check-square"></i>
+          <h4>Premium Custom</h4>
+          <p>Unlimited tasks & extras</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Design Your Perfect Cleaning Service</h2>
+      <p>Tell us what you need, and we'll create a customized plan just for you.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.HousekeepingServices" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.DailyHousekeeping" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Comprehensive Housekeeping Solutions</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Full Housekeeping Service</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Housekeeping Plans</h2>
+      <p class="pricing-description">
+        From daily visits to live-in housekeepers, we offer flexible solutions tailored to your household needs.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-sun"></i>
+          <h4>Daily Visits</h4>
+          <p>2-4 hours per day</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-calendar"></i>
+          <h4>Weekly Package</h4>
+          <p>3-5 days per week</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-home"></i>
+          <h4>Live-In Housekeeper</h4>
+          <p>Full-time residential care</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Simplify Your Life with Professional Housekeeping</h2>
+      <p>Let our expert housekeepers manage your home so you can focus on what matters most.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

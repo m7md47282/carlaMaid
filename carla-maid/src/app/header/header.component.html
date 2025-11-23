@@ -13,9 +13,15 @@
         </div>
       </ng-template>
       <ng-template pTemplate="item" let-item let-root="root">
-        <a pRipple [routerLink]="item.link" class="flex align-items-center p-menuitem-link">
+        <a *ngIf="item.link" pRipple [routerLink]="item.link" class="flex align-items-center p-menuitem-link">
           <span [class]="item.icon"></span>
           <span class="ml-2">{{ item.label }}</span>
+          <span *ngIf="item.items && item.items.length" class="pi pi-angle-down ml-auto"></span>
+        </a>
+        <a *ngIf="!item.link" pRipple class="flex align-items-center p-menuitem-link">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">{{ item.label }}</span>
+          <span *ngIf="item.items && item.items.length" class="pi pi-angle-down ml-auto"></span>
         </a>
       </ng-template>
       <ng-template pTemplate="end">

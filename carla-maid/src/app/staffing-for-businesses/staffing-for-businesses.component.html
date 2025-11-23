@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.StaffingForBusinesses" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.FlexibleContractCleaning" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Professional Business Staffing</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Comprehensive Business Solutions</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Business Cleaning Contracts</h2>
+      <p class="pricing-description">
+        We offer tailored cleaning solutions for businesses of all sizes, from small offices to large commercial facilities.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-building"></i>
+          <h4>Small Business</h4>
+          <p>Up to 2,000 sq ft</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-sitemap"></i>
+          <h4>Medium Enterprise</h4>
+          <p>2,000 - 10,000 sq ft</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-th-large"></i>
+          <h4>Large Corporation</h4>
+          <p>10,000+ sq ft</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Partner with Us for Professional Staffing</h2>
+      <p>Elevate your business environment with our reliable cleaning and staffing services.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

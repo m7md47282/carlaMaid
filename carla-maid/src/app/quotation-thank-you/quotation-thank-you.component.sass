@@ -1,0 +1,50 @@
+@import ../../../variables
+
+.quotation-thank-you-container
+  min-height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+  background: $gray
+  padding: 20px
+
+.success-card
+  background: #ffffff
+  border-radius: 15px
+  padding: 40px
+  text-align: center
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06)
+  max-width: 500px
+  width: 100%
+
+.success-icon
+  margin-bottom: 20px
+  color: #10B981
+
+h1
+  color: $text-primary
+  margin-bottom: 15px
+  font-size: 28px
+
+p
+  color: #4D4D4D
+  margin-bottom: 30px
+  font-size: 16px
+
+.actions
+  display: flex
+  gap: 15px
+  justify-content: center
+  flex-wrap: wrap
+  margin-top: 10px
+
+@media (max-width: 600px)
+  .success-card
+    padding: 30px 20px
+
+  .actions
+    flex-direction: column
+
+  .btn-primary, .btn-secondary
+    width: 100%
+

@@ -1,0 +1,392 @@
+<div class="quotation-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="icon-badge">
+        <i class="pi pi-file-edit"></i>
+      </div>
+      <h1>Request a Quotation</h1>
+      <p class="hero-subtitle">Get a customized cleaning solution for your business</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <i class="pi pi-clock"></i>
+          <span>Quick Response</span>
+        </div>
+        <div class="stat">
+          <i class="pi pi-dollar"></i>
+          <span>Best Prices</span>
+        </div>
+        <div class="stat">
+          <i class="pi pi-check-circle"></i>
+          <span>Trusted Service</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <div class="container">
+      
+      <!-- Success Message -->
+      <div class="success-message" *ngIf="isSuccess">
+        <div class="success-icon">
+          <i class="pi pi-check-circle"></i>
+        </div>
+        <h2>Quotation Request Submitted!</h2>
+        <p>Thank you for your interest. Our team will contact you within 24 hours with a detailed quotation.</p>
+      </div>
+
+      <div class="global-error" *ngIf="submissionError">
+        <div class="error-icon">
+          <i class="pi pi-exclamation-triangle"></i>
+        </div>
+        <div>
+          <h3>Submission Failed</h3>
+          <p>{{ submissionError }}</p>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="quotationForm" (ngSubmit)="onSubmit()" class="quotation-form" *ngIf="!isSuccess">
+        
+        <!-- Section 1: Company Information -->
+        <div class="form-section-card">
+          <div class="section-header">
+            <i class="pi pi-building"></i>
+            <h3>Company Information</h3>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-field full-width">
+              <label>Company Name <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-building"></i>
+                <input 
+                  type="text" 
+                  formControlName="companyName" 
+                  placeholder="Enter your company name"
+                  [class.error]="quotationForm.get('companyName')?.invalid && quotationForm.get('companyName')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('companyName')?.invalid && quotationForm.get('companyName')?.touched">
+                {{ getErrorMessage('companyName') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Contact Person <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-user"></i>
+                <input 
+                  type="text" 
+                  formControlName="contactPerson" 
+                  placeholder="Full name"
+                  [class.error]="quotationForm.get('contactPerson')?.invalid && quotationForm.get('contactPerson')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('contactPerson')?.invalid && quotationForm.get('contactPerson')?.touched">
+                {{ getErrorMessage('contactPerson') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Contact Number <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-phone"></i>
+                <input 
+                  type="tel" 
+                  formControlName="contactNumber" 
+                  placeholder="+974 XXXX XXXX"
+                  [class.error]="quotationForm.get('contactNumber')?.invalid && quotationForm.get('contactNumber')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('contactNumber')?.invalid && quotationForm.get('contactNumber')?.touched">
+                {{ getErrorMessage('contactNumber') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Email Address <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-envelope"></i>
+                <input 
+                  type="email" 
+                  formControlName="email" 
+                  placeholder="company@example.com"
+                  [class.error]="quotationForm.get('email')?.invalid && quotationForm.get('email')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('email')?.invalid && quotationForm.get('email')?.touched">
+                {{ getErrorMessage('email') }}
+              </span>
+            </div>
+
+            <div class="form-field full-width">
+              <label>Location/Address of Service <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-map-marker"></i>
+                <input 
+                  type="text" 
+                  formControlName="location" 
+                  placeholder="Full address of service location"
+                  [class.error]="quotationForm.get('location')?.invalid && quotationForm.get('location')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('location')?.invalid && quotationForm.get('location')?.touched">
+                {{ getErrorMessage('location') }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Service Details -->
+        <div class="form-section-card">
+          <div class="section-header">
+            <i class="pi pi-cog"></i>
+            <h3>Service Details</h3>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Type of Property <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <i class="pi pi-home"></i>
+                <select formControlName="propertyType" [class.error]="quotationForm.get('propertyType')?.invalid && quotationForm.get('propertyType')?.touched">
+                  <option value="">Select property type</option>
+                  <option *ngFor="let type of propertyTypes" [value]="type.value">{{ type.label }}</option>
+                </select>
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('propertyType')?.invalid && quotationForm.get('propertyType')?.touched">
+                {{ getErrorMessage('propertyType') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Property Size (sq ft)</label>
+              <div class="input-wrapper">
+                <i class="pi pi-arrows-alt"></i>
+                <input type="number" formControlName="propertySize" placeholder="e.g., 2000">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Type of Cleaning Service <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <i class="pi pi-sparkles"></i>
+                <select formControlName="cleaningService" [class.error]="quotationForm.get('cleaningService')?.invalid && quotationForm.get('cleaningService')?.touched">
+                  <option value="">Select service type</option>
+                  <option *ngFor="let service of cleaningServices" [value]="service.value">{{ service.label }}</option>
+                </select>
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('cleaningService')?.invalid && quotationForm.get('cleaningService')?.touched">
+                {{ getErrorMessage('cleaningService') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Contract Duration <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <i class="pi pi-calendar"></i>
+                <select formControlName="contractDuration" [class.error]="quotationForm.get('contractDuration')?.invalid && quotationForm.get('contractDuration')?.touched">
+                  <option value="">Select duration</option>
+                  <option *ngFor="let duration of contractDurations" [value]="duration.value">{{ duration.label }}</option>
+                </select>
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('contractDuration')?.invalid && quotationForm.get('contractDuration')?.touched">
+                {{ getErrorMessage('contractDuration') }}
+              </span>
+            </div>
+
+            <div class="form-field" *ngIf="quotationForm.get('contractDuration')?.value === 'custom'">
+              <label>Custom Duration</label>
+              <div class="input-wrapper">
+                <i class="pi pi-clock"></i>
+                <input type="text" formControlName="customDuration" placeholder="Specify duration">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Start Date <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-calendar"></i>
+                <input 
+                  type="date" 
+                  formControlName="startDate" 
+                  [class.error]="quotationForm.get('startDate')?.invalid && quotationForm.get('startDate')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('startDate')?.invalid && quotationForm.get('startDate')?.touched">
+                {{ getErrorMessage('startDate') }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Schedule & Requirements -->
+        <div class="form-section-card">
+          <div class="section-header">
+            <i class="pi pi-clock"></i>
+            <h3>Schedule & Requirements</h3>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-field full-width">
+              <label>Working Days <span class="required">*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-item" *ngFor="let day of workingDays">
+                  <input 
+                    type="checkbox" 
+                    [checked]="isDaySelected(day.value)"
+                    (change)="onWorkingDayChange(day.value, $any($event.target).checked)">
+                  <span class="checkmark"></span>
+                  <span class="label-text">{{ day.label }}</span>
+                </label>
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('workingDays')?.invalid && quotationForm.get('workingDays')?.touched">
+                Please select at least one working day
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Start Time <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-clock"></i>
+                <input 
+                  type="time" 
+                  formControlName="startTime" 
+                  [class.error]="quotationForm.get('startTime')?.invalid && quotationForm.get('startTime')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('startTime')?.invalid && quotationForm.get('startTime')?.touched">
+                {{ getErrorMessage('startTime') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>End Time <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-clock"></i>
+                <input 
+                  type="time" 
+                  formControlName="endTime" 
+                  [class.error]="quotationForm.get('endTime')?.invalid && quotationForm.get('endTime')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('endTime')?.invalid && quotationForm.get('endTime')?.touched">
+                {{ getErrorMessage('endTime') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Number of Cleaners <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <i class="pi pi-users"></i>
+                <input 
+                  type="number" 
+                  formControlName="numberOfCleaners" 
+                  placeholder="e.g., 3"
+                  min="1"
+                  [class.error]="quotationForm.get('numberOfCleaners')?.invalid && quotationForm.get('numberOfCleaners')?.touched">
+              </div>
+              <span class="error-message" *ngIf="quotationForm.get('numberOfCleaners')?.invalid && quotationForm.get('numberOfCleaners')?.touched">
+                {{ getErrorMessage('numberOfCleaners') }}
+              </span>
+            </div>
+
+            <div class="form-field">
+              <label>Cleaning Materials <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" formControlName="cleaningMaterials" value="withMaterials">
+                  <span class="radio-checkmark"></span>
+                  <span class="label-text">With Materials</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" formControlName="cleaningMaterials" value="withoutMaterials">
+                  <span class="radio-checkmark"></span>
+                  <span class="label-text">Without Materials</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-field full-width">
+              <label class="checkbox-item supervisor-checkbox">
+                <input type="checkbox" formControlName="needSupervisor">
+                <span class="checkmark"></span>
+                <span class="label-text">Need a Supervisor for the cleaners?</span>
+              </label>
+            </div>
+
+            <div class="form-field">
+              <label>Estimated Budget (QAR)</label>
+              <div class="input-wrapper">
+                <i class="pi pi-dollar"></i>
+                <input type="number" formControlName="budget" placeholder="Optional">
+              </div>
+            </div>
+
+            <div class="form-field full-width">
+              <label>Additional Notes / Special Requirements</label>
+              <div class="textarea-wrapper">
+                <i class="pi pi-comment"></i>
+                <textarea 
+                  formControlName="additionalNotes" 
+                  rows="4" 
+                  placeholder="Please provide any additional information or special requirements..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-section">
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">
+              <i class="pi pi-send"></i>
+              Submit Quotation Request
+            </span>
+            <span *ngIf="isSubmitting">
+              <i class="pi pi-spin pi-spinner"></i>
+              Processing...
+            </span>
+          </button>
+          <p class="submit-note">
+            <i class="pi pi-info-circle"></i>
+            We'll review your request and send you a detailed quotation within 24 hours.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section">
+    <div class="container">
+      <h2>Why Choose Our Services?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="pi pi-shield"></i>
+          </div>
+          <h3>Licensed & Insured</h3>
+          <p>All our staff are fully licensed and insured for your peace of mind</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="pi pi-star"></i>
+          </div>
+          <h3>Quality Guaranteed</h3>
+          <p>We ensure the highest standards of cleaning excellence</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="pi pi-clock"></i>
+          </div>
+          <h3>Flexible Scheduling</h3>
+          <p>Services tailored to fit your business hours and needs</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="pi pi-dollar"></i>
+          </div>
+          <h3>Competitive Pricing</h3>
+          <p>Best value for professional cleaning services in Qatar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

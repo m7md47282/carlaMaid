@@ -333,23 +333,52 @@ ngAfterViewInit(): void {
   }
 
   /**
-   * Extracts the first image URL from an HTML string.
-   *
-   * @param {string} html - The HTML content.
-   * @returns {string | null} - The first image URL or null if no image is found.
+   * Extracts the post thumbnail image URL
+   * First checks for WordPress featured media, then falls back to content images
+   * @param post - The WordPress post object
+   * @returns The image URL or default image path
    */
-  getFirstImage(html: string): string | null {
-    if (!html || typeof html !== 'string') {
-      return "../../assets/images/posts/default.png";
+  getPostImage(post: any): string {
+    // Check for featured media in _embedded
+    if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+      const featuredMedia = post._embedded['wp:featuredmedia'][0];
+      // Try to get medium_large or medium size first for better performance
+      if (featuredMedia.media_details && featuredMedia.media_details.sizes) {
+        // Priority order: medium_large > large > medium > thumbnail
+        if (featuredMedia.media_details.sizes.medium_large) {
+          return featuredMedia.media_details.sizes.medium_large.source_url;
+        }
+        if (featuredMedia.media_details.sizes.large) {
+          return featuredMedia.media_details.sizes.large.source_url;
+        }
+        if (featuredMedia.media_details.sizes.medium) {
+          return featuredMedia.media_details.sizes.medium.source_url;
+        }
+        if (featuredMedia.media_details.sizes.thumbnail) {
+          return featuredMedia.media_details.sizes.thumbnail.source_url;
+        }
+      }
+      // Fall back to full size image (only if no optimized sizes available)
+      if (featuredMedia.source_url) {
+        return featuredMedia.source_url;
+      }
     }
-    try {
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      const img = doc.querySelector("img");
-      return img ? img.src : "../../assets/images/posts/default.png";
-    } catch (error) {
-      console.error('Error parsing HTML for image:', error);
-      return "../../assets/images/posts/default.png";
+    
+    // Fall back to extracting first image from content
+    if (post.content && post.content.rendered) {
+      try {
+        const doc = new DOMParser().parseFromString(post.content.rendered, "text/html");
+        const img = doc.querySelector("img");
+        if (img && img.src) {
+          return img.src;
+        }
+      } catch (error) {
+        console.error('Error parsing HTML for image:', error);
+      }
     }
+    
+    // Default image if nothing found
+    return "../../assets/images/posts/default.png";
   }
 
   sendPost(post: any) {

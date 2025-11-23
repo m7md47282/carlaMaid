@@ -1,0 +1,82 @@
+<div class="service-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{"shared.OfficeCleaningServices" | translate}}</h1>
+      <p class="hero-subtitle">{{"paragraph.KeepYourWorkPlaceClean" | translate}}</p>
+      <button class="cta-button" routerLink="/book-now">
+        <span class="pi pi-calendar"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-grid">
+    <div class="container">
+      <h2>Professional Office Cleaning Solutions</h2>
+      <div class="grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="whats-included">
+    <div class="container">
+      <h2>Comprehensive Office Care</h2>
+      <div class="included-grid">
+        <div class="included-item" *ngFor="let item of included">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <h2>Flexible Office Cleaning Plans</h2>
+      <p class="pricing-description">
+        Maintain a clean, productive workspace with our tailored office cleaning solutions. Choose from daily, weekly, or monthly service options.
+      </p>
+      <div class="pricing-features">
+        <div class="feature">
+          <i class="pi pi-sun"></i>
+          <h4>Daily Cleaning</h4>
+          <p>Perfect for busy offices</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-calendar"></i>
+          <h4>Weekly Service</h4>
+          <p>Ideal for small businesses</p>
+        </div>
+        <div class="feature">
+          <i class="pi pi-moon"></i>
+          <h4>After-Hours</h4>
+          <p>No disruption to your workday</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Create a Healthier Work Environment</h2>
+      <p>Boost productivity and employee satisfaction with our professional office cleaning services.</p>
+      <button class="cta-button large" routerLink="/book-now">
+        <span class="pi pi-phone"></span>
+        {{ "shared.bookNow" | translate }}
+      </button>
+    </div>
+  </section>
+</div>

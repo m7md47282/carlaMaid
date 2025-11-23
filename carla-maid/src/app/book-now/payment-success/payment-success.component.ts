@@ -19,32 +19,45 @@ import { AnalyticsService } from '../../shared/services/analytics.service';
             <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h1>{{ 'payment.success.title' | translate }}</h1>
-        <p>{{ 'payment.success.message' | translate }}</p>
-        
-        @if(paymentStatus){
-          <div class="payment-details">
-            <div class="detail-row">
-              <span>{{ 'payment.orderId' | translate }}:</span>
-              <span>{{ paymentStatus.orderId }}</span>
-            </div>
-            <div class="detail-row">
-              <span>{{ 'payment.amount' | translate }}:</span>
-              <span>{{ paymentStatus.amount }} {{ paymentStatus.currency }}</span>
-            </div>
-            @if(paymentStatus.transactionId){
-              <div class="detail-row">
-                <span>{{ 'payment.transactionId' | translate }}:</span>
-                <span>{{ paymentStatus.transactionId }}</span>
-              </div>
-            }
-            @if(bookingOrderId){
+        @if(isPayLaterBooking){
+          <h1>{{ 'booking.success.title' | translate }}</h1>
+          <p>{{ 'shared.booking_confirmation_message' | translate }}</p>
+          @if(bookingOrderId){
+            <div class="payment-details">
               <div class="detail-row">
                 <span>{{ 'booking.orderId' | translate }}:</span>
                 <span>{{ bookingOrderId }}</span>
               </div>
-            }
-          </div>
+            </div>
+          }
+        } @else {
+          <h1>{{ 'payment.success.title' | translate }}</h1>
+          <p>{{ 'payment.success.message' | translate }}</p>
+          
+          @if(paymentStatus){
+            <div class="payment-details">
+              <div class="detail-row">
+                <span>{{ 'payment.orderId' | translate }}:</span>
+                <span>{{ paymentStatus.orderId }}</span>
+              </div>
+              <div class="detail-row">
+                <span>{{ 'payment.amount' | translate }}:</span>
+                <span>{{ paymentStatus.amount }} {{ paymentStatus.currency }}</span>
+              </div>
+              @if(paymentStatus.transactionId){
+                <div class="detail-row">
+                  <span>{{ 'payment.transactionId' | translate }}:</span>
+                  <span>{{ paymentStatus.transactionId }}</span>
+                </div>
+              }
+              @if(bookingOrderId){
+                <div class="detail-row">
+                  <span>{{ 'booking.orderId' | translate }}:</span>
+                  <span>{{ bookingOrderId }}</span>
+                </div>
+              }
+            </div>
+          }
         }
         
         <div class="actions">
@@ -65,6 +78,7 @@ export class PaymentSuccessComponent implements OnInit {
   orderId?: string;
   bookingOrderId?: string;
   isCreatingBooking = false;
+  isPayLaterBooking = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,6 +90,24 @@ export class PaymentSuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Check if this is a "pay later" booking (thank you page for booking without payment)
+    const bookingType = this.route.snapshot.queryParams['booking_type'];
+    const bookingConfirmed = this.route.snapshot.queryParams['booking_confirmed'];
+    
+    if (bookingType === 'pay_later' && bookingConfirmed === 'true') {
+      // This is a "pay later" booking confirmation
+      this.isPayLaterBooking = true;
+      this.bookingOrderId = sessionStorage.getItem('bookingOrderId') || undefined;
+      // Clean up after showing thank you page
+      if (this.bookingOrderId) {
+        setTimeout(() => {
+          sessionStorage.removeItem('bookingOrderId');
+        }, 1000);
+      }
+      return;
+    }
+    
+    // Otherwise, handle payment success flow
     // Prefer reading orderId from sessionStorage to avoid URL params
     const storedOrderId = sessionStorage.getItem('paymentOrderId');
     this.orderId = storedOrderId || this.route.snapshot.queryParams['orderId'];

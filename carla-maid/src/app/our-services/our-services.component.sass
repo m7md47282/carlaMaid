@@ -53,13 +53,33 @@
             margin: 10px 0
             bottom: 0.3rem
             padding: 10px 0
+            transition: all 0.3s ease
             h3
                 margin: 0 15px
                 font-size: 1rem
+                transition: all 0.3s ease
 
             p
                 margin: 0 15px
                 font-size: 0.7rem
+                transition: all 0.3s ease
+
+    .clickable-service
+        cursor: pointer
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+        
+        &:hover
+            transform: translateY(-8px)
+            box-shadow: 0 8px 20px rgba(1, 136, 255, 0.3)
+            
+            .service-content
+                background: linear-gradient(180deg, transparent 0%, rgba(1, 136, 255, 0.9) 100%)
+                
+                h3
+                    font-size: 1.1rem
+                    
+                p
+                    font-size: 0.75rem
 
 // section 4
 

@@ -1,0 +1,325 @@
+@import ../../variables
+
+.service-page
+  width: 100%
+  overflow-x: hidden
+
+.hero-section
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+  padding: 100px 20px 80px
+  text-align: center
+  color: white
+
+  .hero-content
+    max-width: 800px
+    margin: 0 auto
+
+    h1
+      font-size: 48px
+      font-weight: 700
+      margin-bottom: 20px
+
+    .hero-subtitle
+      font-size: 20px
+      margin-bottom: 30px
+      opacity: 0.95
+
+    .cta-button
+      padding: 15px 40px
+      font-size: 18px
+      background: white
+      color: #fa709a
+      border: none
+      border-radius: 50px
+      cursor: pointer
+      font-weight: 600
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+
+.service-details
+  padding: 80px 20px
+  background: white
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+  .section-header
+    text-align: center
+    margin-bottom: 60px
+
+    h2
+      font-size: 36px
+      color: #333
+      margin-bottom: 15px
+
+    p
+      font-size: 18px
+      color: #666
+
+  .features-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    gap: 30px
+
+    .feature-card
+      background: #f8f9fa
+      padding: 30px
+      border-radius: 15px
+      text-align: center
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1)
+
+      .feature-icon
+        width: 70px
+        height: 70px
+        margin: 0 auto 20px
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+        border-radius: 50%
+        display: flex
+        align-items: center
+        justify-content: center
+        color: white
+        font-size: 30px
+
+      h3
+        font-size: 22px
+        color: #333
+        margin-bottom: 15px
+
+      p
+        color: #666
+        line-height: 1.6
+
+.event-types
+  padding: 80px 20px
+  background: #f8f9fa
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+    h2
+      text-align: center
+      font-size: 36px
+      color: #333
+      margin-bottom: 50px
+
+  .types-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+    gap: 30px
+
+    .type-card
+      background: white
+      padding: 40px 30px
+      border-radius: 15px
+      text-align: center
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateY(-10px)
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15)
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+        color: white
+
+        i, h3, p
+          color: white
+
+      i
+        font-size: 48px
+        color: #fa709a
+        margin-bottom: 20px
+        transition: all 0.3s ease
+
+      h3
+        font-size: 24px
+        color: #333
+        margin-bottom: 15px
+        transition: all 0.3s ease
+
+      p
+        color: #666
+        line-height: 1.6
+        transition: all 0.3s ease
+
+.services-included
+  padding: 80px 20px
+  background: white
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+  .services-row
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+    gap: 50px
+
+    .services-column
+      h3
+        font-size: 28px
+        color: #333
+        margin-bottom: 30px
+        padding-bottom: 15px
+        border-bottom: 3px solid #fa709a
+
+      ul
+        list-style: none
+        padding: 0
+
+        li
+          display: flex
+          align-items: center
+          gap: 15px
+          padding: 15px 0
+          font-size: 16px
+          color: #666
+          border-bottom: 1px solid #eee
+
+          &:last-child
+            border-bottom: none
+
+          i
+            color: #fa709a
+            font-size: 20px
+
+.why-choose
+  padding: 80px 20px
+  background: #f8f9fa
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+    h2
+      text-align: center
+      font-size: 36px
+      color: #333
+      margin-bottom: 50px
+
+  .reasons-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+    gap: 30px
+
+    .reason-card
+      background: white
+      padding: 30px
+      border-radius: 15px
+      text-align: center
+      transition: all 0.3s ease
+
+      &:hover
+        transform: scale(1.05)
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15)
+
+      .reason-icon
+        width: 60px
+        height: 60px
+        margin: 0 auto 20px
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+        border-radius: 50%
+        display: flex
+        align-items: center
+        justify-content: center
+        color: white
+        font-size: 28px
+        font-weight: 700
+
+      h4
+        font-size: 22px
+        color: #333
+        margin-bottom: 15px
+
+      p
+        color: #666
+        line-height: 1.6
+
+.cta-section
+  padding: 80px 20px
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+  text-align: center
+  color: white
+
+  .container
+    max-width: 800px
+    margin: 0 auto
+
+    h2
+      font-size: 36px
+      margin-bottom: 15px
+
+    p
+      font-size: 18px
+      margin-bottom: 30px
+      opacity: 0.95
+
+  .cta-buttons
+    display: flex
+    gap: 20px
+    justify-content: center
+    flex-wrap: wrap
+
+    button
+      padding: 15px 40px
+      font-size: 18px
+      border: none
+      border-radius: 50px
+      cursor: pointer
+      font-weight: 600
+      transition: all 0.3s ease
+
+    .btn-primary
+      background: white
+      color: #fa709a
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+
+    .btn-secondary
+      background: transparent
+      color: white
+      border: 2px solid white
+
+      &:hover
+        background: white
+        color: #fa709a
+        transform: translateY(-3px)
+
+@media (max-width: 768px)
+  .hero-section
+    padding: 60px 20px 50px
+
+    .hero-content
+      h1
+        font-size: 32px
+
+      .hero-subtitle
+        font-size: 16px
+
+  .service-details, .event-types, .services-included, .why-choose, .cta-section
+    padding: 50px 20px
+
+  .section-header h2, .container h2
+    font-size: 28px
+
+  .features-grid, .types-grid, .reasons-grid
+    grid-template-columns: 1fr
+
+  .services-row
+    grid-template-columns: 1fr
+
+  .cta-buttons
+    flex-direction: column
+
+    button
+      width: 100%
+

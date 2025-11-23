@@ -9,6 +9,21 @@
     "/book-now/cancel",
     "/book-now/success",
     "/contact-us",
-    "/our-services"
+    "/our-services",
+    "/payment/cancel",
+    "/payment/success",
+    "/quotation-request",
+    "/services/carpet-cleaning",
+    "/services/customized-cleaning",
+    "/services/deep-cleaning",
+    "/services/eco-friendly-cleaning",
+    "/services/event-cleaning",
+    "/services/home-cleaning",
+    "/services/hospitality-staff",
+    "/services/housekeeping-services",
+    "/services/maid-services",
+    "/services/office-cleaning",
+    "/services/seasonal-cleaning",
+    "/services/staffing-for-businesses"
   ]
 }

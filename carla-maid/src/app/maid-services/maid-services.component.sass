@@ -1,0 +1,309 @@
+@import ../../variables
+
+.service-page
+  width: 100%
+  overflow-x: hidden
+
+.hero-section
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  padding: 100px 20px 80px
+  text-align: center
+  color: white
+
+  .hero-content
+    max-width: 800px
+    margin: 0 auto
+
+    h1
+      font-size: 48px
+      font-weight: 700
+      margin-bottom: 20px
+      animation: fadeInUp 0.8s ease
+
+    .hero-subtitle
+      font-size: 20px
+      margin-bottom: 30px
+      opacity: 0.95
+      animation: fadeInUp 0.8s ease 0.2s
+      animation-fill-mode: both
+
+    .cta-button
+      padding: 15px 40px
+      font-size: 18px
+      background: white
+      color: #667eea
+      border: none
+      border-radius: 50px
+      cursor: pointer
+      font-weight: 600
+      transition: all 0.3s ease
+      animation: fadeInUp 0.8s ease 0.4s
+      animation-fill-mode: both
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+
+@keyframes fadeInUp
+  from
+    opacity: 0
+    transform: translateY(30px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.service-details
+  padding: 80px 20px
+  background: white
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+  .section-header
+    text-align: center
+    margin-bottom: 60px
+
+    h2
+      font-size: 36px
+      color: #333
+      margin-bottom: 15px
+
+    p
+      font-size: 18px
+      color: #666
+      max-width: 700px
+      margin: 0 auto
+
+  .features-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    gap: 30px
+
+    .feature-card
+      background: #f8f9fa
+      padding: 30px
+      border-radius: 15px
+      text-align: center
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1)
+
+      .feature-icon
+        width: 70px
+        height: 70px
+        margin: 0 auto 20px
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+        border-radius: 50%
+        display: flex
+        align-items: center
+        justify-content: center
+        color: white
+        font-size: 30px
+
+      h3
+        font-size: 22px
+        color: #333
+        margin-bottom: 15px
+
+      p
+        color: #666
+        line-height: 1.6
+
+.whats-included
+  padding: 80px 20px
+  background: #f8f9fa
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+    h2
+      text-align: center
+      font-size: 36px
+      color: #333
+      margin-bottom: 50px
+
+  .included-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+    gap: 20px
+
+    .included-item
+      display: flex
+      align-items: center
+      gap: 15px
+      padding: 20px
+      background: white
+      border-radius: 10px
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateX(10px)
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1)
+
+      i
+        color: #667eea
+        font-size: 24px
+
+      span
+        font-size: 16px
+        color: #333
+
+.pricing-section
+  padding: 80px 20px
+  background: white
+
+  .container
+    max-width: 1200px
+    margin: 0 auto
+
+    h2
+      text-align: center
+      font-size: 36px
+      color: #333
+      margin-bottom: 50px
+
+  .pricing-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+    gap: 30px
+
+    .pricing-card
+      background: #f8f9fa
+      padding: 40px 30px
+      border-radius: 15px
+      text-align: center
+      transition: all 0.3s ease
+      position: relative
+
+      &.featured
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+        color: white
+        transform: scale(1.05)
+
+        h3, .price, li
+          color: white
+
+        .badge
+          position: absolute
+          top: -15px
+          left: 50%
+          transform: translateX(-50%)
+          background: #ffd700
+          color: #333
+          padding: 5px 20px
+          border-radius: 20px
+          font-size: 14px
+          font-weight: 600
+
+      &:hover
+        transform: translateY(-10px)
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15)
+
+      h3
+        font-size: 24px
+        margin-bottom: 15px
+        color: #333
+
+      .price
+        font-size: 18px
+        margin-bottom: 25px
+        color: #666
+
+        strong
+          font-size: 28px
+          color: #667eea
+
+      ul
+        list-style: none
+        padding: 0
+
+        li
+          padding: 10px 0
+          border-bottom: 1px solid rgba(0,0,0,0.1)
+          color: #666
+
+          &:last-child
+            border-bottom: none
+
+.cta-section
+  padding: 80px 20px
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  text-align: center
+  color: white
+
+  .container
+    max-width: 800px
+    margin: 0 auto
+
+    h2
+      font-size: 36px
+      margin-bottom: 15px
+
+    p
+      font-size: 18px
+      margin-bottom: 30px
+      opacity: 0.95
+
+  .cta-buttons
+    display: flex
+    gap: 20px
+    justify-content: center
+    flex-wrap: wrap
+
+    button
+      padding: 15px 40px
+      font-size: 18px
+      border: none
+      border-radius: 50px
+      cursor: pointer
+      font-weight: 600
+      transition: all 0.3s ease
+
+    .btn-primary
+      background: white
+      color: #667eea
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+
+    .btn-secondary
+      background: transparent
+      color: white
+      border: 2px solid white
+
+      &:hover
+        background: white
+        color: #667eea
+        transform: translateY(-3px)
+
+@media (max-width: 768px)
+  .hero-section
+    padding: 60px 20px 50px
+
+    .hero-content
+      h1
+        font-size: 32px
+
+      .hero-subtitle
+        font-size: 16px
+
+  .service-details, .whats-included, .pricing-section, .cta-section
+    padding: 50px 20px
+
+  .section-header h2, .container h2
+    font-size: 28px
+
+  .features-grid, .pricing-grid
+    grid-template-columns: 1fr
+
+  .cta-buttons
+    flex-direction: column
+
+    button
+      width: 100%
+

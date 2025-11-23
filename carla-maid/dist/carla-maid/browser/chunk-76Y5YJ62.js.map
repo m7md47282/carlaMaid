@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/environments/environment.ts"],
+  "sourcesContent": ["export const environment = {\n    production: true, // Changed to true for production\n    // WordPress API Configuration\n    wordpressApiBaseUrl: 'https://carlamaid.qa/wordpress/wp-json/wp/v2',\n    lang: 'en', // Default language setting\n    languages: ['ar', 'en'], // Supported languages\n    direction: 'ltr', // Text direction, left-to-right\n    \n    // Backend API Configuration\n    backendApiUrl: 'http://localhost:4000/api',\n    \n    skipCash: {\n        apiUrl: 'https://api.skipcash.app',\n        backendApiUrl: 'https://api.carlamaid.qa/api/skipcash',\n        clientId: '3d8fecfa-f2c0-4fc8-a913-91634b306eec',\n        isTestMode: false,\n        returnUrl: 'https://carlamaid.qa/book-now/success',\n        cancelUrl: 'https://carlamaid.qa/book-now/cancel',\n        callbackUrl: 'https://api.carlamaid.qa/api/payment/callback',\n        webhookKey: 'a269aaab-8381-4b63-8c83-f1e612494183', \n        webhookUrl: 'https://api.carlamaid.qa/api/skipcash/webhook'\n    }\n  };"],
+  "mappings": ";AAAO,IAAM,cAAc;EACvB,YAAY;;;EAEZ,qBAAqB;EACrB,MAAM;;EACN,WAAW,CAAC,MAAM,IAAI;;EACtB,WAAW;;;EAGX,eAAe;EAEf,UAAU;IACN,QAAQ;IACR,eAAe;IACf,UAAU;IACV,YAAY;IACZ,WAAW;IACX,WAAW;IACX,aAAa;IACb,YAAY;IACZ,YAAY;;;",
+  "names": []
+}
